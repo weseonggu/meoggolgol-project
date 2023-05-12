@@ -11,6 +11,7 @@ public class MeoggolgolProjectApplication {
 		SpringApplication.run(MeoggolgolProjectApplication.class, args);
 		// 위성구
 		// 위성구 두번째 커밋
+		// 협업 설명
 	}
 
 }
