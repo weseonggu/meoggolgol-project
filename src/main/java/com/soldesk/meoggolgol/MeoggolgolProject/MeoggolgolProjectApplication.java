@@ -8,6 +8,7 @@ public class MeoggolgolProjectApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MeoggolgolProjectApplication.class, args);
+		// 위성구
 	}
 
 }
