@@ -5,20 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // kdlfa;
 // wntjrdlqslek,,,,,
 @SpringBootApplication
-public class MeoggolgolProjectApplication //extends SpringBootServletInitializer
-{
-//	@Override
-//	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-//
-//	    return builder.sources(MeoggolgolProjectApplication.class);
-//
-//	  }
+public class MeoggolgolProjectApplication {
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(MeoggolgolProjectApplication.class, args);
-		// 위성구
-		// 위성구 두번째 커밋
-		// 협업 설명
+
 	}
 
 }
