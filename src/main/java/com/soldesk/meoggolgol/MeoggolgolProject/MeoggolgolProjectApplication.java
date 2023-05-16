@@ -5,7 +5,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // kdlfa;
 // wntjrdlqslek,,,,,
 @SpringBootApplication
-public class MeoggolgolProjectApplication {
+public class MeoggolgolProjectApplication //extends SpringBootServletInitializer
+{
+//	@Override
+//	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+//
+//	    return builder.sources(MeoggolgolProjectApplication.class);
+//
+//	  }
 
 	public static void main(String[] args) {
 		SpringApplication.run(MeoggolgolProjectApplication.class, args);
