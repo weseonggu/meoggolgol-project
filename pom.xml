@@ -18,6 +18,15 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+		<!-- 타임리프 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+		</dependency>
 		<!-- spring web -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -25,11 +34,6 @@
 		</dependency>
 
 
-		<!-- 타임리프 -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
 		<!--mysql -->
 		<dependency>
 			<groupId>com.mysql</groupId>
