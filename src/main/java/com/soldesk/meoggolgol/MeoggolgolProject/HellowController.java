@@ -11,6 +11,6 @@ public class HellowController {
 	@GetMapping("/")
 //	@ResponseBody
 	public String hellow() {
-		return"hi";
+		return"index";
 	}
 }
