@@ -8,6 +8,15 @@
 <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/mainpageStyle.css}">
 
+<link rel="stylesheet" type="text/css" th:href="@{/korea.css}">
+
+<script type="text/javascript" th:src="@{/d3.js}"></script>
+<script type="text/javascript" th:src="@{/korea.js}"></script>
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"
+	integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+	crossorigin="anonymous">
+</script>
 <title>Meoggolgol</title>
 </head>
 <body>
@@ -17,9 +26,10 @@
 	<!-- 기본 템플릿 안에 삽입될 내용 Start -->
 	<th:block layout:fragment="content"></th:block>
 	<!-- 기본 템플릿 안에 삽입될 내용 End -->
-	
-	
+
+
 	<!-- Bootstrap JS -->
 	<script th:src="@{/bootstrap.min.js}"></script>
+
 </body>
 </html>
