@@ -10,10 +10,10 @@
         <tr>
             <th>먹자골목 이름</th>
             <th>장소</th>
-        </tr>
+        </tr> 
     </thead>
     <tbody>
-  	   <tr th:each="question : ${requestlist}">
+    	<tr th:each="question : ${adf}">
             <td th:text="${question.FCLTY_NM}"></td>
             <td th:text="${question.SIGNGU_CD}"></td>
         </tr>
