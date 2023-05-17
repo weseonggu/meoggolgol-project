@@ -1,9 +1,5 @@
-window.onload = function() {
-    drawMap('#container');
-};
-
 //지도 그리기
-function drawMap(target) {
+window.onload = function() {
     var width = 500; //지도의 넓이
     var height = 500; //지도의 높이
     var initialScale = 5500; //확대시킬 값
@@ -24,7 +20,7 @@ function drawMap(target) {
         .on('zoom', zoom);
 
     var svg = d3
-        .select(target)
+        .select('#container')// id container 선택
         .append('svg')
         .attr('width', width + 'px')
         .attr('height', height + 'px')
@@ -34,13 +30,15 @@ function drawMap(target) {
     var states = svg
         .append('g')
         .attr('id', 'states')
-        .call(zoom);
+        .call(zoom)
+        .attr("fill", "white");// 배경 흰색
 
     states
         .append('rect')
         .attr('class', 'background')
         .attr('width', width + 'px')
-        .attr('height', height + 'px');
+        .attr('height', height + 'px')
+        ;
 
     //geoJson데이터를 파싱하여 지도그리기
     d3.json('json/korea.json', function(json) {
@@ -52,7 +50,12 @@ function drawMap(target) {
             .attr('d', path)
             .attr('id', function(d) {
                 return 'path-' + d.properties.name_eng;
-            });
+            })
+            // 지역 코드 가져 오기
+            .on("click", function(d) {
+          	  console.log(d);
+        	  alert(d.properties.code);
+        	});
 
         labels = states
             .selectAll('text')
@@ -94,4 +97,7 @@ function drawMap(target) {
         states.selectAll('path').attr('d', path);
         labels.attr('transform', translateTolabel);
     }
-}
+
+};
+
+
