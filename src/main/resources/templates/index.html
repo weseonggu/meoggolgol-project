@@ -5,6 +5,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p th:text="#{home.message}">message</p>
+	<table>
+    <thead>
+        <tr>
+            <th>먹자골목 이름</th>
+            <th>장소</th>
+        </tr>
+    </thead>
+    <tbody>
+  	   <tr th:each="question : ${requestlist}">
+            <td th:text="${question.FCLTY_NM}"></td>
+            <td th:text="${question.SIGNGU_CD}"></td>
+        </tr>
+    </tbody>
+</table>
 </body>
 </html>

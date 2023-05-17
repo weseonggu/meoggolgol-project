@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,8 +22,8 @@ public class JdbcCommandLineRunner implements CommandLineRunner {
 			mgg = new Mgg(mpr.getAllFind().get(i).get("FCLTY_NM") + "", mpr.getAllFind().get(i).get("SIGNGU_CD")+"");
 			requestList.add(mgg);
 		}
-//		System.out.println(requestList.get(0).getFCLTY_NM());
-		Model model = null;
-		model.addAttribute("requestionList", requestList);
+//		System.out.println(requestList);
+		
 	}
+	
 }
