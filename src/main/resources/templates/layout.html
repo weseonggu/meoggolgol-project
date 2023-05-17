@@ -1,4 +1,5 @@
 <html lang="ko">
+
 <head>
 <meta charset="utf-8">
 <meta name="viewport"
@@ -9,35 +10,15 @@
 <title>Meoggolgol</title>
 </head>
 <body>
-<h1>먹골골</h1>
-	<nav th:fragment="navbarFragment"
-		class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="/">먹골골</a><br>
-			<br>
-			<button class="navbar-toggler" type="button"
-				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon">메뉴1</span>
-			</button>
-			<!--         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon">메뉴2</span>
-        </button>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon">메뉴3</span>
-        </button> -->
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link" href="#">로그인</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<h1>메인 페이지 입니다.</h1>
+	<h1>먹골골</h1>
+	<!-- 네비게이션바 -->
+	<nav th:replace="~{navbar :: navbarFragment}"></nav>
+	<!-- 기본 템플릿 안에 삽입될 내용 Start -->
+	<th:block layout:fragment="content"></th:block>
+	<!-- 기본 템플릿 안에 삽입될 내용 End -->
 	
+	
+	<!-- Bootstrap JS -->
 	<script th:src="@{/bootstrap.min.js}"></script>
 </body>
 </html>
