@@ -1,7 +1,7 @@
 //지도 그리기
 window.onload = function() {
-    var width = 500; //지도의 넓이
-    var height = 500; //지도의 높이
+    var width = 300; //지도의 넓이
+    var height = 300; //지도의 높이
     var initialScale = 5500; //확대시킬 값
     var initialX = -12000; //초기 위치값 X
     var initialY = 4050; //초기 위치값 Y
@@ -20,7 +20,7 @@ window.onload = function() {
         .on('zoom', zoom);
 
     var svg = d3
-        .select('#container')// id container 선택
+        .select('#MapContainer')// id container 선택
         .append('svg')
         .attr('width', width + 'px')
         .attr('height', height + 'px')
@@ -37,8 +37,7 @@ window.onload = function() {
         .append('rect')
         .attr('class', 'background')
         .attr('width', width + 'px')
-        .attr('height', height + 'px')
-        ;
+        .attr('height', height + 'px');
 
     //geoJson데이터를 파싱하여 지도그리기
     d3.json('json/korea.json', function(json) {
@@ -51,16 +50,23 @@ window.onload = function() {
             .attr('id', function(d) {
                 return 'path-' + d.properties.name_eng;
             })
-            // 지역 코드 가져 오기
+            // 지역 코드 가져 오기(이벤트 처리)
             .on("click", function(d) {
             	$("#sigunguTable").empty();
             	$("#meoggolgolTable").empty();
             	$.getJSON("sigungu?sidoCode="+d.properties.code, function(sigungu){
             		$.each(sigungu, function(i) {
-                        var button = $("<buuton></button>").text(sigungu[i].name).attr("onclick","listAjax("+sigungu[i].code+")")
-                        var ntd = $("<th></th>").append(button);
-                        var tr = $("<tr></tr>").append(ntd);
-            			$("#sigunguTable").append(tr);
+                        var button; 
+//                        var ntd = $("<p></p>").append(button);
+//                        var tr = $("<tr></tr>").append(ntd);
+                        if(i%3==0 && i!=0){
+                        	
+                        	button = $("<span></span><br>").text(sigungu[i].name).attr("onclick","listAjax("+sigungu[i].code+")")
+                        }
+                        else{
+                        	button = $("<span></span>").text(sigungu[i].name).attr("onclick","listAjax("+sigungu[i].code+")")
+                        }
+            			$("#sigunguTable").append(button);
         			});
             		
          			
@@ -110,7 +116,7 @@ window.onload = function() {
     }
 
 };
-
+// 시군도 선택시 그 지역의 먹자골목 리스트 출력
 function listAjax(code){
 	$("#meoggolgolTable").empty();
     $.getJSON("meoggolgol-list?sigunguCode="+code, function(data){
@@ -125,4 +131,3 @@ function listAjax(code){
 			
 		});
 }
-//56311156
