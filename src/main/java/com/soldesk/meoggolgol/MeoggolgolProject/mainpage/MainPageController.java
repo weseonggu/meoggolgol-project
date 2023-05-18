@@ -18,7 +18,7 @@ public class MainPageController {
 	@GetMapping("/index")
 	public String list(Model model) {
 		
-		List<Map<String, Object>> questlist =  this.mpr.getAllFind(41, "%고양시%");
+		List<Map<String, Object>> questlist =  this.mpr.getAllFind(42, 42210);
 //		System.out.println(questlist);
 		
 		ArrayList<Mgg> requestList = new ArrayList<>();
