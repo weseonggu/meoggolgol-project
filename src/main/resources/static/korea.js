@@ -53,24 +53,20 @@ window.onload = function() {
             })
             // 지역 코드 가져 오기
             .on("click", function(d) {
-				$("#sigunguTable").empty();
-                $.getJSON("sigungu?sidoCode="+d.properties.code, function(sigungu){
-                    
-                    var ntd;
-                    var list = [];
-                    var tr;
-                    $.each(sigungu, function(i) {
-                        ntd = $("<td></td>").text(sigungu[i].name);
-		                tr = $("<tr></tr>").push.append(ntd);
-                        list.push(tr);
-                    });
-                    $("#sigunguTable").append(list);
 
+            	$("#sigunguTable").empty();
+            	$("#meoggolgolTable").empty();
+            	$.getJSON("sigungu?sidoCode="+d.properties.code, function(sigungu){
+            		$.each(sigungu, function(i) {
+                        var button = $("<buuton></button>").text(sigungu[i].name).attr("onclick","listAjax("+sigungu[i].code+")")
+                        var ntd = $("<th></th>").append(button);
+                        var tr = $("<tr></tr>").append(ntd);
+            			$("#sigunguTable").append(tr);
+        			});
+            		
+         			
+         		});
 
-                 }).on("click", function(d){
-					 
-				 });
-				
         	});
 
         labels = states
@@ -116,4 +112,18 @@ window.onload = function() {
 
 };
 
-
+function listAjax(code){
+	$("#meoggolgolTable").empty();
+    $.getJSON("meoggolgol-list?sigunguCode="+code, function(data){
+		$.each(data, function(i) {
+            var ntd = $("<th></th>").text(data[i].FCLTY_NM);
+            var ltd = $("<th></th>").text(data[i].RDNMADR_NM);
+            
+            var tr = $("<tr></tr>").append(ntd,ltd);
+			$("#meoggolgolTable").append(tr);
+		});
+		
+			
+		});
+}
+//56311156

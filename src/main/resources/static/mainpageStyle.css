@@ -11,10 +11,10 @@
 	border: 1px solid black;
 	padding: 18px;
 } 
-#sigunguList table tr{
+#sigunguList #sigunguTable tr{
 	border: 1px solid black;
 }
-#sigunguList table tr td{
+#sigunguList #sigunguTable tr td{
 	border: 1px solid black;
 }
 #mggList{
