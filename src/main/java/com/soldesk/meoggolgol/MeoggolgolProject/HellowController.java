@@ -6,8 +6,5 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HellowController {
-	@GetMapping("/")
-	public String hellow() {
-		return"mainpage";
-	}
+
 }
