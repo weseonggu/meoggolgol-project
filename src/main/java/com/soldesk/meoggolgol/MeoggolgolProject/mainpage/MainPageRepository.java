@@ -26,6 +26,11 @@ public class MainPageRepository {
 			select name from sigungu_information where sido = ?
 			""";
 	
+	private static String SELECT_MGG=
+			"""
+			select FCLTY_NM, SIGNGU_CD from Alley_information where SIGNGU_CD in (select code from sigungu_information  where name like ?)
+			""";
+	
 	public List<Map<String, Object>> getAllFind(int a){
 		return jdbc.queryForList(SELECT_QUERY, a);
 	}
@@ -33,4 +38,9 @@ public class MainPageRepository {
 	public List<Map<String, Object>> getSidoFind(int a){
 		return jdbc.queryForList(SELECT_GU, a);
 	}
+	
+	public List<Map<String, Object>> getMggListFind(String a){
+		return jdbc.queryForList(SELECT_MGG, a);
+	}
+	
 }

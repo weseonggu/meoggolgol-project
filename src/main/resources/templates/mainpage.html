@@ -29,6 +29,9 @@
 	<!-- 시군구에 있는 머작 골목 리스트 -->
  	<div id="mggList">
 		<h1>먹자 골목 리스트</h1>
+		<tr th:each="mgglist : ${sigungu}">
+    		<td th:text="${mgglist.name}"></td>
+        </tr>
 	</div>
 
 </div>
