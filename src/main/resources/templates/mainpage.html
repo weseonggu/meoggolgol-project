@@ -1,5 +1,35 @@
 <html layout:decorate="~{layout}">
-	<div layout:fragment="content">
-		<h1>메인 페이지 입니다.</h1>
+<script th:src="@{/d3.min.js.aa}"></script>
+<div layout:fragment="content">
+	<div style="border: 1px solid black" id="qwqw">
+		<!-- 지도 -->
+		<div th:replace="~{map :: mapFragment}" ></div>
+		<!-- 시군구 리스트 -->
+		<div id ="sigunguList">
+			<p>시군구를 선택하세요</p>
+			<table border="1" style="width: 500px" >
+				<tr>
+					<td>강남구</td>
+					<td>중구</td>
+					<td>노원구</td>
+				</tr>
+				<tr>
+					<td>강북구</td>
+					<td>종로구</td>
+					<td>등등</td>
+				</tr>
+				<tr>
+					<td>등등</td>
+					<td>등등</td>
+					<td>등등</td>
+				</tr>
+			</table>
+		</div>
 	</div>
+	<!-- 시군구에 있는 머작 골목 리스트 -->
+ 	<div id="mggList">
+		<h1>먹자 골목 리스트</h1>
+	</div>
+
+</div>
 </html>
