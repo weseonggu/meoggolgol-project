@@ -20,5 +20,10 @@ public class MainPageRestController {
 		return mpr.getSidoFind(sidoCode);
 		
 	}
+	
+	@GetMapping("/meoggolgol-list")
+	public List<Map<String, Object>> findMeoggolgolList(@RequestParam int sigunguCode){
+		return mpr.getMeoggolgolFind(sigunguCode);
+	}
 
 }

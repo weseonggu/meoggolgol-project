@@ -54,6 +54,7 @@ window.onload = function() {
             // 지역 코드 가져 오기
             .on("click", function(d) {
             	$("#sigunguTable").empty();
+            	$("#meoggolgolTable").empty();
             	$.getJSON("sigungu?sidoCode="+d.properties.code, function(sigungu){
             		$.each(sigungu, function(i) {
                         var button = $("<buuton></button>").text(sigungu[i].name).attr("onclick","listAjax("+sigungu[i].code+")")
@@ -64,6 +65,7 @@ window.onload = function() {
             		
          			
          		});
+
         	});
 
         labels = states
@@ -110,5 +112,16 @@ window.onload = function() {
 };
 
 function listAjax(code){
-    alert(code);
+	$("#meoggolgolTable").empty();
+    $.getJSON("meoggolgol-list?sigunguCode="+code, function(data){
+		$.each(data, function(i) {
+            var ntd = $("<th></th>").text(data[i].FCLTY_NM);
+            var ltd = $("<th></th>").text(data[i].RDNMADR_NM);
+            
+            var tr = $("<tr></tr>").append(ntd,ltd);
+			$("#meoggolgolTable").append(tr);
+		});
+		
+			
+		});
 }
