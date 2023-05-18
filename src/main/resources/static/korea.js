@@ -63,10 +63,7 @@ window.onload = function() {
                         var tr = $("<tr></tr>").append(ntd);
             			$("#sigunguTable").append(tr);
         			});
-            		
-         			
          		});
-
         	});
 
         labels = states
@@ -122,8 +119,6 @@ function listAjax(code){
             var tr = $("<tr></tr>").append(ntd,ltd);
 			$("#meoggolgolTable").append(tr);
 		});
-		
-			
 		});
 }
-//56311156
+
