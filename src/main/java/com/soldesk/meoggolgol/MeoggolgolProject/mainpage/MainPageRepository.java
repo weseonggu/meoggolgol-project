@@ -16,7 +16,7 @@ public class MainPageRepository {
 	
 	private static String SELECT_QUERY=
 			"""
-			select FCLTY_NM, SIGNGU_CD from Alley_information where SIGNGU_CD in (select code from sigungu_information  where code = ?
+			select FCLTY_NM from Alley_information where SIGNGU_CD in (select code from sigungu_information  where code = ?
 			""";
 	
 	private static String SELECT_GU=
