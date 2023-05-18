@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.navbar {
+	padding: 0px;
+    margin: 8px;
+}
+
+
+.nav-item {
+    font-family: 'NanumMyeongjo_Bold';
+    font-size: 25px;
+}
+
+.navbar-collapse {
+    flex-basis: 100%;
+    flex-grow: 0;
+    align-items: center;
+}
+
+.navbar-nav {
+	--bs-nav-link-color: #006243;
+
+}
