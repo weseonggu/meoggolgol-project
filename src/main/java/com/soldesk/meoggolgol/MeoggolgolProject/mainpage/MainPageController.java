@@ -5,14 +5,20 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+<<<<<<< HEAD
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+=======
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+>>>>>>> origin/weseonggu
 
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
 public class MainPageController {
+<<<<<<< HEAD
 	private final MainPageRepository mpr;
 	
 	@GetMapping("/index")
@@ -32,4 +38,15 @@ public class MainPageController {
 		
 		return"index";
 	}
+=======
+	
+	private final MainPageRepository mpr;
+	
+	@GetMapping("/")
+	public String hellow(@RequestParam int sidoCode) {
+		System.out.println(sidoCode);
+		return"mainpage";
+	}
+
+>>>>>>> origin/weseonggu
 }

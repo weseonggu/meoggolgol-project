@@ -54,7 +54,8 @@ window.onload = function() {
             // 지역 코드 가져 오기
             .on("click", function(d) {
           	  console.log(d);
-        	  alert(d.properties.code);
+//        	  alert(d.properties.code);
+          	  location.href='/?sidoCode='+d.properties.code;
         	});
 
         labels = states

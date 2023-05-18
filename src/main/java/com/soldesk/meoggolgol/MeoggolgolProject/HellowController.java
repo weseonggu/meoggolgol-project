@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 public class HellowController {
+
 	
 	@GetMapping("/")
 	public String hellow() {
