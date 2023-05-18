@@ -18,10 +18,10 @@ public class MainPageRepository {
 	
 	private static String SELECT_QUERY=
 			"""
-			select FCLTY_NM, SIGNGU_CD from Alley_information where SIGNGU_CD like '서울%' 
+			select FCLTY_NM, SIGNGU_CD from Alley_information where SIDO_CD  = ? and SIGNGU_CD like ?
 			""";
 	
-	public List<Map<String, Object>> getAllFind(){
-		return jdbc.queryForList(SELECT_QUERY);
+	public List<Map<String, Object>> getAllFind(int a, String s){
+		return jdbc.queryForList(SELECT_QUERY, a, s);
 	}
 }
