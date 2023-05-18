@@ -53,20 +53,23 @@ window.onload = function() {
             })
             // 지역 코드 가져 오기
             .on("click", function(d) {
-          	  console.log(d);
-//        	  alert(d.properties.code);
-//        	  location.href='/?sidoCode='+d.properties.code;
-
 				$("#sigunguTable").empty();
                 $.getJSON("sigungu?sidoCode="+d.properties.code, function(sigungu){
+                    
+                    var ntd;
+                    var list = [];
+                    var tr;
                     $.each(sigungu, function(i) {
-                        var ntd = $("<td></td>").text(sigungu[i].name);
-                        var tr = $("<tr></tr>").append(ntd);
-                        $("#sigunguTable").append(tr);
+                        ntd = $("<td></td>").text(sigungu[i].name);
+		                tr = $("<tr></tr>").push.append(ntd);
+                        list.push(tr);
                     });
+                    $("#sigunguTable").append(list);
 
 
-                 });
+                 }).on("click", function(d){
+					 
+				 });
 				
         	});
 
