@@ -21,7 +21,16 @@ public class MainPageRepository {
 			select FCLTY_NM, SIGNGU_CD from Alley_information where SIGNGU_CD = ?
 			""";
 	
+	private static String SELECT_GU=
+			"""
+			select name from sigungu_information where sido = ?
+			""";
+	
 	public List<Map<String, Object>> getAllFind(int a){
 		return jdbc.queryForList(SELECT_QUERY, a);
+	}
+	
+	public List<Map<String, Object>> getSidoFind(int a){
+		return jdbc.queryForList(SELECT_GU, a);
 	}
 }
