@@ -18,7 +18,7 @@ public class MainPageRepository {
 	
 	private static String SELECT_QUERY=
 			"""
-			select FCLTY_NM, SIGNGU_CD from Alley_information
+			select FCLTY_NM, SIGNGU_CD from Alley_information where SIGNGU_CD like '서울%' 
 			""";
 	
 	public List<Map<String, Object>> getAllFind(){
