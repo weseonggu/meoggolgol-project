@@ -56,8 +56,9 @@ window.onload = function() {
             	$("#sigunguTable").empty();
             	$.getJSON("sigungu?sidoCode="+d.properties.code, function(sigungu){
             		$.each(sigungu, function(i) {
-            			var ntd = $("<td></td>").text(sigungu[i].name);
-            			var tr = $("<tr></tr>").append(ntd);
+                        var button = $("<buuton></button>").text(sigungu[i].name).attr("onclick","listAjax("+sigungu[i].code+")")
+                        var ntd = $("<th></th>").append(button);
+                        var tr = $("<tr></tr>").append(ntd);
             			$("#sigunguTable").append(tr);
         			});
             		
@@ -108,4 +109,6 @@ window.onload = function() {
 
 };
 
-
+function listAjax(code){
+    alert(code);
+}
