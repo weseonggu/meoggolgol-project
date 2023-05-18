@@ -3,7 +3,6 @@ package com.soldesk.meoggolgol.MeoggolgolProject.mainpage;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MainPageRepository {
 	
-	@Autowired
 	private final JdbcTemplate jdbc;
 	
 	private static String SELECT_QUERY=
@@ -23,14 +21,14 @@ public class MainPageRepository {
 	
 	private static String SELECT_GU=
 			"""
-			select name from sigungu_information where sido = ?
+			select * from sigungu_information where sido = ?
 			""";
 	
 	public List<Map<String, Object>> getAllFind(int a){
 		return jdbc.queryForList(SELECT_QUERY, a);
 	}
 	
-	public List<Map<String, Object>> getSidoFind(int a){
-		return jdbc.queryForList(SELECT_GU, a);
+	public List<Map<String, Object>> getSidoFind(int sidoCode){
+		return jdbc.queryForList(SELECT_GU, sidoCode);
 	}
 }
