@@ -1,24 +1,48 @@
-#qwqw{
-	height: 700px;
+#MainPageContainer{
+	width: 100%;
+	
 }
-#container{
-	float: left;
-	width: 500px;
+/*지역 선택 리스트*/
+#SelectBox{
+	padding-top:16px;
+	width:80%; 
 	border: 1px solid black;
+	margin: auto;
+	display: table;/*부모높이 자동 조절 (부모에 넣어야하는 값)*/
+	
+}
+#MapContainer{
+	float: left;
+	border: 1px solid black;
+	display: table-row;/*부모높이 자동 조절 (자식에 넣어야하는 값)*/
+	margin: 8px;
 }
 #sigunguList{
+	height: 300px;
 	float: left;
 	border: 1px solid black;
 	padding: 18px;
+	display: table-row;/*부모높이 자동 조절 (자식에 넣어야하는 값)*/
+	margin: 8px;
 } 
-#sigunguList #sigunguTable tr{
+#sigunguTable{
+	overflow:hidden;
+}
+#sigunguTable tr{
 	border: 1px solid black;
 }
-#sigunguList #sigunguTable tr td{
+#sigunguTable tr td{
 	border: 1px solid black;
 }
+/*먹자골목 리스트*/
 #mggList{
-	display: block;
 	border: 1px solid black; 
+	width:80%;	
+	display: table;/*부모높이 자동 조절 (부모에 넣어야하는 값)*/
+	margin: auto;
+	margin-top:32px;
 
+}
+#meoggolgolTable{
+	display: table-row;/*부모높이 자동 조절 (자식에 넣어야하는 값)*/
 }

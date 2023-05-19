@@ -1,30 +1,13 @@
 <html layout:decorate="~{layout}">
-<script th:src="@{/d3.min.js.aa}"></script>
-<div layout:fragment="content">
-	<div style="border: 1px solid black" id="qwqw">
+<div layout:fragment="content" id="MainPageContainer">
+	<div style="border: 1px solid black" id="SelectBox">
 		<!-- 지도 -->
-		<div th:replace="~{map :: mapFragment}" ></div>
+		<div id="MapContainer"></div>
 		<!-- 시군구 리스트 -->
 		<div id ="sigunguList">
 			<p>시군구를 선택하세요</p>
-			<table border="1" style="width: 500px" id="sigunguTable">
-				<!-- <tr>
-					<td>강남구</td>
-					<td>중구</td>
-					<td>노원구</td>
-				</tr>
-				<tr>
-					<td>강북구</td>
-					<td>종로구</td>
-					<td>등등</td>
-				</tr>
-				<tr>
-					<td>등등</td>
-					<td>등등</td>
-					<td>등등</td>
-				</tr> -->
-
-			</table>
+			<div id="sigunguTable">
+			</div>
 		</div>
 	</div>
 	<!-- 시군구에 있는 머작 골목 리스트 -->
