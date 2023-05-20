@@ -1,5 +1,22 @@
+h2 {
+    font-family: 'NanumMyeongjo_Bold';
+    text-align: center;
+	color: #006243;
+}
+
+h1 {
+    text-align: center;
+    border-bottom: 2.5px solid #006243;
+}
+
+img {
+	width: 330px;
+	height:220px;
+}
+
 #MainPageContainer{
 	width: 100%;
+	border-top: 2.5px solid #006243;
 	
 }
 /*지역 선택 리스트*/
