@@ -66,11 +66,12 @@ window.onload = function() {
 						
 						// 시, 군, 구로 분할 한 것 중 구 값이 undefined일 수 있음 -> 조건문으로 undefined 제거
 						if (sigungu_name2[2] == undefined) {
-							sigungu_name2[2] = "";
+							// UI에 띄울 변수
+							var onlySiGu = sigungu_name2[1];
+						} else {
+							// UI에 띄울 변수
+							var onlySiGu = sigungu_name2[1] + " " + sigungu_name2[2];
 						}
-						
-						// UI에 띄울 시+구 변수
-						var onlySiGu = sigungu_name2[1] + " " + sigungu_name2[2];
 						
 						// index가 0번 부터 시작이어서 (index+1)로 넣어야 알맞게 3개씩 분할됨
 						if ((index+1)%3==0 && index != 0) {
