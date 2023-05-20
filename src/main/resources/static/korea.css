@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/* 이건 어디에 있는 컨테이너인가요 ? - 유진*/
 #container {
 	width: 500px;
 	min-height: 500px;
@@ -33,3 +34,12 @@
 	font-size: 12px;
 	fill: #fff;
 }
+
+/* 시군구 리스트 css*/
+span {
+		width: 200px; height: 30px;
+		border: 1px solid; padding: 5px;
+		margin: 10px;
+		display: inline-block;
+		text-align: center;
+	}
