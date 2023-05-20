@@ -55,18 +55,33 @@ window.onload = function() {
             	$("#sigunguTable").empty();
             	$("#meoggolgolTable").empty();
             	$.getJSON("sigungu?sidoCode="+d.properties.code, function(sigungu){
-            		$.each(sigungu, function(i) {
-                        var button; 
-//                        var ntd = $("<p></p>").append(button);
-//                        var tr = $("<tr></tr>").append(ntd);
-                        if(i%3==0 && i!=0){
-                        	
-                        	button = $("<span></span><br>").text(sigungu[i].name).attr("onclick","listAjax("+sigungu[i].code+")")
-                        }
-                        else{
-                        	button = $("<span></span>").text(sigungu[i].name).attr("onclick","listAjax("+sigungu[i].code+")")
-                        }
-            			$("#sigunguTable").append(button);
+            		$.each(sigungu, function(index) {
+						// 버튼
+                        var button;
+                        
+                        // 해당 지역 눌렀을 때 도+시+군+구 뜨는 거 지저분해보여서 " "를 기준으로 잘라서 가져왔음
+						var sigungu_name = sigungu[index].name
+						var sigungu_name2 = []
+						sigungu_name2 = sigungu_name.split(" ");
+						
+						// 시, 군, 구로 분할 한 것 중 구 값이 undefined일 수 있음 -> 조건문으로 undefined 제거
+						if (sigungu_name2[2] == undefined) {
+							sigungu_name2[2] = "";
+						}
+						
+						// UI에 띄울 시+구 변수
+						var onlySiGu = sigungu_name2[1] + " " + sigungu_name2[2];
+						
+						// index가 0번 부터 시작이어서 (index+1)로 넣어야 알맞게 3개씩 분할됨
+						if ((index+1)%3==0 && index != 0) {
+							// 3, 6, 9 ..번의 태그에 <br>을 넣음으로써 3개 마다 줄 바꿈
+							button = $("<span></span><br>").text(onlySiGu).attr("onclick","listAjax("+sigungu[index].code+")")
+							
+						} else {
+							button = $("<span></span>").text(onlySiGu).attr("onclick","listAjax("+sigungu[index].code+")")
+						}
+						
+						$("#sigunguTable").append(button);
         			});
             		
          			
