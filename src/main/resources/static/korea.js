@@ -23,7 +23,7 @@ window.onload = function() {
         .select('#MapContainer')// id container 선택
         .append('svg')
         .attr('width', width + 'px')
-        .attr('height', height + 'px')
+        .attr('height', 'auto')
         .attr('id', 'map')
         .attr('class', 'map');
 
@@ -37,7 +37,7 @@ window.onload = function() {
         .append('rect')
         .attr('class', 'background')
         .attr('width', width + 'px')
-        .attr('height', height + 'px');
+        .attr('height', 'auto');
 
     //geoJson데이터를 파싱하여 지도그리기
     d3.json('json/korea.json', function(json) {
@@ -77,10 +77,10 @@ window.onload = function() {
 						// index가 0번 부터 시작이어서 (index+1)로 넣어야 알맞게 3개씩 분할됨
 						if ((index+1)%3==0 && index != 0) {
 							// 3, 6, 9 ..번의 태그에 <br>을 넣음으로써 3개 마다 줄 바꿈
-							button = $("<span></span><br>").text(onlySiGu).attr("onclick","listAjax("+sigungu[index].code+")")
+							button = $("<span id='sigunguListSpan'></span><br>").text(onlySiGu).attr("onclick","listAjax("+sigungu[index].code+")")
 							
 						} else {
-							button = $("<span></span>").text(onlySiGu).attr("onclick","listAjax("+sigungu[index].code+")")
+							button = $("<span id='sigunguListSpan'></span>").text(onlySiGu).attr("onclick","listAjax("+sigungu[index].code+")")
 						}
 						
 						$("#sigunguTable").append(button);

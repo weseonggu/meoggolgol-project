@@ -1,12 +1,5 @@
 @charset "UTF-8";
 
-/* 이건 어디에 있는 컨테이너인가요 ? - 유진*/
-#container {
-	width: 500px;
-	min-height: 500px;
-	float: left;
-	margin: 15px 35px;
-}
 #states path {
 	fill: #585858;
 	stroke: #000000;
@@ -35,11 +28,9 @@
 	fill: #fff;
 }
 
-/* 시군구 리스트 css*/
-span {
-		width: 200px; height: 30px;
-		border: 1px solid; padding: 5px;
-		margin: 10px;
-		display: inline-block;
-		text-align: center;
-	}
+/* 지도 크기 */ 
+svg {
+	height: 670px;
+	width: 670px;
+
+}

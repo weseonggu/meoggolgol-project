@@ -1,65 +1,90 @@
+@charset "UTF-8";
+
+/* MainPageContainer */
+.parent {
+	width: 100%;
+	/*부모높이 자동 조절 (자식에 넣어야하는 값)*/
+	display: table;
+    text-align: left;
+}
+
+.parentInner {
+	display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* SelectBox */
+.parentContent{
+	padding-top:16px;
+	/*부모높이 자동 조절 (자식에 넣어야하는 값)*/
+	display: table;
+	display: inline-block;
+}
+
+/* MapContainer &sigunguList */
+.child {
+	float: left;
+	height: 680px;
+	width: 800px;
+	margin-left: 35px;
+	margin-right: 35px;
+	border: 1px solid black;
+	align-content: center;
+}
+
+#sigunguList{
+	padding: 18px;
+    font-family: 'NanumMyeongjo_Bold';
+	color: #006243;
+} 
+
+/* 시군구 리스트 속 span 태그*/
+#sigunguListSpan {
+	width: 200px; 
+	height: 30px;
+	padding: 5px;
+	margin: 5px;
+	display: inline-block;
+	text-align: center;
+	border: 1px solid #006243;
+}
+
+#sigunguTable{
+	overflow:hidden;
+	text-align: left;
+}
+
+#sigunguTableParent{
+	display: inline-block;
+}
+
+#sigunguTable tr{
+	border: 1px solid black;
+}
+
+#sigunguTable tr td{
+	border: 1px solid black;
+}
+
+/* 먹자골목 리스트 제목*/
 h2 {
     font-family: 'NanumMyeongjo_Bold';
     text-align: center;
 	color: #006243;
 }
 
-h1 {
-    text-align: center;
-    border-bottom: 2.5px solid #006243;
-}
-
-img {
-	width: 330px;
-	height:220px;
-}
-
-#MainPageContainer{
-	width: 100%;
-	border-top: 2.5px solid #006243;
-	
-}
-/*지역 선택 리스트*/
-#SelectBox{
-	padding-top:16px;
-	width:80%; 
-	border: 1px solid black;
-	margin: auto;
-	display: table;/*부모높이 자동 조절 (부모에 넣어야하는 값)*/
-	
-}
-#MapContainer{
-	float: left;
-	border: 1px solid black;
-	display: table-row;/*부모높이 자동 조절 (자식에 넣어야하는 값)*/
-	margin: 8px;
-}
-#sigunguList{
-	height: 300px;
-	float: left;
-	border: 1px solid black;
-	padding: 18px;
-	display: table-row;/*부모높이 자동 조절 (자식에 넣어야하는 값)*/
-	margin: 8px;
-} 
-#sigunguTable{
-	overflow:hidden;
-}
-#sigunguTable tr{
-	border: 1px solid black;
-}
-#sigunguTable tr td{
-	border: 1px solid black;
-}
 /*먹자골목 리스트*/
 #mggList{
 	border: 1px solid black; 
-	width:80%;	
-	display: table;/*부모높이 자동 조절 (부모에 넣어야하는 값)*/
+	width:90%;	
+	/*부모높이 자동 조절 (자식에 넣어야하는 값)*/
+	display: table;
 	margin: auto;
 	margin-top:32px;
-
 }
+
 #meoggolgolTable{
-	display: table-row;/*부모높이 자동 조절 (자식에 넣어야하는 값)*/
+	/*부모높이 자동 조절 (자식에 넣어야하는 값)*/
+	display: table-row;
 }

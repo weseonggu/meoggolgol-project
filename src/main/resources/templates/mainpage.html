@@ -1,23 +1,25 @@
 <html layout:decorate="~{layout}">
-<div layout:fragment="content" id="MainPageContainer">
-
-	<!-- border 쓴 건 경계선 확인용 나중에 지울 것 -->
-	<div  style="border: 1px solid black" id="SelectBox">
-		<!-- 지도 -->
-		<div id="MapContainer"></div>
-		<!-- 시군구 리스트 -->
-		<div id ="sigunguList">
-			<p>시군구를 선택하세요</p>
-			<div id="sigunguTable">
+<div layout:fragment="content" class="parent" id="MainPageContainer">
+	<!-- div 태그 안 class 이름들은 정렬을 위해서 만든 것들 -->
+	<div class="parentInner">
+		<div class="parentContent" id="SelectBox">
+			<!-- 지도 -->
+			<div class="child" id="MapContainer"></div>
+			<!-- 시군구 리스트 -->
+			<div  class="child" id ="sigunguList">
+				<p>시군구를 선택하세요</p>
+				<div id= "sigungutableParent">
+					<div id="sigunguTable">
+					</div>
+				</div>
 			</div>
 		</div>
+		<!-- 시군구에 있는 머작 골목 리스트 -->
+ 		<div id="mggList">
+			<h2>먹자 골목 리스트</h2>
+			<table border="1" id="meoggolgolTable">
+			</table>
+		</div>
 	</div>
-	<!-- 시군구에 있는 머작 골목 리스트 -->
- 	<div id="mggList">
-		<h2>먹자 골목 리스트</h2>
-		<table border="1" style="width: 500px" id="meoggolgolTable">
-		</table>
-	</div>
-
 </div>
 </html>
