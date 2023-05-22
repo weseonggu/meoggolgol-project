@@ -1,15 +1,9 @@
+<!-- <script type="text/javascript" th:src="@{/mgg-detail.js}"></script> -->
 <html layout:decorate="~{layout}">
 <div layout:fragment="kakaoMap" class="map" id="Map">
 	<!-- div 태그 안 class 이름들은 정렬을 위해서 만든 것들 -->
 	<div id="mggMap" style="width:500px;height:400px;"></div>
-	<script>
-		var container = document.getElementById('mggMap');
-		var options = {
-			center: new kakao.maps.LatLng(33.450701, 126.570667),
-			level: 3
-		};
-
-		var map = new kakao.maps.Map(container, options);
-	</script>
+	<div th:text="${la}"></div>
+	<div th:text="${lo}"></div>
 </div>
 </html>
