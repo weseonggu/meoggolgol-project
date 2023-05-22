@@ -136,7 +136,7 @@ function listAjax(code){
     $.getJSON("meoggolgol-list?sigunguCode="+code, function(data){
 		$.each(data, function(i) {
 
-
+			
             var ntd = $("<h5 id='streetName'></h5>").text(data[i].FCLTY_NM);
             var ltd = $("<p id='streetAddress'></p>").text(data[i].RDNMADR_NM);
             var lotd = $("<input>").attr("value", data[i].FCLTY_LO);
