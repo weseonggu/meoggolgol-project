@@ -56,7 +56,11 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-
+		<!-- 검증 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
 		<!-- test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
