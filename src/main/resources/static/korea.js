@@ -54,22 +54,10 @@ window.onload = function() {
             .on("click", function(d) {
 
             	$("#sigunguTable").empty();
-<<<<<<< HEAD
-            	$.getJSON("sigungu?sidoCode="+d.properties.code, function(sigungu){
-            		$.each(sigungu, function(i) {
-            			var ntd = $("<td></td>").text(sigungu[i].name);
-            			var tr = $("<tr></tr>").append(ntd);
-=======
+
             	$("#meoggolgolTable").empty();
             	$.getJSON("sigungu?sidoCode="+d.properties.code, function(sigungu){
-<<<<<<< HEAD
-            		$.each(sigungu, function(i) {
-                        var button = $("<buuton></button>").text(sigungu[i].name).attr("onclick","listAjax("+sigungu[i].code+")")
-                        var ntd = $("<th></th>").append(button);
-                        var tr = $("<tr></tr>").append(ntd);
->>>>>>> master
-            			$("#sigunguTable").append(tr);
-=======
+
             		$.each(sigungu, function(index) {
 						// 버튼
                         var button;
@@ -98,16 +86,8 @@ window.onload = function() {
 						}
 						
 						$("#sigunguTable").append(button);
->>>>>>> origin/ksw0518
         			});
          		});
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> master
-=======
->>>>>>> origin/ksw0518
         	});
 
         labels = states
