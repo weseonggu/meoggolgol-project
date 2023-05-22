@@ -142,9 +142,11 @@ function listAjax(code){
             var lotd = $("<input>").attr("value", data[i].FCLTY_LO);
             var latd = $("<input>").attr("value", data[i].FCLTY_LA);
             
-            var tr = $("<span></span>").append(ntd,ltd, lotd, latd);
+            var tr = $("<div></div>").attr("onclick","mggDetail("+data[i].FCLTY_LO+","+data[i].FCLTY_LA+")").append(ntd,ltd, lotd, latd);
 			$("#meoggolgolTable").append(tr);
 		});
 		});
 }
-
+function mggDetail(lo,la){
+	location.href="mgg-detail?lo="+lo+"&la="+la;
+}
