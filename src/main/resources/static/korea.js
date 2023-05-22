@@ -149,4 +149,11 @@ function listAjax(code){
 }
 function mggDetail(lo,la){
 	location.href="mgg-detail?lo="+lo+"&la="+la;
+	
 }
+
+
+
+
+
+
