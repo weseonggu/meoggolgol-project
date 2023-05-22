@@ -131,13 +131,36 @@ window.onload = function() {
         labels.attr('transform', translateTolabel);
     }
 
+	const urlParams = new URL(location.href).searchParams;
+
+	const la = urlParams.get('la');
+	const lo = urlParams.get('lo');
+
+
+	var container = document.getElementById('mggMap');
+		var options = {
+			center: new kakao.maps.LatLng(la, lo),
+			level: 3
+		};
+
+	var map = new kakao.maps.Map(container, options);
+
+	//마커가 표시될 위치
+	var markerPosition  = new kakao.maps.LatLng(la, lo); 
+	
+	//마커를 생성
+	var marker = new kakao.maps.Marker({
+	    position: markerPosition
+	});
+	
+	//마커가 지도 위에 표시되도록 설정
+	marker.setMap(map);
 };
 // 시군도 선택시 그 지역의 먹자골목 리스트 출력
 function listAjax(code){
 	$("#meoggolgolTable").empty();
     $.getJSON("meoggolgol-list?sigunguCode="+code, function(data){
 		$.each(data, function(i) {
-
 			
             var ntd = $("<h5 id='streetName'></h5>").text(data[i].FCLTY_NM);
             var ltd = $("<p id='streetAddress'></p>").text(data[i].RDNMADR_NM);
@@ -152,3 +175,9 @@ function listAjax(code){
 function mggDetail(lo,la){
 	location.href="mgg-detail?lo="+lo+"&la="+la;
 }
+
+
+
+
+
+
