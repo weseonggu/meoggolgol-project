@@ -137,8 +137,8 @@ function listAjax(code){
 		$.each(data, function(i) {
             var ntd = $("<th></th>").text(data[i].FCLTY_NM);
             var ltd = $("<th></th>").text(data[i].RDNMADR_NM);
-            var lotd = $("<th></th>").text(data[i].FCLTY_LO);
-            var latd = $("<th></th>").text(data[i].FCLTY_LA);
+            var ntd = $("<th id='streetName'></th>").text(data[i].FCLTY_NM);
+            var ltd = $("<th id='streetAddress'></th>").text(data[i].RDNMADR_NM);
             
             var tr = $("<tr></tr>").append(ntd,ltd, lotd, latd);
 			$("#meoggolgolTable").append(tr);
