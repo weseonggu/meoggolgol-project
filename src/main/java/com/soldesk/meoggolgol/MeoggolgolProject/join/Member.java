@@ -13,6 +13,7 @@ public class Member {
 	private int member_index;
 	private String member_id;
 	private String member_pw;
+	private String member_name;
 	private String member_nickname;
 	private Date member_birthday;
 	private String member_phoneNumber;
