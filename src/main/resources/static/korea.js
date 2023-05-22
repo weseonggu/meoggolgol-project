@@ -1,7 +1,7 @@
 //지도 그리기
 window.onload = function() {
-    var width = 500; //지도의 넓이
-    var height = 500; //지도의 높이
+    var width = 300; //지도의 넓이
+    var height = 300; //지도의 높이
     var initialScale = 5500; //확대시킬 값
     var initialX = -12000; //초기 위치값 X
     var initialY = 4050; //초기 위치값 Y
@@ -20,10 +20,10 @@ window.onload = function() {
         .on('zoom', zoom);
 
     var svg = d3
-        .select('#container')// id container 선택
+        .select('#MapContainer')// id container 선택
         .append('svg')
         .attr('width', width + 'px')
-        .attr('height', height + 'px')
+        .attr('height', 'auto')
         .attr('id', 'map')
         .attr('class', 'map');
 
@@ -37,8 +37,7 @@ window.onload = function() {
         .append('rect')
         .attr('class', 'background')
         .attr('width', width + 'px')
-        .attr('height', height + 'px')
-        ;
+        .attr('height', 'auto');
 
     //geoJson데이터를 파싱하여 지도그리기
     d3.json('json/korea.json', function(json) {
@@ -51,8 +50,9 @@ window.onload = function() {
             .attr('id', function(d) {
                 return 'path-' + d.properties.name_eng;
             })
-            // 지역 코드 가져 오기
+            // 지역 코드 가져 오기(이벤트 처리)
             .on("click", function(d) {
+
             	$("#sigunguTable").empty();
 <<<<<<< HEAD
             	$.getJSON("sigungu?sidoCode="+d.properties.code, function(sigungu){
@@ -62,20 +62,52 @@ window.onload = function() {
 =======
             	$("#meoggolgolTable").empty();
             	$.getJSON("sigungu?sidoCode="+d.properties.code, function(sigungu){
+<<<<<<< HEAD
             		$.each(sigungu, function(i) {
                         var button = $("<buuton></button>").text(sigungu[i].name).attr("onclick","listAjax("+sigungu[i].code+")")
                         var ntd = $("<th></th>").append(button);
                         var tr = $("<tr></tr>").append(ntd);
 >>>>>>> master
             			$("#sigunguTable").append(tr);
+=======
+            		$.each(sigungu, function(index) {
+						// 버튼
+                        var button;
+                        
+                        // 해당 지역 눌렀을 때 도+시+군+구 뜨는 거 지저분해보여서 " "를 기준으로 잘라서 가져왔음
+						var sigungu_name = sigungu[index].name
+						var sigungu_name2 = []
+						sigungu_name2 = sigungu_name.split(" ");
+						
+						// 시, 군, 구로 분할 한 것 중 구 값이 undefined일 수 있음 -> 조건문으로 undefined 제거
+						if (sigungu_name2[2] == undefined) {
+							// UI에 띄울 변수
+							var onlySiGu = sigungu_name2[1];
+						} else {
+							// UI에 띄울 변수
+							var onlySiGu = sigungu_name2[1] + " " + sigungu_name2[2];
+						}
+						
+						// index가 0번 부터 시작이어서 (index+1)로 넣어야 알맞게 3개씩 분할됨
+						if ((index+1)%3==0 && index != 0) {
+							// 3, 6, 9 ..번의 태그에 <br>을 넣음으로써 3개 마다 줄 바꿈
+							button = $("<span id='sigunguListSpan'></span><br>").text(onlySiGu).attr("onclick","listAjax("+sigungu[index].code+")")
+							
+						} else {
+							button = $("<span id='sigunguListSpan'></span>").text(onlySiGu).attr("onclick","listAjax("+sigungu[index].code+")")
+						}
+						
+						$("#sigunguTable").append(button);
+>>>>>>> origin/ksw0518
         			});
-            		
-         			
          		});
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 
 >>>>>>> master
+=======
+>>>>>>> origin/ksw0518
         	});
 
         labels = states
@@ -120,18 +152,20 @@ window.onload = function() {
     }
 
 };
-
+// 시군도 선택시 그 지역의 먹자골목 리스트 출력
 function listAjax(code){
 	$("#meoggolgolTable").empty();
     $.getJSON("meoggolgol-list?sigunguCode="+code, function(data){
 		$.each(data, function(i) {
-            var ntd = $("<th></th>").text(data[i].FCLTY_NM);
-            var ltd = $("<th></th>").text(data[i].RDNMADR_NM);
+
+            var ntd = $("<h5 id='streetName'></h5>").text(data[i].FCLTY_NM);
+            var ltd = $("<p id='streetAddress'></p>").text(data[i].RDNMADR_NM);
+            var lotd = $("<input>").attr("value", data[i].FCLTY_LO);
+            var latd = $("<input>").attr("value", data[i].FCLTY_LA);
             
-            var tr = $("<tr></tr>").append(ntd,ltd);
+            var tr = $("<span></span>").append(ntd,ltd, lotd, latd);
 			$("#meoggolgolTable").append(tr);
 		});
-		
-			
 		});
 }
+

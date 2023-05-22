@@ -8,6 +8,9 @@
 <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/mainpageStyle.css}">
 
+<link rel="stylesheet" type="text/css" th:href="@{/layout&navbar.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/font-face.css}">
+
 <link rel="stylesheet" type="text/css" th:href="@{/korea.css}">
 
 <script type="text/javascript" th:src="@{/d3.js}"></script>
@@ -22,14 +25,39 @@
 <script src="https://code.jquery.com/jquery-3.7.0.js"
 	integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
 	crossorigin="anonymous">
-	
 </script>
 <title>Meoggolgol</title>
 </head>
+
 <body>
-	<h1>먹골골</h1>
-	<!-- 네비게이션바 -->
-	<nav th:replace="~{navbar :: navbarFragment}"></nav>
+	
+	<!-- 사이트 제목 + 네비바를 헤더로 묶음 -->
+	<header>
+	<!-- 간단한 소개 문구 + 사이트 제목 + 로그인/회원가입 기능 -->
+		<div class="brandBox">
+			<div class="brandContentWrapper">
+			<!-- 간단한 소개 문구 넣는 태그 -->
+				<div class="brandContent" id="text">
+					Ubiquitous Food Street Platform<br>
+					Saturday, May 20, 2023
+				</div>
+				<!-- 사이트 제목 넣는 태그 -->
+				<div class="brandContent">
+					<a href="/">
+						<img alt="" src="/logo.png" id="logo">
+					</a>
+				</div>
+				<!-- 로그인/회원가입 기능 넣는 태그 -->
+				<div class="brandContent" id="signInUp">
+					<a href="#" id="sign">Sign In</a>
+					<a href="#" id="sign">Sign Up</a>
+				</div>
+			</div>
+		</div>
+		<!-- 네비게이션바 -->
+		<nav th:replace="~{navbar :: navbarFragment}"></nav>
+	</header>
+	
 	<!-- 기본 템플릿 안에 삽입될 내용 Start -->
 	<th:block layout:fragment="content"></th:block>
 	<!-- 기본 템플릿 안에 삽입될 내용 End -->

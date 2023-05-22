@@ -1,11 +1,5 @@
 @charset "UTF-8";
 
-#container {
-	width: 500px;
-	min-height: 500px;
-	float: left;
-	margin: 15px 35px;
-}
 #states path {
 	fill: #585858;
 	stroke: #000000;
@@ -32,4 +26,11 @@
 	cursor: pointer;
 	font-size: 12px;
 	fill: #fff;
+}
+
+/* 지도 크기 */ 
+svg {
+	height: 670px;
+	width: 670px;
+
 }
