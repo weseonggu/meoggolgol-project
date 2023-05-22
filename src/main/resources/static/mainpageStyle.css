@@ -88,3 +88,18 @@ h2 {
 	/*부모높이 자동 조절 (자식에 넣어야하는 값)*/
 	display: table-row;
 }
+
+
+#streetName {
+	padding: 5px;
+	margin: 5px;
+	display: inline-block;
+	border: 1px solid #006243;
+}
+
+#streetAddress {
+	padding: 5px;
+	margin: 5px;
+	display: inline-block;
+	border: 1px solid #006243;
+}
