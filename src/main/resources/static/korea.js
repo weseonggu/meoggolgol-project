@@ -135,12 +135,18 @@ function listAjax(code){
 	$("#meoggolgolTable").empty();
     $.getJSON("meoggolgol-list?sigunguCode="+code, function(data){
 		$.each(data, function(i) {
-            var ntd = $("<th id='streetName'></th>").text(data[i].FCLTY_NM);
-            var ltd = $("<th id='streetAddress'></th>").text(data[i].RDNMADR_NM);
+
+			
+            var ntd = $("<h5 id='streetName'></h5>").text(data[i].FCLTY_NM);
+            var ltd = $("<p id='streetAddress'></p>").text(data[i].RDNMADR_NM);
+            var lotd = $("<input>").attr("value", data[i].FCLTY_LO);
+            var latd = $("<input>").attr("value", data[i].FCLTY_LA);
             
-            var tr = $("<tr></tr>").append(ntd,ltd);
+            var tr = $("<div></div>").attr("onclick","mggDetail("+data[i].FCLTY_LO+","+data[i].FCLTY_LA+")").append(ntd,ltd, lotd, latd);
 			$("#meoggolgolTable").append(tr);
 		});
 		});
 }
-
+function mggDetail(lo,la){
+	location.href="mgg-detail?lo="+lo+"&la="+la;
+}
