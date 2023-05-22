@@ -1,15 +1,21 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.Member;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import com.soldesk.meoggolgol.MeoggolgolProject.join.Member;
+
+import lombok.RequiredArgsConstructor;
+
+@Controller
+@RequiredArgsConstructor
 public class MemberController {
 	
-	private final MemberService memberService;
+	private MemberRepository memberRepository;
 	
-	@Autowired
-	public MemberController(MemberService memberService) {
-		this.memberService = memberService;
+	public MemberController(MemberRepository memberRepository) {
+		this.memberRepository = memberRepository;
 	}
 	
 	// 회원가입 페이지 진입
@@ -19,5 +25,14 @@ public class MemberController {
 		return "joinForm";
 
 	}
+	
+	@PostMapping("/join")
+    public String join(Member member) { 
+        System.out.println("user: " + member);
+        Member memberEntity = memberRepository.save(member);
+        System.out.println("userentity:  " + memberEntity);
+        // redirect: mapping주소
+        return "redirect:/loginForm"; 
+    }
 
 }
