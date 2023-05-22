@@ -135,8 +135,8 @@ function listAjax(code){
 	$("#meoggolgolTable").empty();
     $.getJSON("meoggolgol-list?sigunguCode="+code, function(data){
 		$.each(data, function(i) {
-            var ntd = $("<th></th>").text(data[i].FCLTY_NM);
-            var ltd = $("<th></th>").text(data[i].RDNMADR_NM);
+            var ntd = $("<th id='streetName'></th>").text(data[i].FCLTY_NM);
+            var ltd = $("<th id='streetAddress'></th>").text(data[i].RDNMADR_NM);
             
             var tr = $("<tr></tr>").append(ntd,ltd);
 			$("#meoggolgolTable").append(tr);
