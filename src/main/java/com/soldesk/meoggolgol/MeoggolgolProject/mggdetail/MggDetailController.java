@@ -10,15 +10,14 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 public class MggDetailController {
-	private final MggDetailRepository mdr;
-	
-	@GetMapping("/mgg-detail")
-	public String goMggDetail(@RequestParam double lo,@RequestParam double la, Model model) {
-		System.out.println(lo);
-		System.out.println(la);
-		model.addAttribute("la", la);
-		model.addAttribute("lo", lo);
-		return "mgg-detail";
-	}
-	
+    private final MggDetailRepository mdr;
+    private final MggDetailService mggDetailService;
+
+    @GetMapping("/mgg-detail")
+    public String goMggDetail(@RequestParam double lo, @RequestParam double la, Model model) {
+        mggDetailService.searchRestaurants(la, lo);	//mggDetailService로 la, lo 넘겨주기
+        model.addAttribute("la", la);
+        model.addAttribute("lo", lo);
+        return "mgg-detail";
+    }
 }
