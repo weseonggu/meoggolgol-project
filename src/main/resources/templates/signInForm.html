@@ -1,0 +1,24 @@
+<html layout:decorate="~{layout}">
+    <div layout:fragment="content" id="SignInPageContainer">
+        <form th:action="@{/signin}" th:object="${member}" method="POST">
+
+            <div class="signInBox">
+                <label for="username" class="form-label">ID</label> 
+                <input type="text" id="member_id" name="member_id">
+                <div th:if="${#fields.hasErrors('member_id')}" class="error-message" th:errors="*{member_id}"></div>
+            </div>
+
+            <div class="signInBox">
+                <label for="password" class="form-label">PW</label>
+                <input type="password" id="member_pw" name="member_pw">
+                <div th:if="${#fields.hasErrors('member_pw')}" class="error-message" th:errors="*{member_pw}"></div>
+            </div>
+
+            <div th:if="${errorMessage}" class="error-message">
+                <span th:text="${errorMessage}"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Sign In</button>
+        </form>
+    </div>
+</html>
