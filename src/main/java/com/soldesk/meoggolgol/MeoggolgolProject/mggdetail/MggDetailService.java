@@ -1,11 +1,18 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.mggdetail;
 
+import static org.hamcrest.CoreMatchers.nullValue;
+
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,20 +40,29 @@ public class MggDetailService {
             connection.setRequestProperty("Authorization", "KakaoAK " + apiKey);
 
             // 응답 읽기
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            StringBuilder response = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                response.append(line);
-            }
-            reader.close();
+            InputStream is = connection.getInputStream();
+            InputStreamReader isr = new InputStreamReader(is, "utf-8");
+			BufferedReader br = new BufferedReader(isr);
+			String data = br.readLine();
 
-            // 응답 처리
-            System.out.println(response.toString());// 콘솔 출력 test
-
+			JSONParser jp = new JSONParser();
+			JSONObject kakaoData = (JSONObject) jp.parse(data);
+			JSONArray locs = (JSONArray) kakaoData.get("documents");
+			JSONObject list = null;
+            
+			Restaurant rest = null;
+			ArrayList<Restaurant> restlist = new ArrayList<>();
+			
+			// 응답 처리
+			for (int i = 0; i < locs.size(); i++) {
+				list = (JSONObject) locs.get(i);
+				rest = new Restaurant(list.get("place_name")+"", list.get("road_address_name")+"", list.get("category_name")+"", list.get("phone")+"", list.get("place_url")+"", list.get("x")+"", list.get("y")+"");
+				restlist.add(rest);
+			}
+			System.out.println(restlist);
             // 연결 종료
             connection.disconnect();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
