@@ -170,8 +170,11 @@ window.onload = function() {
 
 	// 지도에 원을 표시합니다
 	circle.setMap(map);
-	
-	
+	// 먹자골목 데이터 가져오기
+	//var dataas = localStorage.getItem('fclty_nm');
+	//console.log(dataas);
+	//document.getElementById('sn') = document.getElementById("streetName");
+	//document.getElementById('sn').innerHTML=dataas;
 };
 // 시군도 선택시 그 지역의 먹자골목 리스트 출력
 function listAjax(code){
@@ -179,21 +182,23 @@ function listAjax(code){
     $.getJSON("meoggolgol-list?sigunguCode="+code, function(data){
 		$.each(data, function(i) {
 			
-            var ntd = $("<h5 id='streetName'></h5>").text(data[i].FCLTY_NM);
+//			localStorage.setItem('fclty_nm',data[i].FCLTY_NM);
+			
+            var ntd = $("<p id='streetName'></p>").text(data[i].FCLTY_NM);
             var ltd = $("<p id='streetAddress'></p>").text(data[i].RDNMADR_NM);
             var lotd = $("<input>").attr("value", data[i].FCLTY_LO);
             var latd = $("<input>").attr("value", data[i].FCLTY_LA);
             
+           
             var tr = $("<div></div>").attr("onclick","mggDetail("+data[i].FCLTY_LO+","+data[i].FCLTY_LA+")").append(ntd,ltd, lotd, latd);
 			$("#meoggolgolTable").append(tr);
 		});
 		});
+	
 }
 function mggDetail(lo,la){
 	location.href="mgg-detail?lo="+lo+"&la="+la;
 }
-
-
 
 
 

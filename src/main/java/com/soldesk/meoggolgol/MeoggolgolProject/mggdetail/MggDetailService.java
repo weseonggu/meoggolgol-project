@@ -60,6 +60,7 @@ public class MggDetailService {
 				restlist.add(rest);
 			}
 			System.out.println(restlist);
+			System.out.println(restlist.size());
             // 연결 종료
             connection.disconnect();
         } catch (Exception e) {
