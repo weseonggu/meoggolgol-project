@@ -78,11 +78,11 @@ public class MggDetailService {
     	sb.insert(4, "s");
     	String urltest = sb.toString();
     	try {
-    		 Selenium sel = new Selenium();
+    		Selenium sel = new Selenium();
 
-    		    String url = urltest;
+    		String url = urltest;
 
-    		    sel.useDriver(url);
+    		sel.useDriver(url);
     		
 //    		URL url = new URL(urltest);
 //    		
@@ -99,8 +99,7 @@ public class MggDetailService {
 //				System.out.println(data);
 //			}
 			
-			 // 연결 종료
-//            connection.disconnect();
+			 
     	} catch (Exception e) {
     		e.printStackTrace();
 		}

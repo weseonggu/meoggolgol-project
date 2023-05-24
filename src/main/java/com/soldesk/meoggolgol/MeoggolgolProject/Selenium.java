@@ -2,7 +2,9 @@ package com.soldesk.meoggolgol.MeoggolgolProject;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
@@ -43,9 +45,11 @@ public class Selenium {
 
         try {
             Thread.sleep(1000);
-            
+//            String test = driver.findElement(By.className("#bj_present"));
             //html 콘솔창에 모두 띄우기
-            System.out.println(driver.getPageSource());
+            WebElement test = driver.findElement(By.className("bg_present"));
+            System.out.println(test.getText());
+//            System.out.println(driver.getPageSource());
         }
         catch (Exception e) {
             e.printStackTrace();
