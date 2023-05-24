@@ -1,3 +1,4 @@
+ 
 package com.soldesk.meoggolgol.MeoggolgolProject.Member;
 
 import org.springframework.dao.DataIntegrityViolationException;
@@ -17,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 	
 	private final MemberRepository reposi;
+	private final MemberService mService;
 	
 	@GetMapping("/join")
 	public String goSingUp(Member member) {
@@ -50,28 +52,36 @@ public class MemberController {
 	}
 	
 	@GetMapping("/signin")
-	public String goSignIn(Model model) {
-	    model.addAttribute("membersignin", new MemberSignIn());
+	public String goSignIn(MemberSignIn membersignin) {
+	   
 	    return "signInForm";
 	}
 
 	@PostMapping("/signin")
 	public String signIn(@Valid MemberSignIn membersignin, BindingResult bindingResult) {
-	    
 	    if (bindingResult.hasErrors()) {
 	        return "signInForm";
 	    }
 	    
-	    if (reposi.check(membersignin.getMember_id(), membersignin.getMember_pw()) == null) {
-	        bindingResult.rejectValue("member_id", "invalidCredentials", "아이디 또는 패스워드가 일치하지 않습니다.");
-	        return "signInForm";
+	    String submittedId = membersignin.getMember_id();
+	    String submittedPw = membersignin.getMember_pw();
+	    
+	    int checked = mService.check(submittedId, submittedPw);
+	    System.out.println(checked);
+	    
+	    if (checked == 1) {
+	    	bindingResult.rejectValue("member_id", "passwordInCorrect", "아이디 없");
+	    	//return "redirect:/signin";
+	    	return "signInForm";
+	    } 
+	    if (checked == 2) {
+	    	bindingResult.rejectValue("member_pw", "passwordInCorrect", "비번 틀림");
+	    	return "signInForm";
 	    }
 	    
-	    // 로그인 성공
+	    // 인증 성공
 	    return "redirect:/";
 	}
-
-	
 
 
 }
