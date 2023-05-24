@@ -65,39 +65,37 @@ public class MemberController {
 	    if (bindingResult.hasErrors()) {
 	        return "signInForm";
 	    }
-	    
+
 	    String submittedId = membersignin.getMember_id();
 	    String submittedPw = membersignin.getMember_pw();
-	    
-	    int checked = mService.check(submittedId, submittedPw);
-	    System.out.println(checked);
-	    
-	    if (checked == 1) {
-	    	bindingResult.rejectValue("member_id", "passwordInCorrect", "아이디 없");
-	    	return "signInForm";
-	    } 
-	    if (checked == 2) {
-	    	bindingResult.rejectValue("member_pw", "passwordInCorrect", "비번 틀림");
-	    	return "signInForm";
+
+	    LogInCheckResult checkResult = mService.check(submittedId, submittedPw);
+
+	    if (checkResult.getErrorCode() == 1) {
+	        bindingResult.rejectValue("member_id", "passwordInCorrect", "아이디를 다시 입력해주세요.");
+	        return "signInForm";
 	    }
-	    
+	    if (checkResult.getErrorCode() == 2) {
+	        bindingResult.rejectValue("member_pw", "passwordInCorrect", "비밀번호를 다시 입력해주세요.");
+	        return "signInForm";
+	    }
+
+	    MemberSignIn memberSignIn = checkResult.getMemberSignIn();
 	    // 인증 성공 시 세션에 데이터 저장
-	    
-	    // member_id는 어노테이션이 자동 저장해줌
-	    // session.setAttribute("member_id", membersignin.getMember_id());
-	    
-	    session.setAttribute("member_pw", membersignin.getMember_pw());
-	    session.setAttribute("member_name", membersignin.getMember_name());
-	    session.setAttribute("member_nickname", membersignin.getMember_nickname());
-	    session.setAttribute("member_birth", membersignin.getMember_birth());
-	    session.setAttribute("member_phoneNumber", membersignin.getMember_phoneNumber());
-	    session.setAttribute("member_email", membersignin.getMember_email());
-	    
+	    session.setAttribute("member_id", memberSignIn.getMember_id());
+	    session.setAttribute("member_pw", memberSignIn.getMember_pw());
+	    session.setAttribute("member_name", memberSignIn.getMember_name());
+	    session.setAttribute("member_nickname", memberSignIn.getMember_nickname());
+	    session.setAttribute("member_birth", memberSignIn.getMember_birth());
+	    session.setAttribute("member_phoneNumber", memberSignIn.getMember_phoneNumber());
+	    session.setAttribute("member_email", memberSignIn.getMember_email());
+
 	    // 인증 성공하고 세션에 데이터까지 저장한 후 메인페이지 이동
+	    System.out.println(session.getAttribute("member_name"));
 	    return "redirect:/";
 	}
-	
-	@GetMapping("/logout")
+
+	@PostMapping("/signout")
 	public String logout(Member member, SessionStatus sessionStatus, HttpSession session) throws Exception {
 		// 어노테이션이 관리하는 member_id 세션 삭제
 		sessionStatus.setComplete();
@@ -108,11 +106,8 @@ public class MemberController {
 		session.removeAttribute("member_nickname");
 		session.removeAttribute("member_birth");
 		session.removeAttribute("member_phoneNumber");
-		session.removeAttribute("member_eMail");
-		
+		session.removeAttribute("member_email");
 		return "redirect:/";
 	}
-
-
 }
  
