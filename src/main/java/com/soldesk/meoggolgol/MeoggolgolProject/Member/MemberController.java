@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -58,7 +61,7 @@ public class MemberController {
 	}
 
 	@PostMapping("/signin")
-	public String signIn(@Valid MemberSignIn membersignin, BindingResult bindingResult) {
+	public String signIn(@Valid MemberSignIn membersignin, BindingResult bindingResult, HttpSession session) {
 	    if (bindingResult.hasErrors()) {
 	        return "signInForm";
 	    }
@@ -71,7 +74,6 @@ public class MemberController {
 	    
 	    if (checked == 1) {
 	    	bindingResult.rejectValue("member_id", "passwordInCorrect", "아이디 없");
-	    	//return "redirect:/signin";
 	    	return "signInForm";
 	    } 
 	    if (checked == 2) {
@@ -79,8 +81,25 @@ public class MemberController {
 	    	return "signInForm";
 	    }
 	    
+	    // 인증 성공 시 세션에 데이터 저장
+	    session.setAttribute("member_id", membersignin.getMember_id());
+	    session.setAttribute("member_id", membersignin.getMember_pw());
+	    session.setAttribute("member_id", membersignin.getMember_name());
+	    session.setAttribute("member_id", membersignin.getMember_nickname());
+	    session.setAttribute("member_id", membersignin.getMember_birth());
+	    session.setAttribute("member_id", membersignin.getMember_phoneNumber());
+	    session.setAttribute("member_id", membersignin.getMember_email());
+	    
 	    // 인증 성공
 	    return "redirect:/";
+	}
+	
+	@GetMapping("/logout")
+	public String logout(Member member, SessionStatus sessionStatus) throws Exception {
+		sessionStatus.setComplete();
+		// 명시적으로 써줘야 메인페이지 찾아감 
+		// "redirect:/"는 못 찾더라구요
+		return "redirect:/mainpage";
 	}
 
 
