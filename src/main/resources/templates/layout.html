@@ -48,9 +48,18 @@
 				</div>
 				<!-- 로그인/회원가입 기능 넣는 태그 -->
 				<div class="brandContent" id="signInUp">
-					<a href="/signin" id="sign">Sign In</a>
-					<a href="/join" id="sign">Sign Up</a>
-				</div>
+    				<a th:if="${session.member_name == null}" href="/signin" id="loginButton">Sign In</a>
+   		 			<a th:if="${session.member_name == null}" href="/join" id="signupButton">Sign Up</a>
+
+    				<div th:if="${session.member_name != null}" class="top_menu">
+        				<div class="login_member"><strong><i class="far fa-user-circle"></i> [[${session.member_name}]]</strong>&nbsp;님</div>
+       					<div class="logout">
+           					<form action="/signout" method="post">
+               					<button type="submit"><span class="skip_info">로그아웃</span><i class="fas fa-sign-out-alt"></i></button>
+           					</form>
+        				</div>
+					</div>
+				</div>				
 			</div>
 		</div>
 		<!-- 네비게이션바 -->
