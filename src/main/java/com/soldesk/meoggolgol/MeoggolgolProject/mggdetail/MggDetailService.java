@@ -27,6 +27,7 @@ public class MggDetailService {
     public ArrayList<Restaurant> searchRestaurants(double latitude, double longitude) {
         String apiUrl = "https://dapi.kakao.com/v2/local/search/category.json";
         String apiKey = "770ee2bdd22b63d6a113a2cfef5259c1"; // REST API 키
+//        String apiKey = "aa8ed2785db0138dc7d9bdb1f5756790"; // REST API 키 성구꺼
         String categoryCode = "FD6"; // 카카오맵 식당 카테고리 코드
 
         try {
@@ -59,9 +60,9 @@ public class MggDetailService {
 				list = (JSONObject) locs.get(i);
 				rest = new Restaurant(list.get("place_name")+"", list.get("road_address_name")+"", list.get("category_name")+"", list.get("phone")+"", list.get("place_url")+"", list.get("x")+"", list.get("y")+"");
 				restlist.add(rest);
-				searchImage(list.get("place_url")+"");
+//				searchImage(list.get("place_url")+"");
 			}
-			System.out.println(restlist);
+//			System.out.println(restlist);
 			
             // 연결 종료
             connection.disconnect();
