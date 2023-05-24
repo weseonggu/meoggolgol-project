@@ -90,16 +90,15 @@ public class MemberController {
 	    session.setAttribute("member_id", membersignin.getMember_phoneNumber());
 	    session.setAttribute("member_id", membersignin.getMember_email());
 	    
-	    // 인증 성공
+	    // 인증 성공하고 세션에 데이터까지 저장한 후 메인페이지 이동
 	    return "redirect:/";
 	}
 	
 	@GetMapping("/logout")
 	public String logout(Member member, SessionStatus sessionStatus) throws Exception {
 		sessionStatus.setComplete();
-		// 명시적으로 써줘야 메인페이지 찾아감 
-		// "redirect:/"는 못 찾더라구요
-		return "redirect:/mainpage";
+		
+		return "redirect:/";
 	}
 
 
