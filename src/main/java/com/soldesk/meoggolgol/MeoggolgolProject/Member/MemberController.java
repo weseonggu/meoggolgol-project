@@ -61,11 +61,11 @@ public class MemberController {
 	    if (bindingResult.hasErrors()) {
 	        return "signInForm";
 	    }
-	    
-	    if (reposi.check(membersignin.getMember_id(), membersignin.getMember_pw()) == null) {
-	        bindingResult.rejectValue("member_id", "invalidCredentials", "아이디 또는 패스워드가 일치하지 않습니다.");
-	        return "signInForm";
-	    }
+	    System.out.println("출력:  "+reposi.check(membersignin.getMember_id()));
+//	    if (reposi.check(membersignin.getMember_id()) == null) {
+//	        bindingResult.rejectValue("member_id", "invalidCredentials", "아이디 또는 패스워드가 일치하지 않습니다.");
+//	        return "signInForm";
+//	    }
 	    
 	    // 로그인 성공
 	    return "redirect:/";
