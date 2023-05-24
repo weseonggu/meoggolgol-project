@@ -14,6 +14,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
 
+import com.soldesk.meoggolgol.MeoggolgolProject.Selenium;
+
 @Service
 public class MggDetailService {
     private final MggDetailRepository mdr;
@@ -76,23 +78,29 @@ public class MggDetailService {
     	sb.insert(4, "s");
     	String urltest = sb.toString();
     	try {
-    		URL url = new URL(urltest);
+    		 Selenium sel = new Selenium();
+
+    		    String url = urltest;
+
+    		    sel.useDriver(url);
     		
-    		// HTTP 연결 설정
-    		HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-    		connection.setRequestMethod("GET");
-    		
-    		// 응답 읽기
-    		InputStream is = connection.getInputStream();
-            InputStreamReader isr = new InputStreamReader(is, "utf-8");
-			BufferedReader br = new BufferedReader(isr);
-			String data = null;
-			while ((data =br.readLine()) != null) {
-				System.out.println(data);
-			}
+//    		URL url = new URL(urltest);
+//    		
+//    		// HTTP 연결 설정
+//    		HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+//    		connection.setRequestMethod("GET");
+//    		
+//    		// 응답 읽기
+//    		InputStream is = connection.getInputStream();
+//            InputStreamReader isr = new InputStreamReader(is, "utf-8");
+//			BufferedReader br = new BufferedReader(isr);
+//			String data = null;
+//			while ((data =br.readLine()) != null) {
+//				System.out.println(data);
+//			}
 			
 			 // 연결 종료
-            connection.disconnect();
+//            connection.disconnect();
     	} catch (Exception e) {
     		e.printStackTrace();
 		}
