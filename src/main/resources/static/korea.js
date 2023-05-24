@@ -130,7 +130,7 @@ window.onload = function() {
         states.selectAll('path').attr('d', path);
         labels.attr('transform', translateTolabel);
     }
-
+    //  먹자골록 위치 지도 카카오맵
 	const urlParams = new URL(location.href).searchParams;
 
 	const la = urlParams.get('la');
@@ -171,6 +171,8 @@ window.onload = function() {
 	// 지도에 원을 표시합니다
 	circle.setMap(map);
 };
+
+
 // 시군도 선택시 그 지역의 먹자골목 리스트 출력
 function listAjax(code){
 	$("#meoggolgolTable").empty();

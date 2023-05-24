@@ -59,6 +59,7 @@ public class MggDetailService {
 				list = (JSONObject) locs.get(i);
 				rest = new Restaurant(list.get("place_name")+"", list.get("road_address_name")+"", list.get("category_name")+"", list.get("phone")+"", list.get("place_url")+"", list.get("x")+"", list.get("y")+"");
 				restlist.add(rest);
+				searchImage(list.get("place_url")+"");
 			}
 			System.out.println(restlist);
 			
