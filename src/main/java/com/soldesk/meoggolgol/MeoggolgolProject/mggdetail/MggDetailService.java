@@ -1,14 +1,13 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.mggdetail;
 
-import static org.hamcrest.CoreMatchers.nullValue;
-
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -23,7 +22,7 @@ public class MggDetailService {
         this.mdr = mdr;
     }
 
-    public void searchRestaurants(double latitude, double longitude) {
+    public ArrayList<Restaurant> searchRestaurants(double latitude, double longitude) {
         String apiUrl = "https://dapi.kakao.com/v2/local/search/category.json";
         String apiKey = "770ee2bdd22b63d6a113a2cfef5259c1"; // REST API 키
         String categoryCode = "FD6"; // 카카오맵 식당 카테고리 코드
@@ -60,11 +59,43 @@ public class MggDetailService {
 				restlist.add(rest);
 			}
 			System.out.println(restlist);
-			System.out.println(restlist.size());
+			
             // 연결 종료
             connection.disconnect();
+            
+            return restlist;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
+    }
+    
+    public void searchImage(String imageurl) {
+    	StringBuffer sb = new StringBuffer();
+    	sb.append(imageurl);
+    	sb.insert(4, "s");
+    	String urltest = sb.toString();
+    	try {
+    		URL url = new URL(urltest);
+    		
+    		// HTTP 연결 설정
+    		HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+    		connection.setRequestMethod("GET");
+    		
+    		// 응답 읽기
+    		InputStream is = connection.getInputStream();
+            InputStreamReader isr = new InputStreamReader(is, "utf-8");
+			BufferedReader br = new BufferedReader(isr);
+			String data = null;
+			while ((data =br.readLine()) != null) {
+				System.out.println(data);
+			}
+			
+			 // 연결 종료
+            connection.disconnect();
+    	} catch (Exception e) {
+    		e.printStackTrace();
+		}
+    	
     }
 }

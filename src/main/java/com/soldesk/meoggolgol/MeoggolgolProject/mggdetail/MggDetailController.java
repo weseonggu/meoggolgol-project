@@ -1,5 +1,7 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.mggdetail;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +17,15 @@ public class MggDetailController {
 
     @GetMapping("/mgg-detail")
     public String goMggDetail(@RequestParam double lo, @RequestParam double la, Model model) {
-        mggDetailService.searchRestaurants(la, lo);	//mggDetailService로 la, lo 넘겨주기
+        ArrayList<Restaurant> list = mggDetailService.searchRestaurants(la, lo);	//mggDetailService로 la, lo 넘겨주기
         SelectMgg selectmgg = mdr.check(lo, la);
-        //System.out.println(selectmgg);
+        
+//        for (int i = 0; i < list.size(); i++) {
+//		}
+        System.out.println(list.get(0).getPlace_url());
+        mggDetailService.searchImage(list.get(0).getPlace_url());
+        
+        
         String parking = "없음";
         if (selectmgg.getPARKNG_POSBL_AT().equals("유")) {
 			parking = "있음";
