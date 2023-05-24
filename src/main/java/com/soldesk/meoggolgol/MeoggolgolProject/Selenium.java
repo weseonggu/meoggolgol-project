@@ -47,8 +47,12 @@ public class Selenium {
             Thread.sleep(1000);
 //            String test = driver.findElement(By.className("#bj_present"));
             //html 콘솔창에 모두 띄우기
-            WebElement test = driver.findElement(By.className("bg_present"));
-            System.out.println(test.getText());
+            WebElement test = driver.findElement(By.cssSelector("#kakaoContent > div#mArticle > div.cont_essential > div > div > a > span.bg_present"));
+            String test2 = test.getAttribute("style");
+            String[] test3 = test2.split(" ");
+            
+            System.out.println(test3[1].substring(5,(test3[1].length()-3)));
+            
 //            System.out.println(driver.getPageSource());
         }
         catch (Exception e) {
