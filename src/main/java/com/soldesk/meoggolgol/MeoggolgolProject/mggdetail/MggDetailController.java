@@ -20,11 +20,8 @@ public class MggDetailController {
         ArrayList<Restaurant> list = mggDetailService.searchRestaurants(la, lo);	//mggDetailService로 la, lo 넘겨주기
         SelectMgg selectmgg = mdr.check(lo, la);
         
-//        for (int i = 0; i < list.size(); i++) {
-//		}
         System.out.println(list.get(0).getPlace_url());
         mggDetailService.searchImage(list.get(0).getPlace_url());
-        
         
         String parking = "없음";
         if (selectmgg.getPARKNG_POSBL_AT().equals("유")) {

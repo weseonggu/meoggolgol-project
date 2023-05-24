@@ -39,13 +39,9 @@ public class Selenium {
 
     public void useDriver(String url) {
         driver.get(url) ;
-        //driver.manage().timeouts().implicitlyWait(500, TimeUnit.MILLISECONDS);  // 페이지 불러오는 여유시간.
-
-        //WebElement searchLabel = driver.findElement(By.id("label-text"));
 
         try {
             Thread.sleep(1000);
-//            String test = driver.findElement(By.className("#bj_present"));
             //html 콘솔창에 모두 띄우기
             WebElement test = driver.findElement(By.cssSelector("#kakaoContent > div#mArticle > div.cont_essential > div > div > a > span.bg_present"));
             String test2 = test.getAttribute("style");
@@ -53,7 +49,6 @@ public class Selenium {
             
             System.out.println(test3[1].substring(5,(test3[1].length()-3)));
             
-//            System.out.println(driver.getPageSource());
         }
         catch (Exception e) {
             e.printStackTrace();
