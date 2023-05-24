@@ -170,8 +170,6 @@ window.onload = function() {
 
 	// 지도에 원을 표시합니다
 	circle.setMap(map);
-	
-	
 };
 // 시군도 선택시 그 지역의 먹자골목 리스트 출력
 function listAjax(code){
@@ -179,7 +177,7 @@ function listAjax(code){
     $.getJSON("meoggolgol-list?sigunguCode="+code, function(data){
 		$.each(data, function(i) {
 			
-            var ntd = $("<h5 id='streetName'></h5>").text(data[i].FCLTY_NM);
+            var ntd = $("<p id='streetName'></p>").text(data[i].FCLTY_NM);
             var ltd = $("<p id='streetAddress'></p>").text(data[i].RDNMADR_NM);
             var lotd = $("<input>").attr("value", data[i].FCLTY_LO);
             var latd = $("<input>").attr("value", data[i].FCLTY_LA);
@@ -188,12 +186,11 @@ function listAjax(code){
 			$("#meoggolgolTable").append(tr);
 		});
 		});
+	
 }
 function mggDetail(lo,la){
 	location.href="mgg-detail?lo="+lo+"&la="+la;
 }
-
-
 
 
 

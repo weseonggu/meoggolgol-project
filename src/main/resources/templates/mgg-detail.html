@@ -2,8 +2,12 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="kakaoMap" class="map" id="Map">
 	<!-- div 태그 안 class 이름들은 정렬을 위해서 만든 것들 -->
-	<div id="mggMap" style="width:500px;height:400px;"></div>
-	<div th:text="${la}"></div>
-	<div th:text="${lo}"></div>
+	<div class="selectMgg" id="mggMap" style="width:500px;height:500px;"></div>
+	<div class="selectMgg">
+		<h2 id="mggName" th:text="${fclty_nm}"></h2>
+		<div id="mggAdress" th:text="${rdnmadr_nm}"></div>
+		<div id="mggRoute" th:text="${nearby_pbtrnsp_nm}"></div>
+		<div id="mggParking" th:text="${parkng_posbl_at}"></div>
+	</div>
 </div>
 </html>
