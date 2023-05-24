@@ -30,6 +30,14 @@ public class MemberRepository {
 				);
 	}
 
-
+	public MemberSignIn check(String submitted_id, String submitted_pw) {
+		String query = "select member_id, member_pw from Member_info where member_id = ? and member_pw = ?";
+		return jdbc.queryForObject(query, (rs, rowNum) -> {
+			MemberSignIn membersignin = new MemberSignIn();
+			membersignin.setMember_id(rs.getString("member_id"));
+			membersignin.setMember_pw(rs.getString("member_pw"));
+			return membersignin;
+		}, submitted_id, submitted_pw);
+	}
 
 }
