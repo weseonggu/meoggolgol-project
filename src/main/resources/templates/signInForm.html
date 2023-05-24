@@ -1,16 +1,16 @@
 <html layout:decorate="~{layout}">
     <div layout:fragment="content" id="SignInPageContainer">
-        <form th:action="@{/signin}" th:object="${membersignin}" method="POST">
-			<!-- 입력 정보 오류 -->
+        <form th:action="@{/signin}" th:object="${memberSignIn}" method="POST">
+		
 			<div th:replace="~{form_errors :: formErrorsFragment}"></div>
             <div class="signInBox">
                 <label for="userid" class="form-label">ID</label> 
-                <input type="text" id="member_id" name="member_id">
+                <input type="text" th:field="*{member_id}">
             </div>
 
             <div class="signInBox">
                 <label for="password" class="form-label">PW</label>
-                <input type="password" id="member_pw" name="member_pw">
+                <input type="password" th:field="*{member_pw}">
             </div>
 
             <button type="submit" class="btn btn-primary">Sign In</button>

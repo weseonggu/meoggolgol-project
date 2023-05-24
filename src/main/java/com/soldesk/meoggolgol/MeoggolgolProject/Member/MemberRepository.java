@@ -3,7 +3,7 @@ package com.soldesk.meoggolgol.MeoggolgolProject.Member;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
+import org.springframework.dao.EmptyResultDataAccessException;
 import lombok.RequiredArgsConstructor;
 
 @Repository
@@ -31,9 +31,40 @@ public class MemberRepository {
 				);
 	}
 
-	public MemberAuthority check(String submitted_id) {
-		String query = "select * from Member_info where member_id = ?";
-		return jdbc.queryForObject(query, new BeanPropertyRowMapper<>(MemberAuthority.class), submitted_id);
+
+
+
+	public MemberSignIn getInfoByID(String submittedId) {
+	    String query = "SELECT * FROM Member_info WHERE member_id = ?";
+	    try {
+	       MemberSignIn memberSignIn = jdbc.queryForObject(query, (rs, rowNum) -> {
+	        	
+	            MemberSignIn membersignin = new MemberSignIn();
+	            
+	            membersignin.setMember_id(rs.getString("member_id"));
+	            membersignin.setMember_pw(rs.getString("member_pw"));
+	            membersignin.setMember_name(rs.getString("member_name"));
+	            membersignin.setMember_nickname(rs.getString("member_nickname"));
+	            
+	            // 생일이 null인 경우 문자열 처리
+	            String memberBirth = rs.getString("member_birth");
+	            if (memberBirth == null) {
+	                memberBirth = "등록된 생일 정보가 없습니다."; 
+	            }
+	            membersignin.setMember_birth(memberBirth);
+	            
+	            membersignin.setMember_phoneNumber(rs.getString("member_phoneNumber"));
+	            membersignin.setMember_email(rs.getString("member_email"));
+	            
+	            return membersignin;
+	            
+	        }, submittedId);
+	       return memberSignIn;
+	       
+	    } catch (EmptyResultDataAccessException e) {
+	        return null; // 회원 아이디가 존재하지 않음
+	    }
+
 	}
 
 }
