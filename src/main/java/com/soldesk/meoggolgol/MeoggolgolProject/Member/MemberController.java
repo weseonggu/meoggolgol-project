@@ -82,21 +82,33 @@ public class MemberController {
 	    }
 	    
 	    // 인증 성공 시 세션에 데이터 저장
-	    session.setAttribute("member_id", membersignin.getMember_id());
-	    session.setAttribute("member_id", membersignin.getMember_pw());
-	    session.setAttribute("member_id", membersignin.getMember_name());
-	    session.setAttribute("member_id", membersignin.getMember_nickname());
-	    session.setAttribute("member_id", membersignin.getMember_birth());
-	    session.setAttribute("member_id", membersignin.getMember_phoneNumber());
-	    session.setAttribute("member_id", membersignin.getMember_email());
+	    
+	    // member_id는 어노테이션이 자동 저장해줌
+	    // session.setAttribute("member_id", membersignin.getMember_id());
+	    
+	    session.setAttribute("member_pw", membersignin.getMember_pw());
+	    session.setAttribute("member_name", membersignin.getMember_name());
+	    session.setAttribute("member_nickname", membersignin.getMember_nickname());
+	    session.setAttribute("member_birth", membersignin.getMember_birth());
+	    session.setAttribute("member_phoneNumber", membersignin.getMember_phoneNumber());
+	    session.setAttribute("member_email", membersignin.getMember_email());
 	    
 	    // 인증 성공하고 세션에 데이터까지 저장한 후 메인페이지 이동
 	    return "redirect:/";
 	}
 	
 	@GetMapping("/logout")
-	public String logout(Member member, SessionStatus sessionStatus) throws Exception {
+	public String logout(Member member, SessionStatus sessionStatus, HttpSession session) throws Exception {
+		// 어노테이션이 관리하는 member_id 세션 삭제
 		sessionStatus.setComplete();
+		
+		// httpsession으로 직접 저장한 속성들 삭제
+		session.removeAttribute("member_pw");
+		session.removeAttribute("member_name");
+		session.removeAttribute("member_nickname");
+		session.removeAttribute("member_birth");
+		session.removeAttribute("member_phoneNumber");
+		session.removeAttribute("member_eMail");
 		
 		return "redirect:/";
 	}
