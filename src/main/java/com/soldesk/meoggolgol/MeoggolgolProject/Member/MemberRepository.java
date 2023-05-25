@@ -1,9 +1,9 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.Member;
 
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.dao.EmptyResultDataAccessException;
+
 import lombok.RequiredArgsConstructor;
 
 @Repository

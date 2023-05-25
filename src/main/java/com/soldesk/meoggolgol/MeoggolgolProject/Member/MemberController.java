@@ -90,8 +90,6 @@ public class MemberController {
 	    session.setAttribute("member_email", memberSignIn.getMember_email());
 
 	    // 인증 성공하고 세션에 데이터까지 저장한 후 메인페이지 이동
-	    System.out.println(session.getAttribute("member_name"));
-
 	    return "redirect:/";
 	}
 

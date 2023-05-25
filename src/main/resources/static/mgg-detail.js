@@ -28,7 +28,7 @@ $(function() {
 	// 지도에 표시할 원을 생성합니다
 	var circle = new kakao.maps.Circle({
 	    center: new kakao.maps.LatLng(la, lo), // 원의 중심좌표입니다
-	    radius: 500, // 미터 단위의 원의 반지름입니다
+	    radius: 200, // 미터 단위의 원의 반지름입니다
 	    strokeWeight: 5, // 선의 두께입니다
 		strokeColor: '#75B8FA', // 선의 색깔입니다
  	    strokeOpacity: 1, // 선의 불투명도입니다
@@ -39,4 +39,6 @@ $(function() {
 
 	// 지도에 원을 표시합니다
 	circle.setMap(map);
+	
+//	alert($(".url").text());
 });
