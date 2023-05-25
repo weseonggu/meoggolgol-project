@@ -23,11 +23,12 @@ public class MemberController {
 	private final MemberRepository reposi;
 	private final MemberService mService;
 	
+	// 가입하러 가기 get요청
 	@GetMapping("/join")
 	public String goSingUp(Member member) {
 		return "joinForm";
 	}
-
+	// 가입post요정, 유효성 검증, 비번확인, 아이디 닉네임 중복 확인
 	@PostMapping("/join")
 	public String insertMember(@Valid Member member, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
@@ -54,12 +55,13 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	// 로그인 하러 가기 get요청
 	@GetMapping("/signin")
 	public String goSignIn(MemberSignIn membersignin) {
-	   
 	    return "signInForm";
 	}
 
+	// 로그인 post요청 
 	@PostMapping("/signin")
 	public String signIn(@Valid MemberSignIn membersignin, BindingResult bindingResult, HttpSession session) {
 	    if (bindingResult.hasErrors()) {
@@ -79,32 +81,20 @@ public class MemberController {
 	        return "signInForm";
 	    }
 
-	    MemberSignIn memberSignIn = checkResult.getMemberSignIn();
 	    // 인증 성공 시 세션에 데이터 저장
-	    session.setAttribute("member_id", memberSignIn.getMember_id());
-	    session.setAttribute("member_pw", memberSignIn.getMember_pw());
-	    session.setAttribute("member_name", memberSignIn.getMember_name());
-	    session.setAttribute("member_nickname", memberSignIn.getMember_nickname());
-	    session.setAttribute("member_birth", memberSignIn.getMember_birth());
-	    session.setAttribute("member_phoneNumber", memberSignIn.getMember_phoneNumber());
-	    session.setAttribute("member_email", memberSignIn.getMember_email());
-
+	    session.setAttribute("member_info", checkResult.getMemberSignIn());
 	    // 인증 성공하고 세션에 데이터까지 저장한 후 메인페이지 이동
 	    return "redirect:/";
 	}
-
-	@PostMapping("/signout")
+	
+	// 로그아웃
+	@GetMapping("/signout")
 	public String logout(Member member, SessionStatus sessionStatus, HttpSession session) throws Exception {
 		// 어노테이션이 관리하는 member_id 세션 삭제
 		sessionStatus.setComplete();
 		
 		// httpsession으로 직접 저장한 속성들 삭제
-		session.removeAttribute("member_pw");
-		session.removeAttribute("member_name");
-		session.removeAttribute("member_nickname");
-		session.removeAttribute("member_birth");
-		session.removeAttribute("member_phoneNumber");
-		session.removeAttribute("member_email");
+		session.removeAttribute("member_info");
 		return "redirect:/";
 	}
 }
