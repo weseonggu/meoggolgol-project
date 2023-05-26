@@ -1,5 +1,8 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.notice;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -8,11 +11,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class NoticeService {
 	
-	private final NoticeService nsr;
+	private final NoticeRepository nr;
 	
 	// db에 있는 게시글 가져오기
-	public NoticeResponse getNoticeInfo() {
-		NoticeResponse noicelist = nsr.getNoticeInfo();
+	public List<NoticeResponse> getNoticeInfo() {
+		List<NoticeResponse> noticelist = nr.getNoticeInfo();
+		
+		return noticelist;
 	}
 	
 }

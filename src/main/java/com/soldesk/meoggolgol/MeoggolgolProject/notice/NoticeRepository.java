@@ -1,5 +1,6 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.notice;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +34,7 @@ public class NoticeRepository {
 		
 	}
 	
-	public List<Map<String, Object>> getNoticeInfo(){
-		return jdbc.queryForList(SELECT_NOTICE);
+	public List<NoticeResponse> getNoticeInfo(){
+		return jdbc.query(SELECT_NOTICE, (rs, rn) -> new NoticeResponse());
 	}
 }

@@ -1,5 +1,25 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="parent" id="NoticeContainer">
-	
+<div class="container my-3">
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성일시</th>
+                <th>글쓴이</th>
+            </tr>
+        </thead>	
+        <tbody>
+            <tr th:each="notice : ${noticelist}">
+                <td th:text="${notice.notice_num}"></td>
+                <td>
+                    <a th:href="@{|/question/detail/${question.id}|}" th:text="${notice.title}"></a>
+                </td>
+                <td th:text="${notice.reg_date}"></td>
+                <td th:text="${notice.writer}"></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 </html>
