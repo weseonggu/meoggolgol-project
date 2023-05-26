@@ -40,7 +40,7 @@ public class MggDetailService {
 	// 먹자골목 주변 시당정보 카카모api로 검색하기
     public ArrayList<Restaurant> searchRestaurants(double latitude, double longitude) {
         String apiUrl = "https://dapi.kakao.com/v2/local/search/category.json";
-        String apiKey = "770ee2bdd22b63d6a113a2cfef5259c1"; // REST API 키
+        String apiKey = "770ee2bdd22b63d6a113a2cfef5259c1"; // REST API 키 성찬꺼
 //        String apiKey = "aa8ed2785db0138dc7d9bdb1f5756790"; // REST API 키 성구꺼
         String categoryCode = "FD6"; // 카카오맵 식당 카테고리 코드
 
@@ -81,7 +81,7 @@ public class MggDetailService {
 			
             // 연결 종료
             connection.disconnect();
-            
+            System.out.println(restlist);
             return restlist;
         } catch (Exception e) {
             e.printStackTrace();

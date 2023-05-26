@@ -42,3 +42,36 @@ $(function() {
 	
 //	alert($(".url").text());
 });
+
+/*function filterRestaurantsByCategory() {
+    var categorySelect = document.getElementById("categorySelect");
+    var selectedCategory = categorySelect.value;
+    var restaurantCards = document.getElementsByClassName("restaurant-card");
+
+    for (var i = 0; i < restaurantCards.length; i++) {
+        var category = restaurantCards[i].querySelector("p:nth-child(3)").textContent;
+        if (selectedCategory === "전체" || category.includes(selectedCategory)) {
+            restaurantCards[i].style.display = "block";
+        } else {
+            restaurantCards[i].style.display = "none";
+        }
+    }
+}*/
+function filterRestaurantsByCategory() {
+    var categorySelect = document.getElementById("categorySelect");
+    var selectedCategory = categorySelect.value;
+    var restaurantCards = document.getElementsByClassName("restaurant-card");
+
+    for (var i = 0; i < restaurantCards.length; i++) {
+        var category = restaurantCards[i].querySelector("p:nth-child(3)").textContent;
+        if (selectedCategory === "전체" || category.includes(selectedCategory)) {
+            restaurantCards[i].style.display = "block";
+        } else if (selectedCategory === "기타" && !category.includes("한식") && !category.includes("일식") && !category.includes("중식") && !category.includes("양식")) {
+            restaurantCards[i].style.display = "block";
+        } else {
+            restaurantCards[i].style.display = "none";
+        }
+    }
+}
+
+

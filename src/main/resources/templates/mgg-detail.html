@@ -16,6 +16,19 @@
 			<p id="mggParking" th:text="${selectmgg.PARKNG_POSBL_AT}"></p>
 		</div>
 	</div>
+
+	<div id="category">
+        <label for="categorySelect">카테고리:</label>
+        <select id="categorySelect" onchange="filterRestaurantsByCategory()">
+            <option value="전체">전체</option>
+            <option value="한식">한식</option>
+            <option value="중식">중식</option>
+            <option value="일식">일식</option>
+            <option value="양식">양식</option>
+            <option value="기타">기타</option>
+        </select>
+    </div>
+
 	<div id ="restaurantListBox">
 		<div th:each="restaurant : ${restaurantList}" class="restaurant-card">
 			<br>
