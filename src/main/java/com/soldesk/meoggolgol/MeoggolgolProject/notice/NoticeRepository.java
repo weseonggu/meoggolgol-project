@@ -1,13 +1,10 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.notice;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
-import com.soldesk.meoggolgol.MeoggolgolProject.mggdetail.SelectMgg;
 
 import lombok.RequiredArgsConstructor;
 
@@ -34,7 +31,7 @@ public class NoticeRepository {
 		
 	}
 	
-	public List<NoticeResponse> getNoticeInfo(){
-		return jdbc.query(SELECT_NOTICE, (rs, rn) -> new NoticeResponse());
+	public List<Map<String,Object>> getNoticeInfo(){
+		return jdbc.queryForList(SELECT_NOTICE);
 	}
 }
