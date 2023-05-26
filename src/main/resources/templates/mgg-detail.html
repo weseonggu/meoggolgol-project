@@ -1,13 +1,32 @@
-<!-- <script type="text/javascript" th:src="@{/mgg-detail.js}"></script> -->
 <html layout:decorate="~{layout}">
-<div layout:fragment="kakaoMap" class="map" id="Map">
-	<!-- div 태그 안 class 이름들은 정렬을 위해서 만든 것들 -->
-	<div class="selectMgg" id="mggMap" style="width:500px;height:500px;"></div>
-	<div class="selectMgg">
-		<h2 id="mggName" th:text="${fclty_nm}"></h2>
-		<div id="mggAdress" th:text="${rdnmadr_nm}"></div>
-		<div id="mggRoute" th:text="${nearby_pbtrnsp_nm}"></div>
-		<div id="mggParking" th:text="${parkng_posbl_at}"></div>
+
+<div layout:fragment="content" >
+
+<link rel="stylesheet" type="text/css" th:href="@{/mgg-detail.css}">
+<!-- kakaoApi -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aa8ed2785db0138dc7d9bdb1f5756790"></script>
+<script type="text/javascript" th:src="@{/mgg-detail.js}"></script>
+	<div id = "mggInfoBoox">
+		<!-- div 태그 안 class 이름들은 정렬을 위해서 만든 것들 -->
+		<div class="selectMgg" id="mggMap" style="width:500px;height:500px;"></div>
+		<div class="selectMgg">
+			<h2 id="mggName" th:text="${selectmgg.FCLTY_NM}"></h2>
+			<p id="mggAdress" th:text="${selectmgg.RDNMADR_NM}"></p>
+			<p id="mggRoute" th:text="${selectmgg.NEARBY_PBTRNSP_NM}"></p>
+			<p id="mggParking" th:text="${selectmgg.PARKNG_POSBL_AT}"></p>
+		</div>
 	</div>
+	<div id ="restaurantListBox">
+		<div th:each="restaurant : ${restaurantList}" class=restaurant-card>
+			<p th:text="${restaurant.place_name}">
+			<p th:text="${restaurant.road_address_name}">
+			<p th:text="${restaurant.category_name}">
+			<p th:text="${restaurant.phone}">
+			<p class="url" th:text="${restaurant.place_url}">
+			<p th:text="${restaurant.x}">
+			<p th:text="${restaurant.y}">
+		</div>
+	</div>
+	
 </div>
 </html>

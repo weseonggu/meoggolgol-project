@@ -1,13 +1,10 @@
 package com.soldesk.meoggolgol.MeoggolgolProject;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-
 public class Selenium {
 	private WebDriver driver;
     public static String WEB_DRIVER_ID = "webdriver.chrome.driver"; // Properties 설정
@@ -18,6 +15,7 @@ public class Selenium {
     //생성자
     public Selenium() {
         chrome();
+
     }
  
     //ChromeDriver 연결
@@ -36,7 +34,7 @@ public class Selenium {
 
         // weDriver 생성.
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+//        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }
 
     public void useDriver(String url) {

@@ -1,21 +1,37 @@
 @charset "UTF-8";
 
-/* Map */
-.map {
+#mggInfoBoox {
 	width: 80%;
-	/*부모높이 자동 조절 (자식에 넣어야하는 값)*/
 	display: table;
-    text-align: left;
+	border: 1px solid black;
+	margin: auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-top: 16px;
 }
 
 /*  */
 .selectMgg {
-	float: left;
 	height: 500px;
-	width: 400px;
-	margin-top: 20px;
-	margin-left: 5px;
-	margin-right: 5px;
+	width: 500px;
 	border: 1px solid black;
 	align-content: center;
+}
+
+#restaurantListBox {
+	width:80%;
+	border: 1px solid black;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	margin:auto;
+	margin-top: 16px;
+}
+.restaurant-card{
+	border: 1px solid black;
+	border-radius: 10px;
+	margin-top: 8px;
 }

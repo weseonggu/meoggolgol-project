@@ -1,19 +1,13 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.Member;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class LogInCheckResult {
 	private int errorCode;
 	private MemberSignIn memberSignIn;
-
-	public LogInCheckResult(int errorCode, MemberSignIn memberSignIn) {
-	   this.errorCode = errorCode;
-	   this.memberSignIn = memberSignIn;
-	}
-
-	public int getErrorCode() {
-		return errorCode;
-	}
-
-	public MemberSignIn getMemberSignIn() {
-		return memberSignIn;
-	}
 }

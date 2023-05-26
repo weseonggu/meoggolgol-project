@@ -7,8 +7,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import javax.net.ssl.HttpsURLConnection;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -16,14 +14,30 @@ import org.springframework.stereotype.Service;
 
 import com.soldesk.meoggolgol.MeoggolgolProject.Selenium;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class MggDetailService {
-    private final MggDetailRepository mdr;
 
-    public MggDetailService(MggDetailRepository mdr) {
-        this.mdr = mdr;
-    }
-
+	private final MggDetailRepository mdr;
+	
+	
+	// DB에 있는 먹자골목 정보 가져오기
+	public SelectMgg getMggInfo(double lo, double la) {
+        SelectMgg selectmgg = mdr.check(lo, la);
+        
+        if (selectmgg.getPARKNG_POSBL_AT().equals("유")) {
+			selectmgg.setPARKNG_POSBL_AT("주차시설 있음");
+		}
+        else {
+        	selectmgg.setPARKNG_POSBL_AT("주차시설 없음");
+        }
+        return selectmgg;
+	}
+	
+	
+	// 먹자골목 주변 시당정보 카카모api로 검색하기
     public ArrayList<Restaurant> searchRestaurants(double latitude, double longitude) {
         String apiUrl = "https://dapi.kakao.com/v2/local/search/category.json";
         String apiKey = "770ee2bdd22b63d6a113a2cfef5259c1"; // REST API 키
@@ -60,9 +74,10 @@ public class MggDetailService {
 				list = (JSONObject) locs.get(i);
 				rest = new Restaurant(list.get("place_name")+"", list.get("road_address_name")+"", list.get("category_name")+"", list.get("phone")+"", list.get("place_url")+"", list.get("x")+"", list.get("y")+"");
 				restlist.add(rest);
+				
 //				searchImage(list.get("place_url")+"");
+				
 			}
-//			System.out.println(restlist);
 			
             // 연결 종료
             connection.disconnect();
@@ -74,18 +89,16 @@ public class MggDetailService {
         }
     }
     
+    
+    // 이미지 클롤링
     public void searchImage(String imageurl) {
     	StringBuffer sb = new StringBuffer();
     	sb.append(imageurl);
     	sb.insert(4, "s");
-    	String urltest = sb.toString();
+    	String url = sb.toString();
     	try {
     		Selenium sel = new Selenium();
-
-    		String url = urltest;
-
     		sel.useDriver(url);
-    		
     	} catch (Exception e) {
     		e.printStackTrace();
 		}
