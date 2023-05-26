@@ -17,16 +17,19 @@
 		</div>
 	</div>
 	<div id ="restaurantListBox">
-		<div th:each="restaurant : ${restaurantList}" class=restaurant-card>
-			<p th:text="${restaurant.place_name}">
-			<p th:text="${restaurant.road_address_name}">
-			<p th:text="${restaurant.category_name}">
-			<p th:text="${restaurant.phone}">
-			<p class="url" th:text="${restaurant.place_url}">
-			<p th:text="${restaurant.x}">
-			<p th:text="${restaurant.y}">
+		<div th:each="restaurant : ${restaurantList}" class="restaurant-card">
+			<br>
+			<img src="/loading.png" id="loading">
+			<br>
+			<input th:value="${restaurant.x}" type="hidden">
+			<input th:value="${restaurant.y}" type="hidden">
+			<input th:value="${restaurant.category_name}">
+			<p th:text="${restaurant.place_name}" align="center">
+			<p th:text="${restaurant.road_address_name}" align="center">
+			<p th:text="${restaurant.phone}" align="center">
+	 <!--	<p class="url" th:text="${restaurant.place_url}"> -->
+			<p th:text="${restaurant.category_name}" id="categoryName">
 		</div>
 	</div>
-	
 </div>
 </html>
