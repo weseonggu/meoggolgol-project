@@ -18,11 +18,11 @@
 	</div>
     <div id="categoryButtons">
     	<button id="btnAll" onclick="filterRestaurantsByCategory('전체')">전체</button>
-	    <button id="btnKorean" style="display: block;" onclick="filterRestaurantsByCategory('한식')">한식</button>
-    	<button id="btnJapanese" style="display: block;" onclick="filterRestaurantsByCategory('일식')">일식</button>
-    	<button id="btnChinese" style="display: block;" onclick="filterRestaurantsByCategory('중식')">중식</button>
-	    <button id="btnWestern" style="display: block;" onclick="filterRestaurantsByCategory('양식')">양식</button>
-	    <button id="btnOther" onclick="filterRestaurantsByCategory('기타')">기타</button>
+	    <button id="btnKorean" style="display: none;" onclick="filterRestaurantsByCategory('한식')">한식</button>
+    	<button id="btnJapanese" style="display: none;" onclick="filterRestaurantsByCategory('일식')">일식</button>
+    	<button id="btnChinese" style="display: none;" onclick="filterRestaurantsByCategory('중식')">중식</button>
+	    <button id="btnWestern" style="display: none;" onclick="filterRestaurantsByCategory('양식')">양식</button>
+	    <button id="btnOther" style="display: block;" onclick="filterRestaurantsByCategory('기타')">기타</button>
 	</div>
 	<div id ="restaurantListBox">
 		<div th:each="restaurant : ${restaurantList}" class=restaurant-card>
@@ -36,6 +36,5 @@
 			<p th:text="${restaurant.y}" type="hedden">
 		</div>
 	</div>
-	
 </div>
 </html>

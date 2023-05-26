@@ -41,43 +41,40 @@ $(function() {
 	// 지도에 원을 표시합니다
 	circle.setMap(map);
 
+
+
+	//페이지가 로드될 때 카드의 요소를 확인해서 해당하는 카테고리가 있는지 확인하여 해당하는 카테고리가 있다면 버튼을 보이게 해준다.
+	var restaurantCards = document.getElementsByClassName("restaurant-card");
+	var categoryButtons = document.getElementById("categoryButtons").getElementsByTagName("button");
+
+	for (var i = 0; i < categoryButtons.length; i++) {
+		categoryButtons[i].style.display = "none";
+	}
+
+	for (var i = 0; i < restaurantCards.length; i++) {
+		var cardCategory = restaurantCards[i].querySelector("p:nth-child(4)").textContent;
+
+		for (var j = 0; j < categoryButtons.length; j++) {
+			var category = categoryButtons[j].textContent;
+			if (category === "전체" || category === "기타" || cardCategory.includes(category)) {
+				categoryButtons[j].style.display = "block";
+			}
+		}
+	}
 	//	alert($(".url").text());
 });
 
-/*function filterRestaurantsByCategory(category) {
-	var restaurantCards = document.getElementsByClassName("restaurant-card");
 
-	for (var i = 0; i < restaurantCards.length; i++) {
-		var cardCategory = restaurantCards[i].querySelector("p:nth-child(4)").textContent;
-		if (category === "전체" || (category === "기타" && !isIncludedInCategories(cardCategory))) {
-			restaurantCards[i].style.display = "block";
-		} else if (cardCategory.includes(category)) {
-			restaurantCards[i].style.display = "block";
-		} else {
-			restaurantCards[i].style.display = "none";
-		}
-	}
-}
-
-function isIncludedInCategories(category) {
-	var categories = ["한식", "중식", "양식", "일식"];
-	for (var i = 0; i < categories.length; i++) {
-		if (category.includes(categories[i])) {
-			return true;
-		}
-	}
-	return false;
-}*/
 function filterRestaurantsByCategory(category) {
 	var restaurantCards = document.getElementsByClassName("restaurant-card");
-	
+
+
 	for (var i = 0; i < restaurantCards.length; i++) {
 		var cardCategory = restaurantCards[i].querySelector("p:nth-child(4)").textContent;
 		if (category === "전체" || (category === "기타" && !isIncludedInCategories(cardCategory))) {
 			restaurantCards[i].style.display = "block";
 		} else if (cardCategory.includes(category)) {
 			restaurantCards[i].style.display = "block";
-			
 		} else {
 			restaurantCards[i].style.display = "none";
 		}
