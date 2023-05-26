@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 public class MggDetailController {
     private final MggDetailRepository mdr;
     private final MggDetailService mggDetailService;
-
+    
     @GetMapping("/mgg-detail")
     public String goMggDetail(@RequestParam double lo, @RequestParam double la, Model model) {
                 

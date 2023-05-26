@@ -16,28 +16,24 @@
 			<p id="mggParking" th:text="${selectmgg.PARKNG_POSBL_AT}"></p>
 		</div>
 	</div>
-
-	<div id="category">
-        <label for="categorySelect">카테고리:</label>
-        <select id="categorySelect" onchange="filterRestaurantsByCategory()">
-            <option value="전체">전체</option>
-            <option value="한식">한식</option>
-            <option value="중식">중식</option>
-            <option value="일식">일식</option>
-            <option value="양식">양식</option>
-            <option value="기타">기타</option>
-        </select>
-    </div>
-
+    <div id="categoryButtons">
+    	<button id="btnAll" onclick="filterRestaurantsByCategory('전체')">전체</button>
+	    <button id="btnKorean" style="display: block;" onclick="filterRestaurantsByCategory('한식')">한식</button>
+    	<button id="btnJapanese" style="display: block;" onclick="filterRestaurantsByCategory('일식')">일식</button>
+    	<button id="btnChinese" style="display: block;" onclick="filterRestaurantsByCategory('중식')">중식</button>
+	    <button id="btnWestern" style="display: block;" onclick="filterRestaurantsByCategory('양식')">양식</button>
+	    <button id="btnOther" onclick="filterRestaurantsByCategory('기타')">기타</button>
+	</div>
 	<div id ="restaurantListBox">
 		<div th:each="restaurant : ${restaurantList}" class=restaurant-card>
+			<img src="/loading.png" alt="Restaurant Image">
 			<p th:text="${restaurant.place_name}">
 			<p th:text="${restaurant.road_address_name}">
 			<p th:text="${restaurant.category_name}">
 			<p th:text="${restaurant.phone}">
 			<p class="url" th:text="${restaurant.place_url}">
-			<p th:text="${restaurant.x}">
-			<p th:text="${restaurant.y}">
+			<p th:text="${restaurant.x}" type="hedden">
+			<p th:text="${restaurant.y}" type="hedden">
 		</div>
 	</div>
 	
