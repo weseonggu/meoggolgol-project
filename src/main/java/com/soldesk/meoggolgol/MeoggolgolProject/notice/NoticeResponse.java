@@ -1,6 +1,7 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.notice;
 
-import jakarta.validation.constraints.NotEmpty;
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,16 +9,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class NoticeInfo {
+// 등록된 공지사항 응답 클래스 (사용자에게 보여지는 데이터 처리)
+public class NoticeResponse {
+	
+	private long notice_num;
 	
 	private String writer;
 	
-	@NotEmpty(message = "공지사항의 제목은 필수 입력 사항입니다.")
 	private String title;
-
-	@NotEmpty(message = "공지사항의 내용은 필수 입력 사항입니다.")
+	
 	private String content;
 	
-	private String reg_date;
+	private Date reg_date;
 
 }
