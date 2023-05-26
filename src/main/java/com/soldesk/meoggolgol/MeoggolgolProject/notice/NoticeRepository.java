@@ -15,11 +15,11 @@ public class NoticeRepository {
 	private static String INSERT_NOTICE=
 			"""
 			insert into notice
-			(WRITER,TITLE,CONTENT)
+			(notice_num, WRITER, TITLE, CONTENT)
 			values(?,?,?,?);
 			""";
 
 	public void insertNotice(NoticeRequest noticerequest) {
-		jdbc.update
+
 	}
 }
