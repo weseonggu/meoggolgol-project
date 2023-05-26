@@ -37,7 +37,7 @@ public class Selenium {
 //        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }
 
-    public void useDriver(String url) {
+    public String useDriver(String url) {
         driver.get(url) ;
 
         try {
@@ -47,14 +47,17 @@ public class Selenium {
             String test2 = test.getAttribute("style");
             String[] test3 = test2.split(" ");
             
-            System.out.println(test3[1].substring(5,(test3[1].length()-3)));
+//            System.out.println(test3[1].substring(5,(test3[1].length()-3)));
+            return test3[1].substring(5,(test3[1].length()-3));
             
         }
         catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            
         }
-
         quitDriver();
+        return "error";
+
     }
 
     private void quitDriver() {

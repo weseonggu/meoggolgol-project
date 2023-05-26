@@ -1,11 +1,9 @@
 $(function() {
-
-	//  먹자골록 위치 지도 카카오맵
+	// 먹자골록 위치 지도 카카오맵
 	const urlParams = new URL(location.href).searchParams;
 
 	const la = urlParams.get('la');
 	const lo = urlParams.get('lo');
-
 
 	var container = document.getElementById('mggMap');
 	var options = {
@@ -20,7 +18,7 @@ $(function() {
 
 	// 마커를 생성
 	var marker = new kakao.maps.Marker({
-		position: markerPosition
+		position : markerPosition
 	});
 
 	// 마커가 지도 위에 표시되도록 설정
@@ -61,7 +59,36 @@ $(function() {
 			}
 		}
 	}
-	//	alert($(".url").text());
+	
+	
+	
+	// 이미지 요청 
+//		var urlList = $(".url").map(function() {
+//		return $(this).attr("id");
+//	}).get();
+//	// alert(urlList.length);
+//	for (var j = 0; j < urlList.length; j++) {
+//		$.getJSON("restaurantCard?url=" + urlList[j], function(data) {
+//			console.log(data.url);
+//			if (data.url == "error") {
+//				j = j - 1;
+//			} else {
+//				var p = $("<img id=card_img>").attr("src", data.url);
+//				$("#imgUrl").append(p);
+//			}
+//
+//		});
+//	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 });
 
 
