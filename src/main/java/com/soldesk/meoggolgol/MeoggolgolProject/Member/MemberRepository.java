@@ -15,8 +15,8 @@ public class MemberRepository {
 	private static String INSERT_MEMBER=
 			"""
 			insert into Member_info
-			(member_id,member_pw,member_name,member_nickname,member_birth,member_phoneNumber,member_email) 
-			values(?,?,?,?,?,?,?);
+			(member_id,member_pw,member_name,member_nickname,member_birth,member_phoneNumber,member_email,manager) 
+			values(?,?,?,?,?,?,?,?);
 			""";
 	
 	public void insertMember(Member member) {
@@ -27,7 +27,8 @@ public class MemberRepository {
 				member.getMember_nickname(),
 				member.getMember_birth(),
 				member.getMember_phoneNumber(),
-				member.getMember_email()
+				member.getMember_email(),
+				"N"
 				);
 	}
 
