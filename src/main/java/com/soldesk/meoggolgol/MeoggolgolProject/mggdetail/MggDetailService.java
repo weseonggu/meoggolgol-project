@@ -75,7 +75,6 @@ public class MggDetailService {
 				rest = new Restaurant(list.get("place_name")+"", list.get("road_address_name")+"", list.get("category_name")+"", list.get("phone")+"", list.get("place_url")+"", list.get("x")+"", list.get("y")+"");
 				restlist.add(rest);
 				
-//				searchImage(list.get("place_url")+"");
 				
 			}
 			
@@ -91,17 +90,19 @@ public class MggDetailService {
     
     
     // 이미지 클롤링
-    public void searchImage(String imageurl) {
+    public String searchImage(String imageurl) {
     	StringBuffer sb = new StringBuffer();
     	sb.append(imageurl);
     	sb.insert(4, "s");
     	String url = sb.toString();
     	try {
     		Selenium sel = new Selenium();
-    		sel.useDriver(url);
+    		return sel.useDriver(url);
     	} catch (Exception e) {
-    		e.printStackTrace();
+//    		e.printStackTrace();
+    		
 		}
+		return "error";
     	
     }
 }
