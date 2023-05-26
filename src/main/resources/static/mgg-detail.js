@@ -45,14 +45,16 @@ $(function() {
 	}).get();
 	// alert(urlList.length);
 	for (var j = 0; j < urlList.length; j++) {
-		console.log(urlList[j]);
 		$.getJSON("restaurantCard?url=" + urlList[j], function(data) {
-			var p = $("<p></p>").text( data.url);
-			$("#imgUrl").append(p);
-//			$.each(data, function(i) {
-//				var p = $("<p></p>").text( data[i].url);
-//				$("#imgUrl").append(p);
-//			});
+			console.log(data.url);
+			if (data.url=="error"){
+				j=j-1;
+			}
+			else{
+				var p = $("<img id=card_img>").attr("src", data.url);
+				$("#imgUrl").append(p);
+			}
+
 		});
 	}
 });
