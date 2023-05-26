@@ -35,5 +35,7 @@ public class MemberSignIn {
 	@Email
 	@Size
 	private String member_email;
+	
+	private String manager;
 
 }

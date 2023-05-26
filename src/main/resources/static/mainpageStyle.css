@@ -1,10 +1,15 @@
 @charset "UTF-8";
 
+#banner {
+	width: 100%;
+	height: auto;
+}
+
 /* MainPageContainer */
 .parent {
 	width: 100%;
 	/*부모높이 자동 조절 (자식에 넣어야하는 값)*/
-	display: table;
+	display: table-cell;
     text-align: left;
 }
 

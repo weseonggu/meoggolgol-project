@@ -56,6 +56,7 @@ public class MemberRepository {
 	            
 	            membersignin.setMember_phoneNumber(rs.getString("member_phoneNumber"));
 	            membersignin.setMember_email(rs.getString("member_email"));
+	            membersignin.setMember_email(rs.getString("manager"));
 	            
 	            return membersignin;
 	            

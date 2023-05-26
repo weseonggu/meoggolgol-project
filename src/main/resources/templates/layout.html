@@ -11,56 +11,67 @@
 <link rel="stylesheet" type="text/css" th:href="@{/layout&navbar.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/font-face.css}">
 
+<<<<<<< HEAD
+<link rel="stylesheet" type="text/css" th:href="@{/korea.css}">
+
+<script type="text/javascript" th:src="@{/d3.js}"></script>
+<script type="text/javascript" th:src="@{/korea.js}"></script>
+======= >>>>>>> master
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.7.0.js"
 	integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
 	crossorigin="anonymous">
+	
 </script>
-
-
 
 <title>Meoggolgol</title>
 </head>
 
 <body>
-	
 	<!-- 사이트 제목 + 네비바를 헤더로 묶음 -->
 	<header>
-	<!-- 간단한 소개 문구 + 사이트 제목 + 로그인/회원가입 기능 -->
+		<!-- 간단한 소개 문구 + 사이트 제목 + 로그인/회원가입 기능 -->
 		<div class="brandBox">
 			<div class="brandContentWrapper">
-			<!-- 간단한 소개 문구 넣는 태그 -->
+				<!-- 간단한 소개 문구 넣는 태그 -->
 				<div class="brandContent" id="text">
-					Ubiquitous Food Street Platform<br>
+					Ubiquitous Food Street Platform<br> 
 					Saturday, May 20, 2023
 				</div>
 				<!-- 사이트 제목 넣는 태그 -->
-				<div class="brandContent">
-					<a href="/">
-						<img alt="" src="/logo.png" id="logo">
-					</a>
-				</div>
+				<div class="brandContent" id="brandName">먹골골</div>
 				<!-- 로그인/회원가입 기능 넣는 태그 -->
 				<div class="brandContent" id="signInUp">
-    				<a th:if="${session.member_info == null}" href="/signin" id="loginButton">Sign In</a>
-   		 			<a th:if="${session.member_info == null}" href="/join" id="signupButton">Sign Up</a>
+					<a th:if="${session.member_info == null}" href="/signin" id="loginButton">Sign In</a> 
+					<a th:if="${session.member_info == null}" href="/join" id="signupButton">Sign Up</a>
 
-    				<div th:if="${session.member_info != null}" class="top_menu">
-        				<div class="login_member"><strong><i class="far fa-user-circle"></i> [[${session.member_info.member_nickname}]]</strong>&nbsp;님</div>
-       					<div class="logout">
-           					<form action="/signout" method="get">
-               					<button type="submit"><span class="skip_info">로그아웃</span><i class="fas fa-sign-out-alt"></i></button>
-           					</form>
-        				</div>
+					<!-- 로그인 시 닉네임 띄우기 -->
+					<!-- 관리자 : 관리자 000 님 -->
+					<!-- 일반 사용자 : 000 님 -->
+					<div th:if="${session.member_info != null}" class="top_menu">
+						<div class="login_member">
+							<strong> <i class="far fa-user-circle"></i> 
+								<span th:if="${session.member_info.manager == y}">관리자 </span> 
+								<span>[[${session.member_info.member_nickname}]]</span></strong>&nbsp;님
+						</div>
+						<!-- 로그아웃 버튼 생성 -->
+						<div class="logout">
+							<form action="/signout" method="get">
+								<button type="submit">
+									<span class="skip_info">로그아웃</span><i
+										class="fas fa-sign-out-alt"></i>
+								</button>
+							</form>
+						</div>
 					</div>
-				</div>				
+				</div>
 			</div>
 		</div>
 		<!-- 네비게이션바 -->
 		<nav th:replace="~{navbar :: navbarFragment}"></nav>
 	</header>
-	
+
 	<!-- 기본 템플릿 안에 삽입될 내용 Start -->
 	<th:block layout:fragment="content"></th:block>
 	<!-- 기본 템플릿 안에 삽입될 내용 End -->
