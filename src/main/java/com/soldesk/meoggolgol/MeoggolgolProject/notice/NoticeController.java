@@ -28,12 +28,17 @@ public class NoticeController {
 	}
 	
 	
+	@GetMapping("/uploadnotice")
+	private String goRegNotice(NoticeRequest noticerequest) {
+		return "noticeUploadForm";
+
+	}
 	
 	@PostMapping("/uploadnotice")
-	public String regNotice(@Valid NoticeRequest notieinfo, BindingResult bindingresult) {
+	public String regNotice(@Valid NoticeRequest notierequest, BindingResult bindingresult) {
 		
 		
-		return "";
+		return "noticeUploadForm";
 	}
 
 }
