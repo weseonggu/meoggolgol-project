@@ -38,16 +38,17 @@ public class MggDetailService {
 	
 	
 	// 먹자골목 주변 시당정보 카카모api로 검색하기
-    public ArrayList<Restaurant> searchRestaurants(double latitude, double longitude) {
+    public ArrayList<Restaurant> searchRestaurants(double latitude, double longitude, int page, int pageSize) {
         String apiUrl = "https://dapi.kakao.com/v2/local/search/category.json";
         String apiKey = "770ee2bdd22b63d6a113a2cfef5259c1"; // REST API 키 성찬꺼
-//        String apiKey = "aa8ed2785db0138dc7d9bdb1f5756790"; // REST API 키 성구꺼
+//      String apiKey = "aa8ed2785db0138dc7d9bdb1f5756790"; // REST API 키 성구꺼
         String categoryCode = "FD6"; // 카카오맵 식당 카테고리 코드
 
         try {
             // URL 생성
             String urlString = apiUrl + "?category_group_code=" + categoryCode +
-                    "&y=" + latitude + "&x=" + longitude;
+                    "&y=" + latitude + "&x=" + longitude +
+                    "&page=" + page + "&size=" + pageSize;
             URL url = new URL(urlString);
 
             // HTTP 연결 설정
@@ -58,37 +59,42 @@ public class MggDetailService {
             // 응답 읽기
             InputStream is = connection.getInputStream();
             InputStreamReader isr = new InputStreamReader(is, "utf-8");
-			BufferedReader br = new BufferedReader(isr);
-			String data = br.readLine();
+            BufferedReader br = new BufferedReader(isr);
+            String data = br.readLine();
 
-			JSONParser jp = new JSONParser();
-			JSONObject kakaoData = (JSONObject) jp.parse(data);
-			JSONArray locs = (JSONArray) kakaoData.get("documents");
-			JSONObject list = null;
-            
-			Restaurant rest = null;
-			ArrayList<Restaurant> restlist = new ArrayList<>();
-			
-			// 응답 처리
-			for (int i = 0; i < locs.size(); i++) {
-				list = (JSONObject) locs.get(i);
-				rest = new Restaurant(list.get("place_name")+"", list.get("road_address_name")+"", list.get("category_name")+"", list.get("phone")+"", list.get("place_url")+"", list.get("x")+"", list.get("y")+"");
-				restlist.add(rest);
-				
-//				searchImage(list.get("place_url")+"");
-				
-			}
-			
+            // JSON 파싱
+            JSONParser jp = new JSONParser();
+            JSONObject kakaoData = (JSONObject) jp.parse(data);
+            JSONArray locs = (JSONArray) kakaoData.get("documents");
+            JSONObject list = null;
+
+            Restaurant rest = null;
+            ArrayList<Restaurant> restlist = new ArrayList<>();
+
+            // 응답 처리
+            for (int i = 0; i < locs.size(); i++) {
+                list = (JSONObject) locs.get(i);
+                rest = new Restaurant(
+                        list.get("place_name") + "",
+                        list.get("road_address_name") + "",
+                        list.get("category_name") + "",
+                        list.get("phone") + "",
+                        list.get("place_url") + "",
+                        list.get("x") + "",
+                        list.get("y") + "");
+                restlist.add(rest);
+            }
+
             // 연결 종료
-            connection.disconnect();
             System.out.println(restlist);
+            connection.disconnect();
             return restlist;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+        
     }
-    
     
     // 이미지 클롤링
     public void searchImage(String imageurl) {
@@ -102,6 +108,5 @@ public class MggDetailService {
     	} catch (Exception e) {
     		e.printStackTrace();
 		}
-    	
     }
 }

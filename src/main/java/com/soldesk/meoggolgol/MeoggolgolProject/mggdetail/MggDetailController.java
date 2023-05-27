@@ -1,7 +1,5 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.mggdetail;
 
-import java.util.ArrayList;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +17,7 @@ public class MggDetailController {
     public String goMggDetail(@RequestParam double lo, @RequestParam double la, Model model) {
                 
         model.addAttribute("selectmgg", mggDetailService.getMggInfo(lo, la));// 먹자골목 정보
-        model.addAttribute("restaurantList",mggDetailService.searchRestaurants(la, lo));// 골목 주변 식당 검색
+        model.addAttribute("restaurantList",mggDetailService.searchRestaurants(la, lo, 1, 15));// 위도, 경도, 현재 페이지,식당 수(최대 15개)
         
         return "mgg-detail";
     }
