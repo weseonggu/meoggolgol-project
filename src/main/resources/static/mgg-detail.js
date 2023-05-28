@@ -87,10 +87,15 @@ $(function() {
 	
 	
 	
-	
+	getRestaurantInfo(lo, la, 1)
 	
 });
-
+function getRestaurantInfo(lo, la, page){
+	console.log(lo);
+	console.log(la);
+	$.getJSON("restaurantInfo?la=" + la+"&lo="+la+"&page="+page, function(data) {
+	});
+}
 
 function filterRestaurantsByCategory(category) {
 	var restaurantCards = document.getElementsByClassName("restaurant-card");

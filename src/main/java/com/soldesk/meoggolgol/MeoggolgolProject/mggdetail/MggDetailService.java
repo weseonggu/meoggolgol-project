@@ -92,6 +92,7 @@ public class MggDetailService {
             return restlist;
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("넘어감");
             return null;
         }
         

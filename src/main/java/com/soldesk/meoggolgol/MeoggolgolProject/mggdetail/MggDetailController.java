@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 public class MggDetailController {
-    private final MggDetailRepository mdr;
     private final MggDetailService mggDetailService;
     
     @GetMapping("/mgg-detail")
