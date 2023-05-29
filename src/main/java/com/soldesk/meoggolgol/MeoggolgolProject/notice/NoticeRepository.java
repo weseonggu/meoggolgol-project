@@ -27,6 +27,16 @@ public class NoticeRepository {
 			select * from notice
 			""";
 	
+	private static String SELECT_NOTICE_LIST=
+			"""
+			select * from notice order by REG_DATE limit ?, ?
+			""";
+	
+	private static String NOTICE_TOTAL_COUNT=
+			"""
+			select count(*) from notice
+			""";
+	
 	public void insertNotice(NoticeRequest noticerequest) {
 		
 	}
