@@ -9,6 +9,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.soldesk.meoggolgol.MeoggolgolProject.notice.paging.Paging;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +24,10 @@ public class NoticeController {
 	private final NoticeRepository noReposi;
 	
 	@GetMapping("/notice")
-	private String goNotice(Model model) {
-		ArrayList<NoticeResponse> noticelist = ns.getNoticeInfo();
+	private String goNotice(@RequestParam int page, Model model) {
+		ArrayList<NoticeResponse> noticelist = ns.getNoticeInfo(page);
+		Paging paging = ns.getPage();
+		model.addAttribute("page", paging);
 		model.addAttribute("noticelist", noticelist);
 		return "noticeForm";
 	}

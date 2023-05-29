@@ -44,4 +44,12 @@ public class NoticeRepository {
 	public List<Map<String,Object>> getNoticeInfo(){
 		return jdbc.queryForList(SELECT_NOTICE);
 	}
+	
+	public List<Map<String,Object>> getNoticeInfo(int start, int end){
+		return jdbc.queryForList(SELECT_NOTICE_LIST, start, end);
+	}
+	
+	public int getTotalCount(){
+		return jdbc.queryForObject(NOTICE_TOTAL_COUNT, Integer.class);
+	}
 }
