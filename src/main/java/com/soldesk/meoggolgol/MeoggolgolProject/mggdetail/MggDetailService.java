@@ -12,7 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
 
-import com.soldesk.meoggolgol.MeoggolgolProject.Selenium;
+import com.soldesk.meoggolgol.MeoggolgolProject.crawling.Selenium;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class MggDetailService {
 
 	private final MggDetailRepository mdr;
-	
+	private final Selenium ce;
 	
 	// DB에 있는 먹자골목 정보 가져오기
 	public SelectMgg getMggInfo(double lo, double la) {
@@ -87,6 +87,7 @@ public class MggDetailService {
             }
 
 
+
             // 연결 종료
 //            System.out.println(restlist);
             connection.disconnect();
@@ -106,13 +107,13 @@ public class MggDetailService {
     	sb.insert(4, "s");
     	String url = sb.toString();
     	try {
-    		Selenium sel = new Selenium();
-    		return sel.useDriver(url);
+    		Selenium ce1 = new Selenium();
+    		return ce1.getImageURL(url);
     	} catch (Exception e) {
-//    		e.printStackTrace();
+    		e.printStackTrace();
     		
+    		return "error";
 		}
-		return "error";
     	
 
     }

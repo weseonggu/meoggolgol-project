@@ -44,7 +44,7 @@ $(function() {
 	getRestaurantInfo(lo, la, page);
 
 
-	//페이지가 로드될 때 카드의 요소를 확인해서 해당하는 카테고리가 있는지 확인하여 해당하는 카테고리가 있다면 버튼을 보이게 해준다.
+	// 페이지가 로드될 때 카드의 요소를 확인해서 해당하는 카테고리가 있는지 확인하여 해당하는 카테고리가 있다면 버튼을 보이게 해준다.
 	var restaurantCards = document.getElementsByClassName("restaurant-card");
 	var categoryButtons = document.getElementById("categoryButtons").getElementsByTagName("button");
 
@@ -113,10 +113,7 @@ function getRestaurantInfo(lo, la, page){
 	
 	});
 }
-// 다음 식당 정보 카드
-function next() {
-	page+=1;
-}
+
 
 function filterRestaurantsByCategory(category) {
 	var restaurantCards = document.getElementsByClassName("restaurant-card");
@@ -144,29 +141,45 @@ function isIncludedInCategories(category) {
 	return false;
 }
 
-function changeImg(id, url){
-	for (var i = 0; i < id.length; i++) {
-		console.log(id[i]);
-	}
-	for (var i = 0; i < url.length; i++) {
-		console.log(url[i]);
-	}
-}
+ function changeImg(id, urlList){
 
-// 이미지 요청 
-//var urlList = $(".url").map(function() {
-//return $(this).attr("id");
-//}).get();
-//// alert(urlList.length);
-//for (var j = 0; j < urlList.length; j++) {
-//$.getJSON("restaurantCard?url=" + urlList[j], function(data) {
-//  console.log(data.url);
-//  if (data.url == "error") {
-//      j = j - 1;
-//  } else {
-//      var p = $("<img id=card_img>").attr("src", data.url);
-//      $("#imgUrl").append(p);
-//  }
-//
-//});
+ for (var y = 0; y < urlList.length; y++) {
+ console.log(urlList[y]);
+ $.getJSON("restaurantCardImg?url=" + urlList[y]+"&id="+id[y], function(data)
+ {
+ // console.log(data.url);
+ if(data.url == "error"){
+ // console.log("다시");
+ y=y-1;
+ }
+ else{
+ $("#"+data.id+" img").attr("src",data.url);
+ console.log(data.id);
+ console.log(data.url);
+ }
+ });
+ }
+ }
+//function changeImg(id, urlList){
+//	var urlJson = {
+//				"id":id,
+//				"urlList":urlList
+//		}
+//		$.ajax({
+//			  type : 'get',
+//			  url : "restaurantCardImg",
+//			  dataType    :   "json",
+//			  async: false, 
+//			  data : urlJson,
+//			  error: function(xhr, status, error){
+//				// 실패했을 때 처리
+//			  },
+//			  success : function(data){
+//				  $.each(data,function(i){
+//					  $("#"+data[i].id+" img").attr("src",data[i].url);					  
+//				  })
+//			  }
+//			});
 //}
+
+
