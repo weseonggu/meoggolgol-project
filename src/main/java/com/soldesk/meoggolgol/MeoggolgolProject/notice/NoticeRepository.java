@@ -46,10 +46,6 @@ public class NoticeRepository {
 			"""
 			select count(*) from notice
 			""";
-	
-	public void insertNotice(NoticeRequest noticerequest) {
-		
-	}
 
 	// 공지사항 세부 정보
 	public List<Map<String,Object>> getNoticeDetailInfo(int notice_num){
