@@ -22,6 +22,16 @@ public class NoticeRepository {
 			values(?,?,?,?,?);
 			""";
 
+	public void insertNotice(NoticeRequest noticerequest) {
+		// 작성자와 작성일자+시간은 널 값으로 넣음
+		jdbc.update(INSERT_NOTICE,
+				noticerequest.getTitle(),
+				noticerequest.getContent(),
+				noticerequest.getWriter(), // 널값
+				noticerequest.getReg_date()	//널값
+				);
+	}
+	
 	private static String SELECT_NOTICE=
 			"""
 			select * from notice
@@ -37,19 +47,6 @@ public class NoticeRepository {
 			select count(*) from notice
 			""";
 	
-	public void insertNotice(NoticeRequest noticerequest) {
-		
-<<<<<<< HEAD
-		// 작성자와 작성일자+시간은 널 값으로 넣음
-		jdbc.update(INSERT_NOTICE,
-				noticerequest.getTitle(),
-				noticerequest.getContent(),
-				noticerequest.getWriter(), // 널값
-				noticerequest.getReg_date()	//널값
-				);
-=======
-	}
-	
 	public List<Map<String,Object>> getNoticeInfo(){
 		return jdbc.queryForList(SELECT_NOTICE);
 	}
@@ -60,6 +57,6 @@ public class NoticeRepository {
 	
 	public int getTotalCount(){
 		return jdbc.queryForObject(NOTICE_TOTAL_COUNT, Integer.class);
->>>>>>> ecd6a70325a67168f88bbc9aa6708e4dfbbb692e
+
 	}
 }

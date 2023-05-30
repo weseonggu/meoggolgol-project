@@ -15,11 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class NoticeService {
 	
-<<<<<<< HEAD
-	private final NoticeRepository nReposi;
-=======
 	private final NoticeRepository nr;
->>>>>>> ecd6a70325a67168f88bbc9aa6708e4dfbbb692e
 	
 	// db에 있는 게시글 가져오기
 	public ArrayList<NoticeResponse> getNoticeInfo(){
