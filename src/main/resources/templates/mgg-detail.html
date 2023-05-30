@@ -16,17 +16,27 @@
 			<p id="mggParking" th:text="${selectmgg.PARKNG_POSBL_AT}"></p>
 		</div>
 	</div>
+    <div id="categoryButtons">
+    	<button id="btnAll" onclick="filterRestaurantsByCategory('전체')">전체</button>
+	    <button id="btnKorean" style="display: none;" onclick="filterRestaurantsByCategory('한식')">한식</button>
+    	<button id="btnJapanese" style="display: none;" onclick="filterRestaurantsByCategory('일식')">일식</button>
+    	<button id="btnChinese" style="display: none;" onclick="filterRestaurantsByCategory('중식')">중식</button>
+	    <button id="btnWestern" style="display: none;" onclick="filterRestaurantsByCategory('양식')">양식</button>
+	    <button id="btnOther" style="display: block;" onclick="filterRestaurantsByCategory('기타')">기타</button>
+	</div>
 	<div id ="restaurantListBox">
-		<div th:each="restaurant : ${restaurantList}" class=restaurant-card>
+<!-- 		<div th:each="restaurant : ${restaurantList}" class=restaurant-card>
+ 			<img src="/loading.png" alt="Restaurant Image">
 			<p th:text="${restaurant.place_name}">
 			<p th:text="${restaurant.road_address_name}">
 			<p th:text="${restaurant.category_name}">
 			<p th:text="${restaurant.phone}">
-			<p class="url" th:text="${restaurant.place_url}">
-			<p th:text="${restaurant.x}">
-			<p th:text="${restaurant.y}">
-		</div>
+			<input class="url" th:text="${restaurant.place_url}" type="hidden">
+			<input th:text="${restaurant.x}" type="hidden">
+			<input th:text="${restaurant.y}" type="hidden">
+		</div> -->
 	</div>
-	
+	<button id="before">이전</button>
+	<button id="next">다음</button>
 </div>
 </html>
