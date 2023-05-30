@@ -2,12 +2,9 @@ package com.soldesk.meoggolgol.MeoggolgolProject.notice;
 
 import java.util.ArrayList;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.soldesk.meoggolgol.MeoggolgolProject.notice.paging.Paging;
-import com.soldesk.meoggolgol.MeoggolgolProject.notice.paging.SearchDto;
 
 import lombok.RequiredArgsConstructor;
 
