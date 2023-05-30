@@ -22,9 +22,9 @@ public class NoticeRepository {
 			values(?,?,?,?);
 			""";
 
-	private static String SELECT_NOTICE=
+	private static String SELECT_NOTICE_detail=
 			"""
-			select * from notice
+			select * from notice where notice_num = ?
 			""";
 	
 	private static String SELECT_NOTICE_LIST=
@@ -40,15 +40,15 @@ public class NoticeRepository {
 	public void insertNotice(NoticeRequest noticerequest) {
 		
 	}
-	
-	public List<Map<String,Object>> getNoticeInfo(){
-		return jdbc.queryForList(SELECT_NOTICE);
+	// 공지사항 세부 정보
+	public List<Map<String,Object>> getNoticeDetailInfo(int notice_num){
+		return jdbc.queryForList(SELECT_NOTICE_detail, notice_num);
 	}
-	
-	public List<Map<String,Object>> getNoticeInfo(int start, int end){
-		return jdbc.queryForList(SELECT_NOTICE_LIST, start, end);
+	// 공지사항 페이징
+	public List<Map<String,Object>> getNoticeInfo(int start, int size){
+		return jdbc.queryForList(SELECT_NOTICE_LIST, start, size);
 	}
-	
+	// 총 공지사항 게시물 수
 	public int getTotalCount(){
 		return jdbc.queryForObject(NOTICE_TOTAL_COUNT, Integer.class);
 	}

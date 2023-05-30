@@ -1,7 +1,6 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.notice;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.soldesk.meoggolgol.MeoggolgolProject.notice.paging.Paging;
+import com.soldesk.meoggolgol.MeoggolgolProject.notice.paging.Pagination;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -24,18 +23,19 @@ public class NoticeController {
 	private final NoticeRepository noReposi;
 	
 	@GetMapping("/notice")
-	private String goNotice(@RequestParam int page, Model model) {
+	private String goNotice(@RequestParam(defaultValue = "1") int page, Model model) {
+		// 총 공지사항 수
+		int totalListCnt = noReposi.getTotalCount();
 		ArrayList<NoticeResponse> noticelist = ns.getNoticeInfo(page);
-		Paging paging = ns.getPage();
-		model.addAttribute("page", paging);
+		Pagination pagination = ns.paging(totalListCnt, page);
+		model.addAttribute("pagination", pagination);
 		model.addAttribute("noticelist", noticelist);
 		return "noticeForm";
 	}
 	
 	@GetMapping(value = "/notice/detail/{id}")
 	private String goNoticedtail(Model model,@PathVariable("id") Integer id) {
-		ArrayList<NoticeResponse> noticelist = ns.getNoticeInfo();
-		model.addAttribute("noticelist", noticelist);
+		model.addAttribute("noticeDetailList", noReposi.getNoticeDetailInfo(id));
 		return "notice_detail";
 	}
 	
