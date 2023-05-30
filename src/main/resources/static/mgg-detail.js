@@ -1,3 +1,4 @@
+var page =1;
 $(function() {
 	// 먹자골록 위치 지도 카카오맵
 	const urlParams = new URL(location.href).searchParams;
@@ -38,7 +39,9 @@ $(function() {
 
 	// 지도에 원을 표시합니다
 	circle.setMap(map);
-
+	
+	// 식당 커드
+	getRestaurantInfo(lo, la, page);
 
 
 	//페이지가 로드될 때 카드의 요소를 확인해서 해당하는 카테고리가 있는지 확인하여 해당하는 카테고리가 있다면 버튼을 보이게 해준다.
@@ -50,7 +53,7 @@ $(function() {
 	}
 
 	for (var i = 0; i < restaurantCards.length; i++) {
-		var cardCategory = restaurantCards[i].querySelector("p:nth-child(4)").textContent;
+		var cardCategory = restaurantCards[i].querySelector("input:nth-child(3)").textContent;
 
 		for (var j = 0; j < categoryButtons.length; j++) {
 			var category = categoryButtons[j].textContent;
@@ -62,39 +65,57 @@ $(function() {
 	
 	
 	
-	// 이미지 요청 
-//		var urlList = $(".url").map(function() {
-//		return $(this).attr("id");
-//	}).get();
-//	// alert(urlList.length);
-//	for (var j = 0; j < urlList.length; j++) {
-//		$.getJSON("restaurantCard?url=" + urlList[j], function(data) {
-//			console.log(data.url);
-//			if (data.url == "error") {
-//				j = j - 1;
-//			} else {
-//				var p = $("<img id=card_img>").attr("src", data.url);
-//				$("#imgUrl").append(p);
-//			}
-//
-//		});
-//	}
-
+	$("#next").click(function(){
+		$("#restaurantListBox").empty();
+		page+=1;
+		getRestaurantInfo(lo, la, page);
+	});
+	$("#before").click(function(){
+		if(page == 1){
+			return
+		}
+		else{
+			$("#restaurantListBox").empty();
+			page-=1
+			getRestaurantInfo(lo, la, page);
+		}
+	});
 	
 	
 	
 	
 	
 	
-	
-	getRestaurantInfo(lo, la, 1)
 	
 });
+
+// 식당 카드 만들기 ajax로 호출
 function getRestaurantInfo(lo, la, page){
-	console.log(lo);
-	console.log(la);
-	$.getJSON("restaurantInfo?la=" + la+"&lo="+la+"&page="+page, function(data) {
+	$.getJSON("restaurantInfo?la=" + la+"&lo="+lo+"&page="+page, function(data) {
+		var id = new Array(); 
+		var url = new Array(); 
+		$.each(data,function(i){
+			var card=$("<div></div>").attr("id",data[i].id).attr("class","restaurant-card").append(
+				$("<img>").attr("src","/loading.png"),
+				$("<p></p>").text(data[i].place_name),
+				$("<p></p>").text(data[i].road_address_name),
+				$("<p></p>").text(data[i].phone),
+				$("<input>").text(data[i].x).attr("type","hidden"),
+				$("<input>").text(data[i].y).attr("type","hidden"),
+				$("<input>").text(data[i].place_url).attr("type","hidden"),
+				$("<input>").text(data[i].category_name).attr("type","hidden")
+			);
+			$("#restaurantListBox").append(card);
+			id[i] = data[i].id;
+			url[i] = data[i].place_url;
+		});
+		changeImg(id, url);
+	
 	});
+}
+// 다음 식당 정보 카드
+function next() {
+	page+=1;
 }
 
 function filterRestaurantsByCategory(category) {
@@ -102,7 +123,7 @@ function filterRestaurantsByCategory(category) {
 
 
 	for (var i = 0; i < restaurantCards.length; i++) {
-		var cardCategory = restaurantCards[i].querySelector("p:nth-child(4)").textContent;
+		var cardCategory = restaurantCards[i].querySelector("input:nth-child(3)").textContent;
 		if (category === "전체" || (category === "기타" && !isIncludedInCategories(cardCategory))) {
 			restaurantCards[i].style.display = "block";
 		} else if (cardCategory.includes(category)) {
@@ -123,4 +144,29 @@ function isIncludedInCategories(category) {
 	return false;
 }
 
+function changeImg(id, url){
+	for (var i = 0; i < id.length; i++) {
+		console.log(id[i]);
+	}
+	for (var i = 0; i < url.length; i++) {
+		console.log(url[i]);
+	}
+}
 
+// 이미지 요청 
+//var urlList = $(".url").map(function() {
+//return $(this).attr("id");
+//}).get();
+//// alert(urlList.length);
+//for (var j = 0; j < urlList.length; j++) {
+//$.getJSON("restaurantCard?url=" + urlList[j], function(data) {
+//  console.log(data.url);
+//  if (data.url == "error") {
+//      j = j - 1;
+//  } else {
+//      var p = $("<img id=card_img>").attr("src", data.url);
+//      $("#imgUrl").append(p);
+//  }
+//
+//});
+//}

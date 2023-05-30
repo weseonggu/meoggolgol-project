@@ -75,6 +75,7 @@ public class MggDetailService {
             for (int i = 0; i < locs.size(); i++) {
                 list = (JSONObject) locs.get(i);
                 rest = new Restaurant(
+                		i+(page*15),
                         list.get("place_name") + "",
                         list.get("road_address_name") + "",
                         list.get("category_name") + "",
@@ -87,7 +88,7 @@ public class MggDetailService {
 
 
             // 연결 종료
-            System.out.println(restlist);
+//            System.out.println(restlist);
             connection.disconnect();
             return restlist;
         } catch (Exception e) {
