@@ -8,5 +8,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class NoticeService {
 	
+	private final NoticeRepository nReposi;
 	
 }

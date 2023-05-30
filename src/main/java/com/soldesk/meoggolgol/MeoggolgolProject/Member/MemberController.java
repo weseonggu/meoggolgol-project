@@ -75,7 +75,7 @@ public class MemberController {
 	        return "signInForm";
 	    }
 	    if (checkResult.getErrorCode() == 2) {
-	        bindingResult.rejectValue("member_pw", "passwordInCorrect", "비밀번호를 다시 입력해주세요.");
+	        bindingResult.rejectValue("member_pw", "passwordInCorrect", "비밀번호가 일치하지 않습니다.");
 	        return "signInForm";
 	    }
 
@@ -91,7 +91,7 @@ public class MemberController {
 		// 어노테이션이 관리하는 member_id 세션 삭제
 		sessionStatus.setComplete();
 		
-		// httpsession으로 직접 저장한 속성들 삭제
+		// httpsession으로 직접 저장한 속성 삭제
 		session.removeAttribute("member_info");
 		return "redirect:/";
 	}
