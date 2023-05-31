@@ -23,24 +23,6 @@ public class NoticeRepository {
 			values(?,?,?,?);
 			""";
 	
-	private static String INSERT_NOTICE_COMMENT=
-			"""
-			insert into notice_comment
-			(comment_num, WRITER, COMMENT, REG_DATE, notice_num)
-			values(?,?,?,?,?);
-			""";
-
-	public void insertNotice(NoticeRequest noticerequest, String writer, LocalDate regDate) {
-		System.out.println(writer);
-		System.out.println(regDate);
-		jdbc.update(INSERT_NOTICE,
-				writer,
-				noticerequest.getTitle(),
-				noticerequest.getContent(),
-				regDate
-		);
-	}
-	
 	private static String SELECT_NOTICE_detail=
 			"""
 			select * from notice where notice_num = ?
@@ -55,6 +37,15 @@ public class NoticeRepository {
 			"""
 			select count(*) from notice
 			""";
+	public void insertNotice(String writer, NoticeRequest noticerequest, LocalDate regDate) {
+		
+		jdbc.update(INSERT_NOTICE,
+				writer,
+				noticerequest.getTitle(),
+				noticerequest.getContent(),
+				regDate
+				);
+	}
 
 	// 공지사항 세부 정보
 	public List<Map<String,Object>> getNoticeDetailInfo(int notice_num){

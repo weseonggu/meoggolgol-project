@@ -83,12 +83,12 @@ $(function() {
 	
 	
 	
-	$("#15").click(function() {
-		
-		console.log("클릭");
+	$(document).on('click', '.restaurant-card', function() {
+		alert('클릭 이벤트가 발생했습니다!');
 		console.log($(this).attr("id"));
 	});
-	
+
+	$('.your-div-class').trigger('click');
 	
 	
 });

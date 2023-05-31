@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 public class MainPageController {
-	private final MainPageRepository mpr;
 
 	@GetMapping("/")
 	public String hellow() {
