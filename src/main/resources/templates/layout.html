@@ -9,10 +9,14 @@
 
 <link rel="stylesheet" type="text/css" th:href="@{/mainpageStyle.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/layout&navbar.css}">
+<script type="text/javascript" th:src="@{/dateFormat.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/font-face.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/notice.css}">
 
+<link rel="stylesheet" type="text/css" th:href="@{/korea.css}">
 
+<script type="text/javascript" th:src="@{/d3.js}"></script>
+<script type="text/javascript" th:src="@{/korea.js}"></script>
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.7.0.js"
 	integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
@@ -30,9 +34,14 @@
 		<div class="brandBox">
 			<div class="brandContentWrapper">
 				<!-- 간단한 소개 문구 넣는 태그 -->
-				<div class="brandContent" id="text">
-					Ubiquitous Food Street Platform<br> 
-					Saturday, May 20, 2023
+				<div class="brandContent">
+					<div id="text">
+					<!-- 현재 날짜를 영어로 표가허고샆으나 타임리프는 서버 쪽에서 템플릿을 처리하기 때문에 
+						 브라우저에서 태그 속의 lang="eng" 속성 인식 불가 
+						 그래서 자바스크립트 사용 -->
+						<span id="englishDate"></span>
+						<script>displayEnglishDate();</script>
+					</div>
 				</div>
 				<!-- 사이트 제목 넣는 태그 -->
 				<div class="brandContent" id="brandName">먹골골</div>

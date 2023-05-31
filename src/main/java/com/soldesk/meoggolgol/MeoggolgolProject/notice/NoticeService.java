@@ -1,5 +1,7 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.notice;
 
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Service;
 
 import com.soldesk.meoggolgol.MeoggolgolProject.notice.paging.Pagination;
@@ -11,6 +13,11 @@ import lombok.RequiredArgsConstructor;
 public class NoticeService {
 	
 	private final NoticeRepository nr;
+	
+	// 공지사항 저장하기
+	public void saveNotice(String writer, NoticeRequest noticeRequest, LocalDate regDate) {
+        nr.insertNotice(writer, noticeRequest, regDate);
+    }
 
 	public Pagination paging(int totalListCnt, int page) {
 		Pagination pagination = new Pagination();
@@ -36,7 +43,6 @@ public class NoticeService {
 		if(pagination.getPrevBlock() < 1) {pagination.setPrevBlock(1);}
 		// 다음 블럭(클릭 시, 다음 블럭 첫번째 페이지)
 		pagination.setNextBlock((pagination.getBlock() * pagination.getBlockSize()) + 1);
-		System.out.println((pagination.getBlock() * pagination.getBlockSize()) + 1);
 		// 다음 블럭에 대한 확인
 		if(pagination.getNextBlock() > pagination.getTotalPageCnt()) {pagination.setNextBlock(pagination.getTotalPageCnt());}
 		// DB 접근 시작 index **/

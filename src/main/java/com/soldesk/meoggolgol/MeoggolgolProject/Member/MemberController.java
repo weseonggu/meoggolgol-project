@@ -26,29 +26,32 @@ public class MemberController {
 	public String goSingUp(Member member) {
 		return "member/joinForm";
 	}
-	// 가입post요정, 유효성 검증, 비번확인, 아이디 닉네임 중복 확인
+	// 회원가입 post 요청, 유효성 검증, 비번 확인, 아이디 닉네임 중복 확인
 	@PostMapping("/join")
 	public String insertMember(@Valid Member member, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return "member/joinForm";
 		}
+		
 		if(!member.getMember_pw().equals(member.getMember_pw_check())) {
 			bindingResult.rejectValue("member_pw_check", "passwordInCorrect", 
                     "2개의 패스워드가 일치하지 않습니다.");
 			return "member/joinForm";
 		}
+		
 		try {
-			
 			reposi.insertMember(member);
-		}catch(DataIntegrityViolationException e) {
+		} catch(DataIntegrityViolationException e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
+
             return "member/joinForm";
         }catch(Exception e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", e.getMessage());
             return "member/joinForm";
         }
+		
 		System.out.println(member);
 		return "redirect:/";
 	}
@@ -74,13 +77,16 @@ public class MemberController {
 	        bindingResult.rejectValue("member_id", "passwordInCorrect", "아이디를 다시 입력해주세요.");
 	        return "member/signInForm";
 	    }
+	    
 	    if (checkResult.getErrorCode() == 2) {
 	        bindingResult.rejectValue("member_pw", "passwordInCorrect", "비밀번호를 다시 입력해주세요.");
 	        return "member/signInForm";
+
 	    }
 
 	    // 인증 성공 시 세션에 데이터 저장
 	    session.setAttribute("member_info", checkResult.getMemberSignIn());
+	    
 	    // 인증 성공하고 세션에 데이터까지 저장한 후 메인페이지 이동
 	    return "redirect:/";
 	}
@@ -91,7 +97,7 @@ public class MemberController {
 		// 어노테이션이 관리하는 member_id 세션 삭제
 		sessionStatus.setComplete();
 		
-		// httpsession으로 직접 저장한 속성들 삭제
+		// httpsession으로 직접 저장한 속성 삭제
 		session.removeAttribute("member_info");
 		return "redirect:/";
 	}
