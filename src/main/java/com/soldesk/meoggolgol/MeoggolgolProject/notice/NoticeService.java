@@ -16,8 +16,8 @@ public class NoticeService {
 	private final NoticeRepository nr;
 	
 	// 공지사항 저장하기
-	public void saveNotice(NoticeRequest noticeRequest, String writer, LocalDate regDate) {
-        nr.insertNotice(noticeRequest, writer, regDate);
+	public void saveNotice(String writer, NoticeRequest noticeRequest, LocalDate regDate) {
+        nr.insertNotice(writer, noticeRequest, regDate);
     }
 
 	public ArrayList<NoticeResponse> getNoticeInfo(int page){

@@ -1,8 +1,6 @@
  
 package com.soldesk.meoggolgol.MeoggolgolProject.Member;
 
-import java.util.Enumeration;
-
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -34,23 +32,25 @@ public class MemberController {
 		if (bindingResult.hasErrors()) {
 			return "joinForm";
 		}
+		
 		if(!member.getMember_pw().equals(member.getMember_pw_check())) {
 			bindingResult.rejectValue("member_pw_check", "passwordInCorrect", 
                     "2개의 패스워드가 일치하지 않습니다.");
 			return "joinForm";
 		}
+		
 		try {
-			
 			reposi.insertMember(member);
-		}catch(DataIntegrityViolationException e) {
+		} catch(DataIntegrityViolationException e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
             return "joinForm";
-        }catch(Exception e) {
+        } catch(Exception e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", e.getMessage());
             return "joinForm";
         }
+		
 		System.out.println(member);
 		return "redirect:/";
 	}
@@ -76,6 +76,7 @@ public class MemberController {
 	        bindingResult.rejectValue("member_id", "passwordInCorrect", "아이디를 다시 입력해주세요.");
 	        return "signInForm";
 	    }
+	    
 	    if (checkResult.getErrorCode() == 2) {
 	        bindingResult.rejectValue("member_pw", "passwordInCorrect", "비밀번호가 일치하지 않습니다.");
 	        return "signInForm";
@@ -83,16 +84,8 @@ public class MemberController {
 
 	    // 인증 성공 시 세션에 데이터 저장
 	    session.setAttribute("member_info", checkResult.getMemberSignIn());
+	    
 	    // 인증 성공하고 세션에 데이터까지 저장한 후 메인페이지 이동
-	    
-	 // 세션에 저장된 모든 속성과 값을 출력
-	    Enumeration<String> attributeNames = session.getAttributeNames();
-	    while (attributeNames.hasMoreElements()) {
-	        String attributeName = attributeNames.nextElement();
-	        Object attributeValue = session.getAttribute(attributeName);
-	        System.out.println(attributeName + " : " + attributeValue);
-	    }
-	    
 	    return "redirect:/";
 	}
 	

@@ -45,6 +45,9 @@ public class NoticeController {
 		HttpSession session = httpservletrequest.getSession();
 		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
 
+		// 세션 값 콘솔 확인
+		System.out.println(membersignin);
+		
 		// 세션 값 중 member_nickname 가져오기
 		String writer = membersignin.getMember_nickname();
 		
@@ -55,10 +58,10 @@ public class NoticeController {
 		LocalDate regDate = LocalDate.now();
 		
 		// 등록일자 제대로 들어왔는지 콘솔 확인
-		System.out.println(regDate);
+		// System.out.println(regDate);
 		
 		// NoticeService를 사용하여 공지사항 저장
-        ns.saveNotice(notierequest, writer, regDate);
+        ns.saveNotice(writer, notierequest, regDate);
         
         // 콘솔에 저장된 공지사항 출력        
         System.out.println("번호: " + notierequest.getNotice_num());
@@ -67,7 +70,7 @@ public class NoticeController {
         System.out.println("작성자: " + writer);
         System.out.println("등록일자: " + regDate);
 		
-		return "noticeForm";
+		return "redirect:/notice";
 	}
 	
 	// 공지사항 목록 페이지 요청

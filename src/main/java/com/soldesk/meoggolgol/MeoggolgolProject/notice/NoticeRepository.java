@@ -19,19 +19,20 @@ public class NoticeRepository {
 	private static String INSERT_NOTICE=
 			"""
 			insert into notice
-			(notice_num, WRITER, TITLE, CONTENT, REG_DATE)
-			values(?,?,?,?,?);
+			(WRITER, TITLE, CONTENT, REG_DATE)
+			values(?,?,?,?);
 			""";
 
-	public void insertNotice(NoticeRequest noticerequest, String writer, LocalDate regDate) {
-		System.out.println(writer);
-		System.out.println(regDate);
+	public void insertNotice(String writer, NoticeRequest noticerequest, LocalDate regDate) {
+		
+		// 작성자랑 등록일자 제대로 있는지 콘솔 출력
+		// System.out.println(writer);
+		// System.out.println(regDate);
+		
 		jdbc.update(INSERT_NOTICE,
-				// notice_num은 자동 증가 필드라서 null
-				null,
+				writer,
 				noticerequest.getTitle(),
 				noticerequest.getContent(),
-				writer,
 				regDate
 		);
 	}
