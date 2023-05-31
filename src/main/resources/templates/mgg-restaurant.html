@@ -1,0 +1,13 @@
+<html layout:decorate="~{layout}">
+
+<div layout:fragment="content" >
+
+<link rel="stylesheet" type="text/css" th:href="@{/mgg-restaurant.css}">
+<!-- kakaoApi -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aa8ed2785db0138dc7d9bdb1f5756790"></script>
+<script type="text/javascript" th:src="@{/mgg-restaurant.js}"></script>
+	<div id = "mggInfoBoox">
+	<div class="selectMgg" id="mggRestaurant" style="width:500px;height:500px;"></div>
+	</div>
+</div>
+</html>
