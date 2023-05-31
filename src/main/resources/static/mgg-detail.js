@@ -83,7 +83,9 @@ $(function() {
 	
 	
 	
-	
+	$(".restaurant-card").click(function() {
+		alert($(this).attr("id"));
+	});
 	
 	
 	

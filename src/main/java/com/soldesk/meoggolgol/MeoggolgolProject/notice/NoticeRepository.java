@@ -18,8 +18,8 @@ public class NoticeRepository {
 	private static String INSERT_NOTICE=
 			"""
 			insert into notice
-			(notice_num, WRITER, TITLE, CONTENT)
-			values(?,?,?,?);
+			(notice_num, WRITER, TITLE, CONTENT, REG_DATE)
+			values(?,?,?,?,?);
 			""";
 	
 	private static String INSERT_NOTICE_COMMENT=
@@ -29,6 +29,16 @@ public class NoticeRepository {
 			values(?,?,?,?,?);
 			""";
 
+	public void insertNotice(NoticeRequest noticerequest) {
+		// 작성자와 작성일자+시간은 널 값으로 넣음
+		jdbc.update(INSERT_NOTICE,
+				noticerequest.getTitle(),
+				noticerequest.getContent(),
+				noticerequest.getWriter(), // 널값
+				noticerequest.getReg_date()	//널값
+				);
+	}
+	
 	private static String SELECT_NOTICE_detail=
 			"""
 			select * from notice where notice_num = ?
@@ -43,16 +53,7 @@ public class NoticeRepository {
 			"""
 			select count(*) from notice
 			""";
-	
-	public void insertNoticeComment(NoticeComment noticeComment) {
-		jdbc.update(INSERT_NOTICE_COMMENT,
-		noticeComment.getComment_num(),
-		noticeComment.getWriter(),
-		noticeComment.getComment(),
-		noticeComment.getReg_date(),
-		noticeComment.getNotice_num()
-		);
-	}
+
 	// 공지사항 세부 정보
 	public List<Map<String,Object>> getNoticeDetailInfo(int notice_num){
 		return jdbc.queryForList(SELECT_NOTICE_detail, notice_num);
@@ -62,8 +63,10 @@ public class NoticeRepository {
 	public List<Map<String,Object>> getNoticeInfo(int start, int size){
 		return jdbc.queryForList(SELECT_NOTICE_LIST, start, size);
 	}
+	
 	// 총 공지사항 게시물 수
 	public int getTotalCount(){
 		return jdbc.queryForObject(NOTICE_TOTAL_COUNT, Integer.class);
+
 	}
 }
