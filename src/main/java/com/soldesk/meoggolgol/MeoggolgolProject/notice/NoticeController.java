@@ -1,7 +1,5 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.notice;
 
-import java.util.ArrayList;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,22 +30,22 @@ public class NoticeController {
 		if (page == 1) {
 			start = pagination.getStartPage() - 1;
 		}else {
-			start = pagination.getStartPage() - 1 + pagination.getPageSize() * (page -1);
+			start = pagination.getPageSize() * (page -1);
 		}
 		model.addAttribute("pagination", pagination);
 		model.addAttribute("noticelist", noReposi.getNoticeInfo(start, size));
-		return "noticeForm";
+		return "notice/noticeForm";
 	}
 	
 	@GetMapping(value = "/notice/detail/{id}")
 	private String goNoticedtail(Model model,@PathVariable("id") Integer id) {
 		model.addAttribute("noticeDetailList", noReposi.getNoticeDetailInfo(id));
-		return "notice_detail";
+		return "notice/notice_detail";
 	}
 	
 	@GetMapping("/uploadnotice")
 	private String goRegNotice(NoticeRequest noticerequest) {
-		return "noticeUploadForm";
+		return "notice/noticeUploadForm";
 
 	}
 	
@@ -55,7 +53,7 @@ public class NoticeController {
 	public String regNotice(@Valid NoticeRequest notierequest, BindingResult bindingresult) {
 		
 		
-		return "noticeUploadForm";
+		return "notice/noticeUploadForm";
 	}
 	
 }

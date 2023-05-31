@@ -14,21 +14,6 @@ public class NoticeRepository {
 
 	private final JdbcTemplate jdbc;
 
-	// 등록 요청 받은 공지사항 저장하기
-	private static String INSERT_NOTICE=
-			"""
-			insert into notice
-			(notice_num, WRITER, TITLE, CONTENT)
-			values(?,?,?,?);
-			""";
-	
-	private static String INSERT_NOTICE_COMMENT=
-			"""
-			insert into notice_comment
-			(comment_num, WRITER, COMMENT, REG_DATE, notice_num)
-			values(?,?,?,?,?);
-			""";
-
 	private static String SELECT_NOTICE_detail=
 			"""
 			select * from notice where notice_num = ?
@@ -44,15 +29,6 @@ public class NoticeRepository {
 			select count(*) from notice
 			""";
 	
-	public void insertNoticeComment(NoticeComment noticeComment) {
-		jdbc.update(INSERT_NOTICE_COMMENT,
-		noticeComment.getComment_num(),
-		noticeComment.getWriter(),
-		noticeComment.getComment(),
-		noticeComment.getReg_date(),
-		noticeComment.getNotice_num()
-		);
-	}
 	// 공지사항 세부 정보
 	public List<Map<String,Object>> getNoticeDetailInfo(int notice_num){
 		return jdbc.queryForList(SELECT_NOTICE_detail, notice_num);

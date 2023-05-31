@@ -1,4 +1,4 @@
-package com.soldesk.meoggolgol.MeoggolgolProject.notice;
+package com.soldesk.meoggolgol.MeoggolgolProject.qna;
 
 import org.springframework.stereotype.Service;
 
@@ -8,9 +8,8 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class NoticeService {
-	
-	private final NoticeRepository nr;
+public class QnAService {
+	private final QnARepository qar;
 
 	public Pagination paging(int totalListCnt, int page) {
 		Pagination pagination = new Pagination();
@@ -36,7 +35,6 @@ public class NoticeService {
 		if(pagination.getPrevBlock() < 1) {pagination.setPrevBlock(1);}
 		// 다음 블럭(클릭 시, 다음 블럭 첫번째 페이지)
 		pagination.setNextBlock((pagination.getBlock() * pagination.getBlockSize()) + 1);
-		System.out.println((pagination.getBlock() * pagination.getBlockSize()) + 1);
 		// 다음 블럭에 대한 확인
 		if(pagination.getNextBlock() > pagination.getTotalPageCnt()) {pagination.setNextBlock(pagination.getTotalPageCnt());}
 		// DB 접근 시작 index **/

@@ -24,18 +24,18 @@ public class MemberController {
 	// 가입하러 가기 get요청
 	@GetMapping("/join")
 	public String goSingUp(Member member) {
-		return "joinForm";
+		return "member/joinForm";
 	}
 	// 가입post요정, 유효성 검증, 비번확인, 아이디 닉네임 중복 확인
 	@PostMapping("/join")
 	public String insertMember(@Valid Member member, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
-			return "joinForm";
+			return "member/joinForm";
 		}
 		if(!member.getMember_pw().equals(member.getMember_pw_check())) {
 			bindingResult.rejectValue("member_pw_check", "passwordInCorrect", 
                     "2개의 패스워드가 일치하지 않습니다.");
-			return "joinForm";
+			return "member/joinForm";
 		}
 		try {
 			
@@ -43,11 +43,11 @@ public class MemberController {
 		}catch(DataIntegrityViolationException e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
-            return "joinForm";
+            return "member/joinForm";
         }catch(Exception e) {
             e.printStackTrace();
             bindingResult.reject("signupFailed", e.getMessage());
-            return "joinForm";
+            return "member/joinForm";
         }
 		System.out.println(member);
 		return "redirect:/";
@@ -56,14 +56,14 @@ public class MemberController {
 	// 로그인 하러 가기 get요청
 	@GetMapping("/signin")
 	public String goSignIn(MemberSignIn membersignin) {
-	    return "signInForm";
+	    return "member/signInForm";
 	}
 
 	// 로그인 post요청 
 	@PostMapping("/signin")
 	public String signIn(@Valid MemberSignIn membersignin, BindingResult bindingResult, HttpSession session) {
 	    if (bindingResult.hasErrors()) {
-	        return "signInForm";
+	        return "member/signInForm";
 	    }
 	    String submittedId = membersignin.getMember_id();
 	    String submittedPw = membersignin.getMember_pw();
@@ -72,11 +72,11 @@ public class MemberController {
 
 	    if (checkResult.getErrorCode() == 1) {
 	        bindingResult.rejectValue("member_id", "passwordInCorrect", "아이디를 다시 입력해주세요.");
-	        return "signInForm";
+	        return "member/signInForm";
 	    }
 	    if (checkResult.getErrorCode() == 2) {
 	        bindingResult.rejectValue("member_pw", "passwordInCorrect", "비밀번호를 다시 입력해주세요.");
-	        return "signInForm";
+	        return "member/signInForm";
 	    }
 
 	    // 인증 성공 시 세션에 데이터 저장

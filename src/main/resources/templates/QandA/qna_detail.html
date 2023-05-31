@@ -1,0 +1,20 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="parent" id="qnaContainer">
+    <table class="table" id="noticeList">
+	    <tr th:each="qna : ${qnaDetailList}">
+	        <td th:text="${qna.qa_num}"></td>
+	        <td th:text="${qna.writer}"></td>
+	        <td th:text="${qna.title}"></td>
+	        <td th:text="${qna.content}"></td>
+	        <td th:text="${qna.reg_date}"></td>
+	    </tr>
+    </table>
+    <div id="noticeComment"></div>
+    <form action="/qna/detail/{id}" style="text_align: center;" method="get">
+    	<textarea rows="2.5" cols="70"></textarea>
+    	<input type="submit" value="등록">
+    	<input type="submit" value="수정">
+    	<input type="submit" value="삭제">
+    </form>
+</div>
+</html>
