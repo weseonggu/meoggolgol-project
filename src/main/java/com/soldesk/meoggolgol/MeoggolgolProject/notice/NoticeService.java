@@ -14,28 +14,6 @@ public class NoticeService {
 	
 	private final NoticeRepository nr;
 
-	public ArrayList<NoticeResponse> getNoticeInfo(int page){
-		Pagination pagination = new Pagination();
-		int start = (pagination.getPage() - 1) * pagination.getPageSize();
-		int size = pagination.getPageSize() * page;
-		try {
-			NoticeResponse notice = new NoticeResponse();
-			ArrayList<NoticeResponse> noticelist = new ArrayList<>();
-			for (int i = 0; i < nr.getNoticeInfo(start, size).size(); i++) {
-				notice.setNotice_num(Long.parseLong(nr.getNoticeInfo(start,size).get(i).get("notice_num").toString()));
-				notice.setWriter(nr.getNoticeInfo(start,size).get(i).get("WRITER").toString());
-				notice.setTitle(nr.getNoticeInfo(start,size).get(i).get("TITLE").toString());
-				notice.setContent(nr.getNoticeInfo(start,size).get(i).get("CONTENT").toString());
-				notice.setReg_date(nr.getNoticeInfo(start,size).get(i).get("REG_DATE").toString().replace("T", " ").toString());
-				noticelist.add(notice);
-			}
-			return noticelist;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
 	public Pagination paging(int totalListCnt, int page) {
 		Pagination pagination = new Pagination();
 		// 현재 페이지

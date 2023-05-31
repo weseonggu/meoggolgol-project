@@ -26,10 +26,16 @@ public class NoticeController {
 	private String goNotice(@RequestParam(defaultValue = "1") int page, Model model) {
 		// 총 공지사항 수
 		int totalListCnt = noReposi.getTotalCount();
-		ArrayList<NoticeResponse> noticelist = ns.getNoticeInfo(page);
 		Pagination pagination = ns.paging(totalListCnt, page);
+		int start;
+		int size = pagination.getPageSize();
+		if (page == 1) {
+			start = pagination.getStartPage() - 1;
+		}else {
+			start = pagination.getStartPage() - 1 + pagination.getPageSize() * (page -1);
+		}
 		model.addAttribute("pagination", pagination);
-		model.addAttribute("noticelist", noticelist);
+		model.addAttribute("noticelist", noReposi.getNoticeInfo(start, size));
 		return "noticeForm";
 	}
 	

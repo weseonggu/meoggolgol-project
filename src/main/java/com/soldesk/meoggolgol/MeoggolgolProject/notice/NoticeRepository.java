@@ -36,7 +36,7 @@ public class NoticeRepository {
 	
 	private static String SELECT_NOTICE_LIST=
 			"""
-			select * from notice order by REG_DATE limit ?, ?
+			select * from notice order by notice_num desc limit ?, ?
 			""";
 	
 	private static String NOTICE_TOTAL_COUNT=
@@ -57,6 +57,7 @@ public class NoticeRepository {
 	public List<Map<String,Object>> getNoticeDetailInfo(int notice_num){
 		return jdbc.queryForList(SELECT_NOTICE_detail, notice_num);
 	}
+	
 	// 공지사항 페이징
 	public List<Map<String,Object>> getNoticeInfo(int start, int size){
 		return jdbc.queryForList(SELECT_NOTICE_LIST, start, size);

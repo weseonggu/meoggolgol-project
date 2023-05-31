@@ -34,17 +34,6 @@ public class Selenium {
 	        options.setCapability("ignoreProtectedModeSettings", true);
 	        driver = new ChromeDriver(options);
 
-<<<<<<< HEAD:src/main/java/com/soldesk/meoggolgol/MeoggolgolProject/crawling/CrawlingExample.java
-	        try {
-	        	getImageURL(url);
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
-//	        driver.close();	//탭 닫기
-//	        driver.quit();	//브라우저 닫기
-=======
-
->>>>>>> origin/weseonggu:src/main/java/com/soldesk/meoggolgol/MeoggolgolProject/crawling/Selenium.java
 	    }
 
 		/**
