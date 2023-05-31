@@ -1,8 +1,11 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="parent" id="NoticeContainer">
 <div class="container my-3">
-	<!-- 임시로 만든 공지사항 등록하기 버튼 -->
-	<a th:href="@{/uploadnotice}" class="btn btn-primary">등록하기</a>
+	<!-- 세션 값이 null이 아니고 매니저 값이 y일 경우에만 등록하기 버튼 만들기 -->
+	<div th:if="${session.member_info != null and session.member_info.manager == 'Y'}" class="regNotice">
+   		<a th:href="@{/uploadnotice}" class="btn btn-primary">등록하기</a>
+	</div>
+	
     <table class="table" id="noticeList">
         <thead class="table-dark">
             <tr>
