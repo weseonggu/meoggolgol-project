@@ -1,5 +1,6 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.notice;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
@@ -13,6 +14,11 @@ import lombok.RequiredArgsConstructor;
 public class NoticeService {
 	
 	private final NoticeRepository nr;
+	
+	// 공지사항 저장하기
+	public void saveNotice(NoticeRequest noticeRequest, String writer, LocalDate regDate) {
+        nr.insertNotice(noticeRequest, writer, regDate);
+    }
 
 	public ArrayList<NoticeResponse> getNoticeInfo(int page){
 		Pagination pagination = new Pagination();
