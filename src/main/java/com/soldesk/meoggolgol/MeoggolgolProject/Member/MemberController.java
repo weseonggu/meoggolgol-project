@@ -1,6 +1,8 @@
  
 package com.soldesk.meoggolgol.MeoggolgolProject.Member;
 
+import java.util.Enumeration;
+
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -26,7 +28,7 @@ public class MemberController {
 	public String goSingUp(Member member) {
 		return "joinForm";
 	}
-	// 가입post요정, 유효성 검증, 비번확인, 아이디 닉네임 중복 확인
+	// 회원가입 post 요청, 유효성 검증, 비번 확인, 아이디 닉네임 중복 확인
 	@PostMapping("/join")
 	public String insertMember(@Valid Member member, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
@@ -82,6 +84,15 @@ public class MemberController {
 	    // 인증 성공 시 세션에 데이터 저장
 	    session.setAttribute("member_info", checkResult.getMemberSignIn());
 	    // 인증 성공하고 세션에 데이터까지 저장한 후 메인페이지 이동
+	    
+	 // 세션에 저장된 모든 속성과 값을 출력
+	    Enumeration<String> attributeNames = session.getAttributeNames();
+	    while (attributeNames.hasMoreElements()) {
+	        String attributeName = attributeNames.nextElement();
+	        Object attributeValue = session.getAttribute(attributeName);
+	        System.out.println(attributeName + " : " + attributeValue);
+	    }
+	    
 	    return "redirect:/";
 	}
 	
