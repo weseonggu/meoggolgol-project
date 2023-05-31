@@ -1,7 +1,6 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.notice;
 
-import java.util.Date;
-
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +20,6 @@ public class NoticeRequest {
 
 	private String content;
 	
-	private Date reg_date;
+	private LocalDate reg_date;
 
 }

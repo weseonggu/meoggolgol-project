@@ -1,5 +1,6 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.notice;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -29,14 +30,17 @@ public class NoticeRepository {
 			values(?,?,?,?,?);
 			""";
 
-	public void insertNotice(NoticeRequest noticerequest) {
-		// 작성자와 작성일자+시간은 널 값으로 넣음
+	public void insertNotice(NoticeRequest noticerequest, String writer, LocalDate regDate) {
+		System.out.println(writer);
+		System.out.println(regDate);
 		jdbc.update(INSERT_NOTICE,
+				// notice_num은 자동 증가 필드라서 null
+				null,
 				noticerequest.getTitle(),
 				noticerequest.getContent(),
-				noticerequest.getWriter(), // 널값
-				noticerequest.getReg_date()	//널값
-				);
+				writer,
+				regDate
+		);
 	}
 	
 	private static String SELECT_NOTICE_detail=
