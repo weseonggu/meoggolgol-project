@@ -21,6 +21,13 @@ public class NoticeRepository {
 			(notice_num, WRITER, TITLE, CONTENT)
 			values(?,?,?,?);
 			""";
+	
+	private static String INSERT_NOTICE_COMMENT=
+			"""
+			insert into notice_comment
+			(comment_num, WRITER, COMMENT, REG_DATE, notice_num)
+			values(?,?,?,?,?);
+			""";
 
 	private static String SELECT_NOTICE_detail=
 			"""
@@ -37,8 +44,14 @@ public class NoticeRepository {
 			select count(*) from notice
 			""";
 	
-	public void insertNotice(NoticeRequest noticerequest) {
-		
+	public void insertNoticeComment(NoticeComment noticeComment) {
+		jdbc.update(INSERT_NOTICE_COMMENT,
+		noticeComment.getComment_num(),
+		noticeComment.getWriter(),
+		noticeComment.getComment(),
+		noticeComment.getReg_date(),
+		noticeComment.getNotice_num()
+		);
 	}
 	// 공지사항 세부 정보
 	public List<Map<String,Object>> getNoticeDetailInfo(int notice_num){

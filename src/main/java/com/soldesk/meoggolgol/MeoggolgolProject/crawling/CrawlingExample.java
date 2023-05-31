@@ -35,16 +35,14 @@ public class CrawlingExample {
 	        options.addArguments("--blink-settings=imagesEnabled=false"); //이미지 다운 안받음
 	        options.setCapability("ignoreProtectedModeSettings", true);
 	        driver = new ChromeDriver(options);
-	        
-	        //브라우저 선택
 
 	        try {
 	        	getImageURL(url);
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
-	        driver.close();	//탭 닫기
-	        driver.quit();	//브라우저 닫기
+//	        driver.close();	//탭 닫기
+//	        driver.quit();	//브라우저 닫기
 	    }
 
 		/**

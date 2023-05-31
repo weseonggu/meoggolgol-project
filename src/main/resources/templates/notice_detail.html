@@ -9,6 +9,12 @@
 	        <td th:text="${notice.reg_date}"></td>
 	    </tr>
     </table>
-	<a th:href="@{/uploadnotice}" class="btn btn-primary">등록하기</a>
+    <div id="noticeComment"></div>
+    <form action="/notice/detail/{id}" style="text_align: center;" method="get">
+    	<textarea rows="2.5" cols="70"></textarea>
+    	<input type="submit" value="등록">
+    	<input type="submit" value="수정">
+    	<input type="submit" value="삭제">
+    </form>
 </div>
 </html>
