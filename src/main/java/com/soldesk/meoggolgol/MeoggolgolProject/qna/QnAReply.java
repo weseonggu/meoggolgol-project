@@ -1,4 +1,4 @@
-package com.soldesk.meoggolgol.MeoggolgolProject.notice;
+package com.soldesk.meoggolgol.MeoggolgolProject.qna;
 
 import java.util.Date;
 
@@ -9,11 +9,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-// 공지사항 댓글
-public class NoticeComment {
+public class QnAReply {
 	private int comment_num;
 	private String writer;
 	private String comment;
 	private Date reg_date;
-	private long notice_num;
+	private long qa_num;
 }
