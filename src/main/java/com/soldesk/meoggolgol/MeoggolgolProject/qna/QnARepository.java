@@ -1,5 +1,6 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.qna;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -14,12 +15,12 @@ public class QnARepository {
 	private final JdbcTemplate jdbc;
 
 	// 등록 요청 받은 공지사항 저장하기
-	private static String INSERT_QANDA=
-			"""
-			insert into QandA
-			(qa_num, WRITER, TITLE, CONTENT, REG_DATE)
-			values(?,?,?,?);
-			""";
+		private static String INSERT_QNA=
+				"""
+				insert into QandA
+				(WRITER, TITLE, CONTENT, REG_DATE)
+				values(?,?,?,?);
+				""";
 	
 	private static String INSERT_QNA_REPLY=
 			"""
@@ -42,6 +43,17 @@ public class QnARepository {
 			select count(*) from QandA
 			""";
 	
+	public void insertQnA(String writer, QandA qandA, LocalDate regDate) {
+		// 작성자랑 등록일자 제대로 있는지 콘솔 출력
+		System.out.println(writer);
+		System.out.println(regDate);
+		jdbc.update(INSERT_QNA,
+				writer,
+				qandA.getTitle(),
+				qandA.getContent(),
+				regDate
+				);
+	}
 	// Q&A 세부 정보
 	public List<Map<String,Object>> getQNADetailInfo(int notice_num){
 		return jdbc.queryForList(SELECT_QANDA_DETAIL, notice_num);

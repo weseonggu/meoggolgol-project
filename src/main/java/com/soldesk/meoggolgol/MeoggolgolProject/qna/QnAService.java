@@ -1,5 +1,7 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.qna;
 
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Service;
 
 import com.soldesk.meoggolgol.MeoggolgolProject.notice.paging.Pagination;
@@ -10,6 +12,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class QnAService {
 	private final QnARepository qar;
+	
+	// qna 저장하기
+	public void saveQNA(String writer, QandA qandA, LocalDate regDate) {
+		qar.insertQnA(writer, qandA, regDate);
+	}
 	
 	// 댓글 저장
 	public void saveQNAReply(QnAReply qnAReply, String writer, long qa_num) {
