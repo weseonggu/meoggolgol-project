@@ -48,14 +48,10 @@ public class NoticeController {
 		// 세션 값 중 member_nickname 가져오기
 		String writer = membersignin.getMember_nickname();
 		
-		// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
-		System.out.println(writer);
 
 		// 등록일자는 현재 날짜로 설정
 		LocalDate regDate = LocalDate.now();
 		
-		// 등록일자 제대로 들어왔는지 콘솔 확인
-		System.out.println(regDate);
 		
 		// NoticeService를 사용하여 공지사항 저장
         ns.saveNotice(notierequest, writer, regDate);

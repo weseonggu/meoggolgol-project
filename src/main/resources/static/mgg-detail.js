@@ -83,8 +83,10 @@ $(function() {
 	
 	
 	
-	$(".restaurant-card").click(function() {
-		alert($(this).attr("id"));
+	$("#15").click(function() {
+		
+		console.log("클릭");
+		console.log($(this).attr("id"));
 	});
 	
 	
@@ -146,7 +148,6 @@ function isIncludedInCategories(category) {
  function changeImg(id, urlList){
 
  for (var y = 0; y < urlList.length; y++) {
- console.log(urlList[y]);
  $.getJSON("restaurantCardImg?url=" + urlList[y]+"&id="+id[y], function(data)
  {
  // console.log(data.url);
@@ -156,32 +157,30 @@ function isIncludedInCategories(category) {
  }
  else{
  $("#"+data.id+" img").attr("src",data.url);
- console.log(data.id);
- console.log(data.url);
  }
  });
  }
  }
-//function changeImg(id, urlList){
-//	var urlJson = {
-//				"id":id,
-//				"urlList":urlList
-//		}
-//		$.ajax({
-//			  type : 'get',
-//			  url : "restaurantCardImg",
-//			  dataType    :   "json",
-//			  async: false, 
-//			  data : urlJson,
-//			  error: function(xhr, status, error){
-//				// 실패했을 때 처리
-//			  },
-//			  success : function(data){
-//				  $.each(data,function(i){
-//					  $("#"+data[i].id+" img").attr("src",data[i].url);					  
-//				  })
-//			  }
-//			});
-//}
+// function changeImg(id, urlList){
+// var urlJson = {
+// "id":id,
+// "urlList":urlList
+// }
+// $.ajax({
+// type : 'get',
+// url : "restaurantCardImg",
+// dataType : "json",
+// async: false,
+// data : urlJson,
+// error: function(xhr, status, error){
+// // 실패했을 때 처리
+// },
+// success : function(data){
+// $.each(data,function(i){
+// $("#"+data[i].id+" img").attr("src",data[i].url);
+// })
+// }
+// });
+// }
 
 

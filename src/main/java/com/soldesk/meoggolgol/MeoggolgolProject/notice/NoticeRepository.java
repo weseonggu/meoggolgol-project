@@ -19,8 +19,8 @@ public class NoticeRepository {
 	private static String INSERT_NOTICE=
 			"""
 			insert into notice
-			(notice_num, WRITER, TITLE, CONTENT, REG_DATE)
-			values(?,?,?,?,?);
+			(WRITER, TITLE, CONTENT, REG_DATE)
+			values(?,?,?,?);
 			""";
 	
 	private static String INSERT_NOTICE_COMMENT=
@@ -34,11 +34,9 @@ public class NoticeRepository {
 		System.out.println(writer);
 		System.out.println(regDate);
 		jdbc.update(INSERT_NOTICE,
-				// notice_num은 자동 증가 필드라서 null
-				null,
+				writer,
 				noticerequest.getTitle(),
 				noticerequest.getContent(),
-				writer,
 				regDate
 		);
 	}

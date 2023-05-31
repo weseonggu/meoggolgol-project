@@ -107,8 +107,7 @@ public class MggDetailService {
     	sb.insert(4, "s");
     	String url = sb.toString();
     	try {
-    		Selenium ce1 = new Selenium();
-    		return ce1.getImageURL(url);
+    		return ce.getImageURL(url);
     	} catch (Exception e) {
     		e.printStackTrace();
     		
