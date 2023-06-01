@@ -15,7 +15,6 @@ import com.soldesk.meoggolgol.MeoggolgolProject.notice.paging.Pagination;
 import com.soldesk.meoggolgol.MeoggolgolProject.Member.MemberSignIn;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletRequestWrapper;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
