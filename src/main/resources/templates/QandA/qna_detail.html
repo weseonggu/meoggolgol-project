@@ -9,12 +9,28 @@
 	        <td th:text="${qna.reg_date}"></td>
 	    </tr>
     </table>
-    <div id="noticeComment"></div>
-    <form action="/qna/detail/{id}" style="text_align: center;" method="get">
-    	<textarea rows="2.5" cols="70"></textarea>
-    	<input type="submit" value="등록">
-    	<input type="submit" value="수정">
-    	<input type="submit" value="삭제">
-    </form>
+	<div class="card my-4">
+		<h5 class="card-header">Comment:</h5>
+  	<!-- Comments Form -->
+	<div class="card-body">
+			<form name="comment-form" action="/qna/detail/94" method="post" autocomplete="off">
+				<div class="form-group">
+					<textarea name="content" class="form-control" rows="3"></textarea>
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
+    <table class="table" id="noticeList">
+	    <tr th:each="reply : ${qnaReply}">
+	        <td th:text="${reply.comment_num}"></td>
+	        <td th:text="${reply.writer}"></td>
+	        <td th:text="${reply.comment}"></td>
+	        <td th:text="${reply.reg_date}"></td>
+	        <td th:text="${reply.qa_num}"></td>
+	    </tr>
+    </table>
+ 
+</div>
 </div>
 </html>

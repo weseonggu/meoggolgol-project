@@ -25,7 +25,7 @@ public class QnARepository {
 	private static String INSERT_QNA_REPLY=
 			"""
 			insert into QandA_reply(WRITER, COMMENT, REG_DATE, qa_num)
-			values(?,?,getdate(),?)
+			values(?,?,?,?)
 			""";
 	
 	private static String SELECT_QANDA_DETAIL=
@@ -43,6 +43,12 @@ public class QnARepository {
 			select count(*) from QandA
 			""";
 	
+	private static String SELECT_QANDA_DETAIL_REPLY=
+			"""
+			select * from QandA_reply where qa_num = ? order by REG_DATE desc
+			""";
+	
+	// Q&A 등록 
 	public void insertQnA(String writer, QandA qandA, LocalDate regDate) {
 		// 작성자랑 등록일자 제대로 있는지 콘솔 출력
 		System.out.println(writer);
@@ -54,9 +60,19 @@ public class QnARepository {
 				regDate
 				);
 	}
+	// qna 댓글 등록
+	public void InsertQnAReply(String writer, String qnAReply, LocalDate regDate, long qa_num) {
+		jdbc.update(INSERT_QNA_REPLY,
+				writer,
+				qnAReply,
+				regDate,
+				qa_num
+				);
+	}
+
 	// Q&A 세부 정보
-	public List<Map<String,Object>> getQNADetailInfo(int notice_num){
-		return jdbc.queryForList(SELECT_QANDA_DETAIL, notice_num);
+	public List<Map<String,Object>> getQNADetailInfo(int qna_num){
+		return jdbc.queryForList(SELECT_QANDA_DETAIL, qna_num);
 	}
 	
 	// Q&A 페이징
@@ -67,12 +83,8 @@ public class QnARepository {
 	public int getTotalCount(){
 		return jdbc.queryForObject(QANDA_TOTAL_COUNT, Integer.class);
 	}
-	
-	public void InsertQnAReply(QnAReply qnAReply, String writer, long qa_num) {
-		jdbc.update(INSERT_QNA_REPLY,
-				writer,
-				qnAReply.getComment(),
-				qa_num
-		);
-	}
+	// Q&A 댓글
+		public List<Map<String,Object>> getQNADetailReply(int comment_num){
+			return jdbc.queryForList(SELECT_QANDA_DETAIL_REPLY, comment_num);
+		}
 }

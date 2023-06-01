@@ -19,9 +19,12 @@ public class QnAService {
 	}
 	
 	// 댓글 저장
-	public void saveQNAReply(QnAReply qnAReply, String writer, long qa_num) {
-		qar.InsertQnAReply(qnAReply, writer, qa_num);
+	public void saveQNAReply(String writer, String qnAReply, LocalDate regDate, long qa_num) {
+		qar.InsertQnAReply(writer, qnAReply, regDate, qa_num);
 	}
+//	public void saveQNAReply(String writer, QnAReply qnAReply, LocalDate regDate, long qa_num) {
+//		qar.InsertQnAReply(writer, qnAReply, regDate, qa_num);
+//	}
 
 	public Pagination paging(int totalListCnt, int page) {
 		Pagination pagination = new Pagination();

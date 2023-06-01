@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.soldesk.meoggolgol.MeoggolgolProject.Member.MemberSignIn;
@@ -77,9 +78,31 @@ public class QnAController {
 		model.addAttribute("qnalist", qar.getQNAInfo(start, size));
 		return "QandA/qnaForm";
 	}
+	
 	@GetMapping(value = "/qna/detail/{id}")
 	private String goQNAdtail(Model model,@PathVariable("id") Integer id) {
+		System.out.println(id);
+		model.addAttribute("id", id);
 		model.addAttribute("qnaDetailList", qar.getQNADetailInfo(id));
+		model.addAttribute("qnaReply", qar.getQNADetailReply(id));
 		return "QandA/qna_detail";
+	}
+	
+	// 댓글 작성
+	@PostMapping("/qna/detail/{id}")
+	private String insertComment(@PathVariable("id") Integer id, @RequestParam("content") String content,  HttpServletRequest httpservletrequest, Model model)throws Exception {
+		HttpSession session = httpservletrequest.getSession();
+		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
+		// 세션 값 콘솔 확인
+		System.out.println(membersignin);
+		// 세션 값 중 member_nickname 가져오기
+		String writer = membersignin.getMember_nickname();
+		// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
+		System.out.println(writer);
+		// 등록일자는 현재 날짜로 설정
+		LocalDate regDate = LocalDate.now();
+		qas.saveQNAReply(writer, content, regDate, id);
+		model.addAttribute("id", id);
+		return "redirect:/qna/detail/"+id;
 	}
 }
