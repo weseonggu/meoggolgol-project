@@ -20,9 +20,10 @@ public class MggDetailRestAPI {
 	public ImgUrl crawlingIngUrl(@RequestParam String url, @RequestParam int id) {
 		String imgUrl=mgs.searchImage(url);
 		
-		System.out.println("id: "+id);
-		System.out.println("api: "+imgUrl);
+		//System.out.println("id: "+id);
+		//System.out.println("api: "+imgUrl);
 		ImgUrl urlaa = new ImgUrl(id+"",imgUrl);
+		System.out.println(urlaa);
 		return urlaa;
 	}
 	

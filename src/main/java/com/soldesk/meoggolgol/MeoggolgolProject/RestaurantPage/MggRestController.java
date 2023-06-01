@@ -8,10 +8,11 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-public class MggRestController{
-	
+public class MggRestController {
+
 	@GetMapping("/restaurant-detail")
-	public String goRestPage(@RequestParam double lo, @RequestParam double la) {
-		return "mgg-restaurant";
+	public String goRestPage(@RequestParam double lo, @RequestParam double la, @RequestParam String imgUrl, @RequestParam String placeUrl, @RequestParam String placeName, @RequestParam String roadAddress) {
+		
+	    return "restaurant-detail";
 	}
 }
