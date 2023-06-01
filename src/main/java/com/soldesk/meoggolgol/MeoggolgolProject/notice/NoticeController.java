@@ -2,7 +2,6 @@ package com.soldesk.meoggolgol.MeoggolgolProject.notice;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +15,7 @@ import com.soldesk.meoggolgol.MeoggolgolProject.notice.paging.Pagination;
 import com.soldesk.meoggolgol.MeoggolgolProject.Member.MemberSignIn;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequestWrapper;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,30 @@ public class NoticeController {
 	
 	// 공지사항 등록 페이지 요청
 	@GetMapping("/uploadnotice")
-	private String goRegNotice(NoticeRequest noticerequest) {
+	private String goRegNotice(NoticeRequest noticerequest, HttpServletRequest httpservletreuquest) {
+		
+		// 보안 문제를 위해서 세션의 manager 값이 Y일 경우에만 공지사항 폼으로 넘겨주기
+		
+		// 세션 가져오기
+		HttpSession session = httpservletreuquest.getSession();
+		
+		// 먹골골 회원이 아닌 경우 -> 다시 noticeForm으로 보내기
+		if (session.getAttribute("member_info") == null) {
+			return "redirect:/notice";
+		}
+		
+		// 세션 값 집어넣기
+		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
+		
+		// 세션 값 콘솔 확인
+		System.out.println(session.getAttribute("member_info"));
+		
+		// 먹골골 일반 회원일 경우 -> 다시 noticeForm으로 보내기
+		if ("N".equals(membersignin.getManager())) {
+			return "redirect:/notice";
+		}
+		
+		// 먹골골 관리자일 경우 -> noticeUploadForm으로 보내기
 		return "noticeUploadForm";
 	}
 	
