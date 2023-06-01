@@ -96,4 +96,20 @@ public class NoticeController {
 		model.addAttribute("noticeDetailList", noReposi.getNoticeDetailInfo(id));
 		return "notice/notice_detail";
 	}
+	
+	// notice 삭제
+	@GetMapping(value = "/notice/detail/{id}/delete")
+	private String deleteQna(@PathVariable("id") Integer id, HttpServletRequest httpservletrequest)throws Exception {
+		HttpSession session = httpservletrequest.getSession();
+		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
+		// 세션 값 콘솔 확인
+		System.out.println(membersignin);
+		// 세션 값 중 member_nickname 가져오기
+		String writer = membersignin.getMember_nickname();
+		// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
+		System.out.println(writer);
+		ns.deleteQNA(writer, id);
+		return "redirect:/notice";
+		}
+	
 }

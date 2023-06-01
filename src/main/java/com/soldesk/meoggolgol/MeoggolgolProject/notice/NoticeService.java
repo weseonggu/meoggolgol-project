@@ -18,7 +18,16 @@ public class NoticeService {
 	public void saveNotice(String writer, NoticeRequest noticeRequest, LocalDate regDate) {
         nr.insertNotice(writer, noticeRequest, regDate);
     }
-
+	
+	// notice 수정
+	public void updateNotice(String title, String content, LocalDate regDate, String writer, int num) {
+		nr.updateNotice(title, content, regDate, writer, num);
+	}
+	// notice 삭제
+	public void deleteQNA(String writer, int num) {
+		nr.deleteNotice(writer, num);
+	}
+	
 	public Pagination paging(int totalListCnt, int page) {
 		Pagination pagination = new Pagination();
 		// 현재 페이지

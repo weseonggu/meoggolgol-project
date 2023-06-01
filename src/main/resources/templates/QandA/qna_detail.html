@@ -7,11 +7,12 @@
 	        <td th:text="${qna.title}"></td>
 	        <td th:text="${qna.content}"></td>
 	        <td th:text="${qna.reg_date}"></td>
+	        <a class="btn btn-primary" th:href="@{'/qna/detail/update/' + ${qna.qa_num}}" th:text="수정"></a>
+		    <button id="qnadelete" class="btn btn-danger" onclick="deleteqna();">삭제</button>
 	    </tr>
     </table>
 	<div class="card my-4">
 		<h5 class="card-header">Comment:</h5>
-  	<!-- Comments Form -->
 	<div class="card-body">
 			<form name="comment-form" method="post" autocomplete="off">
 				<div class="form-group">
@@ -28,9 +29,9 @@
 	        <td th:text="${reply.comment}"></td>
 	        <td th:text="${reply.reg_date}"></td>
 	        <td th:text="${reply.qa_num}"></td>
+	        <button class="btn btn-danger" onclick="deleteQnaReply();">삭제</button>
 	    </tr>
     </table>
- 
 </div>
 </div>
 </html>

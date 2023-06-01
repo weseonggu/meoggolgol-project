@@ -24,13 +24,13 @@ public class QnAController {
 	private final QnARepository qar;
 	private final QnAService qas;
 	
-	// 공지사항 등록 페이지 요청
+	// qna 등록 페이지 요청
 	@GetMapping("/uploadQNA")
 	private String goRegQNA(QandA qandA) {
 		return "QandA/qnaUploadForm";
 	}
 	
-	// 공지사항 등록 요청
+	// qna 등록 요청
 	@PostMapping("/uploadQNA")
 	public String regQNA(@Valid QandA qandA, BindingResult bindingresult, HttpServletRequest httpservletrequest) {
 		// input으로 받아온 제목+내용은 noticerequest에 넣고,
@@ -63,7 +63,7 @@ public class QnAController {
 	
 	@GetMapping("/qna")
 	private String goQNA(@RequestParam(defaultValue = "1") int page, Model model) {
-		// 총 공지사항 수
+		// 총 qna 수
 		int totalListCnt = qar.getTotalCount();
 		Pagination pagination = qas.paging(totalListCnt, page);
 		int start;
@@ -103,4 +103,45 @@ public class QnAController {
 		qas.saveQNAReply(writer, content, regDate, id);
 		return "redirect:/qna/detail/"+id;
 	}
+	
+	// qna 등록 페이지 요청
+	@GetMapping(value = "/qna/detail/update/{id}")
+	private String updateQNA(QandA qandA, Model model,@PathVariable("id") Integer id) {
+		model.addAttribute("qna", qar.getQNADetailInfo(id));
+		model.addAttribute("id", id);
+		return "QandA/qna_update";
+	}
+	
+	// qna 수정
+	@PostMapping(value = "/qna/update/{id}")
+	private String updateQna(@PathVariable("id") Integer id, @RequestParam("title") String title, @RequestParam("content") String content, HttpServletRequest httpservletrequest)throws Exception {
+		HttpSession session = httpservletrequest.getSession();
+		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
+		// 세션 값 콘솔 확인
+		System.out.println(membersignin);
+		// 세션 값 중 member_nickname 가져오기
+		String writer = membersignin.getMember_nickname();
+		// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
+		System.out.println(writer);
+		LocalDate regDate = LocalDate.now();
+		qas.updateQNA(title, content, regDate, writer, id);
+		return "redirect:/qna/detail/"+id;
+	}
+	
+	// qna 삭제
+	@GetMapping(value = "/qna/detail/{id}/delete")
+	private String deleteQna(@PathVariable("id") Integer id, HttpServletRequest httpservletrequest)throws Exception {
+		HttpSession session = httpservletrequest.getSession();
+		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
+		// 세션 값 콘솔 확인
+		System.out.println(membersignin);
+		// 세션 값 중 member_nickname 가져오기
+		String writer = membersignin.getMember_nickname();
+		// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
+		System.out.println(writer);
+		qas.deleteQNA(writer, id);
+		return "redirect:/qna";
+	}
+	
+	
 }

@@ -22,9 +22,16 @@ public class QnAService {
 	public void saveQNAReply(String writer, String qnAReply, LocalDate regDate, long qa_num) {
 		qar.InsertQnAReply(writer, qnAReply, regDate, qa_num);
 	}
-//	public void saveQNAReply(String writer, QnAReply qnAReply, LocalDate regDate, long qa_num) {
-//		qar.InsertQnAReply(writer, qnAReply, regDate, qa_num);
-//	}
+	
+	// qna 수정
+	public void updateQNA(String title, String content, LocalDate regDate, String writer, int num) {
+		qar.updateQna(title, content, regDate, writer, num);
+	}
+
+	// qna 삭제
+	public void deleteQNA(String writer, int num) {
+		qar.deleteQna(writer, num);
+	}
 
 	public Pagination paging(int totalListCnt, int page) {
 		Pagination pagination = new Pagination();

@@ -2,12 +2,13 @@
 <div layout:fragment="content" class="parent" id="NoticeContainer">
     <table class="table" id="noticeList">
 	    <tr th:each="notice : ${noticeDetailList}">
-	        <td th:text="${notice.notice_num}"></td>
+	        <td id="notice_num" th:text="${notice.notice_num}"></td>
 	        <td th:text="${notice.writer}"></td>
 	        <td th:text="${notice.title}"></td>
 	        <td th:text="${notice.content}"></td>
 	        <td th:text="${notice.reg_date}"></td>
 	    </tr>
     </table>
+		    <button id="noticedelete" class="btn btn-danger" onclick="deleteNotice();">삭제</button>
 </div>
 </html>

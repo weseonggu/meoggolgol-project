@@ -38,6 +38,17 @@ public class NoticeRepository {
 			select count(*) from notice
 			""";
 
+	// notice 수정
+	private static String UPDATE_NOTICE=
+			"""
+				update notice set TITLE = ?, CONTENT = ?, REG_DATE = ? where WRITER = ? and qa_num = ?
+			""";
+	// notice 삭제
+	private static String DELETE_NOTICE=
+			"""
+				delete from notice where WRITER = ? and notice_num = ?
+			""";
+	
 	public void insertNotice(String writer, NoticeRequest noticerequest, LocalDate regDate) {
 		// 작성자랑 등록일자 제대로 있는지 콘솔 출력
 		// System.out.println(writer);
@@ -63,5 +74,15 @@ public class NoticeRepository {
 	public int getTotalCount(){
 		return jdbc.queryForObject(NOTICE_TOTAL_COUNT, Integer.class);
 
+	}
+	
+	// Q&A 수정
+	public void updateNotice(String title, String content, LocalDate regDate, String writer, int num) {
+		jdbc.update(UPDATE_NOTICE, title, content, regDate, writer, num);
+	}
+	
+	// Q&A 삭제
+	public void deleteNotice(String writer,int num) {
+		jdbc.update(DELETE_NOTICE, writer, num);
 	}
 }
