@@ -41,7 +41,7 @@ public class NoticeRepository {
 	// notice 수정
 	private static String UPDATE_NOTICE=
 			"""
-				update notice set TITLE = ?, CONTENT = ?, REG_DATE = ? where WRITER = ? and qa_num = ?
+				update notice set TITLE = ?, CONTENT = ?, REG_DATE = ? where WRITER = ? and notice_num = ?
 			""";
 	// notice 삭제
 	private static String DELETE_NOTICE=

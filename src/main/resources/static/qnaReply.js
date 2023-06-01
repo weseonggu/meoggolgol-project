@@ -4,13 +4,6 @@ function reply(reply){
 	reply.submit();
 }
 
-function updateQna(update){
-	var id = document.getElementById('qa_num').val();
-	update.action = "/qna/update/"+id;
-	update.submit();
-}
-
-
 function deleteqna(){
 	var id = $("#qa_num").text();
 	location.href="/qna/detail/" + id + "/delete";

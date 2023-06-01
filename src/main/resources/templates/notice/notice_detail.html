@@ -7,8 +7,9 @@
 	        <td th:text="${notice.title}"></td>
 	        <td th:text="${notice.content}"></td>
 	        <td th:text="${notice.reg_date}"></td>
+		    <a class="btn btn-primary" th:href="@{'/notice/detail/update/' + ${notice.notice_num}}" th:text="수정"></a>
+			<button id="noticedelete" class="btn btn-danger" onclick="deleteNotice();">삭제</button>
 	    </tr>
     </table>
-		    <button id="noticedelete" class="btn btn-danger" onclick="deleteNotice();">삭제</button>
 </div>
 </html>

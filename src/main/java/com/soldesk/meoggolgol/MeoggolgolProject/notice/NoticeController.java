@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.soldesk.meoggolgol.MeoggolgolProject.notice.paging.Pagination;
-
+import com.soldesk.meoggolgol.MeoggolgolProject.qna.QandA;
 import com.soldesk.meoggolgol.MeoggolgolProject.Member.MemberSignIn;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -95,6 +95,30 @@ public class NoticeController {
 	private String goNoticedtail(Model model,@PathVariable("id") Integer id) {
 		model.addAttribute("noticeDetailList", noReposi.getNoticeDetailInfo(id));
 		return "notice/notice_detail";
+	}
+	
+	// 공지사항 수정 페이지 요청
+	@GetMapping(value = "/notice/detail/update/{id}")
+	private String updateQNA(NoticeRequest notierequest, Model model,@PathVariable("id") Integer id) {
+		model.addAttribute("notice", noReposi.getNoticeDetailInfo(id));
+		model.addAttribute("id", id);
+		return "notice/notice_update";
+	}
+	
+	// 공지사항 수정
+	@PostMapping(value = "/notice/update/{id}")
+	private String updateQna(@PathVariable("id") Integer id, @RequestParam("title") String title, @RequestParam("content") String content, HttpServletRequest httpservletrequest)throws Exception {
+		HttpSession session = httpservletrequest.getSession();
+		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
+		// 세션 값 콘솔 확인
+		System.out.println(membersignin);
+		// 세션 값 중 member_nickname 가져오기
+		String writer = membersignin.getMember_nickname();
+		// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
+		System.out.println(writer);
+		LocalDate regDate = LocalDate.now();
+		ns.updateNotice(title, content, regDate, writer, id);
+		return "redirect:/notice/detail/"+id;
 	}
 	
 	// notice 삭제
