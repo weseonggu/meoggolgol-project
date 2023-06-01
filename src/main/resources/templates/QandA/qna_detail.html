@@ -2,7 +2,7 @@
 <div layout:fragment="content" class="parent" id="qnaContainer">
     <table class="table" id="noticeList">
 	    <tr th:each="qna : ${qnaDetailList}">
-	        <td th:text="${qna.qa_num}"></td>
+	        <td id="qa_num" th:text="${qna.qa_num}"></td>
 	        <td th:text="${qna.writer}"></td>
 	        <td th:text="${qna.title}"></td>
 	        <td th:text="${qna.content}"></td>
@@ -13,11 +13,11 @@
 		<h5 class="card-header">Comment:</h5>
   	<!-- Comments Form -->
 	<div class="card-body">
-			<form name="comment-form" action="/qna/detail/94" method="post" autocomplete="off">
+			<form name="comment-form" method="post" autocomplete="off">
 				<div class="form-group">
 					<textarea name="content" class="form-control" rows="3"></textarea>
 				</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="submit" class="btn btn-primary" onclick="reply(this.form);">Submit</button>
 			</form>
 		</div>
 	</div>

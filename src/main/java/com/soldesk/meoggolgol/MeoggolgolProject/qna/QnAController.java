@@ -8,7 +8,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.soldesk.meoggolgol.MeoggolgolProject.Member.MemberSignIn;
@@ -90,7 +89,7 @@ public class QnAController {
 	
 	// 댓글 작성
 	@PostMapping("/qna/detail/{id}")
-	private String insertComment(@PathVariable("id") Integer id, @RequestParam("content") String content,  HttpServletRequest httpservletrequest, Model model)throws Exception {
+	private String insertComment(@PathVariable("id") Integer id, @RequestParam("content") String content,  HttpServletRequest httpservletrequest)throws Exception {
 		HttpSession session = httpservletrequest.getSession();
 		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
 		// 세션 값 콘솔 확인
@@ -102,7 +101,6 @@ public class QnAController {
 		// 등록일자는 현재 날짜로 설정
 		LocalDate regDate = LocalDate.now();
 		qas.saveQNAReply(writer, content, regDate, id);
-		model.addAttribute("id", id);
 		return "redirect:/qna/detail/"+id;
 	}
 }
