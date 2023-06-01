@@ -21,6 +21,7 @@ public class MggDetailRestAPI {
 		String imgUrl=mgs.searchImage(url);
 		
 		ImgUrl urlaa = new ImgUrl(id+"",imgUrl);
+		System.out.println(urlaa);
 		return urlaa;
 	}
 	
