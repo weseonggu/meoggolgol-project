@@ -1,7 +1,11 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.Member;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,10 +33,11 @@ public class Member {
 	@NotEmpty(message = "닉네임은 필수항목입니다.")
 	@Size(min = 1, max = 10)
 	private String member_nickname;
-	
-	private String member_birth;
+	@PastOrPresent
+	private LocalDate member_birth;
 	
 	@NotEmpty(message = "휴대폰번호는 필수항목입니다.")
+	@NotEmpty
 	private String member_phoneNumber;
 	
 	@NotEmpty(message = "이메일은 필수항목입니다.")

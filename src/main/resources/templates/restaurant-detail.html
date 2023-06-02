@@ -1,0 +1,14 @@
+<html layout:decorate="~{layout}">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/restaurant-detail.css}">
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aa8ed2785db0138dc7d9bdb1f5756790"></script>
+    <script type="text/javascript" th:src="@{/restaurant-detail.js}"></script>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div id="mggInfoBoox">
+            <div class="selectMgg" id="mggRestaurant" style="width:500px;height:500px;"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -22,7 +22,6 @@ public class NoticeRepository {
 			(WRITER, TITLE, CONTENT, REG_DATE)
 			values(?,?,?,?);
 			""";
-
 	private static String SELECT_NOTICE_detail=
 			"""
 			select * from notice where notice_num = ?
@@ -50,9 +49,6 @@ public class NoticeRepository {
 			""";
 	
 	public void insertNotice(String writer, NoticeRequest noticerequest, LocalDate regDate) {
-		// 작성자랑 등록일자 제대로 있는지 콘솔 출력
-		// System.out.println(writer);
-		// System.out.println(regDate);
 		jdbc.update(INSERT_NOTICE,
 				writer,
 				noticerequest.getTitle(),

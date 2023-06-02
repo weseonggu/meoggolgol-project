@@ -41,7 +41,6 @@ public class MggDetailService {
     public ArrayList<Restaurant> searchRestaurants(double latitude, double longitude, int page, int pageSize) {
         String apiUrl = "https://dapi.kakao.com/v2/local/search/category.json";
         String apiKey = "770ee2bdd22b63d6a113a2cfef5259c1"; // REST API 키 성찬꺼
-//      String apiKey = "aa8ed2785db0138dc7d9bdb1f5756790"; // REST API 키 성구꺼
         String categoryCode = "FD6"; // 카카오맵 식당 카테고리 코드
 
         try {
@@ -85,11 +84,7 @@ public class MggDetailService {
                         list.get("y") + "");
                 restlist.add(rest);
             }
-
-
-
             // 연결 종료
-//            System.out.println(restlist);
             connection.disconnect();
             return restlist;
         } catch (Exception e) {
@@ -107,14 +102,10 @@ public class MggDetailService {
     	sb.insert(4, "s");
     	String url = sb.toString();
     	try {
-    		Selenium ce1 = new Selenium();
-    		return ce1.getImageURL(url);
+    		return ce.getImageURL(url);
     	} catch (Exception e) {
     		e.printStackTrace();
-    		
     		return "error";
 		}
-    	
-
     }
 }

@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-public class MainPageRestController {
+public class MainPageRestAPI {
 	
 	private final MainPageRepository mpr;
 	
