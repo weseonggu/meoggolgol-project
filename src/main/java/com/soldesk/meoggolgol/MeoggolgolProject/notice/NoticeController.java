@@ -37,7 +37,7 @@ public class NoticeController {
 		
 		// 먹골골 회원이 아닌 경우 -> 다시 noticeForm으로 보내기
 		if (session.getAttribute("member_info") == null) {
-			return "redirect:notice/notice";
+			return "redirect:/notice";
 		}
 		
 		// 세션 값 집어넣기
@@ -48,7 +48,7 @@ public class NoticeController {
 		
 		// 먹골골 일반 회원일 경우 -> 다시 noticeForm으로 보내기
 		if ("N".equals(membersignin.getManager())) {
-			return "redirect:notice/notice";
+			return "redirect:/notice";
 		}
 		
 		// 먹골골 관리자일 경우 -> noticeUploadForm으로 보내기
@@ -57,7 +57,7 @@ public class NoticeController {
 		
 	// 공지사항 등록 요청
 	@PostMapping("/uploadnotice")
-	public String regNotice(@Valid NoticeRequest notierequest, BindingResult bindingresult, HttpServletRequest httpservletrequest) {
+	public String regNotice(@Valid NoticeRequest noticerequest, BindingResult bindingresult, HttpServletRequest httpservletrequest) {
 		
 		// input으로 받아온 제목+내용은 noticerequest에 넣고,
 		// 작성자는 세션에 있는 멤버 닉네임 가져와서 넣고, 
@@ -82,17 +82,23 @@ public class NoticeController {
 			// 등록일자 제대로 들어왔는지 콘솔 확인
 			// System.out.println(regDate);
 			
+			// Markdown을 HTML로 변환
+	        String htmlContent = CommonUtil.markdownToHtml(noticerequest.getContent());
+			
+	        // 변환된 HTML 내용 저장
+	        noticerequest.setContent(htmlContent);
+	        
 			// NoticeService를 사용하여 공지사항 저장
-			ns.saveNotice(writer, notierequest, regDate);
+			ns.saveNotice(writer, noticerequest, regDate);
 			
 			// 콘솔에 저장된 공지사항 출력        
-			System.out.println("번호: " + notierequest.getNotice_num());
-			System.out.println("제목: " + notierequest.getTitle());
-			System.out.println("내용: " + notierequest.getContent());
+			System.out.println("번호: " + noticerequest.getNotice_num());
+			System.out.println("제목: " + noticerequest.getTitle());
+			System.out.println("내용: " + noticerequest.getContent());
 			System.out.println("작성자: " + writer);
 			System.out.println("등록일자: " + regDate);
 		}
-		return "redirect:notice/notice";
+		return "redirect:/notice";
 	}
 	
 	// 공지사항 목록 페이지 요청
@@ -159,13 +165,12 @@ public class NoticeController {
 			// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
 			System.out.println(writer);
 			ns.deleteQNA(writer, id);
-			return "redirect:/notice";
+			return "notice/noticeForm";				// 매핑 안 됨
 		} else {
 			return "redirect:/notice/detail/"+id;
 		}
 	}
 
-	
 	// 공지사항 세부 정보 마크다운 변환해서 요청
 	@GetMapping(value = "/notice/detail/{id}")
 	private String goNoticeDetail(Model model, @PathVariable("id") Integer id) {

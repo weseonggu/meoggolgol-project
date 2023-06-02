@@ -1,20 +1,20 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="parent" id="NoticeUploadContainer">
-	<!-- 공지사항 등록 화면 -->
-	<form th:action="@{/uploadnotice}" th:object="${noticeRequest}" method="POST">
+    <!-- 공지사항 등록 화면 -->
+    <form th:action="@{/uploadnotice}" th:object="${noticeRequest}" method="POST">
 
-		<div th:replace="~{form_errors :: formErrorsFragment}"></div>
-		<div class="noticeBox">
-			<label for="noticeTitle" class="form-label">제목</label> 
-			<input type="text" th:field="*{title}">
-		</div>
+        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+        <div class="noticeBox">
+            <label for="noticeTitle" class="form-label">제목</label>
+            <input type="text" th:field="*{title}">
+        </div>
 
-		<div class="NoticeBox">
-			<label class="form-label">내용</label> 
-			<input th:field="*{content}">
-		</div>
+        <div class="NoticeBox">
+            <label class="form-label">내용</label>
+            <textarea th:field="*{content}" rows="5"></textarea>
+        </div>
 
-		<button type="submit" class="btn btn-primary">등록하기</button>
-	</form>
+        <button type="submit" class="btn btn-primary">등록하기</button>
+    </form>
 </div>
 </html>

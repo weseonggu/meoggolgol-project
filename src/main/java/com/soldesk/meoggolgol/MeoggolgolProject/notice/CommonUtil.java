@@ -14,5 +14,12 @@ public class CommonUtil {
         HtmlRenderer renderer = HtmlRenderer.builder().build();
         return renderer.render(document);
     }
+	
+	public static String markdownToHtml(String markdownContent) {
+        Parser parser = Parser.builder().build();
+        Node document = parser.parse(markdownContent);
+        HtmlRenderer renderer = HtmlRenderer.builder().build();
+        return renderer.render(document);
+    }
 }
 
