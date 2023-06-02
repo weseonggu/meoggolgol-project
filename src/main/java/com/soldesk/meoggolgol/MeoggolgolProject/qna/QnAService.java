@@ -1,4 +1,4 @@
-package com.soldesk.meoggolgol.MeoggolgolProject.notice;
+package com.soldesk.meoggolgol.MeoggolgolProject.qna;
 
 import java.time.LocalDate;
 
@@ -10,24 +10,37 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class NoticeService {
+public class QnAService {
+	private final QnARepository qar;
 	
-	private final NoticeRepository nr;
-	
-	// 공지사항 저장하기
-	public void saveNotice(String writer, NoticeRequest noticeRequest, LocalDate regDate) {
-        nr.insertNotice(writer, noticeRequest, regDate);
-    }
-	
-	// notice 수정
-	public void updateNotice(String title, String content, LocalDate regDate, String writer, int num) {
-		nr.updateNotice(title, content, regDate, writer, num);
+	// qna 저장하기
+	public void saveQNA(String writer, QandA qandA, LocalDate regDate) {
+		qar.insertQnA(writer, qandA, regDate);
 	}
-	// notice 삭제
+	
+	// 댓글 저장
+	public void saveQNAReply(String writer, String qnAReply, LocalDate regDate, long qa_num) {
+		qar.InsertQnAReply(writer, qnAReply, regDate, qa_num);
+	}
+	
+	// qna 수정
+	public void updateQNA(String title, String content, LocalDate regDate, String writer, int num) {
+		qar.updateQna(title, content, regDate, writer, num);
+	}
+	// 댓글 수정
+	public void updateQNAReply(String comment, LocalDate regDate, String writer, int num) {
+		qar.updateQnaReply(comment, regDate, writer, num);
+	}
+	
+	// qna 삭제
 	public void deleteQNA(String writer, int num) {
-		nr.deleteNotice(writer, num);
+		qar.deleteQna(writer, num);
 	}
-	
+	// 댓글 삭제
+	public void deleteQNAReply(String writer, int num) {
+		qar.deleteQnaReply(writer, num);
+	}
+
 	public Pagination paging(int totalListCnt, int page) {
 		Pagination pagination = new Pagination();
 		// 현재 페이지

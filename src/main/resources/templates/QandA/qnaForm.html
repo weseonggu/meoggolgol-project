@@ -1,0 +1,60 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="parent" id="qnaContainer">
+<div class="container my-3">
+	<!-- 임시로 만든 공지사항 등록하기 버튼 -->
+	<a th:href="@{/uploadQNA}" class="btn btn-primary">등록하기</a>
+    <table class="table" id="noticeList">
+        <thead class="table-dark">
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일시</th>
+            </tr>
+        </thead>	
+        <tbody>
+            <tr th:each="qna : ${qnalist}">
+                <td th:text="${qna.qa_num}"></td>
+                <td>
+                    <a th:href="@{'/qna/detail/' + ${qna.qa_num}}" th:text="${qna.title}"></a>
+                </td>
+                <td th:text="${qna.writer}"></td>
+                <td th:text="${qna.reg_date}"></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <nav aria-label="Page navigation example">
+	  <ul class="pagination">
+	  <li class="page-item">
+	      <a class="page-link" th:href="@{?page=1}" aria-label="Previous">
+	        <span aria-hidden="true">처음</span>
+	      </a>
+	    </li>
+	    <li class="page-item">
+	      <a class="page-link" th:href="@{?page={page} (page = ${pagination.prevBlock})}" aria-label="Previous">
+	        <span aria-hidden="true">이전</span>
+	      </a>
+	    </li>
+	    <th:block  th:with="start = ${pagination.startPage}, end = ${pagination.endPage}">
+		    <li class="page-item" 
+		    		 th:with="start = ${pagination.startPage}, end = ${pagination.endPage}"
+		    		th:each="pageButton : ${#numbers.sequence(start, end)}">
+		    		<a class="page-link" th:href="@{?page={page} (page = ${pageButton})}" th:text=${pageButton}></a>
+		    </li>
+	    </th:block>
+	    <li class="page-item">
+	      <a class="page-link" th:href="@{?page={page} (page = ${pagination.nextBlock})}" aria-label="Next">
+	        <span aria-hidden="true">다음</span>
+	      </a>
+	    </li>
+	    <li class="page-item">
+	      <a class="page-link" th:href="@{?page={page} (page = ${pagination.totalPageCnt})}" aria-label="Previous">
+	        <span aria-hidden="true">끝</span>
+	      </a>
+	    </li>
+	  </ul>
+	</nav>
+    
+</div>
+</html>

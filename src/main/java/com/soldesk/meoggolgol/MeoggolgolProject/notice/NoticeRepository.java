@@ -23,20 +23,6 @@ public class NoticeRepository {
 			values(?,?,?,?);
 			""";
 
-	public void insertNotice(String writer, NoticeRequest noticerequest, LocalDate regDate) {
-		
-		// 작성자랑 등록일자 제대로 있는지 콘솔 출력
-		// System.out.println(writer);
-		// System.out.println(regDate);
-		
-		jdbc.update(INSERT_NOTICE,
-				writer,
-				noticerequest.getTitle(),
-				noticerequest.getContent(),
-				regDate
-		);
-	}
-	
 	private static String SELECT_NOTICE_detail=
 			"""
 			select * from notice where notice_num = ?
@@ -44,7 +30,7 @@ public class NoticeRepository {
 	
 	private static String SELECT_NOTICE_LIST=
 			"""
-			select * from notice order by REG_DATE limit ?, ?
+			select * from notice order by notice_num desc limit ?, ?
 			""";
 	
 	private static String NOTICE_TOTAL_COUNT=
@@ -52,6 +38,28 @@ public class NoticeRepository {
 			select count(*) from notice
 			""";
 
+	// notice 수정
+	private static String UPDATE_NOTICE=
+			"""
+				update notice set TITLE = ?, CONTENT = ?, REG_DATE = ? where WRITER = ? and notice_num = ?
+			""";
+	// notice 삭제
+	private static String DELETE_NOTICE=
+			"""
+				delete from notice where WRITER = ? and notice_num = ?
+			""";
+	
+	public void insertNotice(String writer, NoticeRequest noticerequest, LocalDate regDate) {
+		// 작성자랑 등록일자 제대로 있는지 콘솔 출력
+		// System.out.println(writer);
+		// System.out.println(regDate);
+		jdbc.update(INSERT_NOTICE,
+				writer,
+				noticerequest.getTitle(),
+				noticerequest.getContent(),
+				regDate
+				);
+	}
 	// 공지사항 세부 정보
 	// public List<Map<String,Object>> getNoticeDetailInfo(int notice_num){
 	// 	return jdbc.queryForList(SELECT_NOTICE_detail, notice_num);
@@ -70,5 +78,15 @@ public class NoticeRepository {
 	public int getTotalCount(){
 		return jdbc.queryForObject(NOTICE_TOTAL_COUNT, Integer.class);
 
+	}
+	
+	// Q&A 수정
+	public void updateNotice(String title, String content, LocalDate regDate, String writer, int num) {
+		jdbc.update(UPDATE_NOTICE, title, content, regDate, writer, num);
+	}
+	
+	// Q&A 삭제
+	public void deleteNotice(String writer,int num) {
+		jdbc.update(DELETE_NOTICE, writer, num);
 	}
 }
