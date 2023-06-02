@@ -45,7 +45,12 @@ public class QnARepository {
 	// QnA 댓글 저체 리스트
 	private static String SELECT_QANDA_DETAIL_REPLY=
 			"""
-			select * from QandA_reply where qa_num = ? order by REG_DATE desc
+			select * from QandA_reply where qa_num = ? order by COMMENT desc
+			""";
+	// QnA 세부 정보
+	private static String SELECT_QANDA_REPLY=
+			"""
+			select * from QandA_reply where comment_num = ?
 			""";
 	
 	// Q&A 수정
@@ -97,6 +102,11 @@ public class QnARepository {
 	// Q&A 세부 정보
 	public List<Map<String,Object>> getQNADetailInfo(int qna_num){
 		return jdbc.queryForList(SELECT_QANDA_DETAIL, qna_num);
+	}
+
+	// Q&A 댓글 세부 정보
+	public List<Map<String,Object>> getQNAReplyInfo(int comment_num){
+		return jdbc.queryForList(SELECT_QANDA_DETAIL, comment_num);
 	}
 	
 	// Q&A 페이징

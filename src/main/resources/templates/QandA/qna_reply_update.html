@@ -1,0 +1,16 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="parent" id="qnaUploadContainer">
+	<!-- qna 수정 화면 -->
+	<form th:action="|@{'/qna/reply/update/' +${q_id}+ '/' + ${r_id}}|" th:object="${qnAReply}" method="POST">
+
+		<div th:replace="~{form_errors :: formErrorsFragment}"></div>
+
+		<div class="NoticeBox">
+			<label class="form-label">내용</label>
+			<textarea name="comment" th:field="*{comment}" th.text="dfasfdas"></textarea>
+		</div>
+
+		<button type="submit" class="btn btn-primary">수정하기</button>
+	</form>
+</div>
+</html>

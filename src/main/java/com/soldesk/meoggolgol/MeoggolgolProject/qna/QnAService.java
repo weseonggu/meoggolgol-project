@@ -27,10 +27,18 @@ public class QnAService {
 	public void updateQNA(String title, String content, LocalDate regDate, String writer, int num) {
 		qar.updateQna(title, content, regDate, writer, num);
 	}
-
+	// 댓글 수정
+	public void updateQNAReply(String comment, LocalDate regDate, String writer, int num) {
+		qar.updateQnaReply(comment, regDate, writer, num);
+	}
+	
 	// qna 삭제
 	public void deleteQNA(String writer, int num) {
 		qar.deleteQna(writer, num);
+	}
+	// 댓글 삭제
+	public void deleteQNAReply(String writer, int num) {
+		qar.deleteQnaReply(writer, num);
 	}
 
 	public Pagination paging(int totalListCnt, int page) {

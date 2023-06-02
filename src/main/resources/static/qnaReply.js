@@ -9,5 +9,3 @@ function deleteqna(){
 	location.href="/qna/detail/" + id + "/delete";
 }
 
-function deleteQnaReply(){
-}

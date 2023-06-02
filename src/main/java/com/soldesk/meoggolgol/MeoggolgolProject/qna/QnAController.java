@@ -41,22 +41,24 @@ public class QnAController {
 		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
 		// 세션 값 콘솔 확인
 		System.out.println(membersignin);
-		// 세션 값 중 member_nickname 가져오기
-		String writer = membersignin.getMember_nickname();
-		// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
-		System.out.println(writer);
-		// 등록일자는 현재 날짜로 설정
-		LocalDate regDate = LocalDate.now();
-		// 등록일자 제대로 들어왔는지 콘솔 확인
-		// System.out.println(regDate);
-		// NoticeService를 사용하여 공지사항 저장
-	    qas.saveQNA(writer, qandA, regDate);
-	    // 콘솔에 저장된 공지사항 출력        
-	    System.out.println("번호: " + qandA.getQa_num());
-	    System.out.println("제목: " + qandA.getTitle());
-	    System.out.println("내용: " + qandA.getContent());
-	    System.out.println("작성자: " + writer);
-	    System.out.println("등록일자: " + regDate);
+		if (membersignin != null) {
+			// 세션 값 중 member_nickname 가져오기
+			String writer = membersignin.getMember_nickname();
+			// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
+			System.out.println(writer);
+			// 등록일자는 현재 날짜로 설정
+			LocalDate regDate = LocalDate.now();
+			// 등록일자 제대로 들어왔는지 콘솔 확인
+			// System.out.println(regDate);
+			// NoticeService를 사용하여 공지사항 저장
+			qas.saveQNA(writer, qandA, regDate);
+			// 콘솔에 저장된 공지사항 출력        
+			System.out.println("번호: " + qandA.getQa_num());
+			System.out.println("제목: " + qandA.getTitle());
+			System.out.println("내용: " + qandA.getContent());
+			System.out.println("작성자: " + writer);
+			System.out.println("등록일자: " + regDate);
+		}
 			
 		return "redirect:/qna";
 	}
@@ -94,17 +96,19 @@ public class QnAController {
 		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
 		// 세션 값 콘솔 확인
 		System.out.println(membersignin);
-		// 세션 값 중 member_nickname 가져오기
-		String writer = membersignin.getMember_nickname();
-		// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
-		System.out.println(writer);
-		// 등록일자는 현재 날짜로 설정
-		LocalDate regDate = LocalDate.now();
-		qas.saveQNAReply(writer, content, regDate, id);
+		if (membersignin != null) {
+			// 세션 값 중 member_nickname 가져오기
+			String writer = membersignin.getMember_nickname();
+			// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
+			System.out.println(writer);
+			// 등록일자는 현재 날짜로 설정
+			LocalDate regDate = LocalDate.now();
+			qas.saveQNAReply(writer, content, regDate, id);
+		}
 		return "redirect:/qna/detail/"+id;
 	}
 	
-	// qna 등록 페이지 요청
+	// qna 수정 페이지 요청
 	@GetMapping(value = "/qna/detail/update/{id}")
 	private String updateQNA(QandA qandA, Model model,@PathVariable("id") Integer id) {
 		model.addAttribute("qna", qar.getQNADetailInfo(id));
@@ -119,13 +123,42 @@ public class QnAController {
 		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
 		// 세션 값 콘솔 확인
 		System.out.println(membersignin);
-		// 세션 값 중 member_nickname 가져오기
-		String writer = membersignin.getMember_nickname();
-		// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
-		System.out.println(writer);
-		LocalDate regDate = LocalDate.now();
-		qas.updateQNA(title, content, regDate, writer, id);
+		if (membersignin != null) {
+			// 세션 값 중 member_nickname 가져오기
+			String writer = membersignin.getMember_nickname();
+			// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
+			System.out.println(writer);
+			LocalDate regDate = LocalDate.now();
+			qas.updateQNA(title, content, regDate, writer, id);
+		}
 		return "redirect:/qna/detail/"+id;
+	}
+	
+	// 댓글 수정 페이지 요청
+	@GetMapping(value = "/qna/reply/detail/update/{qna_id}/{reply_id}")
+	private String updateQNA(QnAReply qnAReply, Model model,@PathVariable("qna_id") Integer qna_id, @PathVariable("reply_id") Integer r_id) {
+		model.addAttribute("qnaReply", qar.getQNAReplyInfo(r_id));
+		model.addAttribute("q_id", qna_id);
+		model.addAttribute("r_id", r_id);
+		return "QandA/qna_reply_update";
+		}
+	
+	// 댓글 수정
+	@PostMapping(value = "/qna/reply/update/{qna_id}/{reply_id}")
+	private String updateQnaReply(@PathVariable("qna_id") Integer qna_id, @PathVariable("reply_id") Integer r_id,@RequestParam("comment") String comment, HttpServletRequest httpservletrequest)throws Exception {
+		HttpSession session = httpservletrequest.getSession();
+		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
+		// 세션 값 콘솔 확인
+		System.out.println(membersignin);
+		if (membersignin != null) {
+			// 세션 값 중 member_nickname 가져오기
+			String writer = membersignin.getMember_nickname();
+			// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
+			System.out.println(writer);
+			LocalDate regDate = LocalDate.now();
+			qas.updateQNAReply(comment, regDate, writer, r_id);
+		}
+		return "redirect:/qna/detail/" + qna_id;
 	}
 	
 	// qna 삭제
@@ -135,13 +168,32 @@ public class QnAController {
 		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
 		// 세션 값 콘솔 확인
 		System.out.println(membersignin);
-		// 세션 값 중 member_nickname 가져오기
-		String writer = membersignin.getMember_nickname();
-		// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
-		System.out.println(writer);
-		qas.deleteQNA(writer, id);
-		return "redirect:/qna";
+		if (membersignin != null) {
+			// 세션 값 중 member_nickname 가져오기
+			String writer = membersignin.getMember_nickname();
+			// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
+			System.out.println(writer);
+			qas.deleteQNA(writer, id);
+			return "redirect:/qna";
+		}
+		return "redirect:/qna/detail/" + id;
 	}
 	
-	
+	// qna 댓글 삭제
+	@GetMapping(value = "/qnaReply/detail/{qna_id}/{reply_id}/delete")
+	private String deleteQnaReply(@PathVariable("qna_id") Integer qna_id, @PathVariable("reply_id") Integer r_id, HttpServletRequest httpservletrequest)throws Exception {
+		HttpSession session = httpservletrequest.getSession();
+		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
+		// 세션 값 콘솔 확인
+		System.out.println(membersignin);
+		if (membersignin != null) {
+			// 세션 값 중 member_nickname 가져오기
+			String writer = membersignin.getMember_nickname();
+			// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
+			System.out.println(writer);
+			qas.deleteQNAReply(writer, r_id);
+			System.out.println(r_id);
+		}
+		return "redirect:/qna/detail/"+qna_id;
+	}
 }

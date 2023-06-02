@@ -24,12 +24,13 @@
 	</div>
     <table class="table" id="noticeList">
 	    <tr th:each="reply : ${qnaReply}">
-	        <td th:text="${reply.comment_num}"></td>
+	        <td th:id="r_num" th:text="${reply.comment_num}"></td>
 	        <td th:text="${reply.writer}"></td>
 	        <td th:text="${reply.comment}"></td>
 	        <td th:text="${reply.reg_date}"></td>
-	        <td th:text="${reply.qa_num}"></td>
-	        <button class="btn btn-danger" onclick="deleteQnaReply();">삭제</button>
+	        <td th:id="r_qa_num" th:text="${reply.qa_num}"></td>
+	        <td><a class="btn btn-primary" th:href="@{'/qna/reply/detail/update/' + ${reply.qa_num} + '/' + ${reply.comment_num}}" th:text="수정"></a>
+	        <a class="btn btn-danger" th:href="@{'/qnaReply/detail/' + ${reply.qa_num} + '/' + ${reply.comment_num} + '/delete'}" th:text="삭제"></a></td>
 	    </tr>
     </table>
 </div>
