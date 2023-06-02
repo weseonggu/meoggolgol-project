@@ -2,6 +2,9 @@ package com.soldesk.meoggolgol.MeoggolgolProject.notice;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -108,10 +111,26 @@ public class NoticeController {
 	}
 	
 	// 공지사항 상세 페이지 요청
-	@GetMapping(value = "/notice/detail/{id}")
-	private String goNoticedtail(Model model,@PathVariable("id") Integer id) {
-		model.addAttribute("noticeDetailList", noReposi.getNoticeDetailInfo(id));
-		return "notice_detail";
-	}
+	// @GetMapping(value = "/notice/detail/{id}/view")
+	// private String goNoticedtail(Model model,@PathVariable("id") Integer id) {
+	//  model.addAttribute("noticeDetailList", noReposi.getNoticeDetailInfo(id));
+	//	return "notice_detail";
+	// }
 	
+	// 공지사항 세부 정보 마크다운 변환해서 요청
+	@GetMapping(value = "/notice/detail/{id}")
+	private String goNoticeDetail(Model model, @PathVariable("id") Integer id) {
+	    Map<String, Object> noticeDetail = noReposi.getNoticeDetail(id);
+	    if (noticeDetail != null) {
+	        String content = noticeDetail.get("CONTENT").toString();
+	        NoticeResponse noticeResponse = new NoticeResponse();
+	        noticeResponse.setContent(content);
+	        String renderedContent = CommonUtil.markdown(noticeResponse);
+	        noticeDetail.put("renderedContent", renderedContent);
+	        model.addAttribute("noticeDetail", noticeDetail);
+	        return "notice_detail";
+	    } else {
+	        return "noticeForm";
+	    }
+	}
 }

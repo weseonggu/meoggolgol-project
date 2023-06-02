@@ -6,13 +6,13 @@ import org.commonmark.renderer.html.HtmlRenderer;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CommonUtill {
+public class CommonUtil {
 	
-	public String markdown(String markdown) {
+	public static String markdown(NoticeResponse notice) {
         Parser parser = Parser.builder().build();
-        Node document = parser.parse(markdown);
+        Node document = parser.parse(notice.getContent());
         HtmlRenderer renderer = HtmlRenderer.builder().build();
         return renderer.render(document);
     }
-
 }
+

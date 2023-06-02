@@ -1,14 +1,20 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="parent" id="NoticeContainer">
-    <table class="table" id="noticeList">
-	    <tr th:each="notice : ${noticeDetailList}">
-	        <td th:text="${notice.notice_num}"></td>
-	        <td th:text="${notice.writer}"></td>
-	        <td th:text="${notice.title}"></td>
-	        <td th:text="${notice.content}"></td>
-	        <td th:text="${notice.reg_date}"></td>
-	    </tr>
-    </table>
-	<a th:href="@{/uploadnotice}" class="btn btn-primary">등록하기</a>
-</div>
-</html>
+<!--    <table class="table" id="noticeList">
+    <tr th:each="notice : ${noticeDetailList}">
+        <td th:text="${notice.notice_num}"></td>
+        <td th:text="${notice.writer}"></td>
+        <td th:text="${notice.title}"></td>
+        <td th:text="${notice.content}"></td>
+        <td th:text="${notice.reg_date}"></td>
+    </tr>
+   </table> -->
+   
+	<div id="noticeList">
+    	<h1 th:text="${noticeDetail.TITLE}"></h1>
+    	<div th:utext="${noticeDetail.renderedContent}"></div>
+    	<p>작성자: <span th:text="${noticeDetail.WRITER}"></span></p>
+    	<p>날짜: <span th:text="${noticeDetail.REG_DATE}"></span></p>
+	</div>
+
+
