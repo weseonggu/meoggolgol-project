@@ -41,8 +41,15 @@ $(function() {
 	circle.setMap(map);
 
 	// 식당 커드
-	getRestaurantInfo(lo, la, page);
-
+//	getRestaurantInfo(lo, la, page);
+	getRestaurantInfo(lo, la, page)
+	  .then(function(result) {
+	    // 결과 처리
+		  changeImg(result);
+	  })
+	  .catch(function(error) {
+	    // 오류 처리
+	  });	
 
 	// 페이지가 로드될 때 카드의 요소를 확인해서 해당하는 카테고리가 있는지 확인하여 해당하는 카테고리가 있다면 버튼을 보이게 해준다.
 	var restaurantCards = document.getElementsByClassName("restaurant-card");
@@ -62,12 +69,20 @@ $(function() {
 			}
 		}
 	}
-
+	// 다음 식당 정보
 	$("#next").click(function() {
 		$("#restaurantListBox").empty();
 		page += 1;
-		getRestaurantInfo(lo, la, page);
+		getRestaurantInfo(lo, la, page)
+		  .then(function(result) {
+		    // 결과 처리
+			  changeImg(result);
+		  })
+		  .catch(function(error) {
+		    // 오류 처리
+		  });	
 	});
+	// 이전 식당 정보
 	$("#before").click(function() {
 		if (page == 1) {
 			return
@@ -75,7 +90,14 @@ $(function() {
 		else {
 			$("#restaurantListBox").empty();
 			page -= 1
-			getRestaurantInfo(lo, la, page);
+			getRestaurantInfo(lo, la, page)
+			  .then(function(result) {
+			    // 결과 처리
+				  changeImg(result);
+			  })
+			  .catch(function(error) {
+			    // 오류 처리
+			  });	
 		}
 	});
 
@@ -93,24 +115,48 @@ $(function() {
 
 // 식당 카드 만들기 ajax로 호출
 function getRestaurantInfo(lo, la, page) {
-	$.getJSON("restaurantInfo?la=" + la + "&lo=" + lo + "&page=" + page, function(data) {
-		var id = new Array();
-		var url = new Array();
-		$.each(data, function(i) {
-			var card = $("<div></div>").attr("id", data[i].id).attr("class", "restaurant-card").attr("lo", data[i].x).attr("la", data[i].y).append(
-				$("<img>").attr("src", "/loading.png").addClass("restaurant-image"),
-				$("<p></p>").text(data[i].place_name).addClass("restaurant-name"),
-				$("<p></p>").text(data[i].road_address_name).addClass("restaurant-address"),
-				$("<p></p>").text(data[i].phone),
-				$("<input>").attr("type", "hidden").val(data[i].place_url).addClass("restaurant-url"),
-				$("<input>").attr("type", "hidden").val(data[i].category_name)
-			);
-			$("#restaurantListBox").append(card);
-			id[i] = data[i].id;
-			url[i] = data[i].place_url;
-		});
-		changeImg(id, url);
-	});
+	  return new Promise(function(resolve, reject) {
+	    $.getJSON("restaurantInfo?la=" + la + "&lo=" + lo + "&page=" + page, function(data) {
+	      var id = [];
+	      var url = [];
+	      $.each(data, function(i) {
+	        var card = $("<div></div>").attr("id", data[i].id).attr("class", "restaurant-card").attr("lo", data[i].x).attr("la", data[i].y).append(
+	          $("<img>").attr("src", "/loading.png").addClass("restaurant-image"),
+	          $("<p></p>").text(data[i].place_name).addClass("restaurant-name"),
+	          $("<p></p>").text(data[i].road_address_name).addClass("restaurant-address"),
+	          $("<p></p>").text(data[i].phone),
+	          $("<input>").attr("type", "hidden").val(data[i].place_url).addClass("restaurant-url"),
+	          $("<input>").attr("type", "hidden").val(data[i].category_name)
+	        );
+	        $("#restaurantListBox").append(card);
+	        id[i] = data[i].id;
+	        url[i] = data[i].place_url;
+	      });
+
+	      resolve({
+	        "id": id,
+	        "url": url
+	      });
+	    }).fail(function(error) {
+	      reject(error);
+	    });
+	  });
+	}
+
+// 이미지 바꾸기
+function changeImg(result) {
+	
+	for (var y = 0; y < result.url.length; y++) {
+		$.getJSON("restaurantCardImg?url=" + result.url[y]+"&id="+result.id[y], function(data)
+				{
+			if(data.url == "error"){
+				y=y-1;
+			}
+			else{
+				$("#"+data.id+" img").attr("src",data.url);
+			}
+				});
+	}
 }
 
 function filterRestaurantsByCategory(category) {
@@ -139,42 +185,5 @@ function isIncludedInCategories(category) {
 	return false;
 }
 
-function changeImg(id, urlList) {
-
- for (var y = 0; y < urlList.length; y++) {
- $.getJSON("restaurantCardImg?url=" + urlList[y]+"&id="+id[y], function(data)
- {
- // console.log(data.url);
- if(data.url == "error"){
- // console.log("다시");
- y=y-1;
- }
- else{
- $("#"+data.id+" img").attr("src",data.url);
- }
- });
- }
- }
-// function changeImg(id, urlList){
-// var urlJson = {
-// "id":id,
-// "urlList":urlList
-// }
-// $.ajax({
-// type : 'get',
-// url : "restaurantCardImg",
-// dataType : "json",
-// async: false,
-// data : urlJson,
-// error: function(xhr, status, error){
-// // 실패했을 때 처리
-// },
-// success : function(data){
-// $.each(data,function(i){
-// $("#"+data[i].id+" img").attr("src",data[i].url);
-// })
-// }
-// });
-// }
 
 
