@@ -17,6 +17,37 @@ public class QnAService {
 	public void saveQNA(String writer, QandA qandA, LocalDate regDate) {
 		qar.insertQnA(writer, qandA, regDate);
 	}
+	// qna 작성자 가져오기
+	public String getQNAWriter(int num) {
+		QandA qandA = new QandA();
+		qandA.setWriter(qar.getQNADetailInfo(num).get(0).get("WRITER").toString());
+		return qandA.getWriter();
+	}
+	// qna 제목 가져오기
+	public String getQNATitle(int num) {
+		QandA qandA = new QandA();
+		qandA.setTitle(qar.getQNADetailInfo(num).get(0).get("TITLE").toString());
+		return qandA.getTitle();
+	}
+	// qna 내용 가져오기
+	public String getQNAContent(int num) {
+		QandA qandA = new QandA();
+		qandA.setContent(qar.getQNADetailInfo(num).get(0).get("CONTENT").toString());
+		return qandA.getContent();
+	}
+	
+	// qna 댓글 작성자 가져오기
+	public String getQNAReplyWriter(int num) {
+		QnAReply qnAReply = new QnAReply();
+		qnAReply.setWriter(qar.getQNAReplyInfo(num).get(0).get("WRITER").toString());
+		return qnAReply.getWriter();
+	}
+	// qna 댓글 내용 가져오기
+	public String getQNAReplyComment(int num) {
+		QnAReply qnAReply = new QnAReply();
+		qnAReply.setComment(qar.getQNAReplyInfo(num).get(0).get("COMMENT").toString());
+		return qnAReply.getComment();
+	}
 	
 	// 댓글 저장
 	public void saveQNAReply(String writer, String qnAReply, LocalDate regDate, long qa_num) {

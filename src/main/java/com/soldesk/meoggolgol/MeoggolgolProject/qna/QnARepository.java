@@ -47,7 +47,7 @@ public class QnARepository {
 			"""
 			select * from QandA_reply where qa_num = ? order by COMMENT desc
 			""";
-	// QnA 세부 정보
+	// 댓글 세부 정보
 	private static String SELECT_QANDA_REPLY=
 			"""
 			select * from QandA_reply where comment_num = ?
@@ -106,7 +106,7 @@ public class QnARepository {
 
 	// Q&A 댓글 세부 정보
 	public List<Map<String,Object>> getQNAReplyInfo(int comment_num){
-		return jdbc.queryForList(SELECT_QANDA_DETAIL, comment_num);
+		return jdbc.queryForList(SELECT_QANDA_REPLY, comment_num);
 	}
 	
 	// Q&A 페이징
@@ -118,8 +118,8 @@ public class QnARepository {
 		return jdbc.queryForObject(QANDA_TOTAL_COUNT, Integer.class);
 	}
 	// Q&A 댓글
-	public List<Map<String,Object>> getQNADetailReply(int comment_num){
-		return jdbc.queryForList(SELECT_QANDA_DETAIL_REPLY, comment_num);
+	public List<Map<String,Object>> getQNADetailReply(int qa_num){
+		return jdbc.queryForList(SELECT_QANDA_DETAIL_REPLY, qa_num);
 	}
 	
 	// Q&A 수정

@@ -48,9 +48,6 @@ public class QnAController {
 			System.out.println(writer);
 			// 등록일자는 현재 날짜로 설정
 			LocalDate regDate = LocalDate.now();
-			// 등록일자 제대로 들어왔는지 콘솔 확인
-			// System.out.println(regDate);
-			// NoticeService를 사용하여 공지사항 저장
 			qas.saveQNA(writer, qandA, regDate);
 			// 콘솔에 저장된 공지사항 출력        
 			System.out.println("번호: " + qandA.getQa_num());
@@ -79,7 +76,7 @@ public class QnAController {
 		model.addAttribute("qnalist", qar.getQNAInfo(start, size));
 		return "QandA/qnaForm";
 	}
-	
+	// qna 상세 정보
 	@GetMapping(value = "/qna/detail/{id}")
 	private String goQNAdtail(Model model,@PathVariable("id") Integer id) {
 		System.out.println(id);
@@ -111,7 +108,8 @@ public class QnAController {
 	// qna 수정 페이지 요청
 	@GetMapping(value = "/qna/detail/update/{id}")
 	private String updateQNA(QandA qandA, Model model,@PathVariable("id") Integer id) {
-		model.addAttribute("qna", qar.getQNADetailInfo(id));
+		model.addAttribute("title", qas.getQNATitle(id));
+		model.addAttribute("content", qas.getQNAContent(id));
 		model.addAttribute("id", id);
 		return "QandA/qna_update";
 	}
@@ -129,7 +127,9 @@ public class QnAController {
 			// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
 			System.out.println(writer);
 			LocalDate regDate = LocalDate.now();
-			qas.updateQNA(title, content, regDate, writer, id);
+			if (writer.equals(qas.getQNAWriter(id))) {
+				qas.updateQNA(title, content, regDate, writer, id);
+			}
 		}
 		return "redirect:/qna/detail/"+id;
 	}
@@ -137,7 +137,7 @@ public class QnAController {
 	// 댓글 수정 페이지 요청
 	@GetMapping(value = "/qna/reply/detail/update/{qna_id}/{reply_id}")
 	private String updateQNA(QnAReply qnAReply, Model model,@PathVariable("qna_id") Integer qna_id, @PathVariable("reply_id") Integer r_id) {
-		model.addAttribute("qnaReply", qar.getQNAReplyInfo(r_id));
+		model.addAttribute("comment", qas.getQNAReplyComment(r_id));
 		model.addAttribute("q_id", qna_id);
 		model.addAttribute("r_id", r_id);
 		return "QandA/qna_reply_update";
@@ -156,6 +156,9 @@ public class QnAController {
 			// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
 			System.out.println(writer);
 			LocalDate regDate = LocalDate.now();
+			if (writer.equals(qas.getQNAReplyWriter(r_id))) {
+				
+			}
 			qas.updateQNAReply(comment, regDate, writer, r_id);
 		}
 		return "redirect:/qna/detail/" + qna_id;
@@ -173,8 +176,10 @@ public class QnAController {
 			String writer = membersignin.getMember_nickname();
 			// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
 			System.out.println(writer);
-			qas.deleteQNA(writer, id);
-			return "redirect:/qna";
+			if (writer.equals(qas.getQNAWriter(id))) {
+				qas.deleteQNA(writer, id);
+				return "redirect:/qna";
+			}
 		}
 		return "redirect:/qna/detail/" + id;
 	}
@@ -191,8 +196,9 @@ public class QnAController {
 			String writer = membersignin.getMember_nickname();
 			// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
 			System.out.println(writer);
-			qas.deleteQNAReply(writer, r_id);
-			System.out.println(r_id);
+			if (writer.equals(qas.getQNAReplyWriter(r_id))) {
+				qas.deleteQNAReply(writer, r_id);
+			}
 		}
 		return "redirect:/qna/detail/"+qna_id;
 	}
