@@ -2,19 +2,14 @@
 <div layout:fragment="content" class="parent" id="NoticeContainer">
     <table class="table" id="noticeList">
 	    <tr th:each="notice : ${noticeDetailList}">
-	        <td th:text="${notice.notice_num}"></td>
+	        <td id="notice_num" th:text="${notice.notice_num}"></td>
 	        <td th:text="${notice.writer}"></td>
 	        <td th:text="${notice.title}"></td>
 	        <td th:text="${notice.content}"></td>
 	        <td th:text="${notice.reg_date}"></td>
+		    <a class="btn btn-primary" th:href="@{'/notice/detail/update/' + ${notice.notice_num}}" th:text="수정"></a>
+			<button id="noticedelete" class="btn btn-danger" onclick="deleteNotice();">삭제</button>
 	    </tr>
     </table>
-    <div id="noticeComment"></div>
-    <form action="/notice/detail/{id}" style="text_align: center;" method="get">
-    	<textarea rows="2.5" cols="70"></textarea>
-    	<input type="submit" value="등록">
-    	<input type="submit" value="수정">
-    	<input type="submit" value="삭제">
-    </form>
 </div>
 </html>

@@ -1,7 +1,6 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.notice;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.soldesk.meoggolgol.MeoggolgolProject.notice.paging.Pagination;
-
 import com.soldesk.meoggolgol.MeoggolgolProject.Member.MemberSignIn;
+import com.soldesk.meoggolgol.MeoggolgolProject.notice.paging.Pagination;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -30,7 +28,7 @@ public class NoticeController {
 	// 공지사항 등록 페이지 요청
 	@GetMapping("/uploadnotice")
 	private String goRegNotice(NoticeRequest noticerequest) {
-		return "noticeUploadForm";
+		return "notice/noticeUploadForm";
 	}
 	
 	// 공지사항 등록 요청
@@ -46,19 +44,30 @@ public class NoticeController {
 		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
 
 		// 세션 값 콘솔 확인
-		
-		// 세션 값 중 member_nickname 가져오기
-		String writer = membersignin.getMember_nickname();
-		
-
-		// 등록일자는 현재 날짜로 설정
-		LocalDate regDate = LocalDate.now();
-		
-
-		// NoticeService를 사용하여 공지사항 저장
-        ns.saveNotice(writer, notierequest, regDate);
-        
-		
+		System.out.println(membersignin);
+		if (membersignin != null) {
+			// 세션 값 중 member_nickname 가져오기
+			String writer = membersignin.getMember_nickname();
+			
+			// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
+			System.out.println(writer);
+			
+			// 등록일자는 현재 날짜로 설정
+			LocalDate regDate = LocalDate.now();
+			
+			// 등록일자 제대로 들어왔는지 콘솔 확인
+			// System.out.println(regDate);
+			
+			// NoticeService를 사용하여 공지사항 저장
+			ns.saveNotice(writer, notierequest, regDate);
+			
+			// 콘솔에 저장된 공지사항 출력        
+			System.out.println("번호: " + notierequest.getNotice_num());
+			System.out.println("제목: " + notierequest.getTitle());
+			System.out.println("내용: " + notierequest.getContent());
+			System.out.println("작성자: " + writer);
+			System.out.println("등록일자: " + regDate);
+		}
 		return "redirect:/notice";
 	}
 	
@@ -73,18 +82,63 @@ public class NoticeController {
 		if (page == 1) {
 			start = pagination.getStartPage() - 1;
 		}else {
-			start = pagination.getStartPage() - 1 + pagination.getPageSize() * (page -1);
+			start = pagination.getPageSize() * (page -1);
 		}
 		model.addAttribute("pagination", pagination);
 		model.addAttribute("noticelist", noReposi.getNoticeInfo(start, size));
-		return "noticeForm";
+		return "notice/noticeForm";
 	}
 	
 	// 공지사항 상세 페이지 요청
 	@GetMapping(value = "/notice/detail/{id}")
 	private String goNoticedtail(Model model,@PathVariable("id") Integer id) {
 		model.addAttribute("noticeDetailList", noReposi.getNoticeDetailInfo(id));
-		return "notice_detail";
+		return "notice/notice_detail";
+	}
+	
+	// 공지사항 수정 페이지 요청
+	@GetMapping(value = "/notice/detail/update/{id}")
+	private String updateQNA(NoticeRequest notierequest, Model model,@PathVariable("id") Integer id) {
+		model.addAttribute("notice", noReposi.getNoticeDetailInfo(id));
+		model.addAttribute("id", id);
+		return "notice/notice_update";
+	}
+	
+	// 공지사항 수정
+	@PostMapping(value = "/notice/update/{id}")
+	private String updateQna(@PathVariable("id") Integer id, @RequestParam("title") String title, @RequestParam("content") String content, HttpServletRequest httpservletrequest)throws Exception {
+		HttpSession session = httpservletrequest.getSession();
+		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
+		// 세션 값 콘솔 확인
+		System.out.println(membersignin);
+		if (membersignin != null) {
+			// 세션 값 중 member_nickname 가져오기
+			String writer = membersignin.getMember_nickname();
+			// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
+			System.out.println(writer);
+			LocalDate regDate = LocalDate.now();
+			ns.updateNotice(title, content, regDate, writer, id);
+		}
+		return "redirect:/notice/detail/"+id;
+	}
+	
+	// notice 삭제
+	@GetMapping(value = "/notice/detail/{id}/delete")
+	private String deleteQna(@PathVariable("id") Integer id, HttpServletRequest httpservletrequest)throws Exception {
+		HttpSession session = httpservletrequest.getSession();
+		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
+		// 세션 값 콘솔 확인
+		System.out.println(membersignin);
+		// 세션 값 중 member_nickname 가져오기
+		if (membersignin != null) {
+			String writer = membersignin.getMember_nickname();
+			// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
+			System.out.println(writer);
+			ns.deleteQNA(writer, id);
+			return "redirect:/notice";
+		} else {
+			return "redirect:/notice/detail/"+id;
+		}
 	}
 	
 }

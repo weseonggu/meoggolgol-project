@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Pagination {
 	// 페이지 당 보여지는 게시글의 최대 개수
-	private int pageSize = 15;
+	private int pageSize = 20;
 	// 페이징된 버튼의 블럭당 최대 개수
 	private int blockSize = 5;
 	// 현재 페이지

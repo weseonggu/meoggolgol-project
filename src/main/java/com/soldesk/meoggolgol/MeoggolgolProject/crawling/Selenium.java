@@ -37,7 +37,6 @@ public class Selenium {
 	        driver = new ChromeDriver(options);
 	}
 
-	// 사이트에서 이미지 url 이미지 가지고 오기
 	public String getImageURL(String url) throws Exception {
 	    Duration duration = Duration.ofSeconds(10);
 

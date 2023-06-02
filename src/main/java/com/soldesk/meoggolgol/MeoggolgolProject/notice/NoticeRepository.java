@@ -22,7 +22,6 @@ public class NoticeRepository {
 			(WRITER, TITLE, CONTENT, REG_DATE)
 			values(?,?,?,?);
 			""";
-	
 	private static String SELECT_NOTICE_detail=
 			"""
 			select * from notice where notice_num = ?
@@ -37,8 +36,19 @@ public class NoticeRepository {
 			"""
 			select count(*) from notice
 			""";
+
+	// notice 수정
+	private static String UPDATE_NOTICE=
+			"""
+				update notice set TITLE = ?, CONTENT = ?, REG_DATE = ? where WRITER = ? and notice_num = ?
+			""";
+	// notice 삭제
+	private static String DELETE_NOTICE=
+			"""
+				delete from notice where WRITER = ? and notice_num = ?
+			""";
+	
 	public void insertNotice(String writer, NoticeRequest noticerequest, LocalDate regDate) {
-		
 		jdbc.update(INSERT_NOTICE,
 				writer,
 				noticerequest.getTitle(),
@@ -46,7 +56,6 @@ public class NoticeRepository {
 				regDate
 				);
 	}
-
 	// 공지사항 세부 정보
 	public List<Map<String,Object>> getNoticeDetailInfo(int notice_num){
 		return jdbc.queryForList(SELECT_NOTICE_detail, notice_num);
@@ -61,5 +70,15 @@ public class NoticeRepository {
 	public int getTotalCount(){
 		return jdbc.queryForObject(NOTICE_TOTAL_COUNT, Integer.class);
 
+	}
+	
+	// Q&A 수정
+	public void updateNotice(String title, String content, LocalDate regDate, String writer, int num) {
+		jdbc.update(UPDATE_NOTICE, title, content, regDate, writer, num);
+	}
+	
+	// Q&A 삭제
+	public void deleteNotice(String writer,int num) {
+		jdbc.update(DELETE_NOTICE, writer, num);
 	}
 }
