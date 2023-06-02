@@ -7,8 +7,10 @@
 	        <td th:text="${qna.title}"></td>
 	        <td th:text="${qna.content}"></td>
 	        <td th:text="${qna.reg_date}"></td>
-	        <a class="btn btn-primary" th:href="@{'/qna/detail/update/' + ${qna.qa_num}}" th:text="수정"></a>
-		    <button id="qnadelete" class="btn btn-danger" onclick="deleteqna();">삭제</button>
+	        <td th:if="${session.member_info != null}">
+		        <a th:if="${session.member_info.member_nickname == qna.writer}" class="btn btn-primary" th:href="@{'/qna/detail/update/' + ${qna.qa_num}}" th:text="수정"></a>
+			    <button th:if="${session.member_info.member_nickname == qna.writer}" id="qnadelete" class="btn btn-danger" onclick="deleteqna();">삭제</button>
+		    </td>
 	    </tr>
     </table>
 	<div class="card my-4">
@@ -29,8 +31,10 @@
 	        <td th:text="${reply.comment}"></td>
 	        <td th:text="${reply.reg_date}"></td>
 	        <td th:id="r_qa_num" th:text="${reply.qa_num}"></td>
-	        <td><a class="btn btn-primary" th:href="@{'/qna/reply/detail/update/' + ${reply.qa_num} + '/' + ${reply.comment_num}}" th:text="수정"></a>
-	        <a class="btn btn-danger" th:href="@{'/qnaReply/detail/' + ${reply.qa_num} + '/' + ${reply.comment_num} + '/delete'}" th:text="삭제"></a></td>
+	        <td th:if="${session.member_info != null}">
+		        <a th:if="${session.member_info.member_nickname == reply.writer}" class="btn btn-primary" th:href="@{'/qna/reply/detail/update/' + ${reply.qa_num} + '/' + ${reply.comment_num}}" th:text="수정"></a>
+		        <a th:if="${session.member_info.member_nickname == reply.writer}" class="btn btn-danger" th:href="@{'/qnaReply/detail/' + ${reply.qa_num} + '/' + ${reply.comment_num} + '/delete'}" th:text="삭제"></a>
+	        </td>
 	    </tr>
     </table>
 </div>

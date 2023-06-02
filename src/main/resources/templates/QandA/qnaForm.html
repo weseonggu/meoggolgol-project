@@ -1,8 +1,12 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="parent" id="qnaContainer">
 <div class="container my-3">
-	<!-- 임시로 만든 공지사항 등록하기 버튼 -->
-	<a th:href="@{/uploadQNA}" class="btn btn-primary">등록하기</a>
+	<div th:if="${session.member_info != null}" class="top_menu">
+		<div class="login_qna">
+			<!-- 임시로 만든 공지사항 등록하기 버튼 -->
+			<a th:href="@{/uploadQNA}" class="btn btn-primary">등록하기</a>
+		</div>
+	</div>
     <table class="table" id="noticeList">
         <thead class="table-dark">
             <tr>

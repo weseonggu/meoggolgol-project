@@ -99,7 +99,8 @@ public class NoticeController {
 	// 공지사항 수정 페이지 요청
 	@GetMapping(value = "/notice/detail/update/{id}")
 	private String updateQNA(NoticeRequest notierequest, Model model,@PathVariable("id") Integer id) {
-		model.addAttribute("notice", noReposi.getNoticeDetailInfo(id));
+		model.addAttribute("title", ns.getNoticeTitle(id));
+		model.addAttribute("content", ns.getNoticeContent(id));
 		model.addAttribute("id", id);
 		return "notice/notice_update";
 	}
@@ -116,8 +117,11 @@ public class NoticeController {
 			String writer = membersignin.getMember_nickname();
 			// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
 			System.out.println(writer);
+			//System.out.println(ns.getNoticeWriter(id));
 			LocalDate regDate = LocalDate.now();
-			ns.updateNotice(title, content, regDate, writer, id);
+			if (writer.equals(ns.getNoticeWriter(id))) {
+				ns.updateNotice(title, content, regDate, writer, id);
+			}
 		}
 		return "redirect:/notice/detail/"+id;
 	}
@@ -134,7 +138,9 @@ public class NoticeController {
 			String writer = membersignin.getMember_nickname();
 			// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
 			System.out.println(writer);
-			ns.deleteQNA(writer, id);
+			if (writer.equals(ns.getNoticeWriter(id))) {
+				ns.deleteQNA(writer, id);
+			}
 			return "redirect:/notice";
 		} else {
 			return "redirect:/notice/detail/"+id;

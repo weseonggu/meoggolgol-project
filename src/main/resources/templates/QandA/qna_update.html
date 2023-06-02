@@ -6,12 +6,12 @@
 		<div th:replace="~{form_errors :: formErrorsFragment}"></div>
 		<div class="noticeBox">
 			<label for="noticeTitle" class="form-label">제목</label> 
-			<input name="title" type="text" th:field="*{title}">
+			<input name="title" type="text" th:value="${title}">
 		</div>
 
 		<div class="NoticeBox">
 			<label class="form-label">내용</label>
-			<textarea name="content" th:field="*{content}"></textarea>
+			<textarea name="content" th:text="${content}"></textarea>
 		</div>
 
 		<button type="submit" class="btn btn-primary">수정하기</button>
