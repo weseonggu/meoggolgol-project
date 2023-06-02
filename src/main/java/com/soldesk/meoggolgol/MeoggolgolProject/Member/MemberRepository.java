@@ -18,7 +18,10 @@ public class MemberRepository {
 			(member_id,member_pw,member_name,member_nickname,member_birth,member_phoneNumber,member_email,manager) 
 			values(?,?,?,?,?,?,?,?);
 			""";
-
+	private static String GET_MEMBER=
+			"""
+			SELECT * FROM Member_info WHERE member_id = ?;
+			""";
 	public void insertMember(Member member) {
 		jdbc.update(INSERT_MEMBER,
 				member.getMember_id(),
@@ -33,7 +36,7 @@ public class MemberRepository {
 	}
 
 	public MemberSignIn getInfoByID(String submittedId) {
-	    String query = "SELECT * FROM Member_info WHERE member_id = ?";
+	    String query = GET_MEMBER;
 	    try {
 	       MemberSignIn memberSignIn = jdbc.queryForObject(query, (rs, rowNum) -> {
 	        	

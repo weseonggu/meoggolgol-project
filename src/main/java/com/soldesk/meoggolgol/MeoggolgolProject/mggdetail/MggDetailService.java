@@ -84,9 +84,6 @@ public class MggDetailService {
                         list.get("y") + "");
                 restlist.add(rest);
             }
-
-
-
             // 연결 종료
             connection.disconnect();
             return restlist;
@@ -108,10 +105,7 @@ public class MggDetailService {
     		return ce.getImageURL(url);
     	} catch (Exception e) {
     		e.printStackTrace();
-    		
     		return "error";
 		}
-    	
-
     }
 }

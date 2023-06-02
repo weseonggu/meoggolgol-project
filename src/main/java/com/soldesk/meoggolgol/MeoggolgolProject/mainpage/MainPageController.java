@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 public class MainPageController {
 
 	@GetMapping("/")
-	public String hellow() {
+	public String hellowMeoggolgol() {
 		return "mainpage";
 	}
 
