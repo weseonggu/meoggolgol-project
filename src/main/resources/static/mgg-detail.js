@@ -102,13 +102,14 @@ $(function() {
 	});
 
 	$(document).on('click', '.restaurant-card', function() {
+		var mggName = $("#mggName").text();
 		var cardlo = $(this).attr("lo");
 		var cardla = $(this).attr("la");
 		var imgUrl = $(this).find('.restaurant-image').attr('src');
 		var placeUrl = $(this).find('.restaurant-url').val();
 		var placeName = $(this).find('.restaurant-name').text();
 		var roadAddress = $(this).find('.restaurant-address').text();
-		var url = "restaurant-detail?lo=" + cardlo + "&la=" + cardla + "&imgUrl=" + imgUrl + "&placeUrl=" + placeUrl + "&placeName=" + placeName + "&roadAddress=" + roadAddress;
+		var url = "restaurant-detail?lo=" + cardlo + "&la=" + cardla + "&imgUrl=" + imgUrl + "&placeUrl=" + placeUrl + "&placeName=" + placeName + "&roadAddress=" + roadAddress+"&mggname="+mggName;
 		location.href = url;
 	});
 });
