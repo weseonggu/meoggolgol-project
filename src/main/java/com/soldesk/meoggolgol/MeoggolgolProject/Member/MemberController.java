@@ -26,6 +26,7 @@ public class MemberController {
 	public String goSingUp(Member member) {
 		return "member/joinForm";
 	}
+	
 	// 회원가입 post 요청, 유효성 검증, 비번 확인, 아이디 닉네임 중복 확인
 	@PostMapping("/join")
 	public String insertMember(@Valid Member member, BindingResult bindingResult) {
