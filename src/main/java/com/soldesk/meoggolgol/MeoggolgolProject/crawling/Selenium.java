@@ -1,6 +1,8 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.crawling;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +14,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
+
+import com.soldesk.meoggolgol.MeoggolgolProject.RestaurantPage.Menu;
 
 @Component
 @Scope(scopeName = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
@@ -99,6 +103,79 @@ public class Selenium {
 	    }
 	}
 	
+	public String getBusinessHours(String url) throws Exception {
+	    Duration duration = Duration.ofSeconds(10);
+
+	    if (driver == null) {
+	        System.out.println("드라이버 없음");
+	        throw new IllegalStateException("Driver is not initialized. Call initializeDriver() first.");
+	    }
+	    try {
+	        driver.get(url);// 드라이버에 주수 초기화
+	        // 사이트가 특정 정보까지 로딩 될기를 최대 10초 기다림
+	        WebDriverWait webDriverWait = new WebDriverWait(driver, duration);
+	        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#kakaoContent > div#mArticle > div.cont_essential > div.details_placeinfo > div.placeinfo_default > div.openhour_wrap")));
+	        WebElement tag = driver.findElement(By.cssSelector("#kakaoContent > div#mArticle > div.cont_essential > div.details_placeinfo > div.placeinfo_default > div.openhour_wrap"));
+//	        String[] array = input.split("더보기|영업시간|닫기");
+	        String property = tag.getAttribute("textContent").replaceAll("\\s+", " ");
+	        return property;
+	    } finally {
+	        if (driver != null) {
+	            try {
+	                driver.close();
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	            try {
+	                driver.quit();
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+	}
 	
-	
+	public ArrayList<Menu> getRestMenu(String url) throws Exception {
+	    Duration duration = Duration.ofSeconds(10);
+
+	    if (driver == null) {
+	        System.out.println("드라이버 없음");
+	        throw new IllegalStateException("Driver is not initialized. Call initializeDriver() first.");
+	    }
+	    try {
+	        driver.get(url);// 드라이버에 주수 초기화
+	        // 사이트가 특정 정보까지 로딩 될기를 최대 10초 기다림
+	        WebDriverWait webDriverWait = new WebDriverWait(driver, duration);
+	        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#kakaoContent > div#mArticle > div.cont_menu > ul.list_menu")));
+	        
+	        List<WebElement> liElements = driver.findElements(By.cssSelector("ul.list_menu li"));
+	        String data;
+	        String[] data2;
+	        ArrayList<Menu> restMenu = new ArrayList<>();
+	        Menu menu = new Menu();
+	        for(WebElement liElement : liElements) {
+	           // 각 li 태그의 데이터를 추출하거나 처리하는 작업을 수행합니다.
+	           data = liElement.getAttribute("textContent").replaceAll("\\s+", " ");
+	           data2 = data.split(" 가격: ");
+	           menu.setName(data2[0].substring(4));
+	           menu.setPrice(data2[1]); 
+	           restMenu.add(menu);
+	        }
+	        
+	        return restMenu;
+	    } finally {
+	        if (driver != null) {
+	            try {
+	                driver.close();
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	            try {
+	                driver.quit();
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+	}
 }
