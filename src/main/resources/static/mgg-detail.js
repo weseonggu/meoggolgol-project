@@ -51,24 +51,7 @@ $(function() {
 	    // 오류 처리
 	  });	
 
-	// 페이지가 로드될 때 카드의 요소를 확인해서 해당하는 카테고리가 있는지 확인하여 해당하는 카테고리가 있다면 버튼을 보이게 해준다.
-	var restaurantCards = document.getElementsByClassName("restaurant-card");
-	var categoryButtons = document.getElementById("categoryButtons").getElementsByTagName("button");
-
-	for (var i = 0; i < categoryButtons.length; i++) {
-		categoryButtons[i].style.display = "none";
-	}
-
-	for (var i = 0; i < restaurantCards.length; i++) {
-		var cardCategory = restaurantCards[i].querySelector("input:nth-child(3)").textContent;
-
-		for (var j = 0; j < categoryButtons.length; j++) {
-			var category = categoryButtons[j].textContent;
-			if (category === "전체" || category === "기타" || cardCategory.includes(category)) {
-				categoryButtons[j].style.display = "block";
-			}
-		}
-	}
+	
 	// 다음 식당 정보
 	$("#next").click(function() {
 		$("#restaurantListBox").empty();
@@ -127,7 +110,7 @@ function getRestaurantInfo(lo, la, page) {
 	          $("<p></p>").text(data[i].road_address_name).addClass("restaurant-address"),
 	          $("<p></p>").text(data[i].phone),
 	          $("<input>").attr("type", "hidden").val(data[i].place_url).addClass("restaurant-url"),
-	          $("<input>").attr("type", "hidden").val(data[i].category_name)
+	          $("<input>").attr("type", "hidden").val(data[i].category_name).addClass("category")
 	        );
 	        $("#restaurantListBox").append(card);
 	        id[i] = data[i].id;
@@ -160,30 +143,44 @@ function changeImg(result) {
 	}
 }
 
-function filterRestaurantsByCategory(category) {
-	var restaurantCards = document.getElementsByClassName("restaurant-card");
-
-
-	for (var i = 0; i < restaurantCards.length; i++) {
-		var cardCategory = restaurantCards[i].querySelector("input:nth-child(3)").textContent;
-		if (category === "전체" || (category === "기타" && !isIncludedInCategories(cardCategory))) {
-			restaurantCards[i].style.display = "block";
-		} else if (cardCategory.includes(category)) {
-			restaurantCards[i].style.display = "block";
-		} else {
-			restaurantCards[i].style.display = "none";
+function filterRestaurantsByCategory(kind){
+	var cate = ["한식","일식","중식","양식"];
+	// 카드들의 카테고리를 배열로 만들기 
+	var categoryValues = $('.category').map(function() {
+		var strsplit=$(this).val().split(' > ');
+		  return strsplit[1];
+		}).get();
+	// 카드들의 id를 배열로 만들기 
+	var restaurantCardID = $('.restaurant-card').map(function() {
+			return $(this).attr("id");
+		}).get();
+		
+	// 한 중 일 양 보이게 하기
+	for (var i = 0; i < categoryValues.length; i++) {
+		if (categoryValues[i] == kind) {
+			$("#"+restaurantCardID[i]).css('display','block');
+		}
+		else{
+			$("#"+restaurantCardID[i]).css('display','none');
 		}
 	}
-}
-
-function isIncludedInCategories(category) {
-	var categories = ["한식", "중식", "양식", "일식"];
-	for (var i = 0; i < categories.length; i++) {
-		if (category.includes(categories[i])) {
-			return true;
+	
+	// 전체일 때
+	if(kind == "전체"){
+		$('.restaurant-card').css('display','block');
+	}
+	
+	// 기타 클릭시
+	if(kind == "기타"){
+		for (var i = 0; i < categoryValues.length; i++) {
+			if ((categoryValues[i] != cate[0]) && (categoryValues[i] != cate[1]) &&(categoryValues[i] != cate[2]) && (categoryValues[i] != cate[3]) ) {
+				$("#"+restaurantCardID[i]).css('display','block');
+			}
+			else{
+				$("#"+restaurantCardID[i]).css('display','none');
+			}
 		}
 	}
-	return false;
 }
 
 
