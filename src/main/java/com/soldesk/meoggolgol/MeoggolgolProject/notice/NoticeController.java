@@ -119,17 +119,19 @@ public class NoticeController {
 		return "notice/noticeForm";
 	}
 	
-	// 공지사항 상세 페이지 요청
-	@GetMapping(value = "/notice/detail/{id}/view")
-	private String goNoticedtail(Model model,@PathVariable("id") Integer id) {
-		model.addAttribute("noticeDetailList", noReposi.getNoticeDetail(id));
-		return "notice/notice_detail";
-	}
+//	// 공지사항 상세 페이지 요청
+//	@GetMapping(value = "/notice/detail/{id}")
+//	private String goNoticedtail(Model model,@PathVariable("id") Integer id) {
+////		model.addAttribute("noticeDetailList", noReposi.getNoticeDetail(id));
+//		System.out.println(noReposi.getNoticeDetail(id));
+//		return "notice/notice_detail";
+//	}
 	
 	// 공지사항 수정 페이지 요청
 	@GetMapping(value = "/notice/detail/update/{id}")
 	private String updateQNA(NoticeRequest notierequest, Model model,@PathVariable("id") Integer id) {
-		model.addAttribute("notice", noReposi.getNoticeDetail(id));
+		model.addAttribute("title", ns.getNoticeTitle(id));
+		model.addAttribute("content", ns.getNoticeContent(id));
 		model.addAttribute("id", id);
 		return "notice/notice_update";
 	}
@@ -167,8 +169,10 @@ public class NoticeController {
 			String writer = membersignin.getMember_nickname();
 			// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
 			System.out.println(writer);
-			ns.deleteQNA(writer, id);
-			return "notice/noticeForm";				// 매핑 안 됨
+			if (writer.equals(ns.getNoticeWriter(id))) {
+				ns.deleteQNA(writer, id);
+			}
+			return "redirect:/notice";
 		} else {
 			return "redirect:/notice/detail/"+id;
 		}

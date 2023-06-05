@@ -57,10 +57,10 @@ public class NoticeRepository {
 				);
 	}
 	
-	// 공지사항 세부 정보
-	// public List<Map<String,Object>> getNoticeDetailInfo(int notice_num){
-	// 	return jdbc.queryForList(SELECT_NOTICE_detail, notice_num);
-	// }
+//	 공지사항 세부 정보
+	 public List<Map<String,Object>> getNoticeDetailInfo(int notice_num){
+	 	return jdbc.queryForList(SELECT_NOTICE_detail, notice_num);
+	 }
 	
 	// 공지사항 세부 정보
 	public Map<String, Object> getNoticeDetail(int notice_num) {
