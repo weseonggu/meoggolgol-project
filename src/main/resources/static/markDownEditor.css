@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+.noticeUploadContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.noticeBox,
+.previewBox {
+    width: 50%;
+    padding: 20px;
+}
+
+textarea {
+    width: 100%;
+    height: 400px;
+}
+
+#markDownPreview {
+    border: 1px solid #ccc;
+    padding: 10px;
+}

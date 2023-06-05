@@ -1,20 +1,38 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="parent" id="NoticeUploadContainer">
-	<!-- 공지사항 등록 화면 -->
-	<form th:action="@{/uploadnotice}" th:object="${noticeRequest}" method="POST">
+    <!-- 공지사항 등록 화면 -->
+    <form th:action="@{/uploadnotice}" th:object="${noticeRequest}" method="POST">
 
-		<div th:replace="~{form_errors :: formErrorsFragment}"></div>
-		<div class="noticeBox">
-			<label for="noticeTitle" class="form-label">제목</label> 
-			<input type="text" th:field="*{title}">
-		</div>
-
-		<div class="NoticeBox">
-			<label class="form-label">내용</label> 
-			<input th:field="*{content}">
-		</div>
-
-		<button type="submit" class="btn btn-primary">등록하기</button>
-	</form>
+        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+        
+        <!-- 제목 -->
+        <div class="noticeBox">
+            <label for="noticeTitle" class="form-label">제목</label>
+            <input type="text" th:field="*{title}">
+        </div>
+        
+		<!-- 내용 -->
+        <div class="noticeBox">
+            <label class="form-label" for="markDownInput">내용</label>
+            <textarea id="markDownInput" th:field="*{content}" rows="5"></textarea>
+        </div>
+		
+		<!-- 미리보기 -->
+        <div class="previewBox">
+            <label for="markdDownPreview">미리보기</label>
+            <div id="markDownPreview"></div>
+        </div>
+        
+		<!-- 등록 버튼 -->
+        <button type="submit" class="btn btn-primary">등록하기</button>
+        
+    </form>
+	
+	<!-- 스크립트 layout.html로 이동시키면 안 됩니다 
+	<textarea id="markdownInput"> 보다 먼저 실행되면 사용자가 입력하는 글을 읽을 수가 없어요-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/markDownEditor.css}">
+	<script type="text/javascript" th:src="@{/markDown.js}"></script>
+ 
 </div>
 </html>

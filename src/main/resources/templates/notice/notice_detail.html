@@ -1,6 +1,17 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="parent" id="NoticeContainer">
-    <table class="table" id="noticeList">
+   
+	<div id="noticeList">
+    	<h1 th:text="${noticeDetail.TITLE}"></h1>
+    	<div th:utext="${noticeDetail.renderedContent}"></div>
+    	<p>작성자: <span th:text="${noticeDetail.WRITER}"></span></p>
+    	<p>날짜: <span th:text="${noticeDetail.REG_DATE}"></span></p>
+    	
+		<a class="btn btn-primary" th:href="@{'/notice/detail/update/' + ${noticeDetail.notice_num}}" th:text="수정"></a>
+		<button id="noticedelete" class="btn btn-danger" onclick="deleteNotice();">삭제</button>
+	</div>
+
+<!--     <table class="table" id="noticeList">
 	    <tr th:each="notice : ${noticeDetailList}">
 	        <td id="notice_num" th:text="${notice.notice_num}"></td>
 	        <td th:text="${notice.writer}"></td>
@@ -12,6 +23,6 @@
 				<button th:if="${session.member_info.member_nickname == notice.writer}" id="noticedelete" class="btn btn-danger" onclick="deleteNotice();">삭제</button>
 			</td>
 	    </tr>
-    </table>
-</div>
+    </table> -->
+    
 </html>

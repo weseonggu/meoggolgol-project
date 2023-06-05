@@ -4,27 +4,48 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
 
-<link rel="stylesheet" type="text/css" th:href="@{/mainpageStyle.css}">
+<!-- 레이아웃 + 네비바 -->
 <link rel="stylesheet" type="text/css" th:href="@{/layout&navbar.css}">
 <script type="text/javascript" th:src="@{/dateFormat.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/font-face.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/notice.css}">
 
+<!-- 메인페이지 -->
+<link rel="stylesheet" type="text/css" th:href="@{/mainpageStyle.css}">
+
+<!-- 지도 -->
 <link rel="stylesheet" type="text/css" th:href="@{/korea.css}">
-
 <script type="text/javascript" th:src="@{/d3.js}"></script>
 <script type="text/javascript" th:src="@{/korea.js}"></script>
-<script type="text/javascript" th:src="@{/qnaReply.js}"></script>
+
+<!-- 공지사항 -->
+<link rel="stylesheet" type="text/css" th:href="@{/notice.css}">
 <script type="text/javascript" th:src="@{/notice.js}"></script>
+
+<!-- Q&A -->
+<script type="text/javascript" th:src="@{/qnaReply.js}"></script>
+
+<!-- About -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="about/bootstrap.min.css">
+<link rel="stylesheet" href="about/animate.min.css">
+<link rel="stylesheet" href="about/owl.carousel.min.css">
+<link rel="stylesheet" href="about/owl.theme.default.min.css">
+<link rel="stylesheet" href="font/icomoon/style.css">
+<link rel="stylesheet" href="font/feather/style.css">
+<link rel="stylesheet" href="font/flaticon/font/flaticon.css">
+<link rel="stylesheet" href="about/jquery.fancybox.min.css">
+<link rel="stylesheet" href="about/aos.css">
+<link rel="stylesheet" href="about/style.css">
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.7.0.js"
 	integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
 	crossorigin="anonymous">
-	
 </script>
 
 <title>Meoggolgol</title>
@@ -39,7 +60,7 @@
 				<!-- 간단한 소개 문구 넣는 태그 -->
 				<div class="brandContent">
 					<div id="text">
-					<!-- 현재 날짜를 영어로 표가허고샆으나 타임리프는 서버 쪽에서 템플릿을 처리하기 때문에 
+					<!-- 현재 날짜를 영어로 표기하고싶으나 타임리프는 서버 쪽에서 템플릿을 처리하기 때문에 
 						 브라우저에서 태그 속의 lang="eng" 속성 인식 불가 
 						 그래서 자바스크립트 사용 -->
 						<span id="englishDate"></span>
@@ -47,7 +68,7 @@
 					</div>
 				</div>
 				<!-- 사이트 제목 넣는 태그 -->
-				<div class="brandContent" id="brandName">먹골골</div>
+				<div class="brandContent" id="brandName"><a href="/">먹골골</a></div>
 				<!-- 로그인/회원가입 기능 넣는 태그 -->
 				<div class="brandContent" id="signInUp">
 					<a th:if="${session.member_info == null}" href="/signin" id="loginButton">Sign In</a> 
@@ -83,9 +104,81 @@
 	<th:block layout:fragment="content"></th:block>
 	<!-- 기본 템플릿 안에 삽입될 내용 End -->
 
-
 	<!-- Bootstrap JS -->
 	<script th:src="@{/bootstrap.min.js}"></script>
+	
+	<!-- footer [사이트 하단 레이아웃] -->
+  <div class="site-footer">
+    <div class="footerContainer">
+      <div class="row justify-content-between">
+        <div class="col-lg-4" id="footerLeft">
+          <div class="widget">
+            <h3>About</h3>
+            <p>Your Ultimate Guide to Food Streets Across the Country !<br>We provide a comprehensive service that integrates nationwide data<br>to offer you detailed information on every food street. Please enjoy !</p>
+          </div>
+          <div class="widget">
+            <h3>Contact us</h3>
+            <!-- 여기다가 깃헙 리포지터리 넣기 -->
+            <ul class="social list-unstyled">
+              <li><a href="#"><span class="icon-facebook"></span></a></li>
+              <li><a href="#"><span class="icon-twitter"></span></a></li>
+              <li><a href="#"><span class="icon-instagram"></span></a></li>
+              <li><a href="#"><span class="icon-dribbble"></span></a></li>
+              <li><a href="#"><span class="icon-linkedin"></span></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-6" id="footerRight">
+          <div class="row">
+            <div class="col-12">
+              <div class="widget">
+                <h3>Navigations</h3>
+              </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-4">
+              <div class="widget">
+                <ul class="links list-unstyled">
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/about">About Us</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-4">
+              <div class="widget">
+                <ul class="links list-unstyled">
+                  <li><a href="/notice">Notice</a></li>
+                  <li><a href="#">Guide</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-4">
+              <div class="widget">
+                <ul class="links list-unstyled">
+                  <li><a href="/qna">Q&A</a></li>
+                  <li><a href="#">Rank</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="widget">
+                <h3>Locations</h3>
+                <p>#Location 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;15, Jong-ro 12-gil, Jongno-gu, Seoul, Republic of Korea</p>
+                <p>#Location 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;119, Bongeunsa-ro, Gangnam-gu, Seoul, Republic of Korea</p>
+                <p>#Location 3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;16, Gangnam-daero 98-gil, Gangnam-gu, Seoul, Republic of Korea</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <div class="row justify-content-center text-center copyright">
+        <div class="col-md-8">
+          <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed with creativity by <a href="/">Meoggolgol</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+	
 </body>
 </html>

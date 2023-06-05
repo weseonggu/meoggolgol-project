@@ -78,7 +78,14 @@
 		    <artifactId>selenium-java</artifactId>
 		    <version>4.9.1</version>
 		</dependency>
+		<!-- 마크다운 https://mvnrepository.com/artifact/org.commonmark/commonmark -->
+		<dependency>
+    		<groupId>org.commonmark</groupId>
+    		<artifactId>commonmark</artifactId>
+    		<version>0.21.0</version>
+		</dependency>
 
+		
 		<!-- test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
