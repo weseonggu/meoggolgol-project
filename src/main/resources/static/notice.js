@@ -1,4 +1,5 @@
 function deleteNotice(){
-	var id = $("#notice_num").text();
-	location.href="/notice/detail/" + id + "/delete";
+	var id = $("#notice_num").value();
+	alert(id);
+//	location.href="/notice/detail/" + id + "/delete";
 }

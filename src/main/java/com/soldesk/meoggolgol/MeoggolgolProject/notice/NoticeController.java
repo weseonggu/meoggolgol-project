@@ -120,9 +120,9 @@ public class NoticeController {
 	}
 	
 //	// 공지사항 상세 페이지 요청
-//	@GetMapping(value = "/notice/detail/{id}")
+//	@GetMapping(value = "/notice/detail/{id}/view")
 //	private String goNoticedtail(Model model,@PathVariable("id") Integer id) {
-////		model.addAttribute("noticeDetailList", noReposi.getNoticeDetail(id));
+//		model.addAttribute("noticeDetailList", noReposi.getNoticeDetail(id));
 //		System.out.println(noReposi.getNoticeDetail(id));
 //		return "notice/notice_detail";
 //	}
