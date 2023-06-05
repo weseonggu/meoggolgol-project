@@ -1,13 +1,11 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.mggdetail;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.validation.constraints.AssertFalse.List;
 import lombok.RequiredArgsConstructor;
 
 @RestController
