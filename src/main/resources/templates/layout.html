@@ -80,7 +80,7 @@
 					<div th:if="${session.member_info != null}" class="top_menu">
 						<div class="login_member">
 							<strong> <i class="far fa-user-circle"></i> 
-								<span th:if="${session.member_info.manager == y}">관리자 </span> 
+								<span th:if="${session.member_info.manager == 'Y'}">관리자 </span> 
 								<span>[[${session.member_info.member_nickname}]]</span></strong>&nbsp;님
 						</div>
 						<!-- 로그아웃 버튼 생성 -->
