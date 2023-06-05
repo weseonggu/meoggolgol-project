@@ -104,7 +104,7 @@ public class Selenium {
 	}
 	
 	public String getBusinessHours(String url) throws Exception {
-	    Duration duration = Duration.ofSeconds(10);
+	    Duration duration = Duration.ofSeconds(100);
 
 	    if (driver == null) {
 	        System.out.println("드라이버 없음");
@@ -114,11 +114,10 @@ public class Selenium {
 	        driver.get(url);// 드라이버에 주수 초기화
 	        // 사이트가 특정 정보까지 로딩 될기를 최대 10초 기다림
 	        WebDriverWait webDriverWait = new WebDriverWait(driver, duration);
-	        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#kakaoContent > div#mArticle > div.cont_essential > div.details_placeinfo > div.placeinfo_default > div.openhour_wrap")));
-	        WebElement tag = driver.findElement(By.cssSelector("#kakaoContent > div#mArticle > div.cont_essential > div.details_placeinfo > div.placeinfo_default > div.openhour_wrap"));
-//	        String[] array = input.split("더보기|영업시간|닫기");
-	        String property = tag.getAttribute("textContent").replaceAll("\\s+", " ");
-	        return property;
+	        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.location_present strong.tit_operation span")));
+	        
+	        WebElement tit_operation = driver.findElement(By.cssSelector("div.location_present strong.tit_operation span"));
+	        return tit_operation.getText();
 	    } finally {
 	        if (driver != null) {
 	            try {
