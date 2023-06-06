@@ -17,10 +17,11 @@ public class MggRestService{
 	public void info(String url) {
 		System.out.println(url);
 		try {
-			System.out.println(ce.getMapURL(url));
-			System.out.println(ce.getBusinessHours(url));
-			ArrayList<Menu> menus = ce.getRestMenu(url);
-			System.out.println(menus);
+//			System.out.println(ce.getMapURL(url));
+//			System.out.println(ce.getBusinessHours(url));
+//			ArrayList<Menu> menus = ce.getRestMenu(url);
+//			System.out.println(menus);
+			ce.getLocationDetail(url);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

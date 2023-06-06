@@ -177,4 +177,37 @@ public class Selenium {
 	        }
 	    }
 	}
+	
+	public void getLocationDetail(String url) throws Exception {
+	    Duration duration = Duration.ofSeconds(10);
+
+	    if (driver == null) {
+	        System.out.println("드라이버 없음");
+	        throw new IllegalStateException("Driver is not initialized. Call initializeDriver() first.");
+	    }
+	    try {
+	        driver.get(url);// 드라이버에 주수 초기화
+	        // 사이트가 특정 정보까지 로딩 될기를 최대 10초 기다림
+	        WebDriverWait webDriverWait = new WebDriverWait(driver, duration);
+	        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("div.placeinfo_default div.location_detail")));
+	        List<WebElement> parent = driver.findElements(By.cssSelector("div.placeinfo_default div.location_detail"));
+	        if (parent.size() >= 4) {
+	        	WebElement loctaionDetail = parent.get(5);
+	        	System.out.println(loctaionDetail.getText());
+			}
+	    } finally {
+	        if (driver != null) {
+	            try {
+	                driver.close();
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	            try {
+	                driver.quit();
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+	}
 }
