@@ -59,6 +59,10 @@ public class NoticeController {
 	@PostMapping("/uploadnotice")
 	public String regNotice(@Valid NoticeRequest noticerequest, BindingResult bindingresult, HttpServletRequest httpservletrequest) {
 		
+		if (bindingresult.hasErrors()) {
+			return "notice/noticeUploadForm";
+		}
+		
 		// input으로 받아온 제목+내용은 noticerequest에 넣고,
 		// 작성자는 세션에 있는 멤버 닉네임 가져와서 넣고, 
 		// 등록일자는 localDate() 사용해서 넣음
@@ -118,14 +122,6 @@ public class NoticeController {
 		model.addAttribute("noticelist", noReposi.getNoticeInfo(start, size));
 		return "notice/noticeForm";
 	}
-	
-//	// 공지사항 상세 페이지 요청
-//	@GetMapping(value = "/notice/detail/{id}/view")
-//	private String goNoticedtail(Model model,@PathVariable("id") Integer id) {
-//		model.addAttribute("noticeDetailList", noReposi.getNoticeDetail(id));
-//		System.out.println(noReposi.getNoticeDetail(id));
-//		return "notice/notice_detail";
-//	}
 	
 	// 공지사항 수정 페이지 요청
 	@GetMapping(value = "/notice/detail/update/{id}")

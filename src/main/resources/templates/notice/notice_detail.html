@@ -10,7 +10,5 @@
 			<a th:if="${session.member_info.member_nickname == noticeDetail.WRITER}" class="btn btn-primary" th:href="@{'/notice/detail/update/' + ${noticeDetail.notice_num}}" th:text="수정"></a>
 			<a th:if="${session.member_info.member_nickname == noticeDetail.WRITER}" id="noticedelete" class="btn btn-danger" th:href="@{'/notice/detail/' + ${noticeDetail.notice_num} + '/delete'}">삭제</a>
 		</div>
-	</div>
-
-    
+	</div>   
 </html>
