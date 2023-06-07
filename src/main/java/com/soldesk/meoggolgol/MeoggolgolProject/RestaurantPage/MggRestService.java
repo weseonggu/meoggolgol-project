@@ -21,7 +21,8 @@ public class MggRestService{
 //			System.out.println(ce.getBusinessHours(url));
 //			ArrayList<Menu> menus = ce.getRestMenu(url);
 //			System.out.println(menus);
-			ce.getLocationDetail(url);
+//			ce.getLocationDetail(url);
+			ce.getFacilityInfo(url);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

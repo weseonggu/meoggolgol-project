@@ -210,4 +210,37 @@ public class Selenium {
 	        }
 	    }
 	}
+	
+	public void getFacilityInfo(String url) throws Exception {
+	    Duration duration = Duration.ofSeconds(10);
+
+	    if (driver == null) {
+	        System.out.println("드라이버 없음");
+	        throw new IllegalStateException("Driver is not initialized. Call initializeDriver() first.");
+	    }
+	    try {
+	        driver.get(url);// 드라이버에 주수 초기화
+	        // 사이트가 특정 정보까지 로딩 될기를 최대 10초 기다림
+	        WebDriverWait webDriverWait = new WebDriverWait(driver, duration);
+	        webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("ul.list_facility")));
+	        List<WebElement> info = driver.findElements(By.cssSelector("ul.list_facility li span.color_g"));
+	        for (WebElement webElement : info) {
+	        	System.out.println(webElement.getAttribute("textContent"));
+			}
+	    } finally {
+	        if (driver != null) {
+	            try {
+	                driver.close();
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	            try {
+	                driver.quit();
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+	}
+	
 }
