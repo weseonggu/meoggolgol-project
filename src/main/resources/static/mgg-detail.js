@@ -40,48 +40,71 @@ $(function() {
 	// 지도에 원을 표시합니다
 	circle.setMap(map);
 
+
 	// 식당 커드
-//	getRestaurantInfo(lo, la, page);
+	//	getRestaurantInfo(lo, la, page);
 	getRestaurantInfo(lo, la, page)
-	  .then(function(result) {
-	    // 결과 처리
-		  changeImg(result);
-	  })
-	  .catch(function(error) {
-	    // 오류 처리
-	  });	
+		.then(function(result) {
+			// 결과 처리
+			changeImg(result);
+			categoryNameValues();
+		})
+		.catch(function(error) {
+			// 오류 처리
+		});
 
-	// 페이지가 로드될 때 카드의 요소를 확인해서 해당하는 카테고리가 있는지 확인하여 해당하는 카테고리가 있다면 버튼을 보이게 해준다.
-	var restaurantCards = document.getElementsByClassName("restaurant-card");
-	var categoryButtons = document.getElementById("categoryButtons").getElementsByTagName("button");
+	
+	// 카테고리 버튼 클릭 이벤트 핸들러
+	$("#btnKorean, #btnChinese, #btnWestern, #btnJapanese").click(function() {
+		var category = $(this).text(); // 클릭한 버튼의 텍스트(카테고리 이름) 가져오기
 
-	for (var i = 0; i < categoryButtons.length; i++) {
-		categoryButtons[i].style.display = "none";
-	}
+		// 모든 식당 카드 숨기기
+		$(".restaurant-card").hide();
 
-	for (var i = 0; i < restaurantCards.length; i++) {
-		var cardCategory = restaurantCards[i].querySelector("input:nth-child(3)").textContent;
-
-		for (var j = 0; j < categoryButtons.length; j++) {
-			var category = categoryButtons[j].textContent;
-			if (category === "전체" || category === "기타" || cardCategory.includes(category)) {
-				categoryButtons[j].style.display = "block";
+		// 해당 카테고리에 해당하는 식당 카드만 보여주기
+		$(".restaurant-card").each(function() {
+			var cardCategory = $(this).find('input[type=hidden]').last().val(); // 식당 카드의 카테고리 이름 가져오기
+			if (cardCategory.includes(category)) {
+				$(this).show();
 			}
-		}
-	}
+		});
+	});
+
+	// "전체" 버튼 클릭 이벤트 핸들러
+	$("#btnAll").click(function() {
+		// 모든 식당 카드 보여주기
+		$(".restaurant-card").show();
+	});
+
+	// 기타 버튼 클릭 이벤트 핸들러
+	$("#btnOther").click(function() {
+		// 모든 식당 카드 숨기기
+		$(".restaurant-card").hide();
+
+		// 기타 카테고리에 해당하지 않는 식당 카드만 보여주기
+		$(".restaurant-card").each(function() {
+			var cardCategory = $(this).find('input[type=hidden]').last().val(); // 식당 카드의 카테고리 이름 가져오기
+			if (!cardCategory.includes("한식") && !cardCategory.includes("중식") && !cardCategory.includes("양식") && !cardCategory.includes("일식")) {
+				$(this).show();
+			}
+		});
+	});
+
 	// 다음 식당 정보
 	$("#next").click(function() {
 		$("#restaurantListBox").empty();
 		page += 1;
 		getRestaurantInfo(lo, la, page)
-		  .then(function(result) {
-		    // 결과 처리
-			  changeImg(result);
-		  })
-		  .catch(function(error) {
-		    // 오류 처리
-		  });	
+			.then(function(result) {
+				// 결과 처리
+				changeImg(result);
+				categoryNameValues();
+			})
+			.catch(function(error) {
+				// 오류 처리
+			});
 	});
+
 	// 이전 식당 정보
 	$("#before").click(function() {
 		if (page == 1) {
@@ -91,99 +114,94 @@ $(function() {
 			$("#restaurantListBox").empty();
 			page -= 1
 			getRestaurantInfo(lo, la, page)
-			  .then(function(result) {
-			    // 결과 처리
-				  changeImg(result);
-			  })
-			  .catch(function(error) {
-			    // 오류 처리
-			  });	
+				.then(function(result) {
+					// 결과 처리
+					changeImg(result);
+					categoryNameValues();
+				})
+				.catch(function(error) {
+					// 오류 처리
+				});
 		}
 	});
 
 	$(document).on('click', '.restaurant-card', function() {
+		var mggName = $("#mggName").text();
 		var cardlo = $(this).attr("lo");
 		var cardla = $(this).attr("la");
 		var imgUrl = $(this).find('.restaurant-image').attr('src');
 		var placeUrl = $(this).find('.restaurant-url').val();
 		var placeName = $(this).find('.restaurant-name').text();
 		var roadAddress = $(this).find('.restaurant-address').text();
-		var url = "restaurant-detail?lo=" + cardlo + "&la=" + cardla + "&imgUrl=" + imgUrl + "&placeUrl=" + placeUrl + "&placeName=" + placeName + "&roadAddress=" + roadAddress;
+		var url = "restaurant-detail?lo=" + cardlo + "&la=" + cardla + "&imgUrl=" + imgUrl + "&placeUrl=" + placeUrl + "&placeName=" + placeName + "&roadAddress=" + roadAddress + "&mggname=" + mggName;
 		location.href = url;
 	});
+
 });
 
 // 식당 카드 만들기 ajax로 호출
 function getRestaurantInfo(lo, la, page) {
-	  return new Promise(function(resolve, reject) {
-	    $.getJSON("restaurantInfo?la=" + la + "&lo=" + lo + "&page=" + page, function(data) {
-	      var id = [];
-	      var url = [];
-	      $.each(data, function(i) {
-	        var card = $("<div></div>").attr("id", data[i].id).attr("class", "restaurant-card").attr("lo", data[i].x).attr("la", data[i].y).append(
-	          $("<img>").attr("src", "/loading.png").addClass("restaurant-image"),
-	          $("<p></p>").text(data[i].place_name).addClass("restaurant-name"),
-	          $("<p></p>").text(data[i].road_address_name).addClass("restaurant-address"),
-	          $("<p></p>").text(data[i].phone),
-	          $("<input>").attr("type", "hidden").val(data[i].place_url).addClass("restaurant-url"),
-	          $("<input>").attr("type", "hidden").val(data[i].category_name)
-	        );
-	        $("#restaurantListBox").append(card);
-	        id[i] = data[i].id;
-	        url[i] = data[i].place_url;
-	      });
-
-	      resolve({
-	        "id": id,
-	        "url": url
-	      });
-	    }).fail(function(error) {
-	      reject(error);
-	    });
-	  });
-	}
+	return new Promise(function(resolve, reject) {
+		$.getJSON("restaurantInfo?la=" + la + "&lo=" + lo + "&page=" + page, function(data) {
+			var id = [];
+			var url = [];
+			$.each(data, function(i) {
+				var card = $("<div></div>").attr("id", data[i].id).attr("class", "restaurant-card").attr("lo", data[i].x).attr("la", data[i].y).append(
+					$("<img>").attr("src", "/loading.png").addClass("restaurant-image"),
+					$("<p></p>").text(data[i].place_name).addClass("restaurant-name"),
+					$("<p></p>").text(data[i].road_address_name).addClass("restaurant-address"),
+					$("<p></p>").text(data[i].phone),
+					$("<input>").attr("type", "hidden").val(data[i].place_url).addClass("restaurant-url"),
+					$("<input>").attr("type", "hidden").val(data[i].category_name).addClass("category_name")
+				);
+				$("#restaurantListBox").append(card);
+				id[i] = data[i].id;
+				url[i] = data[i].place_url;
+			});
+			resolve({
+				"id": id,
+				"url": url
+			});
+		}).fail(function(error) {
+			reject(error);
+		});
+	});
+}
 
 // 이미지 바꾸기
 function changeImg(result) {
-	
+
 	for (var y = 0; y < result.url.length; y++) {
-		$.getJSON("restaurantCardImg?url=" + result.url[y]+"&id="+result.id[y], function(data)
-				{
-			if(data.url == "error"){
-				y=y-1;
+		$.getJSON("restaurantCardImg?url=" + result.url[y] + "&id=" + result.id[y], function(data) {
+			if (data.url == "error") {
+				y = y - 1;
 			}
-			else{
-				$("#"+data.id+" img").attr("src",data.url);
+			else {
+				$("#" + data.id + " img").attr("src", data.url);
 			}
-				});
+		});
 	}
 }
 
-function filterRestaurantsByCategory(category) {
-	var restaurantCards = document.getElementsByClassName("restaurant-card");
 
-
-	for (var i = 0; i < restaurantCards.length; i++) {
-		var cardCategory = restaurantCards[i].querySelector("input:nth-child(3)").textContent;
-		if (category === "전체" || (category === "기타" && !isIncludedInCategories(cardCategory))) {
-			restaurantCards[i].style.display = "block";
-		} else if (cardCategory.includes(category)) {
-			restaurantCards[i].style.display = "block";
-		} else {
-			restaurantCards[i].style.display = "none";
-		}
-	}
+function categoryNameValues() {
+	var categoryValues = $('.category_name').map(function() {
+		return $(this).val().split(' > ')[1];
+	}).get();
+	toggleCategoryButtonVisibility(categoryValues);
 }
 
-function isIncludedInCategories(category) {
-	var categories = ["한식", "중식", "양식", "일식"];
-	for (var i = 0; i < categories.length; i++) {
-		if (category.includes(categories[i])) {
-			return true;
-		}
-	}
-	return false;
+function toggleCategoryButtonVisibility(categoryValues) {
+	toggleButtonVisibility("#btnKorean", categoryValues.includes('한식'));
+	toggleButtonVisibility("#btnChinese", categoryValues.includes('중식'));
+	toggleButtonVisibility("#btnWestern", categoryValues.includes('양식'));
+	toggleButtonVisibility("#btnJapanese", categoryValues.includes('일식'));
+	var hasOtherCategory = categoryValues.some(function(category) {
+		return !['한식', '중식', '양식', '일식'].includes(category);
+	});
+	toggleButtonVisibility("#btnOther", hasOtherCategory);
 }
 
-
-
+function toggleButtonVisibility(buttonId, condition) {
+	$(buttonId).toggle(condition);
+}

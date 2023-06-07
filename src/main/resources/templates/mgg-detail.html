@@ -1,14 +1,16 @@
 <html layout:decorate="~{layout}">
 
-<div layout:fragment="content" >
+<div layout:fragment="content">
 
-<link rel="stylesheet" type="text/css" th:href="@{/mgg-detail.css}">
-<!-- kakaoApi -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aa8ed2785db0138dc7d9bdb1f5756790"></script>
-<script type="text/javascript" th:src="@{/mgg-detail.js}"></script>
-	<div id = "mggInfoBoox">
+	<link rel="stylesheet" type="text/css" th:href="@{/mgg-detail.css}">
+	<!-- kakaoApi -->
+	<script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aa8ed2785db0138dc7d9bdb1f5756790"></script>
+	<script type="text/javascript" th:src="@{/mgg-detail.js}"></script>
+	<div id="mggInfoBoox">
 		<!-- div 태그 안 class 이름들은 정렬을 위해서 만든 것들 -->
-		<div class="selectMgg" id="mggMap" style="width:500px;height:500px;"></div>
+		<div class="selectMgg" id="mggMap"
+			style="width: 500px; height: 500px;"></div>
 		<div class="selectMgg">
 			<h2 id="mggName" th:text="${selectmgg.FCLTY_NM}"></h2>
 			<p id="mggAdress" th:text="${selectmgg.RDNMADR_NM}"></p>
@@ -16,16 +18,15 @@
 			<p id="mggParking" th:text="${selectmgg.PARKNG_POSBL_AT}"></p>
 		</div>
 	</div>
-    <div id="categoryButtons">
-    	<button id="btnAll" onclick="filterRestaurantsByCategory('전체')">전체</button>
-	    <button id="btnKorean" style="display: none;" onclick="filterRestaurantsByCategory('한식')">한식</button>
-    	<button id="btnJapanese" style="display: none;" onclick="filterRestaurantsByCategory('일식')">일식</button>
-    	<button id="btnChinese" style="display: none;" onclick="filterRestaurantsByCategory('중식')">중식</button>
-	    <button id="btnWestern" style="display: none;" onclick="filterRestaurantsByCategory('양식')">양식</button>
-	    <button id="btnOther" style="display: block;" onclick="filterRestaurantsByCategory('기타')">기타</button>
+	<div id="categoryButtons">
+		<button id="btnAll">전체</button>
+		<button id="btnKorean">한식</button>
+		<button id="btnChinese">중식</button>
+		<button id="btnWestern">양식</button>
+		<button id="btnJapanese">일식</button>
+		<button id="btnOther">기타</button>
 	</div>
-	<div id ="restaurantListBox">
-	</div>
+	<div id="restaurantListBox"></div>
 	<button id="before">이전</button>
 	<button id="next">다음</button>
 </div>
