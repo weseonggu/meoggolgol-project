@@ -3,12 +3,68 @@
     <link rel="stylesheet" type="text/css" th:href="@{/restaurant-detail.css}">
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=aa8ed2785db0138dc7d9bdb1f5756790"></script>
     <script type="text/javascript" th:src="@{/restaurant-detail.js}"></script>
+    
+    <!-- 리뷰 -->
+	<link rel="stylesheet" th:href="@{/star.css}"/>
+    
 </head>
 <body>
     <div layout:fragment="content">
-        <div id="mggInfoBoox">
+    
+	<form th:action="@{/restaurant-detail}" th:object="${reviewRequest}" method="POST">
+        
+        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+	
+        <div class="mggInfoBox">
             <div class="selectMgg" id="mggRestaurant" style="width:500px;height:500px;"></div>
         </div>
+		
+		<!-- 리뷰 등록폼 -->
+		<div class="mggInfoBox mb-3" name="reviewBox" id="reviewBox" >
+		
+			<!-- 리뷰 별점 -->
+			<div id="reviewScore">
+				<fieldset>
+					<span class="text-bold">별점을 선택해주세요</span>
+			
+					<!-- 1 점 -->
+					<input type="radio" name="reviewStar" value="5" id="rate1"><label for="rate1">★</label>
+					<!-- 2 점 -->
+					<input type="radio" name="reviewStar" value="4" id="rate2"><label for="rate2">★</label> 
+					<!-- 3 점 -->
+					<input type="radio" name="reviewStar" value="3" id="rate3"><label for="rate3">★</label> 		
+					<!-- 4 점 -->
+					<input type="radio" name="reviewStar" value="2" id="rate4"><label for="rate4">★</label>
+					<!-- 5 점 -->
+					<input type="radio" name="reviewStar" value="1" id="rate5"><label for="rate5">★</label>
+				</fieldset>
+			</div>
+			
+			<!-- 리뷰 상세 작성 -->
+			<div id="reviewDetail">
+				<div>
+					<!-- ToastUiEditor -->  
+        			<div id="editor"></div>
+        			<!-- TOAST UI Editor 생성 JS code -->
+    				<script>
+        				const editor = new toastui.Editor({
+           					el: document.querySelector('#editor'),
+           					initialEditType: 'markdown',
+            				previewStyle: 'tab',
+            				previewHighlight: false,
+            				height: '350px',
+            				initialValue: '작성 내용은 매장주를 포함한 모든 사용자들이 볼 수 있으니, 서로를 배려하는 마음을 담아 작성해 주세요.'
+        				});
+        			
+        				editor.getMarkdown();
+    			</script>
+				</div>
+				<!-- 등록하기 버튼 -->
+        		<button type="submit" class="btn btn-primary">등록하기</button>
+			</div>
+			
+		</div>
+	</form>
     </div>
 </body>
 </html>

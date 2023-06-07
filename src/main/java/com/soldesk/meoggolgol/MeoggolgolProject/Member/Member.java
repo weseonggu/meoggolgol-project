@@ -33,11 +33,11 @@ public class Member {
 	@NotEmpty(message = "닉네임은 필수항목입니다.")
 	@Size(min = 1, max = 10)
 	private String member_nickname;
+	
 	@PastOrPresent
 	private LocalDate member_birth;
 	
 	@NotEmpty(message = "휴대폰번호는 필수항목입니다.")
-	@NotEmpty
 	private String member_phoneNumber;
 	
 	@NotEmpty(message = "이메일은 필수항목입니다.")

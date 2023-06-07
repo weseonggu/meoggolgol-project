@@ -14,7 +14,7 @@ public class MggDetailController {
     
     @GetMapping("/mgg-detail")
     public String goMggDetail(@RequestParam double lo, @RequestParam double la, Model model) {
-        model.addAttribute("selectmgg", mggDetailService.getMggInfo(lo, la));// 먹자골목 정보
+        model.addAttribute("selectmgg", mggDetailService.getMggInfo(lo, la));	// 먹자골목 정보
         
         return "mgg-detail";
     }
