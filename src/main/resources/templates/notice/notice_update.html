@@ -4,6 +4,7 @@
 	<form th:action="@{'/notice/update/' + ${id}}" th:object="${noticeRequest}" method="POST">
 
 		<div th:replace="~{form_errors :: formErrorsFragment}"></div>
+		
 		<div class="noticeBox">
 			<label for="noticeTitle" class="form-label">제목</label> 
 			<input name="title" type="text" th:value="${title}">

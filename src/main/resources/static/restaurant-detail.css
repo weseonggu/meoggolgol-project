@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-#mggInfoBoox {
+.mggInfoBox {
 	width: 80%;
 	display: table;
 	border: 1px solid black;
@@ -10,6 +10,29 @@
 	flex-wrap: wrap;
 	justify-content: center;
 	margin-top: 16px;
+}
+
+#reviewDetail {
+	width: 100%;
+	display: table;
+	border: 1px solid red;
+	margin: auto;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	
+}
+
+#reviewScore {
+	width: 100%;
+	display: table;
+	border: 1px solid red;
+	margin: auto;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	
 }
 
 .selectMgg {

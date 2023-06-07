@@ -27,7 +27,26 @@
             			initialValue: '공지사항의 상세 내용을 입력해주세요.'
         			});
         			
-        			editor.getMarkdown();
+        			 // 사용자가 입력한 값을 서버로 전송하는 함수
+        	        function postNoticeContent() {
+        	            var content = editor.getHtml();
+        	            
+        	            console.log(content); // 콘솔에 값을 출력하여 확인합니다.
+        	            
+        	            var xhr = new XMLHttpRequest();
+        	            xhr.open('POST', '/uploadnotice', true);
+        	            xhr.setRequestHeader('Content-Type', 'application/json');
+        	            
+        	            xhr.onload = function () {
+        	                if (xhr.status === 200) {
+        	                    console.log(xhr.responseText);
+        	                } else {
+        	                    console.error(xhr.statusText);
+        	                }
+        	            };
+        	            
+        	            xhr.send(JSON.stringify({ content: content }));
+        	        }
     			</script>
         	</div>
         </div>
