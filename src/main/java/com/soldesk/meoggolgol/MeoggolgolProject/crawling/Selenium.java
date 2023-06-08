@@ -90,13 +90,37 @@ public class Selenium {
 	        // 지도 url
 	        WebElement tag = driver.findElement(By.cssSelector("li a.link_place"));
 	        String mapURL = tag.getAttribute("href");
-	        System.out.println(mapURL);
+	        //System.out.println(mapURL);
 	        restaurantInfo.setMapURL(mapURL);
 	        
 	        // 현재 영업상태
-	        WebElement tit_operation = driver.findElement(By.cssSelector("div.location_present strong.tit_operation span"));
-	        System.out.println(tit_operation.getText());
-	        restaurantInfo.setOperation(tit_operation.getText());
+	        List<WebElement> titOperationElements = driver.findElements(By.cssSelector("div.location_present strong.tit_operation span"));
+
+	        if (!titOperationElements.isEmpty()) {
+	            WebElement tit_operation = titOperationElements.get(0);
+	            //System.out.println(tit_operation.getText());
+	            restaurantInfo.setOperation(tit_operation.getText());
+	        } else {
+	            WebElement operation = driver.findElement(By.cssSelector("ul.list_caution li"));
+	            //System.out.println(operation.getText());
+	            restaurantInfo.setOperation(operation.getText());
+	        }
+	        
+	        // 영업시간
+	        List<WebElement> hours = driver.findElements(By.cssSelector("div.location_present ul.list_operation li"));
+	        String businessHour = "";
+	        if (hours.size() > 0) {
+	        	for (int i = 0; i < hours.size(); i++) {
+	                WebElement webElement = hours.get(i);
+	                businessHour = businessHour + webElement.getText();
+	                if (i != hours.size() - 1) {
+	                    businessHour = businessHour + ",";
+	                }
+	            }
+	        	businessHour = businessHour.replaceAll("\r\n", "").replace("더보기", "").replaceAll("\n", "");
+	        	restaurantInfo.setBusinessHours(businessHour);
+	        	System.out.println(businessHour);
+			}
 	        
 	        // 식당 메뉴
 	        List<WebElement> liElements = driver.findElements(By.cssSelector("ul.list_menu li"));
@@ -109,22 +133,25 @@ public class Selenium {
 	        	data = liElement.getAttribute("textContent").replaceAll("\\s+", " ");
 	        	data2 = data.split(" 가격: ");
 	        	menu.setName(data2[0].substring(4));
-	        	menu.setPrice(data2[1]); 
+	        	menu.setPrice(data2[1].split(" ")[0]); 
 	        	restMenu.add(menu);
 	        }
-	        System.out.println(restMenu);
+	        //System.out.println(restMenu);
 	        restaurantInfo.setRestMenu(restMenu);
 	        
 	        // 예약, 바달, 포장에 대해서 가능, 불가능
-	        List<WebElement> parent = driver.findElements(By.cssSelector("div.placeinfo_default div.location_detail"));
-	        if (parent.size() >= 5) {
-	        	WebElement loctaionDetail = parent.get(4);
-	        	System.out.println(loctaionDetail.getText());
-	        	restaurantInfo.setLocationDetail(loctaionDetail.getText());
-			} else {
-				System.out.println("null");
-				restaurantInfo.setLocationDetail(null);
-			}
+	        List<WebElement> locationDetail = driver.findElements(By.cssSelector("span.ico_delivery"));
+
+	        if (locationDetail.size() > 0) {
+	            WebElement icoDeliveryElement = locationDetail.get(0);
+	            WebElement parentDiv = icoDeliveryElement.findElement(By.xpath("../.."));
+	            WebElement divElement = parentDiv.findElement(By.cssSelector("div.location_detail"));
+	            restaurantInfo.setLocationDetail(divElement.getText());
+	            //System.out.println(divElement.getText());
+	        } else {
+	            //System.out.println("null");
+	            restaurantInfo.setLocationDetail(null);
+	        }
 	        
 	        // 시설 정보
 	        List<WebElement> info = driver.findElements(By.cssSelector("ul.list_facility li span.color_g"));
@@ -134,7 +161,7 @@ public class Selenium {
 	        	facilityInfo.setInfo(webElement.getAttribute("textContent"));
 	        	facilityInfos.add(facilityInfo);
 			}
-	        System.out.println(facilityInfos);
+	        //System.out.println(facilityInfos);
 	        restaurantInfo.setFacilityInfos(facilityInfos);
 	        
 	        return restaurantInfo;

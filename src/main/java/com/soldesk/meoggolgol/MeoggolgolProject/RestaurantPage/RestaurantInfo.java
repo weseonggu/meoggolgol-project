@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class RestaurantInfo {
 	private String mapURL;
 	private String operation;
+	private String businessHours;
 	private ArrayList<Menu> restMenu;
 	private String locationDetail;
 	private ArrayList<FacilityInfo> facilityInfos;
