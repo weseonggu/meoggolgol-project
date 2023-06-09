@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.soldesk.meoggolgol.MeoggolgolProject.Member.MemberSignIn;
@@ -57,12 +58,9 @@ public class NoticeController {
 		
 	// 공지사항 등록 요청
 	@PostMapping("/uploadnotice")
-	public String regNotice(@Valid NoticeRequest noticerequest, BindingResult bindingresult, @RequestParam("noticeContentHtml") String noticeContentHtml, HttpServletRequest httpservletrequest) {
-		
-		if (bindingresult.hasErrors()) {
-			return "notice/noticeUploadForm";
-		}
-		// input으로 받아온 제목+내용은 noticerequest에 넣고,
+	public String regNotice(@RequestBody NoticeRequest noticerequest, HttpServletRequest httpservletrequest) {
+
+		// 받아온 제목+내용은 noticerequest에 넣고,
 		// 작성자는 세션에 있는 멤버 닉네임 가져와서 넣고, 
 		// 등록일자는 localDate() 사용해서 넣음
 		
@@ -84,8 +82,6 @@ public class NoticeController {
 			
 			// 등록일자 제대로 들어왔는지 콘솔 확인
 			// System.out.println(regDate);
-			
-			noticerequest.setContent(noticeContentHtml); 
 	        
 			// NoticeService를 사용하여 공지사항 저장
 			ns.saveNotice(writer, noticerequest, regDate);
@@ -169,16 +165,13 @@ public class NoticeController {
 		}
 	}
 
-	// 공지사항 세부 정보 마크다운 변환해서 요청
+	// 공지사항 세부 정보 요청
 	@GetMapping(value = "/notice/detail/{id}")
 	private String goNoticeDetail(Model model, @PathVariable("id") Integer id) {
 	    Map<String, Object> noticeDetail = noReposi.getNoticeDetail(id);
 	    if (noticeDetail != null) {
 	        String content = noticeDetail.get("CONTENT").toString();
-	        NoticeResponse noticeResponse = new NoticeResponse();
-	        noticeResponse.setContent(content);
-	        String renderedContent = CommonUtil.markdown(noticeResponse);
-	        noticeDetail.put("renderedContent", renderedContent);
+	        noticeDetail.put("renderedContent", content);
 	        model.addAttribute("noticeDetail", noticeDetail);
 	        return "notice/notice_detail";
 	    } else {

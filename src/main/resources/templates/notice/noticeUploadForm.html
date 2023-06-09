@@ -5,7 +5,7 @@
 
         <div th:replace="~{form_errors :: formErrorsFragment}"></div>
         
-        <!-- 공지사항 제목 (DB에 들어갈 거) -->
+        <!-- 공지사항 제목 -->
         <div class="noticeBox">
         	<label for="noticeTitle" class="form-label">제목</label>
         	<input type="text" th:field="*{title}" id="noticeTitle">
@@ -21,10 +21,6 @@
         		
         		<!-- 에디터 내용을 받을 태그-->
     			<textarea id="noticeContent" name="content" style="display: none;" th:field="*{content}"></textarea>
-    			
-        
-        <!-- 등록하기 버튼 -->
-        <button id="form-submit" type="submit" class="btn btn-primary" onclick="seeHtml">등록하기</button>
         
         		<!-- TOAST UI Editor 생성 JS code -->
 				<script>
@@ -37,42 +33,50 @@
         			});
         			editor.getHTML();
         			
-        			// 등록 버튼 클릭 시 컨트롤러로 HTML 데이터 전송
+        			// 등록 버튼 클릭 시 컨트롤러로 HTML 형식으로 공지사항 내용 전송
         			document.addEventListener('DOMContentLoaded', function() {
-        		          var formSubmitBtn = document.querySelector('#form-submit');
+        		          var formSubmitBtn = document.querySelector('#submitBtn');
         		          if (formSubmitBtn) {
-        		            formSubmitBtn.addEventListener('click', function(e) {
-        		              e.preventDefault(); // 폼 전송 방지
-        		              var noticeContentHtml = editor.getHTML();
+        		        	  formSubmitBtn.addEventListener('click', function(e) {
+        		              	e.preventDefault(); // 폼 전송 방지
+        		              	var noticeContentHtml = editor.getHTML();
         		              
-        		              $.ajax({
-            					  url: '/uploadnotice',
-            					  method: 'POST',
-            					  data: { noticeContentHtml: noticeContentHtml },
+        		              	// NoticeRequest 객체 생성 + 필드 값 설정
+        		              	var noticeRequest = {
+        		                	title: document.getElementById('noticeTitle').value,
+        		                 	content: noticeContentHtml
+        		              	};
+        		              
+        		              	$.ajax({
+        		              		url: '/uploadnotice',
+            					  	method: 'POST',
+            					  	data: JSON.stringify(noticeRequest),
+            		              	contentType: 'application/json',
             					  
-            					  // 성공했을 경우
-            					  success: function(response) {
-            						//성공 콘솔 출력
-            					    console.log('공지사항 등록 성공');
-            					    // 성공 후 폼 제출
-            					    document.querySelector('form-submit').submit();
-            					  },
-            					  // 실패했을 경우
-            					  error: function(error) {
-            						  // 실패 콘솔 출력
-            						  console.error('공지사항 등록 실패:', error);
-            					  }
+            					  	// 성공했을 경우
+            					  	success: function(response) {
+            							//성공 콘솔 출력
+            					    	console.log('공지사항 등록 성공');
+            					    	// 성공 후 폼 제출
+            					    	document.querySelector('form').submit();
+            							window.location.href = '/notice';
+            					  	},
+            					  	// 실패했을 경우
+            					  	error: function(error) {
+            						  	// 실패 콘솔 출력
+            						  	console.error('공지사항 등록 실패:', error);
+            						  	window.location.href = '/uploadnotice';
+            					  	}
             					});
-        		            }
-        		          )}
-        			})
-        		            
-        			
+        		          })}
+        			})	
     			</script>
-
 			</div>
         </div>
-
+        
+        <!-- 등록하기 버튼 -->
+        <button id="submitBtn" type="submit" class="btn btn-primary" >등록하기</button>
+        
 	</form>
 </div>
 </html>
