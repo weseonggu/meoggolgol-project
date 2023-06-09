@@ -17,13 +17,9 @@ public class NoticeRequest {
 	private long notice_num;
 	
 	private String writer;
-	
-	@NotEmpty(message = "공지사항의 제목을 입력해주세요.")
-	@NotEmpty(message = "공지사항의 제목이 입력되지 않았습니다.")
+
 	private String title;
 
-	@NotEmpty(message = "공지사항의 상세 내용를 입력해주세요.")
-	@NotEmpty(message = "작성된 내용이 없습니다.")
 	private String content;
 	
 	private LocalDate reg_date;
