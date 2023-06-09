@@ -20,7 +20,6 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
-	
 }
 
 #reviewScore {
@@ -32,7 +31,17 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
-	
+}
+
+#mggInfo {
+	width: 80%;
+	display: table;
+	border: 1px solid black;
+	margin: auto;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-top: 16px;
 }
 
 .selectMgg {
@@ -40,6 +49,10 @@
 	width: 500px;
 	border: 1px solid black;
 	align-content: center;
+}
+
+.mggDetailInfos{
+	text-align: center;
 }
 
 .wrap {
@@ -148,4 +161,9 @@
 
 .info .link {
 	color: #5085BB;
+}
+
+.findMapURL{
+	width: 50px;
+	height: 50px;
 }

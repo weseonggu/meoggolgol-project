@@ -12,12 +12,13 @@ public class MggRestService{
 	
 	private final Selenium ce;
 	
-	public void info(String url) {
+	public RestaurantInfo info(String url) {
 		System.out.println(url);
 		try {
-			System.out.println(ce.getMapURL(url));
+			return ce.getMapURL(url);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
 }

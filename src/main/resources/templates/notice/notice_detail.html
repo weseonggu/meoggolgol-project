@@ -6,7 +6,6 @@
     	<div th:utext="${noticeDetail.renderedContent}"></div>
     	<p>작성자: <span th:text="${noticeDetail.WRITER}"></span></p>
     	<p>날짜: <span th:text="${noticeDetail.REG_DATE}"></span></p>
-    	<input type="hidden" th:value="${noticeDetail.notice_num}" id="notice_num">
 		<div th:if="${session.member_info != null}">
 			<a th:if="${session.member_info.member_nickname == noticeDetail.WRITER}" class="btn btn-primary" th:href="@{'/notice/detail/update/' + ${noticeDetail.notice_num}}" th:text="수정"></a>
 			<a th:if="${session.member_info.member_nickname == noticeDetail.WRITER}" id="noticedelete" class="btn btn-danger" th:href="@{'/notice/detail/' + ${noticeDetail.notice_num} + '/delete'}">삭제</a>
