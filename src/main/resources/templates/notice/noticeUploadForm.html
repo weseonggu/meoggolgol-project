@@ -29,7 +29,7 @@
             			previewStyle: 'vertical',
             			previewHighlight: false,
             			height: '560px',
-            			initialValue: '공지사항의 상세 내용을 입력해주세요.'
+            			initialValue: ''
         			});
         			editor.getHTML();
         			
@@ -40,13 +40,29 @@
         		        	  formSubmitBtn.addEventListener('click', function(e) {
         		              	e.preventDefault(); // 폼 전송 방지
         		              	var noticeContentHtml = editor.getHTML();
-        		              
-        		              	// NoticeRequest 객체 생성 + 필드 값 설정
-        		              	var noticeRequest = {
-        		                	title: document.getElementById('noticeTitle').value,
-        		                 	content: noticeContentHtml
-        		              	};
-        		              
+
+        		             	// 제목 & 상세 내용 유효성 검사
+        		                var titleInput = document.getElementById('noticeTitle');
+        		                var title = titleInput.value.trim();
+        		                var content = noticeContentHtml.trim();
+								
+        		                // 상세 내용이 빈 칸일 경우 <p><br></p> 값으로 넘어감
+        		                if (title === '' && content === '<p><br></p>') {
+        		                    // 제목과 내용이 모두 비어 있는 경우 경고창 표시
+        		                    alert('제목과 내용을 입력해주세요.');
+        		                } else if (title === '') {
+        		                    // 제목이 비어 있는 경우 경고창 표시
+        		                    alert('제목을 입력해주세요.');
+        		                } else if (content === '<p><br></p>') {
+        		                    // 내용이 비어 있는 경우 경고창 표시
+        		                    alert('상세 내용을 입력해 주세요.');
+        		                } else {
+        		                    // NoticeRequest 객체 생성 + 필드 값 설정
+        		                    var noticeRequest = {
+        		                        title: title,
+        		                        content: content
+        		                    };
+
         		              	$.ajax({
         		              		url: '/uploadnotice',
             					  	method: 'POST',
@@ -68,8 +84,10 @@
             						  	window.location.href = '/uploadnotice';
             					  	}
             					});
-        		          })}
-        			})	
+        		                }
+        		              });
+        		          }
+        		    });
     			</script>
 			</div>
         </div>
