@@ -2,10 +2,31 @@
 <div layout:fragment="content" class="parent" id="NoticeContainer">
    
 	<div id="noticeList">
+		<!-- 제목 -->
     	<h1 th:text="${noticeDetail.TITLE}"></h1>
-    	<div th:utext="${noticeDetail.renderedContent}"></div>
+    	
+    	<!-- 상세 내용 -->
+    	<!-- Toast UI Editor Viewer로 표시  -->
+		<div id="viewer"></div>
+		
+		<!-- Toast UI Editor Viewer 스크립트 -->
+		<script>
+    		document.addEventListener('DOMContentLoaded', function() {
+        		var viewer = new toastui.Editor.factory({
+            		el: document.querySelector('#viewer'),
+            		initialValue: `[[${noticeDetail.renderedContent}]]`,
+            		viewer: true
+        		});
+    		});
+		</script>
+		
+    	<!-- 작성자 -->
     	<p>작성자: <span th:text="${noticeDetail.WRITER}"></span></p>
+    	
+    	<!-- 등록일자 -->
     	<p>날짜: <span th:text="${noticeDetail.REG_DATE}"></span></p>
+    	
+    	<!-- 관리자일 경우 -> 수정/삭제 버튼  보여주기-->
 		<div th:if="${session.member_info != null}">
 			<a th:if="${session.member_info.member_nickname == noticeDetail.WRITER}" class="btn btn-primary" th:href="@{'/notice/detail/update/' + ${noticeDetail.notice_num}}" th:text="수정"></a>
 			<a th:if="${session.member_info.member_nickname == noticeDetail.WRITER}" id="noticedelete" class="btn btn-danger" th:href="@{'/notice/detail/' + ${noticeDetail.notice_num} + '/delete'}">삭제</a>

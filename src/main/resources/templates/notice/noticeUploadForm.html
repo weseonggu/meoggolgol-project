@@ -31,7 +31,7 @@
             			height: '560px',
             			initialValue: ''
         			});
-        			editor.getHTML();
+        			editor.getMarkdown(); 
         			
         			// 등록 버튼 클릭 시 컨트롤러로 HTML 형식으로 공지사항 내용 전송
         			document.addEventListener('DOMContentLoaded', function() {
@@ -39,7 +39,7 @@
         		          if (formSubmitBtn) {
         		        	  formSubmitBtn.addEventListener('click', function(e) {
         		              	e.preventDefault(); // 폼 전송 방지
-        		              	var noticeContentHtml = editor.getHTML();
+        		              	var noticeContentHtml = editor.getMarkdown();
 
         		             	// 제목 & 상세 내용 유효성 검사
         		                var titleInput = document.getElementById('noticeTitle');
