@@ -16,5 +16,5 @@ public class RestaurantInfo {
 	private String businessHours;
 	private ArrayList<Menu> restMenu;
 	private String locationDetail;
-	private ArrayList<FacilityInfo> facilityInfos;
+	private String facilityInfos;
 }

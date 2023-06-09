@@ -9,6 +9,34 @@
         <div id="mggInfoBoox">
             <div class="selectMgg" id="mggRestaurant" style="width:500px;height:500px;"></div>
         </div>
+        <hr>
+        <div id="mggInfo" class="mggDetailInfos">
+		    <h3 th:text="${placeName}"></h3>
+		    <a th:href="${MapURL}">
+		    	<img class="findMapURL" src="find1.png">
+		    </a>
+		    <div th:text="${operation}"></div>
+		    <div th:text="${businessHours}"></div>
+		    <div th:text="${locationDetail}"></div>
+		    <div th:text="${facilityInfo}"></div>
+        </div>
+	    <table id="mggInfo">
+	        <thead class="table-dark">
+	            <tr>
+	                <th>메뉴명</th>
+	                <th>가격</th>
+	            </tr>
+	        </thead>	
+	        <tbody>
+	            <tr th:each="menu : ${menu}">
+	                <td th:text="${menu.name}"></td>
+	                <td th:text="${menu.price}"></td>
+	            </tr>
+	        </tbody>
+	    </table>
     </div>
+    
+    
+    
 </body>
 </html>

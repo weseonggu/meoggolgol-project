@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
-import com.soldesk.meoggolgol.MeoggolgolProject.RestaurantPage.FacilityInfo;
 import com.soldesk.meoggolgol.MeoggolgolProject.RestaurantPage.Menu;
 import com.soldesk.meoggolgol.MeoggolgolProject.RestaurantPage.RestaurantInfo;
 
@@ -90,7 +89,6 @@ public class Selenium {
 	        // 지도 url
 	        WebElement tag = driver.findElement(By.cssSelector("li a.link_place"));
 	        String mapURL = tag.getAttribute("href");
-	        //System.out.println(mapURL);
 	        restaurantInfo.setMapURL(mapURL);
 	        
 	        // 현재 영업상태
@@ -98,11 +96,9 @@ public class Selenium {
 
 	        if (!titOperationElements.isEmpty()) {
 	            WebElement tit_operation = titOperationElements.get(0);
-	            //System.out.println(tit_operation.getText());
 	            restaurantInfo.setOperation(tit_operation.getText());
 	        } else {
 	            WebElement operation = driver.findElement(By.cssSelector("ul.list_caution li"));
-	            //System.out.println(operation.getText());
 	            restaurantInfo.setOperation(operation.getText());
 	        }
 	        
@@ -136,7 +132,6 @@ public class Selenium {
 	        	menu.setPrice(data2[1].split(" ")[0]); 
 	        	restMenu.add(menu);
 	        }
-	        //System.out.println(restMenu);
 	        restaurantInfo.setRestMenu(restMenu);
 	        
 	        // 예약, 바달, 포장에 대해서 가능, 불가능
@@ -147,22 +142,24 @@ public class Selenium {
 	            WebElement parentDiv = icoDeliveryElement.findElement(By.xpath("../.."));
 	            WebElement divElement = parentDiv.findElement(By.cssSelector("div.location_detail"));
 	            restaurantInfo.setLocationDetail(divElement.getText());
-	            //System.out.println(divElement.getText());
 	        } else {
-	            //System.out.println("null");
 	            restaurantInfo.setLocationDetail(null);
 	        }
 	        
 	        // 시설 정보
 	        List<WebElement> info = driver.findElements(By.cssSelector("ul.list_facility li span.color_g"));
-	        ArrayList<FacilityInfo> facilityInfos = new ArrayList<>();
-	        for (WebElement webElement : info) {
-	        	FacilityInfo facilityInfo = new FacilityInfo();
-	        	facilityInfo.setInfo(webElement.getAttribute("textContent"));
-	        	facilityInfos.add(facilityInfo);
+	        String facilityInfos = "";
+	        if (info.size() > 0) {
+				for (int i = 0; i < info.size(); i++) {
+					WebElement webElement = info.get(i);
+					facilityInfos = facilityInfos + webElement.getText();
+					if (i != info.size() - 1) {
+						facilityInfos = facilityInfos + ",";
+					}
+				}
 			}
-	        //System.out.println(facilityInfos);
 	        restaurantInfo.setFacilityInfos(facilityInfos);
+	        
 	        
 	        return restaurantInfo;
 	    } finally {
