@@ -1,24 +1,33 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="parent" id="NoticeUploadContainer">
     <!-- 공지사항 등록 화면 -->
-    <form th:action="@{/uploadnotice}" th:object="${noticeRequest}" method="POST">
+    <form th:action="@{/uploadnotice}" th:object="${noticeRequest}" method="POST" enctype="multipart/form-data">
 
         <div th:replace="~{form_errors :: formErrorsFragment}"></div>
         
         <!-- 공지사항 제목 (DB에 들어갈 거) -->
         <div class="noticeBox">
         	<label for="noticeTitle" class="form-label">제목</label>
-        	<input type="text" th:field="*{title}">
+        	<input type="text" th:field="*{title}" id="noticeTitle">
         </div>
         
         <!-- 내용 -->
         <div class="content-body">
         	<div class="form-group">
         		<label for="noticeContent"><b>내용</b></label>
-        		<!-- ToastUiEditor -->  
+        		
+        		<!-- Toast Ui Editor가 들어갈 태그-->  
         		<div id="editor"></div>
+        		
+        		<!-- 에디터 내용을 받을 태그-->
+    			<textarea id="noticeContent" name="content" style="display: none;" th:field="*{content}"></textarea>
+    			
+        
+        <!-- 등록하기 버튼 -->
+        <button id="form-submit" type="submit" class="btn btn-primary" onclick="seeHtml">등록하기</button>
+        
         		<!-- TOAST UI Editor 생성 JS code -->
-    			<script>
+				<script>
         			const editor = new toastui.Editor({
            				el: document.querySelector('#editor'),
             			previewStyle: 'vertical',
@@ -26,34 +35,44 @@
             			height: '560px',
             			initialValue: '공지사항의 상세 내용을 입력해주세요.'
         			});
+        			editor.getHTML();
         			
-        			 // 사용자가 입력한 값을 서버로 전송하는 함수
-        	        function postNoticeContent() {
-        	            var content = editor.getHtml();
-        	            
-        	            console.log(content); // 콘솔에 값을 출력하여 확인합니다.
-        	            
-        	            var xhr = new XMLHttpRequest();
-        	            xhr.open('POST', '/uploadnotice', true);
-        	            xhr.setRequestHeader('Content-Type', 'application/json');
-        	            
-        	            xhr.onload = function () {
-        	                if (xhr.status === 200) {
-        	                    console.log(xhr.responseText);
-        	                } else {
-        	                    console.error(xhr.statusText);
-        	                }
-        	            };
-        	            
-        	            xhr.send(JSON.stringify({ content: content }));
-        	        }
+        			// 등록 버튼 클릭 시 컨트롤러로 HTML 데이터 전송
+        			document.addEventListener('DOMContentLoaded', function() {
+        		          var formSubmitBtn = document.querySelector('#form-submit');
+        		          if (formSubmitBtn) {
+        		            formSubmitBtn.addEventListener('click', function(e) {
+        		              e.preventDefault(); // 폼 전송 방지
+        		              var noticeContentHtml = editor.getHTML();
+        		              
+        		              $.ajax({
+            					  url: '/uploadnotice',
+            					  method: 'POST',
+            					  data: { noticeContentHtml: noticeContentHtml },
+            					  
+            					  // 성공했을 경우
+            					  success: function(response) {
+            						//성공 콘솔 출력
+            					    console.log('공지사항 등록 성공');
+            					    // 성공 후 폼 제출
+            					    document.querySelector('form-submit').submit();
+            					  },
+            					  // 실패했을 경우
+            					  error: function(error) {
+            						  // 실패 콘솔 출력
+            						  console.error('공지사항 등록 실패:', error);
+            					  }
+            					});
+        		            }
+        		          )}
+        			})
+        		            
+        			
     			</script>
-        	</div>
+
+			</div>
         </div>
-        
-        <!-- 등록하기 버튼 -->
-        <button type="submit" class="btn btn-primary">등록하기</button>
-  
+
 	</form>
 </div>
 </html>

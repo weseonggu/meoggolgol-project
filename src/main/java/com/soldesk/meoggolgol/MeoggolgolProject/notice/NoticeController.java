@@ -57,12 +57,11 @@ public class NoticeController {
 		
 	// 공지사항 등록 요청
 	@PostMapping("/uploadnotice")
-	public String regNotice(@Valid NoticeRequest noticerequest, BindingResult bindingresult, HttpServletRequest httpservletrequest) {
+	public String regNotice(@Valid NoticeRequest noticerequest, BindingResult bindingresult, @RequestParam("noticeContentHtml") String noticeContentHtml, HttpServletRequest httpservletrequest) {
 		
 		if (bindingresult.hasErrors()) {
 			return "notice/noticeUploadForm";
 		}
-		
 		// input으로 받아온 제목+내용은 noticerequest에 넣고,
 		// 작성자는 세션에 있는 멤버 닉네임 가져와서 넣고, 
 		// 등록일자는 localDate() 사용해서 넣음
@@ -86,11 +85,7 @@ public class NoticeController {
 			// 등록일자 제대로 들어왔는지 콘솔 확인
 			// System.out.println(regDate);
 			
-			// Markdown을 HTML로 변환
-	        String htmlContent = CommonUtil.markdownToHtml(noticerequest.getContent());
-			
-	        // 변환된 HTML 내용 저장
-	        noticerequest.setContent(htmlContent);
+			noticerequest.setContent(noticeContentHtml); 
 	        
 			// NoticeService를 사용하여 공지사항 저장
 			ns.saveNotice(writer, noticerequest, regDate);

@@ -41,6 +41,4 @@ public class MggRestController {
 		return "restaurant-detail";
 	}
 	
-	
-	
 }
