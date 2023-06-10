@@ -14,7 +14,7 @@ public class MggRestController {
 	
 	@GetMapping("/restaurant-detail")
 	public String goRestPage(@RequestParam double lo, @RequestParam double la, @RequestParam String imgUrl, @RequestParam String placeUrl, @RequestParam String placeName, @RequestParam String roadAddress) {
-		mrs.info(placeUrl);
+//		mrs.info(placeUrl);
 	    return "restaurant-detail";
 	}
 }
