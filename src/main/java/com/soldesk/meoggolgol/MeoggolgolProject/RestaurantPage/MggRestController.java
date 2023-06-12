@@ -29,9 +29,8 @@ public class MggRestController {
 		model.addAttribute("locationDetail",restaurantInfo.getLocationDetail());
 		model.addAttribute("menu",mrs.menu(placeUrl));
 		model.addAttribute("facilityInfo", restaurantInfo.getFacilityInfos());
-	    model.addAttribute("reviewRequest", new ReviewRequest());
-	    model.addAttribute("review", mrr.getReviewInfo(placeName));
-		return "restaurant-detail";
+		model.addAttribute("reviewRequest", new ReviewRequest());
+	    return "restaurant-detail";
 	}
 	
 	// 음식점 리뷰 등록 요청
