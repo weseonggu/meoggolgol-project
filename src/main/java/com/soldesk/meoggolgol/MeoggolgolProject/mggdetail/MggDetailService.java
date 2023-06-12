@@ -13,6 +13,7 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
 
 import com.soldesk.meoggolgol.MeoggolgolProject.crawling.Selenium;
+import com.soldesk.meoggolgol.MeoggolgolProject.crawling.SeleniumSingleton;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class MggDetailService {
 
 	private final MggDetailRepository mdr;
-	private final Selenium ce;
+	private final SeleniumSingleton ce;
 	
 	// DB에 있는 먹자골목 정보 가져오기
 	public SelectMgg getMggInfo(double lo, double la) {

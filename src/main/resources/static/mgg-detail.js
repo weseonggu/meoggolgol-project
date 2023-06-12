@@ -1,4 +1,6 @@
 var page = 1;
+var xhr;
+var ongoingImageRequests = [];
 $(function() {
 	// 먹자골록 위치 지도 카카오맵
 	const urlParams = new URL(location.href).searchParams;
@@ -42,7 +44,7 @@ $(function() {
 
 
 	// 식당 커드
-	//	getRestaurantInfo(lo, la, page);
+	// getRestaurantInfo(lo, la, page);
 	getRestaurantInfo(lo, la, page)
 		.then(function(result) {
 			// 결과 처리
@@ -63,7 +65,11 @@ $(function() {
 
 		// 해당 카테고리에 해당하는 식당 카드만 보여주기
 		$(".restaurant-card").each(function() {
-			var cardCategory = $(this).find('input[type=hidden]').last().val(); // 식당 카드의 카테고리 이름 가져오기
+			var cardCategory = $(this).find('input[type=hidden]').last().val(); // 식당
+																				// 카드의
+																				// 카테고리
+																				// 이름
+																				// 가져오기
 			if (cardCategory.includes(category)) {
 				$(this).show();
 			}
@@ -83,49 +89,69 @@ $(function() {
 
 		// 기타 카테고리에 해당하지 않는 식당 카드만 보여주기
 		$(".restaurant-card").each(function() {
-			var cardCategory = $(this).find('input[type=hidden]').last().val(); // 식당 카드의 카테고리 이름 가져오기
+			var cardCategory = $(this).find('input[type=hidden]').last().val(); // 식당
+																				// 카드의
+																				// 카테고리
+																				// 이름
+																				// 가져오기
 			if (!cardCategory.includes("한식") && !cardCategory.includes("중식") && !cardCategory.includes("양식") && !cardCategory.includes("일식")) {
 				$(this).show();
 			}
 		});
 	});
 
-	// 다음 식당 정보
+// 다음 식당 정보
 	$("#next").click(function() {
+		// Cancel ongoing image requests
+		for (var i = 0; i < ongoingImageRequests.length; i++) {
+			ongoingImageRequests[i].abort();
+		}
+		
+		ongoingImageRequests = [];
+		
 		$("#restaurantListBox").empty();
 		page += 1;
+		
 		getRestaurantInfo(lo, la, page)
-			.then(function(result) {
-				// 결과 처리
-				changeImg(result);
-				categoryNameValues();
-			})
-			.catch(function(error) {
-				// 오류 처리
-			});
+		.then(function(result) {
+			changeImg(result);
+			categoryNameValues();
+		})
+		.catch(function(error) {
+			// Handle error
+		});
 	});
+	
+// 이전 식당 정보
+		$("#before").click(function() {
+		  // Cancel ongoing image requests
+		  for (var i = 0; i < ongoingImageRequests.length; i++) {
+		    ongoingImageRequests[i].abort();
+		  }
 
-	// 이전 식당 정보
-	$("#before").click(function() {
-		if (page == 1) {
-			return
-		}
-		else {
-			$("#restaurantListBox").empty();
-			page -= 1
-			getRestaurantInfo(lo, la, page)
-				.then(function(result) {
-					// 결과 처리
-					changeImg(result);
-					categoryNameValues();
-				})
-				.catch(function(error) {
-					// 오류 처리
-				});
-		}
-	});
+		  ongoingImageRequests = [];
+
+		  if (page == 1) {
+		    return;
+		  } else {
+		    $("#restaurantListBox").empty();
+		    page -= 1;
+
+		    getRestaurantInfo(lo, la, page)
+		      .then(function(result) {
+		        changeImg(result);
+		        categoryNameValues();
+		      })
+		      .catch(function(error) {
+		        // Handle error
+		      });
+		  }
+		});
 
 	$(document).on('click', '.restaurant-card', function() {
+		  for (var i = 0; i < ongoingImageRequests.length; i++) {
+			    ongoingImageRequests[i].abort();
+			  }
 		var mggName = $("#mggName").text();
 		var cardlo = $(this).attr("lo");
 		var cardla = $(this).attr("la");
@@ -170,19 +196,26 @@ function getRestaurantInfo(lo, la, page) {
 
 // 이미지 바꾸기
 function changeImg(result) {
+	  // Cancel ongoing image requests
+	  for (var i = 0; i < ongoingImageRequests.length; i++) {
+	    ongoingImageRequests[i].abort();
+	  }
 
-	for (var y = 0; y < result.url.length; y++) {
-		$.getJSON("restaurantCardImg?url=" + result.url[y] + "&id=" + result.id[y], function(data) {
-			if (data.url == "error") {
-				y = y - 1;
-			}
-			else {
-				$("#" + data.id + " img").attr("src", data.url);
-			}
-		});
+	  ongoingImageRequests = [];
+
+	  // Create new image requests
+	  for (var y = 0; y < result.url.length; y++) {
+	    var request = $.getJSON("restaurantCardImg?url=" + result.url[y] + "&id=" + result.id[y], function(data) {
+	      if (data.url == "error") {
+	        y = y - 1;
+	      } else {
+	        $("#" + data.id + " img").attr("src", data.url);
+	      }
+	    });
+
+	    ongoingImageRequests.push(request);
+	  }
 	}
-}
-
 
 function categoryNameValues() {
 	var categoryValues = $('.category_name').map(function() {
