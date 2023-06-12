@@ -117,12 +117,24 @@ public class NoticeController {
 	// 공지사항 수정 페이지 요청
 	@GetMapping(value = "/notice/detail/update/{id}")
 	private String updateQNA(NoticeRequest notierequest, Model model,@PathVariable("id") Integer id) {
-		model.addAttribute("title", ns.getNoticeTitle(id));
-		model.addAttribute("content", ns.getNoticeContent(id));
+		
+		// 공지사항 제목 + 번호 가져오기
 		model.addAttribute("id", id);
-		return "notice/notice_update";
+		model.addAttribute("title", ns.getNoticeTitle(id));
+		
+		// 공지사항 내용 가져오기
+		Map<String, Object> noticeDetail = noReposi.getNoticeDetail(id);
+		if (noticeDetail != null) {
+	        String content = noticeDetail.get("CONTENT").toString();
+	        noticeDetail.put("renderedContent", content);
+	        model.addAttribute("noticeDetail", noticeDetail);
+	        return "notice/notice_detail";
+	    } else {
+	        return "notice/noticeForm";
+	    }
+	    
 	}
-	
+
 	// 공지사항 수정
 	@PostMapping(value = "/notice/update/{id}")
 	private String updateQna(@PathVariable("id") Integer id, @RequestParam("title") String title, @RequestParam("content") String content, HttpServletRequest httpservletrequest)throws Exception {

@@ -49,14 +49,18 @@
     				<script>
         				const editor = new toastui.Editor({
            					el: document.querySelector('#editor'),
+           					toolbarItems: [
+        					    ['heading', 'bold', 'italic', 'strike'],
+        					    ['hr'],
+        					    ['ul', 'ol'],
+        					    ['table', 'link']
+        					],
            					initialEditType: 'markdown',
-            				previewStyle: 'tab',
+            				previewStyle: 'vertical',
             				previewHighlight: false,
             				height: '350px',
-            				initialValue: '작성 내용은 매장주를 포함한 모든 사용자들이 볼 수 있으니, 서로를 배려하는 마음을 담아 작성해 주세요.'
+            				initialValue: '작성 내용은 매장 주를 포함한 모든 사용자들이 볼 수 있으니, 서로를 배려하는 마음을 담아 작성해 주세요.'
         				});
-        			
-        				editor.getMarkdown();
     			</script>
 				</div>
 				<!-- 등록하기 버튼 -->
