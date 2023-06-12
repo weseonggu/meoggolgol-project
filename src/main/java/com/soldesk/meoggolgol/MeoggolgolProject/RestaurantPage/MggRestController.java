@@ -30,6 +30,7 @@ public class MggRestController {
 		model.addAttribute("menu",mrs.menu(placeUrl));
 		model.addAttribute("facilityInfo", restaurantInfo.getFacilityInfos());
 		model.addAttribute("reviewRequest", new ReviewRequest());
+		model.addAttribute("review", mrr.getReviewInfo(placeName));
 	    return "restaurant-detail";
 	}
 	
