@@ -73,7 +73,7 @@ public class MggRestController {
 			String review = reviewrequest.getRr_review();
 			
 			mrr.saveReview(reviewrequest.getRr_mggname(), reviewrequest.getRr_restaurantname(), 
-					reviewrequest.getRr_num(), score, reviewrequest.getRr_review(), reviewrequest.getRr_writer());
+					score, reviewrequest.getRr_review(), reviewrequest.getRr_writer());
 
 			// 콘솔에 저장된 공지사항 출력        
 			System.out.println("번호: " + reviewrequest.getRr_score());
