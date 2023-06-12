@@ -18,6 +18,32 @@
         <div class="mggInfoBox">
             <div class="selectMgg" id="mggRestaurant" style="width:500px;height:500px;"></div>
         </div>
+		<hr>
+		<div id="mggInfo" class="mggDetailInfos">
+			<h3 th:text="${placeName}"></h3>
+			<a th:href="${MapURL}">
+				<img class="findMapURL" src="find1.png">
+			</a>
+			<div th:text="${operation}"></div>
+			<div th:text="${businessHours}"></div>
+			<div th:text="${locationDetail}"></div>
+			<div th:text="${facilityInfo}"></div>
+		</div>
+		
+		<table id="mggInfo">
+			<thead class="table-dark">
+				<tr>
+					<th>메뉴명</th>
+					<th>가격</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:Each="menu : ${menu}">
+					<td th:text="${menu.name}"></td>
+					<td th:text="${menu.price}"></td>
+				</tr>
+			</tbody>
+		</table>
 		
 		<!-- 리뷰 등록폼 -->
 		<div class="mggInfoBox mb-3" name="reviewBox" id="reviewBox" >
@@ -63,6 +89,26 @@
         		<button type="submit" class="btn btn-primary">등록하기</button>
 			</div>
 			
+			<table class="table" id="noticeList">
+        <thead class="table-dark">
+            <tr>
+                <th>먹자골목이름</th>
+                <th>음식점이름</th>
+                <th>별점</th>
+                <th>리뷰</th>
+                <th>작성일시</th>
+            </tr>
+        </thead>	
+        <tbody>
+            <tr th:each="review : ${review}">
+                <td th:text="${review.rr_mggname}"></td>
+                <td th:text="${review.rr_restaurantname}"></td>
+                <td th:text="${review.rr_score}"></td>
+                <td th:text="${review.rr_review}"></td>
+                <td th:text="${review.rr_writer}"></td>
+            </tr>
+        </tbody>
+    </table>
 		</div>
 	</form>
     </div>

@@ -15,6 +15,7 @@ public class MggRestService{
 	public RestaurantInfo info(String url) {
 		System.out.println(url);
 		try {
+			System.out.println(ce.getDetailRest(url));
 			return ce.getDetailRest(url);
 		} catch (Exception e) {
 			e.printStackTrace();

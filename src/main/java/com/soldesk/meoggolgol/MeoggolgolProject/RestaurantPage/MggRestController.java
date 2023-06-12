@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MggRestController {
 
+	private final MggRestRepository mrr;
 	private final MggRestService mrs;
 	
 	// 음식점 상세 페이지 요청
@@ -28,7 +29,9 @@ public class MggRestController {
 		model.addAttribute("locationDetail",restaurantInfo.getLocationDetail());
 		model.addAttribute("menu",restaurantInfo.getRestMenu());
 		model.addAttribute("facilityInfo", restaurantInfo.getFacilityInfos());
-	    return "restaurant-detail";
+	    model.addAttribute("reviewRequest", new ReviewRequest());
+	    model.addAttribute("review", mrr.getReviewInfo(placeName));
+		return "restaurant-detail";
 	}
 	
 	// 음식점 리뷰 등록 요청
