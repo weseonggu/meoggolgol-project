@@ -18,10 +18,16 @@ public class MggRestRepository{
 			"""
 			select * from restaurantreview where rr_restaurantname = ? order by rr_num desc
 			""";
+
 	
+	private static final String INSERT_REVIEW = "INSERT INTO restaurantreview (rr_mggname, rr_restaurantname, rr_num, rr_score, rr_review, rr_writer) VALUES (?, ?, ?, ?, ?, ?)";
 	
 	// Q&A 댓글 세부 정보
 	public List<Map<String,Object>> getReviewInfo(String restName){
 		return jdbc.queryForList(SELECT_REST_REVIEW, restName);
 	}
+	
+	public void saveReview(String mggName, String restaurantName, long rr_num, int score, String review, String writer) {
+        jdbc.update(INSERT_REVIEW, mggName, restaurantName, rr_num, score, review, writer);
+    }
 }

@@ -1,6 +1,5 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.RestaurantPage;
 
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,9 +14,10 @@ public class ReviewRequest {
 	
 	private String rr_restaurantname;
 	
+	private long rr_num;
+	
 	private int rr_score;
 	
-	@NotEmpty
 	private String rr_review;
 	
 	private String rr_writer;

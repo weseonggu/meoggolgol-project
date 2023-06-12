@@ -26,6 +26,12 @@
 				<script>
         			const editor = new toastui.Editor({
            				el: document.querySelector('#editor'),
+           				toolbarItems: [
+    					    ['heading', 'bold', 'italic', 'strike'],
+    					    ['hr'],
+    					    ['ul', 'ol', 'task'],
+    					    ['table', 'link']
+    					],
             			previewStyle: 'vertical',
             			previewHighlight: false,
             			height: '560px',
