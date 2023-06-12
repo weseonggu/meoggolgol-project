@@ -1,6 +1,6 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.notice;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +40,7 @@ public class NoticeRepository {
 	// notice 수정
 	private static String UPDATE_NOTICE=
 			"""
-				update notice set TITLE = ?, CONTENT = ?, REG_DATE = ? where WRITER = ? and notice_num = ?
+				update notice set TITLE = ?, CONTENT = ?, REG_DATE = ?, WRITER = ? where notice_num = ?
 			""";
 	// notice 삭제
 	private static String DELETE_NOTICE=
@@ -48,7 +48,7 @@ public class NoticeRepository {
 				delete from notice where WRITER = ? and notice_num = ?
 			""";
 	
-	public void insertNotice(String writer, NoticeRequest noticerequest, LocalDate regDate) {
+	public void insertNotice(String writer, NoticeRequest noticerequest, LocalDateTime regDate) {
 		jdbc.update(INSERT_NOTICE,
 				writer,
 				noticerequest.getTitle(),
@@ -57,7 +57,12 @@ public class NoticeRepository {
 				);
 	}
 	
-//	 공지사항 세부 정보
+	// 공지사항 수정
+	public void updateNotice(String writer, NoticeRequest noticerequest, LocalDateTime regDate, Long notice_num) {
+		jdbc.update(UPDATE_NOTICE, writer, noticerequest.getTitle(), noticerequest.getContent(), regDate, notice_num);
+	}
+	
+	 // 공지사항 세부 정보
 	 public List<Map<String,Object>> getNoticeDetailInfo(int notice_num){
 	 	return jdbc.queryForList(SELECT_NOTICE_detail, notice_num);
 	 }
@@ -75,15 +80,9 @@ public class NoticeRepository {
 	// 총 공지사항 게시물 수
 	public int getTotalCount(){
 		return jdbc.queryForObject(NOTICE_TOTAL_COUNT, Integer.class);
-
 	}
 	
-	// Q&A 수정
-	public void updateNotice(String title, String content, LocalDate regDate, String writer, int num) {
-		jdbc.update(UPDATE_NOTICE, title, content, regDate, writer, num);
-	}
-	
-	// Q&A 삭제
+	// 공지사항 삭제
 	public void deleteNotice(String writer,int num) {
 		jdbc.update(DELETE_NOTICE, writer, num);
 	}

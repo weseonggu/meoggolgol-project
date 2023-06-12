@@ -1,6 +1,6 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.notice;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ public class NoticeService {
 	private final NoticeRepository nr;
 	
 	// 공지사항 저장하기
-	public void saveNotice(String writer, NoticeRequest noticeRequest, LocalDate regDate) {
+	public void saveNotice(String writer, NoticeRequest noticeRequest, LocalDateTime regDate) {
         nr.insertNotice(writer, noticeRequest, regDate);
     }
 	// 공지사항 작성자 가져오기
@@ -36,12 +36,14 @@ public class NoticeService {
 		noticeResponse.setContent(nr.getNoticeDetailInfo(num).get(0).get("CONTENT").toString());
 		return noticeResponse.getContent();
 	}
-	// notice 수정
-	public void updateNotice(String title, String content, LocalDate regDate, String writer, int num) {
-		nr.updateNotice(title, content, regDate, writer, num);
+	// 공지사항 수정
+	public void updateNotice(String writer, NoticeRequest noticerequest, LocalDateTime regDate, long notice_num) {
+		
+		
+		nr.updateNotice(writer, noticerequest, regDate, notice_num);
 	}
-	// notice 삭제
-	public void deleteQNA(String writer, int num) {
+	// 공지사항 삭제
+	public void deleteNotice(String writer, int num) {
 		nr.deleteNotice(writer, num);
 	}
 	

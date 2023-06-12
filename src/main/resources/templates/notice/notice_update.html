@@ -17,7 +17,7 @@
         	<div id="editor"></div>
         	
         	<!-- 에디터 내용을 받을 태그-->
-    		<textarea id="noticeContent" name="content" style="display: none;" th:text="${content}"></textarea>
+    		<textarea id="noticeContent" name="content" style="display: none;" th:field="*{content}"></textarea>
 			
 			<!-- TOAST UI Editor 생성 JS code -->
 			<script>

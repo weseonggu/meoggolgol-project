@@ -1,6 +1,7 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.notice;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,6 @@ public class NoticeRequest {
 
 	private String content;
 	
-	private LocalDate reg_date;
+	private LocalDateTime reg_date;
 
 }
