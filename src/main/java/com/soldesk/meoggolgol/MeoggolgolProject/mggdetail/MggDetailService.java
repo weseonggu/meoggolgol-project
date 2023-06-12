@@ -47,7 +47,7 @@ public class MggDetailService {
             // URL 생성
             String urlString = apiUrl + "?category_group_code=" + categoryCode +
                     "&y=" + latitude + "&x=" + longitude +
-                    "&page=" + page + "&size=" + pageSize;
+                    "&page=" + page + "&size=" + pageSize+"&radius=200";
             URL url = new URL(urlString);
 
             // HTTP 연결 설정
