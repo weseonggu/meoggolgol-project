@@ -12,7 +12,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
 
-import com.soldesk.meoggolgol.MeoggolgolProject.crawling.Selenium;
 import com.soldesk.meoggolgol.MeoggolgolProject.crawling.SeleniumSingleton;
 
 import lombok.RequiredArgsConstructor;
