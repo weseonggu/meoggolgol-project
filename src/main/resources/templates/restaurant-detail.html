@@ -19,30 +19,11 @@
             <div class="selectMgg" id="mggRestaurant" style="width:500px;height:500px;"></div>
         </div>
 		<hr>
-		<div id="mggInfo" class="mggDetailInfos">
-			<h3 th:text="${placeName}"></h3>
-			<a th:href="${MapURL}">
-				<img class="findMapURL" src="find1.png">
-			</a>
-			<div th:text="${operation}"></div>
-			<div th:text="${businessHours}"></div>
-			<div th:text="${locationDetail}"></div>
-			<div th:text="${facilityInfo}"></div>
-		</div>
+		<div id="mggInfoabc" class="mggDetailInfos"></div>
 		
 		<table id="mggInfo">
-			<thead class="table-dark">
-				<tr>
-					<th>메뉴명</th>
-					<th>가격</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:Each="menu : ${menu}">
-					<td th:text="${menu.name}"></td>
-					<td th:text="${menu.price}"></td>
-				</tr>
-			</tbody>
+			<thead id="menuHead" class="table-dark"></thead>
+			<tbody id="menuBody"></tbody>
 		</table>
 		
 		<!-- 리뷰 등록폼 -->
@@ -52,7 +33,6 @@
 			<div id="reviewScore">
 				<fieldset>
 					<span class="text-bold">별점을 선택해주세요</span>
-			
 					<!-- 1 점 -->
 					<input type="radio" name="reviewStar" value="5" id="rate1"><label for="rate1">★</label>
 					<!-- 2 점 -->
