@@ -69,12 +69,6 @@ function getRestaurantInfo(placeUrl, placeName) {
 	return new Promise(function(reject) {
 		placeUrl = placeUrl.replace("http:", "https:"); // "placeUrl" 변수에 대입하는 부분 수정
 		$.getJSON("restaurantDetailInfo?placeUrl=" + placeUrl, function(data) {
-			console.info(data.mapURL);
-			console.info(data.operation);
-			console.info(data.businessHours);
-			console.info(data.locationDetail);
-			console.info(data.facilityInfos);
-			console.info(data);
 			$("#mggInfoabc").append(
 				$("<h3></h3>").text(placeName),
 				$("<a></a>").attr("href", data.mapURL).append($("<img>").attr("src", "/find1.png").addClass("findMapURL")), // "val()" 대신 "attr()"을 사용하여 href 속성 설정
