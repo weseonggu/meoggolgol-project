@@ -140,35 +140,37 @@ public class NoticeController {
 	}
 
 	// 공지사항 수정
-	@PostMapping(value = "/notice/update/{id}")
-	private String updateNotice(@PathVariable("id") Integer id, @RequestBody NoticeRequest noticerequest, HttpServletRequest httpservletrequest)throws Exception {
-		HttpSession session = httpservletrequest.getSession();
-		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
-		// 세션 값 콘솔 확인
-		System.out.println(membersignin);
-		if (membersignin != null) {
-			
-			// 세션 값 중 member_nickname 가져오기
-			String writer = membersignin.getMember_nickname();
-			
-			// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
-			System.out.println(writer);
-			//System.out.println(ns.getNoticeWriter(id));
-			
-			// 수정일자는 현재 날짜로 설정
-			LocalDateTime regDate = LocalDateTime.now();
-			System.out.println(regDate);
-			
-			System.out.println(noticerequest.getContent());
-			
-			Map<String, Object> noticeDetail = noReposi.getNoticeDetail(id);
-			Long notice_num = (Long) noticeDetail.get("notice_num");
-		
-			if ("Y".equals(membersignin.getManager())) {
-				ns.updateNotice(noticerequest.getTitle(), noticerequest.getContent(), regDate, writer, notice_num);
-			}
-		}
-		return "redirect:/notice/detail/"+id;
+	@PostMapping(value = "/notice/update")
+	private void updateNotice( @RequestBody NoticeRequest noticerequest, HttpServletRequest httpservletrequest)throws Exception {
+		System.out.println(noticerequest.getTitle());
+		System.out.println(noticerequest.getTitle());
+//		HttpSession session = httpservletrequest.getSession();
+//		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
+//		// 세션 값 콘솔 확인
+//		System.out.println(membersignin);
+//		if (membersignin != null) {
+//			
+//			// 세션 값 중 member_nickname 가져오기
+//			String writer = membersignin.getMember_nickname();
+//			
+//			// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
+//			System.out.println(writer);
+//			//System.out.println(ns.getNoticeWriter(id));
+//			
+//			// 수정일자는 현재 날짜로 설정
+//			LocalDateTime regDate = LocalDateTime.now();
+//			System.out.println(regDate);
+//			
+//			System.out.println(noticerequest.getContent());
+//			
+//			Map<String, Object> noticeDetail = noReposi.getNoticeDetail(id);
+//			Long notice_num = (Long) noticeDetail.get("notice_num");
+//		
+//			if ("Y".equals(membersignin.getManager())) {
+//				ns.updateNotice(noticerequest.getTitle(), noticerequest.getContent(), regDate, writer, notice_num);
+//			}
+//		}
+//		return "redirect:/notice/detail/"+id;
 	}
 	
 	// notice 삭제
