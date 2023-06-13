@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -117,7 +119,7 @@ public class NoticeController {
 	
 	// 공지사항 수정 페이지 요청
 	@GetMapping(value = "/notice/detail/update/{id}")
-	private String updateQNA(NoticeRequest notierequest, Model model,@PathVariable("id") Integer id) {
+	private String goUpdateNotice(NoticeRequest notierequest, Model model,@PathVariable("id") Integer id) {
 		
 		// 공지사항 제목 + 번호 가져오기
 		model.addAttribute("id", id);
@@ -129,9 +131,8 @@ public class NoticeController {
 			
 	        String content = noticeDetail.get("CONTENT").toString();
 	        System.out.println(content);
-	        
-	        noticeDetail.put("renderedContent", content);
-	        model.addAttribute("noticeDetail", noticeDetail);
+	       
+	        model.addAttribute("content", content);
 	        
 	        return "notice/notice_update";
 	    } else {
@@ -141,7 +142,7 @@ public class NoticeController {
 
 	// 공지사항 수정
 	@PostMapping(value = "/notice/update/{id}")
-	private String updateNotice(@PathVariable("id") Integer id, @RequestBody NoticeRequest noticerequest, HttpServletRequest httpservletrequest)throws Exception {
+	private String updateNotice(@PathVariable("id") Integer id, @RequestBody NoticeEditRequest noticeeditrequest, HttpServletRequest httpservletrequest)throws Exception {
 		HttpSession session = httpservletrequest.getSession();
 		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
 		// 세션 값 콘솔 확인
@@ -159,13 +160,13 @@ public class NoticeController {
 			LocalDateTime regDate = LocalDateTime.now();
 			System.out.println(regDate);
 			
-			System.out.println(noticerequest.getContent());
+			System.out.println(noticeeditrequest.getContent());
 			
 			Map<String, Object> noticeDetail = noReposi.getNoticeDetail(id);
 			Long notice_num = (Long) noticeDetail.get("notice_num");
 		
 			if ("Y".equals(membersignin.getManager())) {
-				ns.updateNotice(noticerequest.getTitle(), noticerequest.getContent(), regDate, writer, notice_num);
+				ns.updateNotice(noticeeditrequest.getTitle(), noticeeditrequest.getContent(), regDate, writer, notice_num);
 			}
 		}
 		return "redirect:/notice/detail/"+id;

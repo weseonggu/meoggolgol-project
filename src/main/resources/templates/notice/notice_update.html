@@ -32,7 +32,7 @@
             		previewStyle: 'vertical',
             		previewHighlight: false,
             		height: '560px',
-            		initialValue: `[[${noticeDetail.renderedContent}]]`
+            		initialValue: `[[${content}]]`
         		});
         		
         		// 등록 버튼 클릭 시 컨트롤러로 HTML 형식으로 공지사항 내용 전송
@@ -60,21 +60,19 @@
     		                    alert('상세 내용을 입력해 주세요.');
     		                } else {
     		                    // NoticeRequest 객체 생성 + 필드 값 설정
-    		                    var NoticeRequest = {'title': title, 'content': content};
+    		                    var NoticeEditRequest = {'title': title, 'content': content};
 
     		              	$.ajax({
     		              		url: '/notice/update/{id}',
         					  	method: 'POST',
-        					  	data: JSON.stringify(NoticeRequest),
+        					    enctype: 'application/x-www-form-urlencoded',
+        					  	data: JSON.stringify(NoticeEditRequest),
         		              	contentType: "application/json; charset=UTF-8",
         					  
         					  	// 성공했을 경우
         					  	success: function(response) {
         							//성공 콘솔 출력
         					    	console.log('공지사항 수정 성공');
-        					    	// 성공 후 폼 제출
-        					    	document.querySelector('form').submit();
-        							window.location.href = '/notice/detail/{id}';
         					  	},
         					  	// 실패했을 경우
         					  	error: function(error) {
