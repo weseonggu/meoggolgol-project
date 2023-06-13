@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.net.MediaType;
 import com.soldesk.meoggolgol.MeoggolgolProject.Member.MemberSignIn;
@@ -142,7 +143,7 @@ public class NoticeController {
 
 	// 공지사항 수정
 	@PostMapping(value = "/notice/update/{id}")
-	private String updateNotice(@PathVariable("id") Integer id, @RequestBody NoticeEditRequest noticeeditrequest, HttpServletRequest httpservletrequest)throws Exception {
+	private String updateNotice(@RequestBody NoticeRequest noticerequest, HttpServletRequest httpservletrequest, @PathVariable("id") Integer id)throws Exception {
 		HttpSession session = httpservletrequest.getSession();
 		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
 		// 세션 값 콘솔 확인
@@ -160,13 +161,13 @@ public class NoticeController {
 			LocalDateTime regDate = LocalDateTime.now();
 			System.out.println(regDate);
 			
-			System.out.println(noticeeditrequest.getContent());
+			System.out.println(noticerequest);
 			
 			Map<String, Object> noticeDetail = noReposi.getNoticeDetail(id);
 			Long notice_num = (Long) noticeDetail.get("notice_num");
 		
 			if ("Y".equals(membersignin.getManager())) {
-				ns.updateNotice(noticeeditrequest.getTitle(), noticeeditrequest.getContent(), regDate, writer, notice_num);
+				ns.updateNotice(noticerequest.getTitle(), noticerequest.getContent(), regDate, writer, notice_num);
 			}
 		}
 		return "redirect:/notice/detail/"+id;
