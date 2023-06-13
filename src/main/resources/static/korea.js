@@ -27,7 +27,7 @@ $(function() {
 
   // 맵을 위한 투영법 정의
   const projection = d3.geoMercator()
-    .center([127.985, 37.565]) // 경도 127.985, 위도 37.565로 맵 중앙 설정
+    .center([127.985, 36.265]) // 경도 127.985, 위도 37.565로 맵 중앙 설정
     .scale(initialScale)
     .translate([width / 2, height / 2]);
 
