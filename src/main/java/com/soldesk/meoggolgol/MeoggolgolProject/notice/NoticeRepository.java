@@ -62,8 +62,8 @@ public class NoticeRepository {
 	}
 	
 	// 공지사항 수정
-	public void updateNotice(NoticeRequest noticerequest, LocalDateTime regDate, String writer, Long notice_num) {
-		jdbc.update(UPDATE_NOTICE, noticerequest.getTitle(), noticerequest.getContent(), regDate, writer, notice_num);
+	public void updateNotice(String title, String content, LocalDateTime regDate, String writer, Long notice_num) {
+		jdbc.update(UPDATE_NOTICE, title, content, regDate, writer, notice_num);
 	}
 	
 	 // 공지사항 세부 정보

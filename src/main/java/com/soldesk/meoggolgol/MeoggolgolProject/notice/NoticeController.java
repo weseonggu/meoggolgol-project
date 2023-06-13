@@ -6,11 +6,13 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.common.net.MediaType;
 import com.soldesk.meoggolgol.MeoggolgolProject.Member.MemberSignIn;
 import com.soldesk.meoggolgol.MeoggolgolProject.notice.paging.Pagination;
 
@@ -138,7 +140,7 @@ public class NoticeController {
 	}
 
 	// 공지사항 수정
-	@PostMapping(value = "/notice/update/{id}", consumes = "application/json")
+	@PostMapping(value = "/notice/update/{id}")
 	private String updateNotice(@PathVariable("id") Integer id, @RequestBody NoticeRequest noticerequest, HttpServletRequest httpservletrequest)throws Exception {
 		HttpSession session = httpservletrequest.getSession();
 		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
@@ -156,13 +158,14 @@ public class NoticeController {
 			// 수정일자는 현재 날짜로 설정
 			LocalDateTime regDate = LocalDateTime.now();
 			System.out.println(regDate);
+			
 			System.out.println(noticerequest.getContent());
 			
 			Map<String, Object> noticeDetail = noReposi.getNoticeDetail(id);
 			Long notice_num = (Long) noticeDetail.get("notice_num");
 		
 			if ("Y".equals(membersignin.getManager())) {
-				ns.updateNotice(writer, noticerequest, regDate, notice_num);
+				ns.updateNotice(noticerequest.getTitle(), noticerequest.getContent(), regDate, writer, notice_num);
 			}
 		}
 		return "redirect:/notice/detail/"+id;

@@ -41,8 +41,8 @@ public class NoticeService {
 	}
 	
 	// 공지사항 수정
-	public void updateNotice(String writer, NoticeRequest noticerequest, LocalDateTime regDate, long notice_num) {	
-		nr.updateNotice(noticerequest, regDate, writer, notice_num);
+	public void updateNotice(String title, String content, LocalDateTime regDate, String writer, long notice_num) {	
+		nr.updateNotice(title, content, regDate, writer, notice_num);
 	}
 	
 	// 공지사항 삭제
