@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+#aboutTop {
+	font-family: 'PyeongChangPeace';
+	color: #1B1B1C;
+}
+
+#waveDivider {
+	height: 150px;
+	width: 100%;
+	background-color: #FEF8EA;
+}
+
+#topSubText {
+	font-family: 'Dung';
+	font-size: 22px;
+	color: #1B1B1C;
+}
+
+#section2 {
+	padding-bottom: 0px;
+	background-color: #B2F354;
+}

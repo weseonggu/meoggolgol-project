@@ -14,7 +14,7 @@
 }
 
 .brandContentWrapper {
- 	display: flex;
+ 	display: contents;
  	justify-content: space-between;
  	width: 100%;
 }
@@ -22,34 +22,26 @@
 .brandContent {
    flex-grow: 1;
    text-align: center;
-   font-size: 18px;
 }
 
-#brandName {
-	font-family: 'PyeongChangPeace';
-    font-size: 60px; 
-    color: #1B1B1C;
-	
-}
 #text {
 	display: flex;
     width: 80%;
     justify-content: flex-start;
     align-items: center;
-    padding-left: 20px;
+    padding-left: 21px;
     text-align: left;
-    font-family: 'NanumMyeongjo_Bold';
+    font-family: 'Dung';
     color: #1B1B1C;
-    font-size: 18px;
-    
+    font-size: 22px;
 }
 
 /* 먹골골 로고 png 파일*/
 #logo {
-	width: 240px;
-	height:160px;
-    margin-bottom: 0px;
-    margin-top: 0px;
+	width: 270px;
+	height: 160px;
+	padding: 10px;
+	margin-left: 28px;
 }
 
 #signInUp {
@@ -57,18 +49,38 @@
     width: 20%;
     justify-content: flex-end;
     align-items: center;
-    padding-right: 20px;
+    padding-right: 27px;
 }
 
-#sign {
-	padding: 4px;
+#signDivider {
+	font-family: 'Dung';
+	font-size: 25px;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 4px;
+    color: #1B1B1C;
+}
+
+#loginButton, #signupButton {
+	font-family: 'Dung';
+	font-size: 25px;
+	text-decoration: none;
+    color: #1B1B1C;
+}
+
+#signupButton:hover {
+    color: #EE3898;
+}
+
+#loginButton:hover {
+    color: #EE3898;
 }
 
 /* 네비게이션 바 */
 .navbar {
 	padding: 0px;
 	background-color: #1B1B1C;
-
+	--bs-navbar-hover-color: #EE3898;
 }
 
 .navbar-collapse {
@@ -76,7 +88,6 @@
     flex-grow: 1;
 	align-items: center;
 	flex-flow: nowrap;
-
 }
 
 .navbar-nav {
@@ -84,13 +95,14 @@
 	display: flex;
     justify-content: space-around;
     width: 100%;
+    padding: 0rem 0rem;
 }
 
 .navbar-nav .nav-item {
     flex-grow: 1;
     text-align: center;
-    font-family: 'NanumMyeongjo_Bold';
-    font-size: 25px;
+    font-family: 'Dung';
+    font-size: 40px;
 }
 
 body {

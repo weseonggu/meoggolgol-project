@@ -46,3 +46,13 @@
         url('https://cdn.jsdelivr.net/gh/webfontworld/PyeongChang/PyeongChangPeace-Bold.ttf') format("truetype");
     font-display: swap;
 } 
+
+@font-face {
+    font-family: 'Kumar';
+    src: url('font/KumarOne-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Dung';
+    src: url('font/DungGeunMo.ttf') format('truetype');
+}

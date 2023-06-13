@@ -1,30 +1,37 @@
 <html layout:decorate="~{layout}">
-<div layout:fragment="content" class="parent" id="MainPageContainer">
+<div layout:fragment="content">
 
 <link rel="stylesheet" type="text/css" th:href="@{/korea.css}">
 <script type="text/javascript" th:src="@{/d3.js}"></script>
 <script type="text/javascript" th:src="@{/korea.js}"></script>
 
-	<!-- div 태그 안 class 이름들은 정렬을 위해서 만든 것들 -->
-	<div class="parentInner">
-		<div class="parentContent" id="SelectBox">
-			<!-- 지도 -->
-			<div class="child" id="MapContainer"></div>
-			<!-- 시군구 리스트 -->
-			<div  class="child" id ="sigunguList">
-				<p>시군구를 선택하세요</p>
-				<div id= "sigungutableParent">
-					<div id="sigunguTable">
+	<!-- 이용 가이드 배너 -->
+	<div id="banner">
+		<a href="/userguide"><img alt="banner" src="mggBanner.png" id="banner"></a>
+	</div>
+	
+	<!-- 메인 페이지 내용 시작 -->
+	<div class="parent" id="MainPageContainer">
+		<!-- div 태그 안 class 이름들은 정렬을 위해서 만든 것들 -->
+		<div class="parentInner">
+			<div class="parentContent" id="SelectBox">
+				<!-- 지도 -->
+				<div class="child" id="MapContainer"></div>
+				<!-- 시군구 리스트 -->
+				<div  class="child" id ="sigunguList">
+					<p>시군구를 선택하세요</p>
+					<div id= "sigungutableParent">
+						<div id="sigunguTable">
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- 시군구에 있는 머작 골목 리스트 -->
- 		<div id="mggList">
-			<h2>먹자 골목 리스트</h2>
-			<div id="meoggolgolTable">
+			<!-- 시군구에 있는 머작 골목 리스트 -->
+ 			<div id="mggList">
+				<h2>먹자 골목 리스트</h2>
+				<div id="meoggolgolTable">
+				</div>
 			</div>
-
 		</div>
 	</div>
 </div>
