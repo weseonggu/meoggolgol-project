@@ -1,5 +1,7 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.RestaurantPage;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Service;
 
 import com.soldesk.meoggolgol.MeoggolgolProject.crawling.SeleniumSingleton;
@@ -13,10 +15,17 @@ public class MggRestService{
 	private final SeleniumSingleton ce;
 	
 	public RestaurantInfo info(String url) {
-		System.out.println(url);
 		try {
-			System.out.println(ce.getDetailRest(url));
 			return ce.getDetailRest(url);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public ArrayList<Menu> menu(String url) {
+		try {
+			return ce.getRestMenu(url);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

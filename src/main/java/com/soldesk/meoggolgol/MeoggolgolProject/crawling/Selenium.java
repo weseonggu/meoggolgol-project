@@ -132,7 +132,7 @@ public class Selenium {
 	        	menu.setPrice(data2[1].split(" ")[0]); 
 	        	restMenu.add(menu);
 	        }
-	        restaurantInfo.setRestMenu(restMenu);
+	        
 	        
 	        // 예약, 바달, 포장에 대해서 가능, 불가능
 	        List<WebElement> locationDetail = driver.findElements(By.cssSelector("span.ico_delivery"));

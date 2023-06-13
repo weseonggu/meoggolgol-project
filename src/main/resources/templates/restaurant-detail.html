@@ -107,27 +107,29 @@
             		                    alert('상세 내용을 입력해 주세요.');
             		                } else {
             		                    // NoticeRequest 객체 생성 + 필드 값 설정
-            		                    var ReviewRequest = {content: content};
+            		                    var ReviewRequest = {'content': content};
+            		                    console.log(ReviewRequest);
 
             		              	$.ajax({
             		              		url: '/restaurant-detail/review',
                 					  	method: 'POST',
                 					  	data: JSON.stringify(ReviewRequest),
-                		              	contentType: 'application/json',
+                		              	contentType: "application/json; charset=UTF-8",
                 					  
                 					  	// 성공했을 경우
                 					  	success: function(response) {
                 							//성공 콘솔 출력
                 					    	console.log('공지사항 등록 성공');
+                					    	console.log(response);
                 					    	// 성공 후 폼 제출
-                					    	document.querySelector('form').submit();
-                							window.location.href = '/restaurant-detail';
+                					    	//document.querySelector('form').submit();
+                							//window.location.href = '/restaurant-detail';
                 					  	},
                 					  	// 실패했을 경우
                 					  	error: function(error) {
                 						  	// 실패 콘솔 출력
                 						  	console.error('공지사항 등록 실패:', error);
-                						  	window.location.href = '/';
+                						  	//window.location.href = '/';
                 					  	}
                 					});
             		                }
@@ -138,7 +140,7 @@
 
 				</div>
 				<!-- 등록하기 버튼 -->
-        		<button type="submitBtn" class="btn btn-primary">등록하기</button>
+        		<button type="submitBtn" class="btn btn-primary" id=submitBtn>등록하기</button>
 			</div>
 			
 			<table class="table" id="noticeList">
@@ -148,7 +150,7 @@
                 <th>음식점이름</th>
                 <th>별점</th>
                 <th>리뷰</th>
-                <th>작성일시</th>
+                <th>작성자</th>
             </tr>
         </thead>	
         <tbody>
