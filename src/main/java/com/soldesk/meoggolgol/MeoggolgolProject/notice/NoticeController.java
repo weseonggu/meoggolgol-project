@@ -124,9 +124,13 @@ public class NoticeController {
 		// 공지사항 내용 가져오기
 		Map<String, Object> noticeDetail = noReposi.getNoticeDetail(id);
 		if (noticeDetail != null) {
+			
 	        String content = noticeDetail.get("CONTENT").toString();
+	        System.out.println(content);
+	        
 	        noticeDetail.put("renderedContent", content);
 	        model.addAttribute("noticeDetail", noticeDetail);
+	        
 	        return "notice/notice_update";
 	    } else {
 	        return "notice/noticeForm";
@@ -134,8 +138,8 @@ public class NoticeController {
 	}
 
 	// 공지사항 수정
-	@PostMapping(value = "/notice/update/{id}")
-	private String updateQna(@PathVariable("id") Integer id, NoticeRequest noticerequest, HttpServletRequest httpservletrequest)throws Exception {
+	@PostMapping(value = "/notice/update/{id}", consumes = "application/json")
+	private String updateNotice(@PathVariable("id") Integer id, @RequestBody NoticeRequest noticerequest, HttpServletRequest httpservletrequest)throws Exception {
 		HttpSession session = httpservletrequest.getSession();
 		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
 		// 세션 값 콘솔 확인
@@ -152,6 +156,7 @@ public class NoticeController {
 			// 수정일자는 현재 날짜로 설정
 			LocalDateTime regDate = LocalDateTime.now();
 			System.out.println(regDate);
+			System.out.println(noticerequest.getContent());
 			
 			Map<String, Object> noticeDetail = noReposi.getNoticeDetail(id);
 			Long notice_num = (Long) noticeDetail.get("notice_num");

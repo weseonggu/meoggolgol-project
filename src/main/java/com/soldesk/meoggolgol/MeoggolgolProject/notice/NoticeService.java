@@ -18,30 +18,33 @@ public class NoticeService {
 	public void saveNotice(String writer, NoticeRequest noticeRequest, LocalDateTime regDate) {
         nr.insertNotice(writer, noticeRequest, regDate);
     }
+	
 	// 공지사항 작성자 가져오기
 	public String getNoticeWriter(int num) {
 		NoticeResponse noticeResponse = new NoticeResponse();
 		noticeResponse.setWriter(nr.getNoticeDetailInfo(num).get(0).get("WRITER").toString());
 		return noticeResponse.getWriter();
 	}
+	
 	// 공지사항 제목 가져오기
 	public String getNoticeTitle(int num) {
 		NoticeResponse noticeResponse = new NoticeResponse();
 		noticeResponse.setTitle(nr.getNoticeDetailInfo(num).get(0).get("TITLE").toString());
 		return noticeResponse.getTitle();
 	}
+	
 	// 공지사항 내용 가져오기
 	public String getNoticeContent(int num) {
 		NoticeResponse noticeResponse = new NoticeResponse();
 		noticeResponse.setContent(nr.getNoticeDetailInfo(num).get(0).get("CONTENT").toString());
 		return noticeResponse.getContent();
 	}
+	
 	// 공지사항 수정
-	public void updateNotice(String writer, NoticeRequest noticerequest, LocalDateTime regDate, long notice_num) {
-		
-		
-		nr.updateNotice(writer, noticerequest, regDate, notice_num);
+	public void updateNotice(String writer, NoticeRequest noticerequest, LocalDateTime regDate, long notice_num) {	
+		nr.updateNotice(noticerequest, regDate, writer, notice_num);
 	}
+	
 	// 공지사항 삭제
 	public void deleteNotice(String writer, int num) {
 		nr.deleteNotice(writer, num);
