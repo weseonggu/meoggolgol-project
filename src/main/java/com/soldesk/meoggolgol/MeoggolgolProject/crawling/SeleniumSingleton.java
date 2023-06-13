@@ -141,7 +141,6 @@ public class SeleniumSingleton {
 	        	menu.setPrice(data2[1].split(" ")[0]); 
 	        	restMenu.add(menu);
 	        }
-	        System.out.println(restMenu);
 	        return restMenu;
 		} finally {
 			if (driver != null) {
