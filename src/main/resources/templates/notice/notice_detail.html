@@ -18,6 +18,63 @@
             		viewer: true
         		});
     		});
+    		editor.getMarkdown(); 
+			
+			// 수정 버튼 클릭 시 컨트롤러로 마크다운 형식으로 공지사항 내용 전송
+			document.addEventListener('DOMContentLoaded', function() {
+		          var formSubmitBtn = document.querySelector('#submitBtn');
+		          if (formSubmitBtn) {
+		        	  formSubmitBtn.addEventListener('click', function(e) {
+		              	e.preventDefault(); // 폼 전송 방지
+		              	var noticeContentHtml = editor.getMarkdown();
+
+		             	// 제목 & 상세 내용 유효성 검사
+		                var titleInput = document.getElementById('noticeTitle');
+		                var title = titleInput.value.trim();
+		                var content = noticeContentHtml.trim();
+						
+		                // 상세 내용이 빈 칸일 경우 <p><br></p> 값으로 넘어감
+		                if (title === '' && content === '<p><br></p>') {
+		                    // 제목과 내용이 모두 비어 있는 경우 경고창 표시
+		                    alert('제목과 내용을 입력해주세요.');
+		                } else if (title === '') {
+		                    // 제목이 비어 있는 경우 경고창 표시
+		                    alert('제목을 입력해주세요.');
+		                } else if (content === '<p><br></p>') {
+		                    // 내용이 비어 있는 경우 경고창 표시
+		                    alert('상세 내용을 입력해 주세요.');
+		                } else {
+		                    // NoticeRequest 객체 생성 + 필드 값 설정
+		                    var noticeRequest = {
+		                        title: title,
+		                        content: content
+		                    };
+
+		              	$.ajax({
+		              		url: '/notice/update/{id}',
+    					  	method: 'POST',
+    					  	data: JSON.stringify(noticeRequest),
+    		              	contentType: 'application/json',
+    					  
+    					  	// 성공했을 경우
+    					  	success: function(response) {
+    							//성공 콘솔 출력
+    					    	console.log('공지사항 등록 성공');
+    					    	// 성공 후 폼 제출
+    					    	document.querySelector('form').submit();
+    							window.location.href = '/notice';
+    					  	},
+    					  	// 실패했을 경우
+    					  	error: function(error) {
+    						  	// 실패 콘솔 출력
+    						  	console.error('공지사항 등록 실패:', error);
+    						  	window.location.href = '/uploadnotice';
+    					  	}
+    					});
+		                }
+		              });
+		          }
+		    });
 		</script>
 		
     	<!-- 작성자 -->

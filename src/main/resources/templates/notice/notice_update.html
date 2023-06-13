@@ -17,7 +17,7 @@
         	<div id="editor"></div>
         	
         	<!-- 에디터 내용을 받을 태그-->
-    		<textarea id="noticeContent" name="content" style="display: none;" th:text="${content}"></textarea>
+    		<textarea id="noticeContent" name="content" style="display: none;" th:field="*{content}"></textarea>
 			
 			<!-- TOAST UI Editor 생성 JS code -->
 			<script>
@@ -60,16 +60,13 @@
     		                    alert('상세 내용을 입력해 주세요.');
     		                } else {
     		                    // NoticeRequest 객체 생성 + 필드 값 설정
-    		                    var noticeRequest = {
-    		                        title: title,
-    		                        content: content
-    		                    };
+    		                    var NoticeRequest = {'title': title, 'content': content};
 
     		              	$.ajax({
     		              		url: '/notice/update/{id}',
         					  	method: 'POST',
-        					  	data: JSON.stringify(noticeRequest),
-        		              	contentType: 'application/json',
+        					  	data: JSON.stringify(NoticeRequest),
+        		              	contentType: "application/json; charset=UTF-8",
         					  
         					  	// 성공했을 경우
         					  	success: function(response) {
