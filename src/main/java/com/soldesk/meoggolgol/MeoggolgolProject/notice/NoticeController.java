@@ -143,7 +143,7 @@ public class NoticeController {
 	@PostMapping(value = "/notice/update")
 	private void updateNotice( @RequestBody NoticeRequest noticerequest, HttpServletRequest httpservletrequest)throws Exception {
 		System.out.println(noticerequest.getTitle());
-		System.out.println(noticerequest.getTitle());
+		System.out.println(noticerequest.getContent());
 //		HttpSession session = httpservletrequest.getSession();
 //		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
 //		// 세션 값 콘솔 확인
