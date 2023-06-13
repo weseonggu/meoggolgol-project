@@ -126,13 +126,19 @@ public class NoticeController {
 		model.addAttribute("id", id);
 		model.addAttribute("title", ns.getNoticeTitle(id));
 		
+		// 제목 값 확인
+		System.out.println(ns.getNoticeTitle(id));
+		
 		// 공지사항 내용 가져오기
 		Map<String, Object> noticeDetail = noReposi.getNoticeDetail(id);
 		if (noticeDetail != null) {
 			
+			// 공지사항 내용
 	        String content = noticeDetail.get("CONTENT").toString();
+	        
+	        // 내용 값 확인
 	        System.out.println(content);
-	       
+	        
 	        model.addAttribute("content", content);
 	        
 	        return "notice/notice_update";

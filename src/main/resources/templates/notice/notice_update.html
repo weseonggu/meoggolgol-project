@@ -8,7 +8,7 @@
         <!-- 공지사항 제목 -->
         <div class="noticeBox">
         	<label for="noticeTitle" class="form-label">제목</label>
-        	<input type="text" th:field="*{title}" id="noticeTitle">
+        	<input type="text" name="title" id="noticeTitle" th:value="${title}">
         </div>
         
         <!-- 내용 -->
