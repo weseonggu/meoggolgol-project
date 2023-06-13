@@ -2,6 +2,7 @@
 $(function() {
 	const width = 600; // width of the map
 	const height = 600; // height of the map
+	var labels;
 
 	// Create an SVG container
 	const svg = d3.select("#MapContainer")
@@ -10,6 +11,17 @@ $(function() {
 	  .attr("height", height)
 	  .attr('id', 'map')
       .attr('class', 'map');
+	
+	
+	// Create a zoom behavior
+    const zoom = d3.zoom()
+        .scaleExtent([1, 8]) // Limit the zoom scale from 1 to 8
+        .on('zoom', zoomed); // Call the zoomed function when zooming occurs
+
+    // Apply the zoom behavior to the SVG container
+    svg.call(zoom);
+    
+    
 	var states = svg
     .append('g')
     .attr('id', 'states')
@@ -81,7 +93,7 @@ $(function() {
 		
 		
 		
-		states.selectAll("text")
+		labels =states.selectAll("text")
 	    	.data(geojson.features)
 	    	.enter()
 	    	.append("text")
@@ -99,9 +111,28 @@ $(function() {
 			    .attr("font-size", "12px");
 	});
 	
-//	$("#11").on('click',function(){
-//		alert("클릭 이벤트");
-//	})
+	
+    function translateTolabel(d) {
+        var arr = path.centroid(d);
+        if (d.properties.code == 31) {
+            //서울 경기도 이름 겹쳐서 경기도 내리기
+            arr[1] +=
+                d3.event && d3.event.scale
+                    ? d3.event.scale / height + 20
+                    : initialScale / height + 20;
+        } else if (d.properties.code == 34) {
+            //충남은 조금 더 내리기
+            arr[1] +=
+                d3.event && d3.event.scale
+                    ? d3.event.scale / height + 10
+                    : initialScale / height + 10;
+        }
+        return 'translate(' + arr + ')';
+    }
+	function zoomed(event) {
+		states.attr("transform", event.transform);
+    }
+	
 
 
 });
