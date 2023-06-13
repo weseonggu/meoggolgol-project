@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.soldesk.meoggolgol.MeoggolgolProject.Member.MemberSignIn;
@@ -41,7 +42,7 @@ public class MggRestController {
 	
 	// 음식점 리뷰 등록 요청
 	@PostMapping("/restaurant-detail/review")
-	public void regReview(ReviewRequest reviewrequest, BindingResult bindingresult, HttpServletRequest httpservletrequest) {
+	public void regReview(@RequestBody ReviewRequest reviewrequest, HttpServletRequest httpservletrequest) {
 
 		// 받아온 제목+내용은 noticerequest에 넣고,
 		// 작성자는 세션에 있는 멤버 닉네임 가져와서 넣고, 
@@ -53,9 +54,10 @@ public class MggRestController {
 
 		// 세션 값 콘솔 확인
 		//System.out.println(membersignin);
+		System.out.println("gdgdgdgdgd");
 				
-		if (membersignin != null) {
-			System.out.println("gdgd");
+//		if (membersignin != null) {
+//			System.out.println("gdgd");
 //			// 세션 값 중 member_nickname 가져오기
 //			String writer = membersignin.getMember_nickname();
 //					
@@ -81,10 +83,10 @@ public class MggRestController {
 //			System.out.println("번호: " + reviewrequest.getRr_score());
 //			System.out.println("내용: " + reviewrequest.getRr_review());
 //			System.out.println("작성자: " + reviewrequest.getRr_writer());
-			}
-
-			// 적절한 처리 결과를 반환하거나 다른 화면으로 리다이렉션하는 로직을 구현합니다.
-			//return "redirect:/restaurant-detail";
+//			}
+//
+//			// 적절한 처리 결과를 반환하거나 다른 화면으로 리다이렉션하는 로직을 구현합니다.
+//			return "redirect:/restaurant-detail";
 	}
 
 
