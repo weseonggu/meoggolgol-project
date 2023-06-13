@@ -1,13 +1,19 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.RestaurantPage;
 
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.soldesk.meoggolgol.MeoggolgolProject.Member.MemberSignIn;
+
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -27,20 +33,15 @@ public class MggRestController {
 	}
 	
 	// 음식점 리뷰 등록 요청
-	@GetMapping("/restaurant-detail/review")
-	public String regReview(ReviewRequest reviewrequest, BindingResult bindingresult, HttpServletRequest httpservletrequest) {
+	@PostMapping("/restaurant-detail/review")
+	public String writeReview(@RequestBody ReviewRequest reviewRequest) {
+//		@RequestBody ReviewRequest reviewrequest
+		System.out.println(reviewRequest.getContent());
+		return "성공";
 
-		if (bindingresult.hasErrors()) {
-			return "notice/noticeUploadForm";
-		}
-		
-		return "restaurant-detail";
 	}
-	
-	//음식점 리뷰 목록 요청
-	@PostMapping("/restaurant-detail")
-	public String postReview(@Valid ReviewRequest reviewrequest) {
-		return "restaurant-detail";
-	}
+
+
+
 	
 }

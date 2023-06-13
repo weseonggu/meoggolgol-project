@@ -119,20 +119,20 @@ public class Selenium {
 			}
 	        
 	        // 식당 메뉴
-//	        List<WebElement> liElements = driver.findElements(By.cssSelector("ul.list_menu li"));
-//	        String data;
-//	        String[] data2;
-//	        ArrayList<Menu> restMenu = new ArrayList<>();
-//	        for(WebElement liElement : liElements) {
-//	        	Menu menu = new Menu();
-//	        	// 각 li 태그의 데이터를 추출하거나 처리하는 작업을 수행합니다.
-//	        	data = liElement.getAttribute("textContent").replaceAll("\\s+", " ");
-//	        	data2 = data.split(" 가격: ");
-//	        	menu.setName(data2[0].substring(4));
-//	        	menu.setPrice(data2[1].split(" ")[0]); 
-//	        	restMenu.add(menu);
-//	        }
-//	        restaurantInfo.setRestMenu(restMenu);
+	        List<WebElement> liElements = driver.findElements(By.cssSelector("ul.list_menu li"));
+	        String data;
+	        String[] data2;
+	        ArrayList<Menu> restMenu = new ArrayList<>();
+	        for(WebElement liElement : liElements) {
+	        	Menu menu = new Menu();
+	        	// 각 li 태그의 데이터를 추출하거나 처리하는 작업을 수행합니다.
+	        	data = liElement.getAttribute("textContent").replaceAll("\\s+", " ");
+	        	data2 = data.split(" 가격: ");
+	        	menu.setName(data2[0].substring(4));
+	        	menu.setPrice(data2[1].split(" ")[0]); 
+	        	restMenu.add(menu);
+	        }
+	        
 	        
 	        // 예약, 바달, 포장에 대해서 가능, 불가능
 	        List<WebElement> locationDetail = driver.findElements(By.cssSelector("span.ico_delivery"));

@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 // 등록된 리뷰 클래스
 public class ReviewResponse {
 	
+	private long rr_num;
+	
 	private String rr_mggname;
 	
 	private String rr_restaurantname;
