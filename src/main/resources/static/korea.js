@@ -153,38 +153,43 @@ $(function() {
 // 시군도 선택시 그 지역의 먹자골목 리스트 출력
 function listAjax(code){
 	$("#meoggolgolTable").empty();
+	$("#meoggolgolHead").empty();
     $.getJSON("meoggolgol-list?sigunguCode="+code, function(data){
-		$("#meoggolgolHead").empty();
-		$("#meoggolgolHead").append(
-				$("<tr></tr>").append(
-					$("<th></th>").text("목자골목"),
-					$("<th></th>").text("주소")
-					)
-			);
-		$.each(data, function(i) {
-            var ntd = $("<td></td>").text(data[i].FCLTY_NM);
-            var ltd = $("<td></td>").text(data[i].RDNMADR_NM);
-            var lotd = $("<input>").attr("type", "hidden").attr("value", data[i].FCLTY_LO);
-            var latd = $("<input>").attr("type", "hidden").attr("value", data[i].FCLTY_LA);
- 			ntd.hover(
-                function() {
-                    $(this).css("color", "#F06292"); // 마우스를 올렸을 때 배경색을 노란색으로 변경
-                },
-                function() {
-                    $(this).css("color", ""); // 마우스를 내렸을 때 배경색을 원래대로 되돌림
-                }
+		if(data != null && data.length > 0){
+            $("#meoggolgolHead").empty().append(
+                $("<tr></tr>").append(
+                    $("<th></th>").text("목자골목"),
+                    $("<th></th>").text("주소")
+                )
             );
- 			ltd.hover(
-                function() {
-                    $(this).css("color", "#F06292"); // 마우스를 올렸을 때 배경색을 노란색으로 변경
-                },
-                function() {
-                    $(this).css("color", ""); // 마우스를 내렸을 때 배경색을 원래대로 되돌림
-                }
-            );
-            var tr = $("<tr></tr>").attr("onclick","mggDetail("+data[i].FCLTY_LO+","+data[i].FCLTY_LA+")").append(ntd,ltd, lotd, latd);
-			$("#meoggolgolTable").append(tr);
-		});
+            $.each(data, function(i) {
+                var ntd = $("<td></td>").text(data[i].FCLTY_NM);
+                var ltd = $("<td></td>").text(data[i].RDNMADR_NM);
+                var lotd = $("<input>").attr("type", "hidden").attr("value", data[i].FCLTY_LO);
+                var latd = $("<input>").attr("type", "hidden").attr("value", data[i].FCLTY_LA);
+                
+                ntd.hover(
+                    function() {
+                        $(this).css("color", "#F06292"); // 마우스를 올렸을 때 배경색을 노란색으로 변경
+                    },
+                    function() {
+                        $(this).css("color", ""); // 마우스를 내렸을 때 배경색을 원래대로 되돌림
+                    }
+                );
+                
+                ltd.hover(
+                    function() {
+                        $(this).css("color", "#F06292"); // 마우스를 올렸을 때 배경색을 노란색으로 변경
+                    },
+                    function() {
+                        $(this).css("color", ""); // 마우스를 내렸을 때 배경색을 원래대로 되돌림
+                    }
+                );
+                
+                var tr = $("<tr></tr>").attr("onclick","mggDetail("+data[i].FCLTY_LO+","+data[i].FCLTY_LA+")").append(ntd,ltd, lotd, latd);
+                $("#meoggolgolTable").append(tr);
+            });
+        }
 		});
 	
 }
