@@ -125,15 +125,16 @@ $(function() {
 // 이전 식당 정보
 		$("#before").click(function() {
 		  // Cancel ongoing image requests
-		  for (var i = 0; i < ongoingImageRequests.length; i++) {
-		    ongoingImageRequests[i].abort();
-		  }
+
 
 		  ongoingImageRequests = [];
 
 		  if (page == 1) {
 		    return;
 		  } else {
+			for (var i = 0; i < ongoingImageRequests.length; i++) {
+			    ongoingImageRequests[i].abort();
+			  }
 		    $("#restaurantListBox").empty();
 		    page -= 1;
 

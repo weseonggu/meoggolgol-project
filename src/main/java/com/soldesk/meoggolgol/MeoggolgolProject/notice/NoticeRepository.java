@@ -46,7 +46,7 @@ public class NoticeRepository {
                                   where notice_num = ?
             """;
 	
-	// notice 삭제
+	// 공지사항 삭제
 	private static String DELETE_NOTICE=
 			"""
 				delete from notice where WRITER = ? and notice_num = ?

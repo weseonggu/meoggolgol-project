@@ -13,5 +13,10 @@ public class MainPageController {
 	public String hellowMeoggolgol() {
 		return "mainpage";
 	}
+	
+	@GetMapping("/userguide")
+	public String goUserGuide() {
+		return "user-guide";
+	}
 
 }
