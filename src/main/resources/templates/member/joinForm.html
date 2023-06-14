@@ -1,42 +1,44 @@
 <html layout:decorate="~{layout}">
-	<div layout:fragment="content"  id="JoinPageContainer">
-		<form th:action="@{/join}" th:object="${member}" method="post">
+	<div layout:fragment="content"  id="JoinPageContainer" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+		<form th:action="@{/join}" th:object="${member}" method="post" style="width: 300px;">
 			<!-- 입력 정보 오류 -->
 			<div th:replace="~{form_errors :: formErrorsFragment}"></div>
 			<!-- 회원 정보 입력 -->
 			<div class="mb-3">
-				<label for="username" class="form-label">사용자ID</label> <input
-					type="text" th:field="*{member_id}" class="form-control">
+				<label for="username" class="form-label">사용자ID</label>
+				<input type="text" th:field="*{member_id}" class="form-control" style="width: 100%">
 			</div>
 			<div class="mb-3">
-				<label for="username" class="form-label">사용자이름</label> <input
-					type="text" th:field="*{member_name}" class="form-control">
+				<label for="username" class="form-label">사용자이름</label> 
+				<input type="text" th:field="*{member_name}" class="form-control" style="width: 100%">
 			</div>
 			<div class="mb-3">
-				<label for="username" class="form-label">닉네임</label> <input
-					type="text" th:field="*{member_nickname}" class="form-control">
+				<label for="username" class="form-label"> 닉네임</label> 
+				<input type="text" th:field="*{member_nickname}" class="form-control" style="width: 100%">
 			</div>
 			<div class="mb-3">
-				<label for="password1" class="form-label">비밀번호</label> <input
-					type="password" th:field="*{member_pw}" class="form-control">
+				<label for="password1" class="form-label">비밀번호</label> 
+				<input type="password" th:field="*{member_pw}" class="form-control" style="width: 100%">
 			</div>
 			<div class="mb-3">
-				<label for="password2" class="form-label">비밀번호 확인</label> <input
-					type="password" th:field="*{member_pw_check}" class="form-control">
+				<label for="password2" class="form-label">비밀번호 확인</label> 
+				<input type="password" th:field="*{member_pw_check}" class="form-control" style="width: 100%">
 			</div>
 	 		<div class="mb-3">
-				<label for="password2" class="form-label">생년월일</label> <input
-					type="date" th:field="*{member_birth}" class="form-control">
+				<label for="password2" class="form-label">생년월일</label> 
+				<input type="date" th:field="*{member_birth}" class="form-control" style="width: 100%">
 			</div> 
 			<div class="mb-3">
-				<label for="username" class="form-label">폰 번호</label> <input
-					type="text" th:field="*{member_phoneNumber}" class="form-control">
+				<label for="username" class="form-label">폰 번호</label> 
+				<input type="text" th:field="*{member_phoneNumber}" class="form-control" style="width: 100%">
 			</div>
 			<div class="mb-3">
-				<label for="email" class="form-label">이메일</label> <input type="email"
-					th:field="*{member_email}" class="form-control">
+				<label for="email" class="form-label">이메일</label> 
+				<input type="email" th:field="*{member_email}" class="form-control" style="width: 100%">
 			</div>
-			<button type="submit" class="btn btn-primary">회원가입</button>
+			<div class="mb-3" style="text-align: center;">
+				<button type="submit" class="btn btn-primary">회원가입</button>
+			</div>
 		</form>
 	</div>
 </html>

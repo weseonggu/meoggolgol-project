@@ -160,7 +160,22 @@ function listAjax(code){
             var ltd = $("<td></td>").text(data[i].RDNMADR_NM);
             var lotd = $("<input>").attr("type", "hidden").attr("value", data[i].FCLTY_LO);
             var latd = $("<input>").attr("type", "hidden").attr("value", data[i].FCLTY_LA);
-            
+ 			ntd.hover(
+                function() {
+                    $(this).css("color", "#F06292"); // 마우스를 올렸을 때 배경색을 노란색으로 변경
+                },
+                function() {
+                    $(this).css("color", ""); // 마우스를 내렸을 때 배경색을 원래대로 되돌림
+                }
+            );
+ 			ltd.hover(
+                function() {
+                    $(this).css("color", "#F06292"); // 마우스를 올렸을 때 배경색을 노란색으로 변경
+                },
+                function() {
+                    $(this).css("color", ""); // 마우스를 내렸을 때 배경색을 원래대로 되돌림
+                }
+            );
             var tr = $("<tr></tr>").attr("onclick","mggDetail("+data[i].FCLTY_LO+","+data[i].FCLTY_LA+")").append(ntd,ltd, lotd, latd);
 			$("#meoggolgolTable").append(tr);
 		});
