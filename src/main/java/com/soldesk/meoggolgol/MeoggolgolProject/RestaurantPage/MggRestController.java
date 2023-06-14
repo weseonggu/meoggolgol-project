@@ -24,16 +24,7 @@ public class MggRestController {
 	
 	// 음식점 상세 페이지 요청
 	@GetMapping("/restaurant-detail")
-	public String goRestPage(@RequestParam double lo, @RequestParam double la, @RequestParam String imgUrl, @RequestParam String placeUrl, @RequestParam String placeName, @RequestParam String roadAddress, Model model) {
-		RestaurantInfo restaurantInfo = mrs.info(placeUrl);
-		model.addAttribute("placeName", placeName);		// --> 식당 이름
-		model.addAttribute("MapURL",restaurantInfo.getMapURL());
-		model.addAttribute("operation",restaurantInfo.getOperation());
-		model.addAttribute("businessHours",restaurantInfo.getBusinessHours());
-		model.addAttribute("locationDetail",restaurantInfo.getLocationDetail());
-		model.addAttribute("menu",mrs.menu(placeUrl));
-		model.addAttribute("facilityInfo", restaurantInfo.getFacilityInfos());
-
+	public String goRestPage(@RequestParam String placeName, Model model) {
 		model.addAttribute("reviewRequest", new ReviewRequest());
 		model.addAttribute("review", mrr.getReviewInfo(placeName));
 		
@@ -43,7 +34,7 @@ public class MggRestController {
 
 	// 음식점 리뷰 등록 요청
 	@PostMapping("/restaurant-detail/review")
-	public String writeReview(@RequestBody ReviewRequest reviewRequest, HttpServletRequest httpservletrequest, @RequestParam String placeUrl) {
+	public String writeReview(@RequestBody ReviewRequest reviewRequest, HttpServletRequest httpservletrequest, @RequestParam String placeUrl, @RequestParam String placeName, @RequestParam String mggname) {
 		
 		// 먹자 골목 이름 정보 + 식당 이름 정보 가져와서 reviewRequest에 넣고,
 		// 받아온 제목 + 내용도 reviewRequest에 넣고,
@@ -51,7 +42,8 @@ public class MggRestController {
 		RestaurantInfo restaurantInfo = mrs.info(placeUrl);
 		
 		// 리뷰 별점
-		
+		System.out.println(mggname);
+		System.out.println(placeName);
 		// 리뷰 상세 내용
 		System.out.println(reviewRequest.getContent());
 		
