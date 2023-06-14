@@ -6,6 +6,7 @@ $(function() {
 	const lo = urlParams.get('lo');
 	const imgUrl = urlParams.get('imgUrl');
 	const placeName = urlParams.get('placeName');
+	const placeUrl = urlParams.get('placeUrl');
 	const roadAddress = urlParams.get('roadAddress');
 
 
@@ -59,5 +60,51 @@ $(function() {
 	function closeOverlay() {
 		overlay.setMap(null);
 	}
-
+	// getRestaurantInfo(lo, la, page);
+	getRestaurantInfo(placeUrl, placeName);
+	getRestaurantafdsInfo(placeUrl);
 });
+// 식당 세부 정보 ajax로 호출
+function getRestaurantInfo(placeUrl, placeName) {
+	return new Promise(function(reject) {
+		placeUrl = placeUrl.replace("http:", "https:"); // "placeUrl" 변수에 대입하는 부분 수정
+		$.getJSON("restaurantDetailInfo?placeUrl=" + placeUrl, function(data) {
+			$("#mggInfoabc").append(
+				$("<h3></h3>").text(placeName),
+				$("<a></a>").attr("href", data.mapURL).append($("<img>").attr("src", "/find1.png").addClass("findMapURL")), // "val()" 대신 "attr()"을 사용하여 href 속성 설정
+				$("<div></div>").text(data.operation),
+				$("<div></div>").text(data.businessHours),
+				$("<div></div>").text(data.locationDetail),
+				$("<div></div>").text(data.facilityInfos)
+			);
+		}).fail(function(error) {
+			reject(error);
+		});
+	});
+}
+
+// 식당 메뉴 ajax로 호출
+function getRestaurantafdsInfo(placeUrl) {
+	return new Promise(function(reject) {
+		placeUrl = placeUrl.replace("http:", "https:"); // "placeUrl" 변수에 대입하는 부분 수정
+		$.getJSON("restaurantMenuInfo?placeUrl=" + placeUrl, function(data) {
+			$("#menuHead").append(
+				$("<tr></tr>").append(
+					$("<th></th>").text("메뉴명"),
+					$("<th></th>").text("가격")
+					)
+			);
+			$.each(data, function(i) {
+				var menuInfo = $("<tr></tr>").append(
+					$("<td></td>").text(data[i].name),
+					$("<td></td>").text(data[i].price)
+				);
+				$("#menuBody").append(menuInfo);
+			});
+		}).fail(function(error) {
+			reject(error);
+		});
+	});
+}
+
+
