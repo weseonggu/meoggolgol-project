@@ -37,5 +37,7 @@ public class MemberSignIn {
 	private String member_email;
 	
 	private String manager;
+	
+	private String backPageUrl;
 
 }
