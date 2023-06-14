@@ -3,12 +3,14 @@ package com.soldesk.meoggolgol.MeoggolgolProject.Member;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -59,18 +61,29 @@ public class MemberController {
 	
 	// 로그인 하러 가기 get요청
 	@GetMapping("/signin")
-	public String goSignIn(MemberSignIn membersignin) {
-	    return "member/signInForm";
+	public String goSignIn(MemberSignIn membersignin, HttpServletRequest request, ModelMap model) {
+		String referrer = request.getHeader("referer");
+	    String url[] =referrer.split("/");
+	    String reurl="";
+	    for (int i = 3; i < url.length; i++) {
+			reurl+="/"+url[i];
+		}
+//	    model.addAttribute("BackPageUrl", reurl);
+	    membersignin.setBackPageUrl(reurl);
+	    System.out.println("reurl: "+reurl);
+		return "member/signInForm";
 	}
 
 	// 로그인 post요청 
 	@PostMapping("/signin")
-	public String signIn(@Valid MemberSignIn membersignin, BindingResult bindingResult, HttpSession session) {
+	public String signIn(@Valid MemberSignIn membersignin, BindingResult bindingResult, HttpSession session,HttpServletRequest request) {
 	    if (bindingResult.hasErrors()) {
 	        return "member/signInForm";
 	    }
 	    String submittedId = membersignin.getMember_id();
 	    String submittedPw = membersignin.getMember_pw();
+	    String referrer = request.getHeader("referer");
+	    System.out.println("referrer: "+membersignin.getBackPageUrl() );
 
 	    LogInCheckResult checkResult = mService.check(submittedId, submittedPw);
 
@@ -87,9 +100,9 @@ public class MemberController {
 
 	    // 인증 성공 시 세션에 데이터 저장
 	    session.setAttribute("member_info", checkResult.getMemberSignIn());
-	    
+
 	    // 인증 성공하고 세션에 데이터까지 저장한 후 메인페이지 이동
-	    return "redirect:/";
+	    return "redirect:"+membersignin.getBackPageUrl() ;
 	}
 	
 	// 로그아웃
