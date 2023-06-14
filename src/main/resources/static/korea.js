@@ -150,11 +150,17 @@ $(function() {
   });
 });
 
-
 // 시군도 선택시 그 지역의 먹자골목 리스트 출력
 function listAjax(code){
 	$("#meoggolgolTable").empty();
     $.getJSON("meoggolgol-list?sigunguCode="+code, function(data){
+		$("#meoggolgolHead").empty();
+		$("#meoggolgolHead").append(
+				$("<tr></tr>").append(
+					$("<th></th>").text("목자골목"),
+					$("<th></th>").text("주소")
+					)
+			);
 		$.each(data, function(i) {
             var ntd = $("<td></td>").text(data[i].FCLTY_NM);
             var ltd = $("<td></td>").text(data[i].RDNMADR_NM);
