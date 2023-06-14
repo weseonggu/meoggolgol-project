@@ -6,16 +6,11 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.common.net.MediaType;
 import com.soldesk.meoggolgol.MeoggolgolProject.Member.MemberSignIn;
 import com.soldesk.meoggolgol.MeoggolgolProject.notice.paging.Pagination;
 
@@ -148,39 +143,6 @@ public class NoticeController {
 	}
 
 	// 공지사항 수정
-<<<<<<< HEAD
-	@PostMapping(value = "/notice/update")
-	private void updateNotice( @RequestBody NoticeRequest noticerequest, HttpServletRequest httpservletrequest)throws Exception {
-		System.out.println(noticerequest.getTitle());
-		System.out.println(noticerequest.getContent());
-//		HttpSession session = httpservletrequest.getSession();
-//		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
-//		// 세션 값 콘솔 확인
-//		System.out.println(membersignin);
-//		if (membersignin != null) {
-//			
-//			// 세션 값 중 member_nickname 가져오기
-//			String writer = membersignin.getMember_nickname();
-//			
-//			// 세션에 있던 member_nickname 제대로 들어왔는지 콘솔 확인
-//			System.out.println(writer);
-//			//System.out.println(ns.getNoticeWriter(id));
-//			
-//			// 수정일자는 현재 날짜로 설정
-//			LocalDateTime regDate = LocalDateTime.now();
-//			System.out.println(regDate);
-//			
-//			System.out.println(noticerequest.getContent());
-//			
-//			Map<String, Object> noticeDetail = noReposi.getNoticeDetail(id);
-//			Long notice_num = (Long) noticeDetail.get("notice_num");
-//		
-//			if ("Y".equals(membersignin.getManager())) {
-//				ns.updateNotice(noticerequest.getTitle(), noticerequest.getContent(), regDate, writer, notice_num);
-//			}
-//		}
-//		return "redirect:/notice/detail/"+id;
-=======
 	@PostMapping(value = "/notice/update/{id}")
 	private String updateNotice(@RequestBody NoticeRequest noticerequest, HttpServletRequest httpservletrequest, @PathVariable("id") Integer id)throws Exception {
 		HttpSession session = httpservletrequest.getSession();
@@ -210,7 +172,6 @@ public class NoticeController {
 			}
 		}
 		return "redirect:/notice/detail/"+id;
->>>>>>> origin/uznn
 	}
 	
 	// notice 삭제

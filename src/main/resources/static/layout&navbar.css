@@ -1,5 +1,7 @@
 @charset "UTF-8";
-
+body{
+	background-color: antiquewhite !important;
+}
 .brandBox {
     flex-basis: 0;
     flex-grow: 1;
@@ -8,7 +10,7 @@
     display: flex;
     justify-content: space-between;
     text-align: center;
-    background-color: #FEF8EA;
+    background-color: antiquewhite !important;
     margin-bottom: 5px;
     margin-top: 5px;
 }

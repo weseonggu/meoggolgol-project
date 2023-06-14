@@ -8,6 +8,7 @@
 
 #states path:hover {
 	fill: #009300;
+	transition:  0.5s ease;
 }
 
 #states .active {

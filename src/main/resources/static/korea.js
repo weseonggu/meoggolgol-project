@@ -17,7 +17,7 @@ $(function() {
   var states = svg
     .append('g')
     .attr('id', 'states')
-    .attr("fill", "white"); // 배경 흰색
+    .attr("fill", "antiquewhite"); // 배경 흰색
 
   states
     .append('rect')
