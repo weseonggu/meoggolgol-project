@@ -156,21 +156,21 @@
         		<input type="submit" class="btn btn-primary" id="submitBtn" value="등록하기" />
 	</form>
 			
+		</div>
+	</form>
 			<table class="table" id="noticeList">
         <thead class="table-dark">
             <tr>
-                <th>작성일</th>
                 <th>작성자</th>
                 <th>별점</th>
                 <th>리뷰 내용</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="review : ${reviews}">
-                <td th:text="${review.date}"></td>
-                <td th:text="${review.writer}"></td>
-                <td th:text="${review.rating}"></td>
-                <td th:text="${review.content}"></td>
+            <tr th:each="review : ${review}">
+                <td th:text="${review.rr_writer}"></td>
+                <td th:text="${review.rr_score}"></td>
+                <td th:text="${review.rr_review}"></td>
             </tr>
         </tbody>
     	</table>

@@ -25,7 +25,8 @@ public class MggRestController {
 	
 	// 음식점 상세 페이지 요청
 	@GetMapping("/restaurant-detail")
-	public String goRestPage(@RequestParam(name = "placeName", required = true) String placeName, Model model) {
+	public String goRestPage(@RequestParam String placeName, Model model) {
+
 		model.addAttribute("reviewRequest", new ReviewRequest());
 		model.addAttribute("review", mrr.getReviewInfo(placeName));
 		
