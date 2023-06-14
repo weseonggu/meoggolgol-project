@@ -68,14 +68,26 @@ $(function() {
 			// index가 0번 부터 시작이어서 (index+1)로 넣어야 알맞게 3개씩 분할됨
             if ((index + 1) % 3 == 0 && index != 0) {
 				// 3, 6, 9 ..번의 태그에 <br>을 넣음으로써 3개 마다 줄 바꿈
-              	button = $("<span id='sigunguListSpan'></span><br>").text(onlySiGu).attr("onclick", "listAjax(" + sigungu[index].code + ")");
+              	//button = $("<span id='sigunguListSpan'></span><br>").text(onlySiGu).attr("onclick", "listAjax(" + sigungu[index].code + ")");
+              	button = $("<span id='sigunguListSpan'></span><br>").text(onlySiGu).on('click', function() {
+					  listAjax(sigungu[index].code);
+					  var targetElement = $('#mggList');
+					  $('html, body').animate({scrollTop: targetElement.offset().top}, 500);
+				});
             } else {
-              	button = $("<span id='sigunguListSpan'></span>").text(onlySiGu).attr("onclick", "listAjax(" + sigungu[index].code + ")");
+              	button = $("<span id='sigunguListSpan'></span>").text(onlySiGu).on('click', function() {
+					  listAjax(sigungu[index].code);
+					  var targetElement = $('#mggList');
+					  $('html, body').animate({scrollTop: targetElement.offset().top}, 500);
+				});
             }
 
             $("#sigunguTable").append(button);
           });
         });
+        var target = $('#sigunguList');
+         $('html, body').animate({
+			 scrollTop: target.offset().top}, 1000);
       });
 
     labels=states.selectAll("text")
@@ -144,13 +156,12 @@ function listAjax(code){
 	$("#meoggolgolTable").empty();
     $.getJSON("meoggolgol-list?sigunguCode="+code, function(data){
 		$.each(data, function(i) {
-			
-            var ntd = $("<p id='streetName'></p>").text(data[i].FCLTY_NM);
-            var ltd = $("<p id='streetAddress'></p>").text(data[i].RDNMADR_NM);
-            var lotd = $("<input>").attr("value", data[i].FCLTY_LO);
-            var latd = $("<input>").attr("value", data[i].FCLTY_LA);
+            var ntd = $("<td></td>").text(data[i].FCLTY_NM);
+            var ltd = $("<td></td>").text(data[i].RDNMADR_NM);
+            var lotd = $("<input>").attr("type", "hidden").attr("value", data[i].FCLTY_LO);
+            var latd = $("<input>").attr("type", "hidden").attr("value", data[i].FCLTY_LA);
             
-            var tr = $("<div></div>").attr("onclick","mggDetail("+data[i].FCLTY_LO+","+data[i].FCLTY_LA+")").append(ntd,ltd, lotd, latd);
+            var tr = $("<tr></tr>").attr("onclick","mggDetail("+data[i].FCLTY_LO+","+data[i].FCLTY_LA+")").append(ntd,ltd, lotd, latd);
 			$("#meoggolgolTable").append(tr);
 		});
 		});

@@ -94,10 +94,10 @@ h2 {
 	margin-top:32px;
 }
 
-#meoggolgolTable{
-	/*부모높이 자동 조절 (자식에 넣어야하는 값)*/
+/* #meoggolgolTable{
+	부모높이 자동 조절 (자식에 넣어야하는 값)
 	display: table-row;
-}
+} */
 
 
 #streetName {

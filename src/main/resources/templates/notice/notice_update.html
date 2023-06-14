@@ -1,5 +1,8 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="parent" id="NoticeUploadContainer">
+
+	<script type="text/javascript" th:src="@{/notice_updateJS.js}"></script>
+
     <!-- 공지사항 등록 화면 -->
     <form th:action="@{'/notice/update/' + ${id}}" th:object="${noticeRequest}" method="POST" enctype="multipart/form-data">
 
