@@ -144,13 +144,12 @@ function listAjax(code){
 	$("#meoggolgolTable").empty();
     $.getJSON("meoggolgol-list?sigunguCode="+code, function(data){
 		$.each(data, function(i) {
-			
-            var ntd = $("<p id='streetName'></p>").text(data[i].FCLTY_NM);
-            var ltd = $("<p id='streetAddress'></p>").text(data[i].RDNMADR_NM);
-            var lotd = $("<input>").attr("value", data[i].FCLTY_LO);
-            var latd = $("<input>").attr("value", data[i].FCLTY_LA);
+            var ntd = $("<td></td>").text(data[i].FCLTY_NM);
+            var ltd = $("<td></td>").text(data[i].RDNMADR_NM);
+            var lotd = $("<input>").attr("type", "hidden").attr("value", data[i].FCLTY_LO);
+            var latd = $("<input>").attr("type", "hidden").attr("value", data[i].FCLTY_LA);
             
-            var tr = $("<div></div>").attr("onclick","mggDetail("+data[i].FCLTY_LO+","+data[i].FCLTY_LA+")").append(ntd,ltd, lotd, latd);
+            var tr = $("<tr></tr>").attr("onclick","mggDetail("+data[i].FCLTY_LO+","+data[i].FCLTY_LA+")").append(ntd,ltd, lotd, latd);
 			$("#meoggolgolTable").append(tr);
 		});
 		});
