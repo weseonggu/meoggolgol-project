@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.soldesk.meoggolgol.MeoggolgolProject.Member.MemberSignIn;
@@ -24,55 +25,60 @@ public class MggRestController {
 	
 	// 음식점 상세 페이지 요청
 	@GetMapping("/restaurant-detail")
-	public String goRestPage(@RequestParam String placeName, Model model) {
+	public String goRestPage(@RequestParam(name = "placeName", required = true) String placeName, Model model) {
 		model.addAttribute("reviewRequest", new ReviewRequest());
 		model.addAttribute("review", mrr.getReviewInfo(placeName));
 		
-
 	    return "restaurant-detail";
 	}
 
 	// 음식점 리뷰 등록 요청
+	@ResponseBody
 	@PostMapping("/restaurant-detail/review")
-	public String writeReview(@RequestBody ReviewRequest reviewRequest, HttpServletRequest httpservletrequest, @RequestParam String placeUrl, @RequestParam String placeName, @RequestParam String mggname) {
+	public String writeReview(@RequestBody ReviewRequest reviewRequest, HttpServletRequest httpservletrequest, Model model) {
 		
-		// 먹자 골목 이름 정보 + 식당 이름 정보 가져와서 reviewRequest에 넣고,
-		// 받아온 제목 + 내용도 reviewRequest에 넣고,
-		// 작성자는 세션에 있는 멤버 닉네임 가져와서 넣음
-		RestaurantInfo restaurantInfo = mrs.info(placeUrl);
+		// 먹자 골목 이름 정보 + 식당 이름 + 리뷰 별점 + 리뷰 상세 내용 데이터 가져와서 reviewRequest에 넣고,
+		// 리뷰 작성자는 세션에 있는 멤버 닉네임 가져와서 넣음
+
+		// 먹자 골목 이름 콘솔 확인
+		System.out.println(reviewRequest.getMggname());
 		
-		// 리뷰 별점
-		System.out.println(mggname);
-		System.out.println(placeName);
-		// 리뷰 상세 내용
+		// 음식점 이름 콘솔 확인
+		System.out.println(reviewRequest.getPlaceName());
+		
+		// 리뷰 상세 내용 콘솔 확인
 		System.out.println(reviewRequest.getContent());
+		
+		// 리뷰 별점 콘솔 확인
+		System.out.println(reviewRequest.getScore());
 		
 		// 세션에 있는 회원 정보 가져오기
 		HttpSession session = httpservletrequest.getSession();
 		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
-		
-		// 세션 값 콘솔 확인
-		System.out.println(membersignin);
 	
 		if (membersignin != null) {
 			
-			// 리뷰 작성자
-			String writer = membersignin.getMember_nickname();	// 세션 값 중 member_nickname 가져와서 리뷰 작성자로 만들기
-			System.out.println(writer);
+			// 세션 값 중 member_nickname 가져와서 리뷰 작성자로 만들기
+			String rr_writer = membersignin.getMember_nickname();
+			
+			// 리뷰 작성자 콘솔 확인
+			System.out.println(rr_writer);
 			
 			// NoticeService를 사용하여 공지사항 저장
-			// mrs.메소드
+			mrs.saveNotice(reviewRequest, rr_writer);
 		}
-		
-		return "redirect:/restaurant-detail";
+		return "성공";
 	}
 
 	@GetMapping("/restaurant-detail/review")
 	public ModelAndView writeReview(@RequestParam(required = false) Double lo, @RequestParam(required = false) Double la, @RequestParam String imgUrl, @RequestParam String placeUrl, @RequestParam String placeName, @RequestParam String roadAddress, Model model, @ModelAttribute("reviewRequest") ReviewRequest reviewRequest) {
 	    if (lo == null || la == null) {
+	    	
 	        // lo와 la 값이 없는 경우에 대한 처리
 	        // 예를 들어, 기본 값을 설정하거나 오류 메시지를 반환할 수 있습니다.
+	    	
 	    } else {
+	    	
 	        // lo와 la 값이 있는 경우에 대한 처리
 	        System.out.println(reviewRequest.getContent());
 	    }

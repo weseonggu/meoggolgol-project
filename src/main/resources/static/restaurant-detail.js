@@ -9,7 +9,6 @@ $(function() {
 	const placeUrl = urlParams.get('placeUrl');
 	const roadAddress = urlParams.get('roadAddress');
 
-
 	var mapContainer = document.getElementById('mggRestaurant'), // 지도의 중심좌표
 		mapOption = {
 			center: new kakao.maps.LatLng(la, lo), // 지도의 중심좌표
@@ -64,6 +63,7 @@ $(function() {
 	getRestaurantInfo(placeUrl, placeName);
 	getRestaurantafdsInfo(placeUrl);
 });
+
 // 식당 세부 정보 ajax로 호출
 function getRestaurantInfo(placeUrl, placeName) {
 	return new Promise(function(reject) {
@@ -106,5 +106,3 @@ function getRestaurantafdsInfo(placeUrl) {
 		});
 	});
 }
-
-

@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 public class MggRestService{
 	
 	private final SeleniumSingleton ce;
+	private final MggRestRepository mReposi;
 	
 	public RestaurantInfo info(String url) {
 		try {
@@ -30,5 +31,15 @@ public class MggRestService{
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	// 리뷰 저장하기
+	public void saveNotice(ReviewRequest reviewrequest, String rr_writer) {
+		String rr_mggname = reviewrequest.getMggname();
+		String rr_restaurantname = reviewrequest.getPlaceName();
+		int rr_score = reviewrequest.getScore();
+		String rr_review = reviewrequest.getContent();
+		
+		mReposi.saveReview(rr_mggname, rr_restaurantname, rr_score, rr_review, rr_writer);
 	}
 }

@@ -19,7 +19,6 @@ public class MggRestRepository{
 			select * from restaurantreview where rr_restaurantname = ? order by rr_num desc
 			""";
 
-	
 	private static final String INSERT_REVIEW = "INSERT INTO restaurantreview (rr_mggname, rr_restaurantname, rr_score, rr_review, rr_writer) VALUES (?, ?, ?, ?, ?)";
 	
 	// 리뷰 세부 정보 가져오기
@@ -28,9 +27,8 @@ public class MggRestRepository{
 	}
 	
 	// 리뷰 저장하기
-	public void saveReview(String mggName, String restaurantName, int score, String review, String writer) {
-        jdbc.update(INSERT_REVIEW, mggName, restaurantName, score, review, writer);
-    }
-	
+	public void saveReview(String rr_mggname, String rr_restaurantname, int rr_score, String rr_review, String rr_writer) {
+        jdbc.update(INSERT_REVIEW, rr_mggname, rr_restaurantname, rr_score, rr_review, rr_writer);
+    }	
 	
 }

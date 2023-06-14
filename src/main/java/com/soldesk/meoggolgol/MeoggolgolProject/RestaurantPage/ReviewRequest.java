@@ -12,12 +12,10 @@ public class ReviewRequest {
 	
 	private String mggname;
 	
-	private String restaurantname;
+	private String placeName;
 	
 	private int score;
 
 	private String content;
-	
-	private String writer;
 	
 }
