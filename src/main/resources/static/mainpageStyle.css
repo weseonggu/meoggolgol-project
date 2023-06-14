@@ -25,7 +25,7 @@
 /* MapContainer &sigunguList */
 .child {
 	float: left;
-	height: 680px;
+	height: 736.5px;
 	width: 800px;
 	margin-left: 35px;
 	margin-right: 35px;
@@ -41,7 +41,7 @@
 
 /* 시군구 리스트 속 span 태그*/
 #sigunguListSpan {
-	width: 200px; 
+	width: 30%; 
 	height: 30px;
 	padding: 5px;
 	margin: 12px;
@@ -58,8 +58,8 @@
   opacity: 0.5;
 }
 #sigunguListSpan:hover{
-	width: 225px; 
-	height: 35px;
+	width: 30%; 
+	height: 30px;
 	background-color: #6699CC;
   	transform: scale(1.1);
   	z-index: 1;
@@ -67,11 +67,15 @@
 }
 
 #sigunguTable{
+	width: 100%; 
+	height: 100%;
 	overflow:hidden;
 	text-align: left;
 }
 
 #sigunguTableParent{
+	width: 100%; 
+	height: 100%;
 	display: inline-block;
 }
 
