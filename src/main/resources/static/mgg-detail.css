@@ -1,9 +1,8 @@
 @charset "UTF-8";
 
 #mggInfoBoox {
-	width: 80%;
+	width: 100%;
 	display: table;
-	border: 1px solid black;
 	margin: auto;
 	display: flex;
 	flex-direction: row;
@@ -21,7 +20,7 @@
 }
 
 #restaurantListBox {
-	width: 90%;
+	width: 100%;
 	border: 1px solid black;
 	display: flex;
 	flex-direction: row;
@@ -31,6 +30,8 @@
 	margin-top: 2%;
 	padding-bottom: 1%;
 	padding-top: 1%;
+	padding-right: 16%;
+	padding-left: 16%;
 }
 
 .restaurant-card {
@@ -52,6 +53,7 @@
 }
 
 #categoryButtons {
+	width: 100%;
 	margin-top: 3%;
 	display: flex;
 	justify-content: center;
@@ -79,12 +81,14 @@
     box-sizing: border-box;
 }
 
-body {
+/* body {
+	height: 100%;
+	width: 100%;
     text-align: center;
     padding: 100px;
     background: whitesmoke;
     display: table-cell;
-}
+} */
 
 button {
     margin: 20px;
