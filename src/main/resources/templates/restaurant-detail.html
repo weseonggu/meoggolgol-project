@@ -26,7 +26,7 @@
 		</table>
 		
 		<!-- 리뷰 등록폼 -->
-		<div class="mggInfoBox mb-3" name="reviewBox" id="reviewBox" >
+		<div th:if="${session.member_info != null}"  class="mggInfoBox mb-3" name="reviewBox" id="reviewBox" >
 		
 			<!-- 리뷰 별점 -->
 			<div id="reviewScore">
@@ -153,10 +153,7 @@
 			</div>
 		</div>
 				<!-- 등록하기 버튼 -->
-        		<input type="submit" class="btn btn-primary" id="submitBtn" value="등록하기" />
-	</form>
-			
-		</div>
+        		<input th:if="${session.member_info != null}" type="submit" class="btn btn-primary" id="submitBtn" value="등록하기" />
 	</form>
 			<table class="table" id="noticeList">
         <thead class="table-dark">
