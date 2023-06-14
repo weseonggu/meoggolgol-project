@@ -46,6 +46,9 @@
 				</fieldset>
 			</div>
 			
+			<!-- 별점 처리할 js 불러오기 (옮기시면 안 돼요 별점 태그보다 밑에 있어야 됩니다) -->
+			<script src="starRating.js"></script>
+			
 			<!-- 리뷰 상세 작성 -->
 			<div id="reviewDetail">
 				<div>
@@ -80,7 +83,6 @@
             		        	  formSubmitBtn.addEventListener('click', function(e) {
             		              	e.preventDefault(); // 폼 전송 방지
             		              	var reviewContentHtml = editor.getMarkdown();
-
             		               
             		             	// 상세 내용 유효성 검사 시작
             		                var content = reviewContentHtml.trim();
@@ -90,15 +92,24 @@
             		                    // 내용이 비어 있는 경우 경고창 표시
             		                    alert('소중한 리뷰를 작성해 주세요.');
             		                } else {
-            		                    // NoticeRequest 객체 생성 + 필드 값 설정
-            		                    var ReviewRequest = {
-            		                    		content: content,
-            		                    		};
+         
+            		                	// 선택된 별점
+            		                    var selectedRating = document.querySelector('input[name="reviewStar"]:checked').value;
+            		                	
+            		                	
+            		                    // JSON 데이터 생성
+            		                    var reviewData = {
+            		                      rating: selectedRating,
+            		                      content: content
+            		                    };
+            		                    
+            		                    // JSON 데이터를 문자열로 변환
+            		                    var jsonStr = JSON.stringify(reviewData);
 
             		              	$.ajax({
             		              		url: '/restaurant-detail/review',
-                					  	method: 'GET',
-                					  	data: JSON.stringify(ReviewRequest),
+                					  	method: 'POST',
+                					  	data: jsonStr,
                 		              	contentType: 'application/json',
                 					  
                 					  	// 성공했을 경우

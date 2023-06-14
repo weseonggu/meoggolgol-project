@@ -43,7 +43,7 @@ $(function() {
 	circle.setMap(map);
 
 
-	// 식당 커드
+	// 식당 카드
 	// getRestaurantInfo(lo, la, page);
 	getRestaurantInfo(lo, la, page)
 		.then(function(result) {
@@ -55,7 +55,6 @@ $(function() {
 			// 오류 처리
 		});
 
-	
 	// 카테고리 버튼 클릭 이벤트 핸들러
 	$("#btnKorean, #btnChinese, #btnWestern, #btnJapanese").click(function() {
 		var category = $(this).text(); // 클릭한 버튼의 텍스트(카테고리 이름) 가져오기
