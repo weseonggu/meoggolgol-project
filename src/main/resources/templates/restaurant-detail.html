@@ -171,6 +171,54 @@
             </tr>
         </tbody>
     	</table>
+	<button id="loadMoreButton">더보기</button>
 	</div>
+
+    <script>
+        // 리뷰 보여주는 함수
+        function showReviews(count) {
+            var reviewTableBody = document.getElementById("reviewTableBody");
+
+            // 추가로 보여질 리뷰 개수
+            var additionalReviewCount = Math.min(count, allReviews.length - visibleReviewCount);
+
+            // 추가 리뷰 행 생성
+            for (var i = visibleReviewCount; i < visibleReviewCount + additionalReviewCount; i++) {
+                var review = allReviews[i];
+                var tr = document.createElement("tr");
+
+                var tdWriter = document.createElement("td");
+                tdWriter.innerText = review.rr_writer;
+                tr.appendChild(tdWriter);
+
+                var tdScore = document.createElement("td");
+                tdScore.innerText = review.rr_score;
+                tr.appendChild(tdScore);
+
+                var tdReview = document.createElement("td");
+                tdReview.innerText = review.rr_review;
+                tr.appendChild(tdReview);
+
+                reviewTableBody.appendChild(tr);
+            }
+
+            // 현재 보여지는 리뷰 개수 업데이트
+            visibleReviewCount += additionalReviewCount;
+
+            // 모든 리뷰를 이미 표시했을 경우 "더보기" 버튼 숨기기
+            if (visibleReviewCount >= allReviews.length) {
+                loadMoreButton.classList.add("hidden");
+            }
+        }
+
+        // 초기에 20개의 리뷰 보여주기
+        showReviews(20);
+
+        // "더보기" 버튼 클릭 이벤트 처리
+        var loadMoreButton = document.getElementById("loadMoreButton");
+        loadMoreButton.addEventListener("click", function() {
+            showReviews(20);
+        });
+    </script>
 </body>
 </html>
