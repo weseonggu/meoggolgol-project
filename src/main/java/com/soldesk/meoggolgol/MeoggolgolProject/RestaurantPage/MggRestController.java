@@ -31,6 +31,8 @@ public class MggRestController {
 
 		model.addAttribute("reviewRequest", new ReviewRequest());
 		model.addAttribute("review", mrr.getReviewInfo(placeName));
+//		System.out.println("평점: "+mrr.getAvgScore(placeName));
+		model.addAttribute("avg", mrr.getAvgScore(placeName));
 		
 	    return "restaurant-detail";
 	}
