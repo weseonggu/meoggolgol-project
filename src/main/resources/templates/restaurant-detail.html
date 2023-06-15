@@ -48,13 +48,8 @@
 			<!-- 리뷰 상세 작성 -->
 			<div id="reviewDetail">
 				<div>
-					<!-- ToastUiEditor -->  
-        			<div id="editor"></div>
-        			
-        			<!-- 에디터 내용을 받을 태그-->
-    				<textarea id="reviewContent" name="content" style="display: none;"></textarea>
-    				
-        			<!-- TOAST UI Editor 생성 JS code -->
+					<textarea id="reviewContent" name="content"></textarea>
+    				</div>
     				<script>
     					// URL에서 매개변수 추출
     					const urlParams = new URLSearchParams(window.location.search);
@@ -68,42 +63,22 @@
     				  	const encodedRoadAddress = encodeURI(roadAddress);
     				  	const mggname = urlParams.get('mggname');
     				  	const encodedmggname = encodeURI(mggname);
-
-        				const editor = new toastui.Editor({
-           					el: document.querySelector('#editor'),
-           					toolbarItems: [
-        					    ['heading', 'bold', 'italic', 'strike'],
-        					    ['hr'],
-        					    ['ul', 'ol'],
-        					    ['table', 'link']
-        					],
-           					initialEditType: 'markdown',
-            				previewStyle: 'vertical',
-            				previewHighlight: false,
-            				height: '350px',
-            				initialValue: ''
-        				});
-        				editor.getMarkdown(); 
         				
-            			// 등록 버튼 클릭 시 컨트롤러로 마크다운 형식으로 리뷰 데이터 전송
+            			// 등록 버튼 클릭 시 컨트롤러로 리뷰 데이터 전송
             			document.addEventListener('DOMContentLoaded', function() {
-          				  	var formSubmitBtn = document.querySelector('#submitBtn');
+            				var formSubmitBtn = document.querySelector('#submitBtn');
             		        if (formSubmitBtn) {
             		        	formSubmitBtn.addEventListener('click', function(e) {
             		        		e.preventDefault(); // 폼 전송 방지
-            		              	var reviewContentHtml = editor.getMarkdown();
-
-            		             	// 리뷰 별점 & 상세 내용 유효성 검사 (별점 아직 안 넣음)
-            		                const content = reviewContentHtml.trim();
+									const selectedRating = parseInt(document.querySelector('input[name="reviewStar"]:checked')?.value);
+            		                const content = document.querySelector('textarea[name="content"]')?.value;
+            		                
+            		             	// 리뷰 별점 & 상세 내용 유효성 검사
     								
-            		                // 상세 내용이 빈 칸일 경우 <p><br></p> 값으로 넘어감
-            		                if (content === '<p><br></p>') {
-            		                    // 제목과 내용이 모두 비어 있는 경우 경고창 표시
-            		                    alert('제목과 내용을 입력해주세요.');
-            		                } else {
-            		                	const selectedRating = parseInt(document.querySelector('input[name="reviewStar"]:checked').value);
-
-                    					console.log('경도:', lo);
+            		                // 리뷰 별점 + 내용을 모두 작성한 경우
+            		                if (selectedRating !== null && selectedRating !== undefined && !isNaN(selectedRating) && content !== null && content !== undefined && content.trim() !== "") {
+            		                	
+            		                	console.log('경도:', lo);
                     					console.log('위도:', la);
                     					console.log('imgUrl:', imgUrl);
                     					console.log('placeUrl:', placeUrl);
@@ -121,53 +96,59 @@
                 				        	content: content
                 				      	};
                 				    
-            		              	$.ajax({
-            		              		url: '/restaurant-detail/review',
-                					  	method: 'POST',
-                					  	data: JSON.stringify(reviewRequest),
-                		              	contentType: 'application/json',
+            		              		$.ajax({
+            		              			url: '/restaurant-detail/review',
+                					  		method: 'POST',
+                					  		data: JSON.stringify(reviewRequest),
+                		              		contentType: 'application/json',
                 					  
-                					  	// 성공했을 경우
-                					  	success: function(response) {
-                							//성공 콘솔 출력
-                					    	console.log('공지사항 등록 성공');
-                					    	console.log(response);
-                					    	// 성공 후 폼 제출
-                					    	// document.querySelector('form').submit();
-                							window.location.href = '/restaurant-detail' + '?lo=' + lo + '&la=' + la + '&imgUrl=' + imgUrl + '&placeUrl=' + placeUrl + '&placeName=' + encodedPlaceName + '&roadAddress=' + encodedRoadAddress + '&mggname=' + encodedmggname;
-                					  	},
-                					  	// 실패했을 경우
-                					  	error: function(error) {
-                						  	// 실패 콘솔 출력
-                						  	console.error('공지사항 등록 실패:', error);
-                						  	window.location.href = '/restaurant-detail' + '?lo=' + lo + '&la=' + la + '&imgUrl=' + imgUrl + '&placeUrl=' + placeUrl + '&placeName=' + encodedPlaceName + '&roadAddress=' + encodedRoadAddress + '&mggname=' + encodedmggname;
-                					  	}
-                					});
-            		                }
-            		              });
-            		          }
-            		    });
+                					  		// 성공했을 경우
+                					  		success: function(response) {
+                								//성공 콘솔 출력
+                					    		console.log('공지사항 등록 성공');
+                					    		console.log(response);
+                					    		// 성공 후 폼 제출
+                					    		// document.querySelector('form').submit();
+                								window.location.href = '/restaurant-detail' + '?lo=' + lo + '&la=' + la + '&imgUrl=' + imgUrl + '&placeUrl=' + placeUrl + '&placeName=' + encodedPlaceName + '&roadAddress=' + encodedRoadAddress + '&mggname=' + encodedmggname;
+                					  		},
+                					  		// 실패했을 경우
+                					  		error: function(error) {
+                						  		// 실패 콘솔 출력
+                						  		console.error('공지사항 등록 실패:', error);
+                						  		window.location.href = '/restaurant-detail' + '?lo=' + lo + '&la=' + la + '&imgUrl=' + imgUrl + '&placeUrl=' + placeUrl + '&placeName=' + encodedPlaceName + '&roadAddress=' + encodedRoadAddress + '&mggname=' + encodedmggname;
+                					  		}
+                						});
+            		              	
+            		                } else {
+            		                	// 별점 또는 내용을 작성하지 않은 경우
+            		                    alert('별점과 내용을 모두 입력해 주세요.');
+            		            	}
+            		        	});
+            		    	}
+						});
         			</script>
-
-				</div>
-			</div>
 		</div>
-				<!-- 등록하기 버튼 -->
-        		<input th:if="${session.member_info != null}" type="submit" class="btn btn-primary" id="submitBtn" value="등록하기" />
+		<div>
+			<!-- 등록하기 버튼 -->
+        	<input th:if="${session.member_info != null}" type="submit" class="btn btn-primary" id="submitBtn" value="등록하기" />
+		</div>
 	</form>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('#reviewTbody > tr').hide();
-    $("#reviewTbody > tr").slice(0, 15).show();
-    $("#load").click(function(e) {
-      e.preventDefault();
-      $("#reviewTbody > tr:hidden").slice(0, 15).fadeIn(200);
-      if ($("#reviewTbody > tr:hidden").length === 0) {
-        $(this).fadeOut(100);
-      }
-    });
-  });
-</script>
+	
+	
+	<script type="text/javascript">
+  		$(document).ready(function() {
+    		$('#reviewTbody > tr').hide();
+    		$("#reviewTbody > tr").slice(0, 15).show();
+    		$("#load").click(function(e) {
+      			e.preventDefault();
+      			$("#reviewTbody > tr:hidden").slice(0, 15).fadeIn(200);
+      			if ($("#reviewTbody > tr:hidden").length === 0) {
+        			$(this).fadeOut(100);
+      			}
+    		});
+		});
+	</script>
+
 	<table class="table" id="reviewList">
 		<thead class="table-dark">
 			<tr>
@@ -179,16 +160,16 @@
 		    </tr>
 		</thead>
 		<tbody id="reviewTbody">
-		     <tr th:each="review : ${review}" class="review-row">
-            <td th:text="${review.rr_num}"></td>
-            <td th:text="${review.rr_writer}"></td>
-            <td th:text="${review.rr_score}"></td>
-            <td th:text="${review.rr_review}"></td>
-            <td th:text="${review.rr_date}"></td>
-        </tr>
+		    <tr th:each="review : ${review}" class="review-row">
+            	<td th:text="${review.rr_num}"></td>
+            	<td th:text="${review.rr_writer}"></td>
+            	<td th:text="${review.rr_score}"></td>
+            	<td th:text="${review.rr_review}" id="editor"></td>
+            	<td th:text="${review.rr_date}"></td>
+        	</tr>
 		</tbody>
     </table>
-		<a href="#" id="load">MORE</a>
+    	<a href="#" id="load">MORE</a>
 	</div>
 </body>
 </html>

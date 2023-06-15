@@ -1,7 +1,6 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.RestaurantPage;
 
 import java.time.LocalDateTime;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -94,4 +93,5 @@ public class MggRestController {
 	    ModelAndView modelAndView = new ModelAndView("성공");
 	    return modelAndView;
 	}	
+
 }

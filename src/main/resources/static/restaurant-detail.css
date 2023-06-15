@@ -15,7 +15,7 @@
 #reviewDetail {
 	width: 100%;
 	display: table;
-	border: 1px solid red;
+	border: 3px dasshed #1b1b1c;
 	margin: auto;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -25,7 +25,7 @@
 #reviewScore {
 	width: 100%;
 	display: table;
-	border: 1px solid red;
+	border: 3px dashed #1b1b1c;
 	margin: auto;
 	display: flex;
 	flex-direction: row;
