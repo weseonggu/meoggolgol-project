@@ -134,13 +134,13 @@
                 					    	console.log(response);
                 					    	// 성공 후 폼 제출
                 					    	// document.querySelector('form').submit();
-                							window.location.href = '/restaurant-detail' + '?lo=' + lo + '&la=' + la + '&imgUrl=' + imgUrl + '&placeUrl=' + placeUrl + '&placeName=' + encodedPlaceName + '&roadAddress=' + encodedRoadAddress + 'mggname' + encodedmggname;
+                							window.location.href = '/restaurant-detail' + '?lo=' + lo + '&la=' + la + '&imgUrl=' + imgUrl + '&placeUrl=' + placeUrl + '&placeName=' + encodedPlaceName + '&roadAddress=' + encodedRoadAddress + '&mggname=' + encodedmggname;
                 					  	},
                 					  	// 실패했을 경우
                 					  	error: function(error) {
                 						  	// 실패 콘솔 출력
                 						  	console.error('공지사항 등록 실패:', error);
-                						  	window.location.href = '/restaurant-detail' + '?lo=' + lo + '&la=' + la + '&imgUrl=' + imgUrl + '&placeUrl=' + placeUrl + '&placeName=' + encodedPlaceName + '&roadAddress=' + encodedRoadAddress + 'mggname' + encodedmggname;
+                						  	window.location.href = '/restaurant-detail' + '?lo=' + lo + '&la=' + la + '&imgUrl=' + imgUrl + '&placeUrl=' + placeUrl + '&placeName=' + encodedPlaceName + '&roadAddress=' + encodedRoadAddress + '&mggname=' + encodedmggname;
                 					  	}
                 					});
             		                }
