@@ -7,15 +7,15 @@
 		
 			<div th:replace="~{form_errors :: formErrorsFragment}"></div>
             <div class="signInBox">
-                <label for="userid" class="form-label">ID</label> 
-                <input type="text" th:field="*{member_id}">
+                <label for="userid" class="form-label" id="signInLabel">ID</label> 
+                <input type="text" th:field="*{member_id}" autocomplete="off">
             </div>
 
             <div class="signInBox">
-                <label for="password" class="form-label">PW</label>
-                <input type="password" th:field="*{member_pw}">
+                <label for="password" class="form-label" id="signInLabel">PW</label>
+                <input type="password" th:field="*{member_pw}" autocomplete="off">
             </div>
-			<input  type="hidden"th:field="*{backPageUrl}" readonly="readonly">
+			<input  type="hidden"th:field="*{backPageUrl}" readonly="readonly" autocomplete="off">
             <button type="submit" class="btn btn-primary">Sign In</button>
         </form>
     </div>
