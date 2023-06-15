@@ -24,7 +24,20 @@
 			</form>
 		</div>
 	</div>
-    <table class="table" id="noticeList">
+	<script type="text/javascript">
+  $(document).ready(function() {
+    $('#noticeList > tr').hide();
+    $("#noticeList > tr").slice(0, 1).show();
+    $("#load").click(function(e) {
+      e.preventDefault();
+      $("#noticeList > tr:hidden").slice(0, 1).fadeIn(200);
+      if ($("#noticeList > tr:hidden").length === 0) {
+        $(this).fadeOut(100);
+      }
+    });
+  });
+</script>
+    <table class="table" id="qnaList">
 	    <tr th:each="reply : ${qnaReply}">
 	        <td th:id="r_num" th:text="${reply.comment_num}"></td>
 	        <td th:text="${reply.writer}"></td>
@@ -37,6 +50,7 @@
 	        </td>
 	    </tr>
     </table>
+    <a href="#" id="load">MORE</a>
 </div>
 </div>
 </html>
