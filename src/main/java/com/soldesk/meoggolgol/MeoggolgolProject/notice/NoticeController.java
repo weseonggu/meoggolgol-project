@@ -115,7 +115,27 @@ public class NoticeController {
 	
 	// 공지사항 수정 페이지 요청
 	@GetMapping(value = "/notice/detail/update/{id}")
-	private String goUpdateNotice(NoticeRequest notierequest, Model model,@PathVariable("id") Integer id) {
+	private String goUpdateNotice(NoticeRequest notierequest, Model model,@PathVariable("id") Integer id, HttpServletRequest httpservletreuquest) {
+		// 세션 가져오기
+		HttpSession session = httpservletreuquest.getSession();
+				
+		// 먹골골 회원이 아닌 경우 -> 다시 noticeForm으로 보내기
+		if (session.getAttribute("member_info") == null) {
+			return "redirect:/notice";
+		}
+		
+		// 관리자 정보 가져오기
+		MemberSignIn membersignin = (MemberSignIn) session.getAttribute("member_info");
+				
+		// 세션 값 콘솔 확인
+		System.out.println(session.getAttribute("member_info"));
+				
+		// 먹골골 일반 회원일 경우 -> 다시 notice로 보내기
+		if ("N".equals(membersignin.getManager())) {
+			return "notice/noticeForm";
+		}
+				
+		// 먹골골 관리자일 경우 -> notice_update으로 보내기
 		
 		// 공지사항 제목 + 번호 가져오기
 		model.addAttribute("id", id);
@@ -138,8 +158,8 @@ public class NoticeController {
 	        
 	        return "notice/notice_update";
 	    } else {
-	        return "notice/noticeForm";
-	    }
+	    	return "notice/noticeForm";
+		}
 	}
 
 	// 공지사항 수정

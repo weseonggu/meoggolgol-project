@@ -73,7 +73,7 @@ public class MggRestController {
 			// 등록일자 제대로 들어왔는지 콘솔 확인
 			System.out.println(rr_date);
 			
-			// NoticeService를 사용하여 공지사항 저장
+			// MggRestService를 사용하여 공지사항 저장
 			mrs.saveNotice(reviewRequest, rr_writer, rr_date);
 		}
 		return "성공";
