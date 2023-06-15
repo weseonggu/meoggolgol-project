@@ -1,43 +1,46 @@
 <html layout:decorate="~{layout}">
-	<div layout:fragment="content"  id="JoinPageContainer" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-		<form th:action="@{/join}" th:object="${member}" method="post" style="width: 300px;">
+	<div layout:fragment="content"  id="JoinPageContainer">
+	
+	<link rel="stylesheet" type="text/css" th:href="@{/signInUpStyle.css}">
+	
+		<form id ="joinForm" th:action="@{/join}" th:object="${member}" method="post">
 			<!-- 입력 정보 오류 -->
 			<div th:replace="~{form_errors :: formErrorsFragment}"></div>
 			<!-- 회원 정보 입력 -->
-			<div class="mb-3">
-				<label for="username" class="form-label">사용자ID</label>
-				<input type="text" th:field="*{member_id}" class="form-control" style="width: 100%">
+			<div class="mb-3" id="signUpBox">
+				<label for="username" class="form-label" id="signUpLabel" >USER ID</label>
+				<input type="text" th:field="*{member_id}" class="form-control" autocomplete="off" placeholder="3-15 자리 사이로 입력해 주세요.">
 			</div>
-			<div class="mb-3">
-				<label for="username" class="form-label">사용자이름</label> 
-				<input type="text" th:field="*{member_name}" class="form-control" style="width: 100%">
+			<div class="mb-3" id="signUpBox">
+				<label for="username" class="form-label" id="signUpLabel">USER NAME</label> 
+				<input type="text" th:field="*{member_name}" class="form-control" autocomplete="off" placeholder="성함을 입력해 주세요.">
 			</div>
-			<div class="mb-3">
-				<label for="username" class="form-label"> 닉네임</label> 
-				<input type="text" th:field="*{member_nickname}" class="form-control" style="width: 100%">
+			<div class="mb-3" id="signUpBox">
+				<label for="username" class="form-label" id="signUpLabel">USER NICKNAME</label> 
+				<input type="text" th:field="*{member_nickname}" class="form-control" placeholder="닉네임을 입력해 주세요.">
 			</div>
-			<div class="mb-3">
-				<label for="password1" class="form-label">비밀번호</label> 
-				<input type="password" th:field="*{member_pw}" class="form-control" style="width: 100%">
+			<div class="mb-3" id="signUpBox">
+				<label for="password1" class="form-label" id="signUpLabel">PW</label> 
+				<input type="password" th:field="*{member_pw}" class="form-control" autocomplete="off" placeholder="5-15 자리 사이로 입력해 주세요.">
 			</div>
-			<div class="mb-3">
-				<label for="password2" class="form-label">비밀번호 확인</label> 
-				<input type="password" th:field="*{member_pw_check}" class="form-control" style="width: 100%">
+			<div class="mb-3" id="signUpBox">
+				<label for="password2" class="form-label" id="signUpLabel">CHECK PW</label> 
+				<input type="password" th:field="*{member_pw_check}" class="form-control" autocomplete="off" placeholder="비밀번호를 다시 한 번 입력해 주세요.">
 			</div>
-	 		<div class="mb-3">
-				<label for="password2" class="form-label">생년월일</label> 
-				<input type="date" th:field="*{member_birth}" class="form-control" style="width: 100%">
+	 		<div class="mb-3" id="signUpBox">
+				<label for="password2" class="form-label" id="signUpLabel">BIRTH</label> 
+				<input type="date" th:field="*{member_birth}" class="form-control" autocomplete="off">
 			</div> 
-			<div class="mb-3">
-				<label for="username" class="form-label">폰 번호</label> 
-				<input type="text" th:field="*{member_phoneNumber}" class="form-control" style="width: 100%">
+			<div class="mb-3" id="signUpBox">
+				<label for="username" class="form-label" id="signUpLabel">PHONE NUMBER</label> 
+				<input type="text" th:field="*{member_phoneNumber}" class="form-control" placeholder="ex) 010-1234-5678" autocomplete="off">
 			</div>
-			<div class="mb-3">
-				<label for="email" class="form-label">이메일</label> 
-				<input type="email" th:field="*{member_email}" class="form-control" style="width: 100%">
+			<div class="mb-3" id="signUpBox">
+				<label for="email" class="form-label" id="signUpLabel">EMAIL</label> 
+				<input type="email" th:field="*{member_email}" class="form-control" autocomplete="off" placeholder="ex) meoggolgol@gmail.com">
 			</div>
 			<div class="mb-3" style="text-align: center;">
-				<button type="submit" class="btn btn-primary">회원가입</button>
+				<button type="submit" class="btn btn-primary">SIGN UP</button>
 			</div>
 		</form>
 	</div>

@@ -1,9 +1,9 @@
 <html layout:decorate="~{layout}">
     <div layout:fragment="content" id="SignInPageContainer">
     
-    <link rel="stylesheet" type="text/css" th:href="@{/loginStyle.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/signInUpStyle.css}">
     
-        <form id ="loginForm"th:action="@{/signin}" th:object="${memberSignIn}" method="POST">
+        <form id ="loginForm" th:action="@{/signin}" th:object="${memberSignIn}" method="POST">
 		
 			<div th:replace="~{form_errors :: formErrorsFragment}"></div>
             <div class="signInBox">

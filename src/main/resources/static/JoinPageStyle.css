@@ -1,8 +1,13 @@
 @charset "UTF-8";
-#JoinPageContainer form div{
-	width: 80%;
-}
+
 
 #joinMember{
 	width: 50px;
+}
+
+#signUpLabel{
+	font-family: 'Dung';
+	font-size: 25px;
+	margin-top: 8px;
+	margin-bottom: 6px;
 }
