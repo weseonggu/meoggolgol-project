@@ -44,16 +44,16 @@ public class MggRestController {
 		// 리뷰 작성자는 세션에 있는 멤버 닉네임 가져와서 넣음
 
 		// 먹자 골목 이름 콘솔 확인
-		System.out.println(reviewRequest.getMggname());
+		System.out.println("먹자 골목 이름: "+reviewRequest.getMggname());
 		
 		// 음식점 이름 콘솔 확인
-		System.out.println(reviewRequest.getPlaceName());
+		System.out.println("음식점 이름: "+reviewRequest.getPlaceName());
 		
 		// 리뷰 상세 내용 콘솔 확인
-		System.out.println(reviewRequest.getContent());
+		System.out.println("리뷰 상세: "+reviewRequest.getContent());
 		
 		// 리뷰 별점 콘솔 확인
-		System.out.println(reviewRequest.getScore());
+		System.out.println("리뷰 별점: "+reviewRequest.getScore());
 		
 		// 세션에 있는 회원 정보 가져오기
 		HttpSession session = httpservletrequest.getSession();
@@ -65,13 +65,13 @@ public class MggRestController {
 			String rr_writer = membersignin.getMember_nickname();
 			
 			// 리뷰 작성자 콘솔 확인
-			System.out.println(rr_writer);
+//			System.out.println(rr_writer);
 			
 			// 등록일자는 현재 날짜로 설정
 			LocalDateTime rr_date = LocalDateTime.now();
 						
 			// 등록일자 제대로 들어왔는지 콘솔 확인
-			System.out.println(rr_date);
+//			System.out.println(rr_date);
 			
 			// MggRestService를 사용하여 공지사항 저장
 			mrs.saveNotice(reviewRequest, rr_writer, rr_date);
