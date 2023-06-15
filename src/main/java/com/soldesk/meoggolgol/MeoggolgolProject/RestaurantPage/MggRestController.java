@@ -1,5 +1,7 @@
 package com.soldesk.meoggolgol.MeoggolgolProject.RestaurantPage;
 
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,8 +67,14 @@ public class MggRestController {
 			// 리뷰 작성자 콘솔 확인
 			System.out.println(rr_writer);
 			
+			// 등록일자는 현재 날짜로 설정
+			LocalDateTime rr_date = LocalDateTime.now();
+						
+			// 등록일자 제대로 들어왔는지 콘솔 확인
+			System.out.println(rr_date);
+			
 			// NoticeService를 사용하여 공지사항 저장
-			mrs.saveNotice(reviewRequest, rr_writer);
+			mrs.saveNotice(reviewRequest, rr_writer, rr_date);
 		}
 		return "성공";
 	}
