@@ -85,6 +85,13 @@ body{
 	--bs-navbar-hover-color: #EE3898;
 }
 
+@media (max-width: 900px) {
+  .navbar {
+    width: 900px;
+  }
+  
+}
+
 .navbar-collapse {
     flex-basis: 0;
     flex-grow: 1;
