@@ -122,7 +122,9 @@ h2 {
 
 /*먹자골목 리스트*/
 #mggList {
-	border: 1px solid #1B1B1C;
+	font-family: 'Dung' !important;
+	font-size: 20px !important;
+	border: 6px dashed #1B1B1C;
 	width: 1680px;
 	display: table;
 	margin: auto;
@@ -155,4 +157,9 @@ h2 {
 
 p {
 	margin-bottom: 0px;
+}
+
+#meoggolgolHead{
+	font-family: 'PyeongChangPeace';
+	font-size: 25px;
 }
