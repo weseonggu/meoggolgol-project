@@ -155,22 +155,40 @@
 				<!-- 등록하기 버튼 -->
         		<input th:if="${session.member_info != null}" type="submit" class="btn btn-primary" id="submitBtn" value="등록하기" />
 	</form>
-			<table class="table" id="noticeList">
-        <thead class="table-dark">
-            <tr>
-                <th>작성자</th>
-                <th>별점</th>
-                <th>리뷰 내용</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="review : ${review}">
-                <td th:text="${review.rr_writer}"></td>
-                <td th:text="${review.rr_score}"></td>
-                <td th:text="${review.rr_review}"></td>
-            </tr>
-        </tbody>
-    	</table>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#reviewTbody > tr').hide();
+    $("#reviewTbody > tr").slice(0, 15).show();
+    $("#load").click(function(e) {
+      e.preventDefault();
+      $("#reviewTbody > tr:hidden").slice(0, 15).fadeIn(200);
+      if ($("#reviewTbody > tr:hidden").length === 0) {
+        $(this).fadeOut(100);
+      }
+    });
+  });
+</script>
+	<table class="table" id="reviewList">
+		<thead class="table-dark">
+			<tr>
+				<th>번호</th>
+				<th>작성자</th>
+		        <th>별점</th>
+		        <th>리뷰 내용</th>
+		        <th>리뷰 작성일</th>
+		    </tr>
+		</thead>
+		<tbody id="reviewTbody">
+		     <tr th:each="review : ${review}" class="review-row">
+            <td th:text="${review.rr_num}"></td>
+            <td th:text="${review.rr_writer}"></td>
+            <td th:text="${review.rr_score}"></td>
+            <td th:text="${review.rr_review}"></td>
+            <td th:text="${review.rr_date}"></td>
+        </tr>
+		</tbody>
+    </table>
+		<a href="#" id="load">MORE</a>
 	</div>
 </body>
 </html>
