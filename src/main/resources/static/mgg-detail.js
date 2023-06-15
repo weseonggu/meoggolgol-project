@@ -162,6 +162,14 @@ $(function() {
 		var url = "restaurant-detail?lo=" + cardlo + "&la=" + cardla + "&imgUrl=" + imgUrl + "&placeUrl=" + placeUrl + "&placeName=" + placeName + "&roadAddress=" + roadAddress + "&mggname=" + mggName;
 		location.href = url;
 	});
+	
+	
+	  // 카드 이미지
+	  $(window).on('resize', function() {
+		  var imgWidth = $(".restaurant-card img").width();
+		  
+		$(".restaurant-card img").css("height",(imgWidth*14)/9);
+		});
 
 });
 
@@ -215,6 +223,8 @@ function changeImg(result) {
 
 	    ongoingImageRequests.push(request);
 	  }
+	  var imgWidth = $(".restaurant-card img").width();
+	  $(".restaurant-card img").css("height",(imgWidth*14)/9);
 	}
 
 function categoryNameValues() {

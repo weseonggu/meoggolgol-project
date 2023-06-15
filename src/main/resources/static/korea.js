@@ -177,7 +177,6 @@ $(function() {
   // 먹자 골목 리스트 가로길이 조정
   $(window).on('resize', function() {
 	  var windowWidth = $(window).width();
-	  console.log(windowWidth);
 	  if (windowWidth<=1740) {
 		$("#mggList").css("width","800px")
 	}else{
