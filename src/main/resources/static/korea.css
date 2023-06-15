@@ -1,13 +1,13 @@
 @charset "UTF-8";
 
 #states path {
-	fill: #BCAAA4;
-	stroke: #000000;
-	stroke-width: 1.5px;
+	fill: #FAE5E3;
+	stroke: LightSteelBlue;
+	stroke-width: 2px;
 }
 
 #states path:hover {
-	fill: #009300;
+	fill: pink;
 	transition:  0.5s ease;
 }
 
@@ -16,7 +16,7 @@
 }
 
 #states .activeDetail {
-	fill: #00B700;
+	fill: LightSteelBlue;
 }
 
 #states path {
@@ -25,13 +25,17 @@
 
 #states text {
 	cursor: pointer;
-	font-size: 12px;
-	fill: #fff;
+	font-size: 13px;
+	font-family: 'Dung';
+	fill: #1B1B1C;
 }
 
 /* 지도 크기 */ 
 svg {
-	height: 736.5px;
-	width: 670px;
+	height: 893px;
+	width: 787px;
+}
 
+#mapContainer {
+	background-color: LightSteelBlue;
 }
