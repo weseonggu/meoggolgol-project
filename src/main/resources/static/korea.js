@@ -172,6 +172,18 @@ $(function() {
     
 
   });
+  
+  
+  // 먹자 골목 리스트 가로길이 조정
+  $(window).on('resize', function() {
+	  var windowWidth = $(window).width();
+	  console.log(windowWidth);
+	  if (windowWidth<=1740) {
+		$("#mggList").css("width","800px")
+	}else{
+		$("#mggList").css("width","1680px")
+	}
+	});
 });
 
 // 시군도 선택시 그 지역의 먹자골목 리스트 출력
