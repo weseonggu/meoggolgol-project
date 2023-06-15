@@ -13,10 +13,16 @@
 
 /*  */
 .selectMgg {
+	font-family: 'Dung' !important;
+	font-size: 20px !important;
 	height: 500px;
 	width: 500px;
 	border: 1px solid black;
 	align-content: center;
+}
+#mggName{
+	font-family: 'PyeongChangPeace';
+	font-size: 35px;
 }
 
 #restaurantListBox {
@@ -92,15 +98,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-
-/* body {
-	height: 100%;
-	width: 100%;
-    text-align: center;
-    padding: 100px;
-    background: whitesmoke;
-    display: table-cell;
-} */
 
 button {
     margin: 20px;
