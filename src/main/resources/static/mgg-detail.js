@@ -162,6 +162,26 @@ $(function() {
 		var url = "restaurant-detail?lo=" + cardlo + "&la=" + cardla + "&imgUrl=" + imgUrl + "&placeUrl=" + placeUrl + "&placeName=" + placeName + "&roadAddress=" + roadAddress + "&mggname=" + mggName;
 		location.href = url;
 	});
+	  var windowWidth = $(window).width();
+	  if (windowWidth>=1740) {
+			$("#restaurantListBox").css("width","1740px");
+		}else{
+			$("#restaurantListBox").css("width","80%")
+		}
+	
+	  // 카드 이미지
+	  $(window).on('resize', function() {
+		  var imgWidth = $(".restaurant-card img").width();
+		  
+		  $(".restaurant-card img").css("height",(imgWidth*14)/9);
+		  
+		  var windowWidth = $(window).width();
+		  if (windowWidth>=1740) {
+				$("#restaurantListBox").css("width","1740px");
+			}else{
+				$("#restaurantListBox").css("width","80%")
+			}
+		});
 
 });
 
@@ -215,6 +235,8 @@ function changeImg(result) {
 
 	    ongoingImageRequests.push(request);
 	  }
+	  var imgWidth = $(".restaurant-card img").width();
+	  $(".restaurant-card img").css("height",(imgWidth*14)/9);
 	}
 
 function categoryNameValues() {
@@ -238,3 +260,26 @@ function toggleCategoryButtonVisibility(categoryValues) {
 function toggleButtonVisibility(buttonId, condition) {
 	$(buttonId).toggle(condition);
 }
+
+$(document).ready(function() {
+    var restaurantListBox = $("#restaurantListBox");
+
+    // 페이지 로드 시 체크 및 조정
+    checkAndAdjustWidth();
+
+    // 창 크기가 변경될 때마다 체크 및 조정
+    $(window).resize(function() {
+        checkAndAdjustWidth();
+    });
+
+    function checkAndAdjustWidth() {
+        var windowWidth = $(window).width();
+        var targetWidth = 1500;
+
+        if (windowWidth < targetWidth) {
+            restaurantListBox.css("width", targetWidth + "px");
+        } else {
+            restaurantListBox.css("width", "auto");
+        }
+    }
+});

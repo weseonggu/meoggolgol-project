@@ -64,7 +64,7 @@
 				<!-- 로그인/회원가입 기능 넣는 태그 -->
 				<div class="brandContent" id="signInUp">
 					<a th:if="${session.member_info == null}" href="/signin" id="loginButton">Sign In</a>
-					<a id=signDivider>|</a>
+					<a th:if="${session.member_info == null}" id=signDivider>|</a>
 					<a th:if="${session.member_info == null}" href="/join" id="signupButton">Sign Up</a>
 
 					<!-- 로그인 시 닉네임 띄우기 -->

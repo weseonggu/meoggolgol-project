@@ -172,6 +172,17 @@ $(function() {
     
 
   });
+  
+  
+  // 먹자 골목 리스트 가로길이 조정
+  $(window).on('resize', function() {
+	  var windowWidth = $(window).width();
+	  if (windowWidth<=1740) {
+		$("#mggList").css("width","800px")
+	}else{
+		$("#mggList").css("width","1680px")
+	}
+	});
 });
 
 // 시군도 선택시 그 지역의 먹자골목 리스트 출력
@@ -182,16 +193,22 @@ function listAjax(code){
 		if(data != null && data.length > 0){
             $("#meoggolgolHead").empty().append(
                 $("<tr></tr>").append(
-                    $("<th></th>").text("목자골목"),
+                    $("<th></th>").text("먹자골목"),
                     $("<th></th>").text("주소")
                 )
             );
             $.each(data, function(i) {
-                var ntd = $("<td></td>").text(data[i].FCLTY_NM);
-                var ltd = $("<td></td>").text(data[i].RDNMADR_NM);
-                var lotd = $("<input>").attr("type", "hidden").attr("value", data[i].FCLTY_LO);
-                var latd = $("<input>").attr("type", "hidden").attr("value", data[i].FCLTY_LA);
-                
+    			var ntd = $("<td></td>").text(data[i].FCLTY_NM).css({
+        			"padding-bottom": "20px",
+        			"padding-top": "20px"
+    			});
+    			var ltd = $("<td></td>").text(data[i].RDNMADR_NM).css({
+        			"padding-bottom": "20px",
+        			"padding-top": "20px"
+    			});
+    			var lotd = $("<input>").attr("type", "hidden").attr("value", data[i].FCLTY_LO);
+    			var latd = $("<input>").attr("type", "hidden").attr("value", data[i].FCLTY_LA);
+
                 ntd.hover(
                     function() {
                         $(this).css("color", "#F06292"); // 마우스를 올렸을 때 배경색을 노란색으로 변경

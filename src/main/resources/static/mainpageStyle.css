@@ -5,18 +5,18 @@
 	width: 100%;
 	/*부모높이 자동 조절 (자식에 넣어야하는 값)*/
 	display: table;
-    text-align: left;
+	text-align: left;
 }
 
 .parentInner {
 	display: table-cell;
-    text-align: center;
-    vertical-align: middle;
+	text-align: center;
+	vertical-align: middle;
 }
 
 /* SelectBox */
-.parentContent{
-	padding-top:16px;
+.parentContent {
+	padding-top: 16px;
 	/*부모높이 자동 조절 (자식에 넣어야하는 값)*/
 	display: table;
 	display: inline-block;
@@ -32,18 +32,46 @@
 	border: 6px dashed #1B1B1C;
 }
 
-#sigunguList{
+.child2 {
+	float: left;
+	height: 905px;
+	width: 800px;
+	margin-left: 35px;
+	margin-right: 35px;
+	border: 6px dashed #1B1B1C;
+}
+
+@media (max-width: 1774px) {
+  .parentContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .child {
+    float: none;
+    margin: 0 auto;
+  }
+  
+  .child2 {
+    float: none;
+    margin: 0 auto;
+    margin-top: 16px;
+  }
+}
+
+#sigunguList {
 	padding: 16px;
-    font-family: 'PyeongChangPeace';
-    font-size: 35px;
+	font-family: 'PyeongChangPeace';
+	font-size: 35px;
 	color: #1B1B1C;
-} 
+}
 
 /* 시군구 리스트 속 span 태그*/
 #sigunguListSpan {
-    font-family: 'Dung' !important;
-    font-size: 20px !important;
-	width: 30%; 
+	font-family: 'Dung' !important;
+	font-size: 20px !important;
+	width: 30%;
 	padding: 2px;
 	margin: 12px;
 	margin-bottom: 5px;
@@ -51,31 +79,33 @@
 	text-align: center;
 	border: 3px solid #1B1B1C;
 	border-radius: 5px;
-	transition:  0.3s ease;
+	transition: 0.3s ease;
 	transition: transform 0.5s ease, background-color 0.5s ease;
 }
+
 #sigunguList:hover .sigunguListSpan:not(:hover) {
-  transform: scale(0.9);
-  opacity: 0.5;
-}
-#sigunguListSpan:hover{
-	width: 30%; 
-	background-color: #6699CC;
-  	transform: scale(1.1);
-  	z-index: 1;
-  	opacity: 1;
+	transform: scale(0.9);
+	opacity: 0.5;
 }
 
-#sigunguTable{
-	width: 100%; 
+#sigunguListSpan:hover {
+	width: 30%;
+	background-color: #6699CC;
+	transform: scale(1.1);
+	z-index: 1;
+	opacity: 1;
+}
+
+#sigunguTable {
+	width: 100%;
 	height: 100%;
-	overflow:hidden;
+	overflow: hidden;
 	text-align: left;
 }
 
-#sigunguTableParent{
-	width: 100%; 
-	height: 100%;	
+#sigunguTableParent {
+	width: 100%;
+	height: 100%;
 }
 
 #selectSigungu {
@@ -85,26 +115,25 @@
 
 /* 먹자골목 리스트 제목*/
 h2 {
-    font-family: 'Dung';
-    text-align: center;
+	font-family: 'Dung';
+	text-align: center;
 	color: #1B1B1C;
 }
 
 /*먹자골목 리스트*/
-#mggList{
-	border: 1px solid #1B1B1C; 
-	width:90%;	
-	/*부모높이 자동 조절 (자식에 넣어야하는 값)*/
+#mggList {
+	border: 6px dashed #1B1B1C;
+	width: 1680px;
 	display: table;
 	margin: auto;
-	margin-top:32px;
+	margin-top: 32px;
+	transition: width 0.5s ease-out;
 }
 
 /* #meoggolgolTable{
 	부모높이 자동 조절 (자식에 넣어야하는 값)
 	display: table-row;
 } */
-
 #streetName {
 	padding: 5px;
 	margin: 5px;
@@ -121,7 +150,18 @@ h2 {
 
 #banner {
 	margin-bottom: 35px;
+	width: 100%
 }
+
 p {
 	margin-bottom: 0px;
+}
+
+#meoggolgolHead{
+	font-family: 'PyeongChangPeace';
+	font-size: 25px;
+}
+#meoggolgolTable{
+	font-family: 'Dung' !important;
+	font-size: 25px !important;
 }
