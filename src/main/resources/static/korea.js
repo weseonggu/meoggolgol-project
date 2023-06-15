@@ -1,8 +1,8 @@
 // 지도 그리기
 $(function() {
-  const width = 600; // 맵의 너비
-  const height = 600; // 맵의 높이
-  var initialScale = 5500; //확대시킬 값
+  const width = 840; // 맵의 너비
+  const height = 815; // 맵의 높이
+  var initialScale = 6500; //확대시킬 값
   const initialX = -12000; //초기 위치값 X
   const initialY = 4050; //초기 위치값 Y
   var labels;
@@ -17,7 +17,7 @@ $(function() {
   var states = svg
     .append('g')
     .attr('id', 'states')
-    .attr("fill", "antiquewhite"); // 배경 흰색
+    .attr("fill", "LightSteelBlue"); // 배경 색상
 
   states
     .append('rect')
@@ -120,14 +120,38 @@ $(function() {
               //서울 경기도 이름 겹쳐서 경기도 내리기
               arr[1] +=
                   d3.event && d3.event.scale
-                      ? d3.event.scale / height + 20
-                      : initialScale / height + 20;
+                      ? d3.event.scale / height + 40
+                      : initialScale / height + 40;
           } else if (d.properties.code == 44) {
               //충남은 조금 더 내리기
               arr[1] +=
                   d3.event && d3.event.scale
                       ? d3.event.scale / height + 10
                       : initialScale / height + 10;
+          } else if (d.properties.code == 11) {
+              // 서울 내리기
+              arr[1] +=
+                  d3.event && d3.event.scale
+                      ? d3.event.scale / height + 2
+                      : initialScale / height + 2;
+          } else if (d.properties.code == 30) {
+              // 대전 내리기
+              arr[1] +=
+                  d3.event && d3.event.scale
+                      ? d3.event.scale / height + 1
+                      : initialScale / height + 1;
+          } else if (d.properties.code == 36) {
+              // 세종시 올리기
+              arr[1] +=
+                  d3.event && d3.event.scale
+                      ? d3.event.scale / height - 15
+                      : initialScale / height - 15;
+          } else if (d.properties.code == 43) {
+              // 충북 올리기
+              arr[1] +=
+                  d3.event && d3.event.scale
+                      ? d3.event.scale / height - 30
+                      : initialScale / height - 30;
           }
         return arr[1];
       })
@@ -150,35 +174,46 @@ $(function() {
   });
 });
 
-
 // 시군도 선택시 그 지역의 먹자골목 리스트 출력
 function listAjax(code){
 	$("#meoggolgolTable").empty();
+	$("#meoggolgolHead").empty();
     $.getJSON("meoggolgol-list?sigunguCode="+code, function(data){
-		$.each(data, function(i) {
-            var ntd = $("<td></td>").text(data[i].FCLTY_NM);
-            var ltd = $("<td></td>").text(data[i].RDNMADR_NM);
-            var lotd = $("<input>").attr("type", "hidden").attr("value", data[i].FCLTY_LO);
-            var latd = $("<input>").attr("type", "hidden").attr("value", data[i].FCLTY_LA);
- 			ntd.hover(
-                function() {
-                    $(this).css("color", "#F06292"); // 마우스를 올렸을 때 배경색을 노란색으로 변경
-                },
-                function() {
-                    $(this).css("color", ""); // 마우스를 내렸을 때 배경색을 원래대로 되돌림
-                }
+		if(data != null && data.length > 0){
+            $("#meoggolgolHead").empty().append(
+                $("<tr></tr>").append(
+                    $("<th></th>").text("목자골목"),
+                    $("<th></th>").text("주소")
+                )
             );
- 			ltd.hover(
-                function() {
-                    $(this).css("color", "#F06292"); // 마우스를 올렸을 때 배경색을 노란색으로 변경
-                },
-                function() {
-                    $(this).css("color", ""); // 마우스를 내렸을 때 배경색을 원래대로 되돌림
-                }
-            );
-            var tr = $("<tr></tr>").attr("onclick","mggDetail("+data[i].FCLTY_LO+","+data[i].FCLTY_LA+")").append(ntd,ltd, lotd, latd);
-			$("#meoggolgolTable").append(tr);
-		});
+            $.each(data, function(i) {
+                var ntd = $("<td></td>").text(data[i].FCLTY_NM);
+                var ltd = $("<td></td>").text(data[i].RDNMADR_NM);
+                var lotd = $("<input>").attr("type", "hidden").attr("value", data[i].FCLTY_LO);
+                var latd = $("<input>").attr("type", "hidden").attr("value", data[i].FCLTY_LA);
+                
+                ntd.hover(
+                    function() {
+                        $(this).css("color", "#F06292"); // 마우스를 올렸을 때 배경색을 노란색으로 변경
+                    },
+                    function() {
+                        $(this).css("color", ""); // 마우스를 내렸을 때 배경색을 원래대로 되돌림
+                    }
+                );
+                
+                ltd.hover(
+                    function() {
+                        $(this).css("color", "#F06292"); // 마우스를 올렸을 때 배경색을 노란색으로 변경
+                    },
+                    function() {
+                        $(this).css("color", ""); // 마우스를 내렸을 때 배경색을 원래대로 되돌림
+                    }
+                );
+                
+                var tr = $("<tr></tr>").attr("onclick","mggDetail("+data[i].FCLTY_LO+","+data[i].FCLTY_LA+")").append(ntd,ltd, lotd, latd);
+                $("#meoggolgolTable").append(tr);
+            });
+        }
 		});
 	
 }
