@@ -133,8 +133,7 @@
         	<input th:if="${session.member_info != null}" type="submit" class="btn btn-primary" id="submitBtn" value="등록하기" />
 		</div>
 	</form>
-	
-	
+
 	<script type="text/javascript">
   		$(document).ready(function() {
     		$('#reviewTbody > tr').hide();
@@ -148,7 +147,9 @@
     		});
 		});
 	</script>
-
+	
+	<h1 th:text="${avg+'/5점'}"></h1>
+	
 	<table class="table" id="reviewList">
 		<thead class="table-dark">
 			<tr>
