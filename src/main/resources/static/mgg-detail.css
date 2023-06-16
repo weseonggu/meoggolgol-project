@@ -10,7 +10,12 @@
 	justify-content: center;
 	margin-top: 16px;
 }
-
+#mgginfo p{
+	margin-left: 16px;
+}
+#mgginf h2{
+	margin-top: 8px;
+}
 /*  */
 .selectMgg {
 	font-family: 'Dung' !important;
