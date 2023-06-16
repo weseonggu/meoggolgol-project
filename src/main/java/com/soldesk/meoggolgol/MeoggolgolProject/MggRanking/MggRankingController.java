@@ -21,8 +21,8 @@ public class MggRankingController {
 
 			model.addAttribute("rank", mrr.getRanking());
 			ArrayList<Ranking> ranking = new ArrayList<>();
-			ArrayList<Rest> rests = new ArrayList<>();
 			for (int i = 0; i < mrr.getRanking().size(); i++) {
+				ArrayList<Rest> rests = new ArrayList<>();
 				Ranking rank = new Ranking();
 				rank.setMgg_name((String) mrr.getRanking().get(i).get("rr_mggname"));
 				rank.setAverage_score((BigDecimal) mrr.getRanking().get(i).get("average_score"));
