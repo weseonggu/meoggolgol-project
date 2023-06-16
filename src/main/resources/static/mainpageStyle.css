@@ -41,23 +41,21 @@
 	border: 6px dashed #1B1B1C;
 }
 
-@media (max-width: 1774px) {
-  .parentContent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .child {
-    float: none;
-    margin: 0 auto;
-  }
-  
-  .child2 {
-    float: none;
-    margin: 0 auto;
-    margin-top: 16px;
-  }
+@media ( max-width : 1774px) {
+	.parentContent {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.child {
+		float: none;
+		margin: 0 auto;
+	}
+	.child2 {
+		float: none;
+		margin: 0 auto;
+		margin-top: 16px;
+	}
 }
 
 #sigunguList {
@@ -123,7 +121,7 @@ h2 {
 /*먹자골목 리스트*/
 #mggList {
 	border: 6px dashed #1B1B1C;
-	width: 1680px;
+	width: 800px;
 	display: table;
 	margin: auto;
 	margin-top: 32px;
@@ -157,11 +155,12 @@ p {
 	margin-bottom: 0px;
 }
 
-#meoggolgolHead{
+#meoggolgolHead {
 	font-family: 'PyeongChangPeace';
 	font-size: 25px;
 }
-#meoggolgolTable{
+
+#meoggolgolTable {
 	font-family: 'Dung' !important;
 	font-size: 25px !important;
 }
