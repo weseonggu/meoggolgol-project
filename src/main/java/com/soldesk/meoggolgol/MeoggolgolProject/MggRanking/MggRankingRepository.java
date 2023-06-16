@@ -24,8 +24,22 @@ private final JdbcTemplate jdbc;
 			ORDER BY ranking ASC
 			LIMIT 9;
 			""";
+
+	private static String SELECT_MGG_REST_RANKING=
+			"""
+			SELECT rr_mggname, rr_restaurantname, average_score, RANK() OVER (ORDER BY average_score DESC) AS ranking
+			FROM (
+			    select * , AVG(rr_score) AS average_score from restaurantreview where rr_mggname = ? GROUP BY rr_restaurantname
+			) AS subquery
+			ORDER BY ranking ASC
+			LIMIT 3;
+			""";
 	
 	public List<Map<String,Object>> getRanking(){
 		return jdbc.queryForList(SELECT_RANKING);
+	}
+
+	public List<Map<String,Object>> getRestRanking(String mggName){
+		return jdbc.queryForList(SELECT_MGG_REST_RANKING, mggName);
 	}
 }
