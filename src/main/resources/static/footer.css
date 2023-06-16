@@ -1,9 +1,7 @@
-/* #parent {
-  display: flex;
-  justify-content: flex-end;
-}
-
 #footera {
-  position: absolute;
+ position: fixed;
   bottom: 0;
-} */
+  width: 100%;
+  padding: 10px;
+  z-index: 9999;
+} 

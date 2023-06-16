@@ -117,3 +117,8 @@ body{
 body {
     background-color: #FEF8EA;
 }
+
+#fixedContent{
+	position: relative;
+  	min-height: 100vh;
+}
