@@ -36,10 +36,14 @@
 	crossorigin="anonymous">
 </script>
 
+<!-- footer -->
+<link rel="stylesheet" type="text/css" th:href="@{/footer.css}">
+
 <title>Meoggolgol</title>
 </head>
 
 <body>
+	<div id="fixedContent">
 	<!-- 사이트 제목 + 네비바를 헤더로 묶음 -->
 	<header>
 		<!-- 간단한 소개 문구 + 사이트 제목 + 로그인/회원가입 기능 -->
@@ -96,12 +100,12 @@
 	<!-- 기본 템플릿 안에 삽입될 내용 Start -->
 	<th:block layout:fragment="content"></th:block>
 	<!-- 기본 템플릿 안에 삽입될 내용 End -->
-
+	</div>
 	<!-- Bootstrap JS -->
 	<script th:src="@{/bootstrap.min.js}"></script>
-	
+
 	<!-- footer -->
-	<div th:replace="~{footer :: footerFragment}"></div>
+	<div id="footera" th:replace="~{footer :: footerFragment}"></div>
 
 </body>
 </html>

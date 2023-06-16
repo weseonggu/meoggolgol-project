@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+#NoticeDetailContainer {
+  height: 70%;
+}
+
 #noticeList {
 	width: 1300px;
 	margin-left:auto; 
