@@ -27,10 +27,13 @@
 	<script type="text/javascript">
   $(document).ready(function() {
     $('#replyTbody > tr').hide();
-    $("#replyTbody > tr").slice(0, 2).show();
+    $("#replyTbody > tr").slice(0, 15).show();
+    if ($("#replyTbody > tr").length <= 15) {
+        $("#qnaload").hide();
+      }
     $("#qnaload").click(function(e) {
       e.preventDefault();
-      $("#replyTbody > tr:hidden").slice(0, 2).fadeIn(200);
+      $("#replyTbody > tr:hidden").slice(0, 15).fadeIn(200);
       if ($("#replyTbody > tr:hidden").length === 0) {
         $(this).fadeOut(100);
       }
