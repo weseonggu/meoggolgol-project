@@ -1,0 +1,27 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="parent" id="RankingContainer">
+<div class="container my-3">
+	
+    <table class="table" id="rankingList">
+        <thead class="table-dark">
+            <tr>
+                <th>골목이름</th>
+                <th>평균점</th>
+                <th>랭킹</th>
+            </tr>
+        </thead>	
+        <tbody>
+            <tr th:each="rank : ${ranking}">
+                <td th:text="${rank.mgg_name}"></td>
+                <td th:text="${rank.average_score}"></td>
+                <td th:text="${rank.ranking}"></td>
+                <td th:each="rests : ${rank.rest}">
+                	<p th:text="${rests.rr_restaurantname}"></p>
+	                <p th:text="${rests.average_score}"></p>
+	                <p th:text="${rests.ranking}"></p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</html>
