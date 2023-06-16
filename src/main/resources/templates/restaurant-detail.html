@@ -129,6 +129,7 @@
 						});
         			</script>
 			</div>
+		</div>
 		<div style="width: 100%; text-align: center;">
 			<!-- 등록하기 버튼 -->
         	<input th:if="${session.member_info != null}" type="submit" class="btn btn-primary" id="submitBtn" value="등록하기" />
@@ -152,10 +153,7 @@
     		});
 		});
 	</script>
-	<div style="width: 100%">
 	<h1 th:text="${avg+'/5점'}"></h1>
-	</div>
-	<div style="width: 100%">
 	<table class="table" id="reviewList">
 		<thead class="table-dark">
 			<tr>
@@ -176,7 +174,6 @@
         	</tr>
 		</tbody>
     </table>
-	</div>
     	<a href="#" id="load">MORE</a>
 	</div>
 </body>

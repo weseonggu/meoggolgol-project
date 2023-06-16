@@ -17,7 +17,7 @@ public class MggRestRepository{
 	
 	private static String SELECT_REST_REVIEW=
 			"""
-			select * from restaurantreview where rr_restaurantname = ? order by rr_num desc
+			select * from restaurantreview where rr_restaurantname = ? and rr_mggname = ? order by rr_num desc
 			""";
 
 	private static final String INSERT_REVIEW = "INSERT INTO restaurantreview (rr_mggname, rr_restaurantname, rr_score, rr_review, rr_writer, rr_date) VALUES (?, ?, ?, ?, ?, ?)";
@@ -30,8 +30,8 @@ public class MggRestRepository{
 			GROUP BY rr_restaurantname;
 			""";
 	// 리뷰 세부 정보 가져오기
-	public List<Map<String,Object>> getReviewInfo(String restName){
-		return jdbc.queryForList(SELECT_REST_REVIEW, restName);
+	public List<Map<String,Object>> getReviewInfo(String restName, String mggname){
+		return jdbc.queryForList(SELECT_REST_REVIEW, restName, mggname);
 	}
 	
 	// 리뷰 저장하기
