@@ -24,7 +24,21 @@
 			</form>
 		</div>
 	</div>
-    <table class="table" id="noticeList">
+	<script type="text/javascript">
+  $(document).ready(function() {
+    $('#replyTbody > tr').hide();
+    $("#replyTbody > tr").slice(0, 2).show();
+    $("#qnaload").click(function(e) {
+      e.preventDefault();
+      $("#replyTbody > tr:hidden").slice(0, 2).fadeIn(200);
+      if ($("#replyTbody > tr:hidden").length === 0) {
+        $(this).fadeOut(100);
+      }
+    });
+  });
+</script>
+    <table class="table" id="qnaList">
+    <tbody id="replyTbody">
 	    <tr th:each="reply : ${qnaReply}">
 	        <td th:id="r_num" th:text="${reply.comment_num}"></td>
 	        <td th:text="${reply.writer}"></td>
@@ -36,7 +50,9 @@
 		        <a th:if="${session.member_info.member_nickname == reply.writer}" class="btn btn-danger" th:href="@{'/qnaReply/detail/' + ${reply.qa_num} + '/' + ${reply.comment_num} + '/delete'}" th:text="삭제"></a>
 	        </td>
 	    </tr>
+    </tbody>
     </table>
+    <a href="#" id="qnaload">MORE</a>
 </div>
 </div>
 </html>

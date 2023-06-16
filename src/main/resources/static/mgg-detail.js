@@ -260,3 +260,26 @@ function toggleCategoryButtonVisibility(categoryValues) {
 function toggleButtonVisibility(buttonId, condition) {
 	$(buttonId).toggle(condition);
 }
+
+$(document).ready(function() {
+    var restaurantListBox = $("#restaurantListBox");
+
+    // 페이지 로드 시 체크 및 조정
+    checkAndAdjustWidth();
+
+    // 창 크기가 변경될 때마다 체크 및 조정
+    $(window).resize(function() {
+        checkAndAdjustWidth();
+    });
+
+    function checkAndAdjustWidth() {
+        var windowWidth = $(window).width();
+        var targetWidth = 1500;
+
+        if (windowWidth < targetWidth) {
+            restaurantListBox.css("width", targetWidth + "px");
+        } else {
+            restaurantListBox.css("width", "auto");
+        }
+    }
+});
