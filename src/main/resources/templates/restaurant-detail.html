@@ -139,6 +139,9 @@
   		$(document).ready(function() {
     		$('#reviewTbody > tr').hide();
     		$("#reviewTbody > tr").slice(0, 15).show();
+    		if ($("#reviewTbody > tr").length <= 15) {
+    	        $("#load").hide();
+    	      }
     		$("#load").click(function(e) {
       			e.preventDefault();
       			$("#reviewTbody > tr:hidden").slice(0, 15).fadeIn(200);
