@@ -24,6 +24,9 @@
 	width: 500px;
 	align-content: center;
 }
+#mggMap{
+	border-radius: 20px;
+}
 #mggName{
 	font-family: 'PyeongChangPeace';
 	font-size: 35px;
