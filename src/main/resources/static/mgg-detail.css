@@ -53,6 +53,7 @@
 	margin-top: 1%;
 	margin-bottom: 1%;
 }
+
 .restaurant-card:hover{
 	width: 220px;
 	background-color: rgb(164, 211, 255);
@@ -60,6 +61,7 @@
   	opacity: 1;
   	transition: 0.25s;
 }
+
 .restaurant-card img {
 	align-content: center;
 	width: 45%;

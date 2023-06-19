@@ -2,8 +2,11 @@
 
 #mggGuide{
 	font-family: 'PyeongChangPeace';
+	font-size: 100px;
 	color: #1B1B1C;
 	text-align: center;
+	margin-top: 100px;
+	margin-bottom: 160px;
 }
 
 .guideStep {
@@ -11,3 +14,24 @@
 	color: #1B1B1C;
 	text-align: center;
 }
+
+#stepImg1,#stepImg3 {
+	width: 700px;
+	height: 400px;
+	float:left;
+}
+
+#stepImg2, #stepImg4 {
+	width: 700px;
+	height: 400px;
+	float:right;
+}
+
+.guideContainer {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-items: stretch;
+}
+
+
