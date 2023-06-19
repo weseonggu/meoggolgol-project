@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+#qnaList {
+	width: 1300px;
+	margin-left:auto; 
+    margin-right:auto;
+    border-collapse : collapse;
+}
+
+#qnaload {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* 원하는 여백 값으로 조정하세요 */
+  }
