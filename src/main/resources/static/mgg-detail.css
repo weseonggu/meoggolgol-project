@@ -10,7 +10,12 @@
 	justify-content: center;
 	margin-top: 16px;
 }
-
+#mgginfo p{
+	margin-left: 16px;
+}
+#mgginf h2{
+	margin-top: 8px;
+}
 /*  */
 .selectMgg {
 	font-family: 'Dung' !important;
@@ -47,12 +52,14 @@
 	margin-top: 1%;
 	margin-bottom: 1%;
 }
+
 .restaurant-card:hover{
-	width: 220px;
+	width: 200px; 
 	background-color: rgb(164, 211, 255);
   	transform: scale(1.1);
   	opacity: 1;
 }
+
 .restaurant-card img {
 	align-content: center;
 	width: 45%;
