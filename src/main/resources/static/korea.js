@@ -51,6 +51,8 @@ $(function() {
         var code = $(this).attr('id');
         $("#sigunguTable").empty();
         $("#meoggolgolTable").empty();
+        if(code != '36'){
+        	
         $.getJSON("sigungu?sidoCode=" + code, function(sigungu) {
           $.each(sigungu, function(index) {
             var button;
@@ -85,6 +87,9 @@ $(function() {
             $("#sigunguTable").append(button);
           });
         });
+        }else{
+        	listAjax(36110);
+        }
         var target = $('#sigunguList');
          $('html, body').animate({
 			 scrollTop: target.offset().top}, 1000);
@@ -174,15 +179,7 @@ $(function() {
   });
   
   
-  // 먹자 골목 리스트 가로길이 조정
-  $(window).on('resize', function() {
-	  var windowWidth = $(window).width();
-	  if (windowWidth<=1740) {
-		$("#mggList").css("width","800px")
-	}else{
-		$("#mggList").css("width","1680px")
-	}
-	});
+  
 });
 
 // 시군도 선택시 그 지역의 먹자골목 리스트 출력

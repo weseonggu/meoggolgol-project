@@ -162,7 +162,7 @@ $(function() {
 		var url = "restaurant-detail?lo=" + cardlo + "&la=" + cardla + "&imgUrl=" + imgUrl + "&placeUrl=" + placeUrl + "&placeName=" + placeName + "&roadAddress=" + roadAddress + "&mggname=" + mggName;
 		location.href = url;
 	});
-	  var windowWidth = $(window).width();
+	  /*var windowWidth = $(window).width();
 	  if (windowWidth>=1740) {
 			$("#restaurantListBox").css("width","1740px");
 		}else{
@@ -181,8 +181,7 @@ $(function() {
 			}else{
 				$("#restaurantListBox").css("width","80%")
 			}
-		});
-
+		});*/
 });
 
 // 식당 카드 만들기 ajax로 호출
@@ -262,7 +261,7 @@ function toggleButtonVisibility(buttonId, condition) {
 }
 
 $(document).ready(function() {
-    var restaurantListBox = $("#restaurantListBox");
+    var restaurant_card = $(".restaurant-card");
 
     // 페이지 로드 시 체크 및 조정
     checkAndAdjustWidth();
@@ -274,12 +273,13 @@ $(document).ready(function() {
 
     function checkAndAdjustWidth() {
         var windowWidth = $(window).width();
-        var targetWidth = 1500;
 
-        if (windowWidth < targetWidth) {
-            restaurantListBox.css("width", targetWidth + "px");
+        if (windowWidth < 1170) {
+            restaurant_card.css("width", 17 + "%");
+            $("#restaurantListBox").css("width","80%")
         } else {
-            restaurantListBox.css("width", "auto");
+            restaurant_card.css("width", "auto");
+            $("#restaurantListBox").css("width",1170 + "px")
         }
     }
 });

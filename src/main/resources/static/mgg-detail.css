@@ -10,15 +10,22 @@
 	justify-content: center;
 	margin-top: 16px;
 }
-
+#mgginfo p{
+	margin-left: 16px;
+}
+#mgginf h2{
+	margin-top: 8px;
+}
 /*  */
 .selectMgg {
 	font-family: 'Dung' !important;
 	font-size: 20px !important;
 	height: 500px;
 	width: 500px;
-	border: 1px solid black;
 	align-content: center;
+}
+#mggMap{
+	border-radius: 20px;
 }
 #mggName{
 	font-family: 'PyeongChangPeace';
@@ -26,8 +33,7 @@
 }
 
 #restaurantListBox {
-	width: 100%;
-	border: 1px solid black;
+	width: 1170px;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -40,7 +46,7 @@
 
 .restaurant-card {
 	padding:1%;
-	width: 17%;
+	width: 220px;
 	border: 1px solid black;
 	font-family: "paybooc-Light", sans-serif;
 	border-radius: 10px;
@@ -48,14 +54,14 @@
 	margin-bottom: 1%;
 }
 .restaurant-card:hover{
-	width: 17%; 
+	width: 220px;
 	background-color: rgb(164, 211, 255);
   	transform: scale(1.1);
   	opacity: 1;
+  	transition: 0.25s;
 }
 .restaurant-card img {
 	align-content: center;
-
 	width: 45%;
 	border: 1px solid #006243;
 	margin: auto;
