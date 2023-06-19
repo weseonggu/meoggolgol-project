@@ -76,7 +76,8 @@ $(function() {
 					  var targetElement = $('#mggList');
 					  $('html, body').animate({scrollTop: targetElement.offset().top}, 500);
 				});
-            } else {
+            }
+            else {
               	button = $("<span id='sigunguListSpan'></span>").text(onlySiGu).on('click', function() {
 					  listAjax(sigungu[index].code);
 					  var targetElement = $('#mggList');
@@ -87,12 +88,15 @@ $(function() {
             $("#sigunguTable").append(button);
           });
         });
-        }else{
-        	listAjax(36110);
-        }
         var target = $('#sigunguList');
          $('html, body').animate({
 			 scrollTop: target.offset().top}, 1000);
+        }
+        else{
+			listAjax(36110);
+        	var targetElement = $('#mggList');
+			$('html, body').animate({scrollTop: targetElement.offset().top}, 1000);
+        }
       });
 
     labels=states.selectAll("text")
