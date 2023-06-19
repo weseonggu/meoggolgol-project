@@ -26,7 +26,7 @@
 }
 
 #restaurantListBox {
-	width: 100%;
+	width: 1170px;
 	border: 1px solid black;
 	display: flex;
 	flex-direction: row;
@@ -40,7 +40,7 @@
 
 .restaurant-card {
 	padding:1%;
-	width: 17%;
+	width: 220px;
 	border: 1px solid black;
 	font-family: "paybooc-Light", sans-serif;
 	border-radius: 10px;
@@ -48,14 +48,13 @@
 	margin-bottom: 1%;
 }
 .restaurant-card:hover{
-	width: 17%; 
+	width: 220px;
 	background-color: rgb(164, 211, 255);
   	transform: scale(1.1);
   	opacity: 1;
 }
 .restaurant-card img {
 	align-content: center;
-
 	width: 45%;
 	border: 1px solid #006243;
 	margin: auto;
