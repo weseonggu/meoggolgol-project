@@ -35,11 +35,20 @@ private final JdbcTemplate jdbc;
 			LIMIT 3;
 			""";
 	
+	private static String SELECT_MGG_LO_LA=
+			"""
+			select FCLTY_LO, FCLTY_LA from Alley_information where FCLTY_NM = ?
+			""";
+	
 	public List<Map<String,Object>> getRanking(){
 		return jdbc.queryForList(SELECT_RANKING);
 	}
 
 	public List<Map<String,Object>> getRestRanking(String mggName){
 		return jdbc.queryForList(SELECT_MGG_REST_RANKING, mggName);
+	}
+	
+	public List<Map<String,Object>> getLoLa(String mggName){
+		return jdbc.queryForList(SELECT_MGG_LO_LA, mggName);
 	}
 }
