@@ -37,7 +37,6 @@ public class MggRankingController {
 				rank.setRest(rests);
 				ranking.add(rank);
 			}
-			System.out.println(ranking);
 			model.addAttribute("ranking", ranking);
 		    return "mggRanking";
 		}
