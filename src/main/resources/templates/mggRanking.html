@@ -3,28 +3,24 @@
 <div class="container my-3">
 	
     <table class="table" id="rankingList">
-        <thead class="table-dark">
-            <tr>
-                <th>랭킹</th>
-                <th>골목이름</th>
-                <th>평균점</th>
-                <th>음식점1</th>
-                <th>음식점2</th>
-                <th>음식점3</th>
-            </tr>
-        </thead>	
         <tbody>
-            <tr th:each="rank : ${ranking}">
-                <td th:text="${rank.ranking}"></td>
-                <td th:text="${rank.mgg_name}"></td>
-                <td th:text="${rank.average_score}"></td>
+        <br>
+        <br>
+        <br>
+        <br>
+            <tr th:each="rank, status : ${ranking}">
+                <td style="font-size: 25px; font-weight: bold;" th:text="${rank.ranking}"></td>
+                <td style="font-size: 35px; font-weight: bold;" th:text="${rank.mgg_name}" th:attr="data-lo=${lolas[status.index].FCLTY_LO}, data-la=${lolas[status.index].FCLTY_LA}" onclick="mggDetail(this.getAttribute('data-lo'), this.getAttribute('data-la'))"></td>
                 <td th:each="rests : ${rank.rest}">
-	                <p th:text="${rests.ranking}"></p>
-                	<p th:text="${rests.rr_restaurantname}"></p>
-	                <p th:text="${rests.average_score}"></p>
+                	<p style="font-size: 20px;" th:text="${rests.rr_restaurantname}"></p>
                 </td>
             </tr>
         </tbody>
     </table>
+		    <script>
+			    function mggDetail(lo,la){
+			    	location.href="mgg-detail?lo="+lo+"&la="+la; 
+			    }
+		    </script>
 </div>
 </html>

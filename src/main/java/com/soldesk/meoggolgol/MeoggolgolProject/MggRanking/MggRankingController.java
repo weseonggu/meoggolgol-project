@@ -3,6 +3,8 @@ package com.soldesk.meoggolgol.MeoggolgolProject.MggRanking;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +21,12 @@ public class MggRankingController {
 		@GetMapping("/mggRanking")
 		public String goRestPage(Model model) {
 
-			model.addAttribute("rank", mrr.getRanking());
 			ArrayList<Ranking> ranking = new ArrayList<>();
+			ArrayList<Rest> rests = null;
+			Ranking rank = null;
 			for (int i = 0; i < mrr.getRanking().size(); i++) {
-				ArrayList<Rest> rests = new ArrayList<>();
-				Ranking rank = new Ranking();
+				rests = new ArrayList<>();
+				rank = new Ranking();
 				rank.setMgg_name((String) mrr.getRanking().get(i).get("rr_mggname"));
 				rank.setAverage_score((BigDecimal) mrr.getRanking().get(i).get("average_score"));
 				rank.setRanking((BigInteger) mrr.getRanking().get(i).get("ranking"));
@@ -37,7 +40,12 @@ public class MggRankingController {
 				rank.setRest(rests);
 				ranking.add(rank);
 			}
+			ArrayList<Map<String,Object>> lolas = new ArrayList<>();
+			for (int i = 0; i < ranking.size(); i++) {
+				lolas.addAll(mrr.getLoLa(ranking.get(i).getMgg_name()));
+			}
 			model.addAttribute("ranking", ranking);
+			model.addAttribute("lolas", lolas);
 		    return "mggRanking";
 		}
 }
