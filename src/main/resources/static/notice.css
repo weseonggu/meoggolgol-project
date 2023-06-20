@@ -10,3 +10,11 @@
     margin-right:auto;
     border-collapse : collapse;
 }
+
+div.toastui-editor-contents {
+    font-size: 30px;
+}
+
+div#textBox{
+	text-align: right;
+}
