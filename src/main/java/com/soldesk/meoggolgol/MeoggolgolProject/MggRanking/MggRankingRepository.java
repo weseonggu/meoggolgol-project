@@ -15,12 +15,19 @@ private final JdbcTemplate jdbc;
 	
 	private static String SELECT_RANKING=
 			"""
-			SELECT rr_mggname, average_score, RANK() OVER (ORDER BY average_score DESC) AS ranking
+			SELECT rr_mggname, weight, average_score, RANK() OVER (ORDER BY weight * average_score DESC) AS ranking
 			FROM (
-			    SELECT rr_mggname, AVG(rr_score) AS average_score
-			    FROM restaurantreview
+			    SELECT rr_mggname,
+			        AVG(rr_score) AS average_score,
+			        COUNT(*) AS record,
+			        COUNT(*) / AVG(rr_score) AS weight
+			    FROM (
+			        SELECT rr_mggname, rr_restaurantname, rr_score,
+			            AVG(rr_score) OVER (PARTITION BY rr_mggname, rr_restaurantname) AS avg_score
+			        FROM restaurantreview
+			    ) AS subquery
 			    GROUP BY rr_mggname
-			) AS subquery
+			) AS subquery2
 			ORDER BY ranking ASC
 			LIMIT 9;
 			""";
