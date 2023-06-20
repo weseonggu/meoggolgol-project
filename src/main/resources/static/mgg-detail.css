@@ -25,6 +25,7 @@
 	align-content: center;
 }
 #mggMap{
+	border: 6px dashed #1B1B1C;
 	border-radius: 20px;
 }
 #mggName{

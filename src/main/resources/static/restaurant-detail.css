@@ -3,7 +3,6 @@
 .mggInfoBox {
 	width: 80%;
 	display: table;
-	border: 1px solid black;
 	margin: auto;
 	display: flex;
 	flex-direction: row;
@@ -11,7 +10,10 @@
 	justify-content: center;
 	margin-top: 16px;
 }
-
+.mggInfoBox .selectMgg{
+	border: 6px dashed #1B1B1C;
+	border-radius: 20px;
+}
 #reviewDetail {
 	width: 100%;
 	display: table;
@@ -34,7 +36,7 @@
 }
 
 #mggInfo {
-	width: 80%;
+	width: 1330px;
 	display: table;
 	border: 1px solid black;
 	margin: auto;
@@ -45,7 +47,7 @@
 }
 
 #reviewList {
-	width: 80%;
+	width: 1330px;
 	display: table;
 	margin: auto;
 	flex-direction: row;
@@ -54,17 +56,15 @@
 	margin-top: 16px;
 }
 
-.selectMgg {
-	height: 500px;
-	width: 500px;
-	border: 1px solid black;
-	align-content: center;
-}
+
 
 .mggDetailInfos{
 	text-align: center;
+	margin-top: 32px;
 }
-
+#score{
+	margin: auto;
+}
 .wrap {
 	position: absolute;
 	left: 0;
