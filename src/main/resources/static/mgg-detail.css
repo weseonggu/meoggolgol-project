@@ -55,7 +55,7 @@
 }
 
 .restaurant-card:hover{
-	width: 200px; 
+	width: 220px;
 	background-color: rgb(164, 211, 255);
   	transform: scale(1.1);
   	opacity: 1;
