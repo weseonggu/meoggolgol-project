@@ -51,6 +51,8 @@ $(function() {
         var code = $(this).attr('id');
         $("#sigunguTable").empty();
         $("#meoggolgolTable").empty();
+        if(code != '36'){
+        	
         $.getJSON("sigungu?sidoCode=" + code, function(sigungu) {
           $.each(sigungu, function(index) {
             var button;
@@ -74,7 +76,8 @@ $(function() {
 					  var targetElement = $('#mggList');
 					  $('html, body').animate({scrollTop: targetElement.offset().top}, 500);
 				});
-            } else {
+            }
+            else {
               	button = $("<span id='sigunguListSpan'></span>").text(onlySiGu).on('click', function() {
 					  listAjax(sigungu[index].code);
 					  var targetElement = $('#mggList');
@@ -88,6 +91,12 @@ $(function() {
         var target = $('#sigunguList');
          $('html, body').animate({
 			 scrollTop: target.offset().top}, 1000);
+        }
+        else{
+			listAjax(36110);
+        	var targetElement = $('#mggList');
+			$('html, body').animate({scrollTop: targetElement.offset().top}, 1000);
+        }
       });
 
     labels=states.selectAll("text")
@@ -174,15 +183,7 @@ $(function() {
   });
   
   
-  /*// 먹자 골목 리스트 가로길이 조정
-  $(window).on('resize', function() {
-	  var windowWidth = $(window).width();
-	  if (windowWidth<=1740) {
-		$("#mggList").css("width","100%")
-	}else{
-		$("#mggList").css("width","100%")
-	}
-	});*/
+  
 });
 
 // 시군도 선택시 그 지역의 먹자골목 리스트 출력

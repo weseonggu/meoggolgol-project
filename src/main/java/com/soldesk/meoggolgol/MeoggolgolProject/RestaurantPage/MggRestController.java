@@ -26,10 +26,10 @@ public class MggRestController {
 	
 	// 음식점 상세 페이지 요청
 	@GetMapping("/restaurant-detail")
-	public String goRestPage(@RequestParam String placeName, Model model) {
+	public String goRestPage(@RequestParam String placeName, @RequestParam String mggname, Model model) {
 
 		model.addAttribute("reviewRequest", new ReviewRequest());
-		model.addAttribute("review", mrr.getReviewInfo(placeName));
+		model.addAttribute("review", mrr.getReviewInfo(placeName, mggname));
 //		System.out.println("평점: "+mrr.getAvgScore(placeName));
 		model.addAttribute("avg", mrr.getAvgScore(placeName));
 		

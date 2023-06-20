@@ -22,8 +22,10 @@
 	font-size: 20px !important;
 	height: 500px;
 	width: 500px;
-	border: 1px solid black;
 	align-content: center;
+}
+#mggMap{
+	border-radius: 20px;
 }
 #mggName{
 	font-family: 'PyeongChangPeace';
@@ -32,7 +34,6 @@
 
 #restaurantListBox {
 	width: 1170px;
-	border: 1px solid black;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -54,7 +55,7 @@
 }
 
 .restaurant-card:hover{
-	width: 200px; 
+	width: 220px;
 	background-color: rgb(164, 211, 255);
   	transform: scale(1.1);
   	opacity: 1;
