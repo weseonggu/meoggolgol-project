@@ -1,18 +1,26 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="parent" id="RankingContainer">
 <div class="container my-3">
-	
     <table class="table" id="rankingList">
         <tbody>
         <br>
         <br>
         <br>
         <br>
+		<style>
+			@font-face{
+				font-family: 'ranking';
+				src: url('font/rank.ttf') format('truetype');
+			}
+		   .ranking{
+		   	font-family: 'ranking';
+		   }
+		</style>
             <tr th:each="rank, status : ${ranking}">
-                <td style="font-size: 25px; font-weight: bold;" th:text="${rank.ranking}"></td>
-                <td style="font-size: 35px; font-weight: bold;" th:text="${rank.mgg_name}" th:attr="data-lo=${lolas[status.index].FCLTY_LO}, data-la=${lolas[status.index].FCLTY_LA}" onclick="mggDetail(this.getAttribute('data-lo'), this.getAttribute('data-la'))"></td>
+                <td class="ranking" style="font-size: 30px; font-weight: bold;" th:text="${rank.ranking}"></td>
+                <td class="ranking" style="font-size: 40px; font-weight: bold;" th:text="${rank.mgg_name}" th:attr="data-lo=${lolas[status.index].FCLTY_LO}, data-la=${lolas[status.index].FCLTY_LA}" onclick="mggDetail(this.getAttribute('data-lo'), this.getAttribute('data-la'))"></td>
                 <td th:each="rests : ${rank.rest}">
-                	<p style="font-size: 20px;" th:text="${rests.rr_restaurantname}"></p>
+                	<p class="ranking" style="font-size: 30px;" th:text="${rests.rr_restaurantname}"></p>
                 </td>
             </tr>
         </tbody>
