@@ -231,6 +231,12 @@ function listAjax(code){
                 var tr = $("<tr></tr>").attr("onclick","mggDetail("+data[i].FCLTY_LO+","+data[i].FCLTY_LA+")").append(ntd,ltd, lotd, latd);
                 $("#meoggolgolTable").append(tr);
             });
+        }else{
+        	$("#meoggolgolHead").empty().append(
+        			$("<tr></tr>").append(
+                            $("<th></th>").text("등록된 먹자골목이 없습니다."),
+                        )
+        	);
         }
 		});
 	

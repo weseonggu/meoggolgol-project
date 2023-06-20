@@ -9,23 +9,19 @@
 </head>
 <body>
     <div layout:fragment="content">
-    
-	<form th:action="@{/restaurant-detail}" th:object="${reviewRequest}">
-        
-        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
-	
         <div class="mggInfoBox">
             <div class="selectMgg" id="mggRestaurant" style="width:500px;height:500px;"></div>
         </div>
-  
-		<hr>
+    
 		<div id="mggInfoabc" class="mggDetailInfos"></div>
 		
 		<table id="mggInfo">
 			<thead id="menuHead" class="table-dark"></thead>
 			<tbody id="menuBody"></tbody>
 		</table>
-		
+	<form th:action="@{/restaurant-detail}" th:object="${reviewRequest}">
+        
+        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
 		<!-- 리뷰 등록폼 -->
 		<div th:if="${session.member_info != null}"  class="mggInfoBox mb-3" name="reviewBox" id="reviewBox" >
 		
@@ -152,23 +148,23 @@
     		});
 		});
 	</script>
+	<div id=score>
 	<h1 th:text="${avg+'/5점'}"></h1>
+	</div>
 	<table class="table" id="reviewList">
 		<thead class="table-dark">
 			<tr>
-				<th>번호</th>
-				<th>작성자</th>
 		        <th>별점</th>
 		        <th>리뷰 내용</th>
+				<th>작성자</th>
 		        <th>리뷰 작성일</th>
 		    </tr>
 		</thead>
 		<tbody id="reviewTbody">
 		    <tr th:each="review : ${review}" class="review-row">
-            	<td th:text="${review.rr_num}"></td>
-            	<td th:text="${review.rr_writer}"></td>
             	<td th:text="${review.rr_score}"></td>
             	<td th:text="${review.rr_review}" id="editor"></td>
+            	<td th:text="${review.rr_writer}"></td>
             	<td th:text="${review.rr_date}"></td>
         	</tr>
 		</tbody>

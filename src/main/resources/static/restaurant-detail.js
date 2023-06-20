@@ -62,6 +62,38 @@ $(function() {
 	// getRestaurantInfo(lo, la, page);
 	getRestaurantInfo(placeUrl, placeName);
 	getRestaurantafdsInfo(placeUrl);
+	
+	
+	
+	  var windowWidth = $(window).width();
+	  if (windowWidth<=1330) {
+			$("#mggInfo").css("width","100%");
+			$("#reviewList").css("width","100%");
+			$(".mggInfoBox").css("width","100%");
+			$("#score").css("width","100%");
+		}else{
+			$("#mggInfo").css("width","1330px");
+			$("#reviewList").css("width","1330px");
+			$(".mggInfoBox").css("width","1330px");
+			$("#score").css("width","1330px");
+		}
+	
+	  // 카드 이미지
+	  $(window).on('resize', function() {
+		  
+		  var windowWidth = $(window).width();
+		  if (windowWidth<=1330) {
+			  $("#mggInfo").css("width","100%");
+			  $("#reviewList").css("width","100%");
+			  $(".mggInfoBox").css("width","100%");
+			  $("#score").css("width","100%");
+			}else{
+				$("#mggInfo").css("width","1330px");
+				$("#reviewList").css("width","1330px");
+				$(".mggInfoBox").css("width","1330px");
+				$("#score").css("width","1330px");
+			}
+		});
 });
 
 // 식당 세부 정보 ajax로 호출

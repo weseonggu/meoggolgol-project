@@ -3,33 +3,22 @@ body{
 	background-color: antiquewhite !important;
 }
 .brandBox {
-    flex-basis: 0;
-    flex-grow: 1;
-	align-items: center;
-	flex-flow: nowrap;
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
     background-color: antiquewhite !important;
-    margin-bottom: 5px;
-    margin-top: 5px;
 }
 
 .brandContentWrapper {
- 	display: contents;
- 	justify-content: space-between;
- 	width: 100%;
+ 	  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.brandContent {
-   flex-grow: 1;
-   text-align: center;
-}
 
+#textbox{
+	flex: 1;
+  text-align: left;
+}
 #text {
-	display: flex;
-    width: 80%;
-    justify-content: flex-start;
+	width:auto;
     align-items: center;
     padding-left: 21px;
     text-align: left;
@@ -39,19 +28,22 @@ body{
 }
 
 /* 먹골골 로고 png 파일*/
+#brandName {
+  flex: 1;
+  text-align: center;
+}
 #logo {
 	width: 270px;
 	height: 160px;
 	padding: 10px;
-	margin-left: 20px;
+	display:block;
+	margin:auto;
 }
 
 #signInUp {
-	display: flex;
-    width: 20%;
-    justify-content: flex-end;
-    align-items: center;
-    padding-right: 27px;
+    flex: 1;
+ 	text-align: right;
+ 	margin-right: 16px;
 }
 
 #signDivider {
@@ -85,11 +77,13 @@ body{
 	--bs-navbar-hover-color: #EE3898;
 }
 
-@media (max-width: 900px) {
-  .navbar {
-    width: 900px;
-  }
-  
+.navbar-toggler{
+	border-color: #EE3898;
+	background-color: #EE3898;
+	margin:8px;
+}
+.navbar-toggler span{
+	background-color: #EE3898;
 }
 
 .navbar-collapse {
