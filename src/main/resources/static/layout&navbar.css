@@ -116,3 +116,13 @@ body {
 	position: relative;
   	min-height: 100vh;
 }
+#logoutbtn {
+  background: none;
+  border: none;
+  padding: 0;
+  outline: none;
+  border-bottom: 1px solid #1B1B1C;
+  font-family: 'Dung';
+}
+
+
