@@ -18,3 +18,8 @@ div.toastui-editor-contents {
 div#textBox{
 	text-align: right;
 }
+
+#submitBtn{
+	float: right;
+	
+}
