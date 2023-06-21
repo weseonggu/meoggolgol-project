@@ -1,5 +1,8 @@
 @charset "UTF-8";
-
+.guideContainer{
+	width: 65%;
+	margin: auto;
+}
 #mggGuide{
 	font-family: 'PyeongChangPeace';
 	font-size: 100px;
@@ -26,12 +29,19 @@
 	height: 400px;
 	float:right;
 }
+#step2 text, #step3 text{
+	float:right;
+}
 
 .guideContainer {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
 	align-items: stretch;
+}
+.text{
+	font-family: 'PyeongChangPeace';
+	font-size: 40px;
 }
 
 
