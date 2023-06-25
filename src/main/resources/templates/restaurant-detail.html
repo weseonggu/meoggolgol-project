@@ -125,10 +125,10 @@
 						});
         			</script>
 			</div>
-		</div>
-		<div style="width: 100%; text-align: center;">
+		<div style="display: flex; justify-content: center;">
 			<!-- 등록하기 버튼 -->
         	<input th:if="${session.member_info != null}" type="submit" class="btn btn-primary" id="submitBtn" value="등록하기" />
+		</div>
 		</div>
 	</form>
 
@@ -165,7 +165,7 @@
             	<td th:text="${review.rr_score}"></td>
             	<td th:text="${review.rr_review}" id="editor"></td>
             	<td th:text="${review.rr_writer}"></td>
-            	<td th:text="${review.rr_date}"></td>
+            	<td th:text="${#strings.substringBefore(review.rr_date, 'T')}"></td>
         	</tr>
 		</tbody>
     </table>
