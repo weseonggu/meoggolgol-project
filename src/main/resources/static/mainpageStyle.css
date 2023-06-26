@@ -157,16 +157,6 @@ h2 {
 	margin-bottom: 35px;
 }
 
-@media (max-width: 900px) {
-  #banner {
-    width: 900px;
-  }
-}
-
-p {
-	margin-bottom: 0px;
-}
-
 #meoggolgolHead {
 	font-family: 'PyeongChangPeace';
 	font-size: 25px;

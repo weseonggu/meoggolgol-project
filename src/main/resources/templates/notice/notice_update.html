@@ -4,20 +4,22 @@
 	<script type="text/javascript" th:src="@{/notice_updateJS.js}"></script>
 
     <!-- 공지사항 등록 화면 -->
-    <form th:action="@{'/notice/update/' + ${id}}" th:object="${noticeRequest}" method="POST" enctype="multipart/form-data">
+    <form th:action="@{'/notice/update/' + ${id}}" th:object="${noticeRequest}" method="POST" enctype="multipart/form-data" id="updateNoticeForm">
 
         <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+        <br><br>
         
         <!-- 공지사항 제목 -->
         <div class="noticeBox">
-        	<label for="noticeTitle" class="form-label">제목</label>
-        	<input type="text" name="title" id="noticeTitle" th:value="${title}">
+        	<label for="noticeTitle" class="form-label" id="noticeLabel"><b>제목<b></label>
+        	<input type="text" name="title" id="noticeTitle" th:value="${title}" style="width: 1600px; height: 40px; border-radius: 5px; padding-left: 10px; background-color: white; border: 2px solid #1B1B1C;">
         </div>
+        <br>
         
         <!-- 내용 -->
         <div class="content-body">
         	<div class="form-group">
-        		<label for="noticeContent"><b>내용</b></label>
+        		<label for="noticeContent" id="noticeLabel"><b>상세 내용</b></label>
         		
         		<!-- Toast Ui Editor가 들어갈 태그-->  
         		<div id="editor"></div>
@@ -101,7 +103,7 @@
     			</script>
 			</div>
         </div>
-        
+        <br>
         <!-- 등록하기 버튼 -->
         <button id="submitBtn" type="submit" class="btn btn-primary" >등록하기</button>
         

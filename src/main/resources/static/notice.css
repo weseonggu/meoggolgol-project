@@ -23,3 +23,29 @@ div#textBox{
 	float: right;
 	
 }
+
+#noticeTitle input {
+	border-radius: 5px;
+	font-family: 'Dung';
+	font-size: 21px;
+	padding-left: 10px;
+	background-color: white;
+	border: 2px solid #1B1B1C;
+}
+
+#uploadNoticeForm, #updateNoticeForm{
+	width: 1600px;
+	margin: auto;
+	margin-top: 30px;
+}
+#editor {
+	background-color: white;
+	font-family: 'Dung';
+}
+
+#noticeLabel {
+	font-family: 'Dung';
+	font-size: 20px;
+	margin-top: 4px;
+	margin-bottom: 6px;
+}
