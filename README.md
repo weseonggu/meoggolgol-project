@@ -8,7 +8,7 @@
 * Selenium
 * AWS RDS
 >먹골골 구조도
- ![alt text](/img/구조도.png)
+<img src="img/구조도.png" alt="구조도 이미지" width="350"/>
 
 
 
